@@ -1,0 +1,2021 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>AI 模型完整族譜時間軸｜手機版</title>
+<style>
+:root{--bar-h:58px;--bg:#eef2f7;}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;-webkit-text-size-adjust:100%}
+body{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+.toolbar{position:fixed;top:env(safe-area-inset-top);left:0;right:0;z-index:20;min-height:var(--bar-h);display:flex;align-items:center;gap:6px;padding:7px max(10px,env(safe-area-inset-right)) 7px max(10px,env(safe-area-inset-left));background:rgba(17,24,39,.96);color:#fff;box-shadow:0 2px 10px #0004;backdrop-filter:blur(12px)}
+.toolbar button,.toolbar select{min-height:40px;border:0;border-radius:10px;padding:0 9px;background:#fff;color:#111827;font-weight:750;font-size:13px}
+.toolbar button:active{transform:scale(.97)}
+.brand-jump{min-width:0;width:43vw;max-width:190px}
+.zoom-label{min-width:46px;text-align:center;font-size:12px;font-weight:700}
+.spacer{flex:1}
+.desktop-only{display:inline-flex}
+.viewer{position:absolute;top:calc(var(--bar-h) + env(safe-area-inset-top));left:0;right:0;bottom:env(safe-area-inset-bottom);overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:#fff;touch-action:none;cursor:grab}
+.viewer.dragging{cursor:grabbing;user-select:none;-webkit-user-select:none}.stage{position:relative;transform-origin:0 0;width:12080.0px;height:5374.0px;will-change:transform}
+.stage svg{display:block;width:12080.0px;height:5374.0px;user-select:none;-webkit-user-select:none}
+.fab{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:25;display:none;gap:8px;flex-direction:column}
+.fab button{width:46px;height:46px;border:0;border-radius:50%;background:#111827;color:#fff;font-size:22px;font-weight:800;box-shadow:0 4px 14px #0005}
+.tip{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:30;padding:9px 13px;border-radius:999px;background:rgba(17,24,39,.92);color:white;font-size:13px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .25s}
+.tip.show{opacity:1}
+@media(max-width:760px){
+  .desktop-only{display:none!important}
+  .fab{display:flex}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <select id="brandJump" class="brand-jump" aria-label="跳到品牌">
+    <option value="">跳到品牌…</option>
+    <option value="330.0">OpenAI</option>
+<option value="738.0">Anthropic</option>
+<option value="1030.0">Google</option>
+<option value="1322.0">xAI</option>
+<option value="1614.0">DeepSeek</option>
+<option value="1906.0">Moonshot AI</option>
+<option value="2140.0">Alibaba</option>
+<option value="2490.0">Z.ai / Zhipu</option>
+<option value="2724.0">MiniMax</option>
+<option value="2914.0">Meta</option>
+<option value="3148.0">Mistral AI</option>
+<option value="3338.0">Cohere</option>
+<option value="3630.0">AI21 Labs</option>
+<option value="3864.0">Perplexity</option>
+<option value="4156.0">NVIDIA</option>
+<option value="4390.0">Amazon</option>
+<option value="4580.0">Microsoft</option>
+<option value="4770.0">Baidu</option>
+<option value="5004.0">ByteDance</option>
+  </select>
+  <button id="fitBtn">符合寬度</button>
+  <button class="desktop-only" id="minusBtn">－</button>
+  <span id="pct" class="zoom-label">100%</span>
+  <button class="desktop-only" id="plusBtn">＋</button>
+  <span class="spacer"></span>
+  <button id="topBtn">頂端</button>
+</div>
+
+<div class="viewer" id="viewer"><div class="stage" id="stage"><svg xmlns="http://www.w3.org/2000/svg" width="12080" height="5374" viewBox="0 0 12080 5374">
+<rect width="100%" height="100%" fill="white"/>
+
+<style>
+  text { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",Arial,sans-serif; fill:#111827; }
+  .title { font-size:54px; font-weight:800; }
+  .sub { font-size:22px; fill:#4B5563; }
+  .year { font-size:25px; font-weight:750; }
+  .vendor { font-size:28px; font-weight:800; }
+  .count { font-size:16px; fill:#6B7280; }
+  .model { font-size:16px; font-weight:700; }
+  .date { font-size:13px; fill:#4B5563; }
+  .tag { font-size:11px; font-weight:700; fill:#6B7280; }
+  .legend { font-size:15px; fill:#374151; }
+  a:hover .labelbox { stroke-width:3; }
+</style>
+
+<text x="70" y="82" class="title">主流 AI 模型族譜／軍備競賽時間軸</text>
+<text x="72" y="126" class="sub">2023 → 2026/09　LLM・Reasoning・Multimodal・Coding・Agent　｜　208 個模型／重要版本節點</text>
+<text x="72" y="164" class="sub">單一超寬 SVG 向量圖：可在瀏覽器放大，文字與線條不會因縮放失真。節點可點擊官方／供應商資料來源。</text>
+<text x="72" y="214" class="legend">● 通用　◆ 推理　▲ Coding / Agent　■ 多模態　｜　R=Reasoning　A=Agent/Coding　MM=Multimodal　OSS=Open Weights</text>
+<text x="72" y="250" class="legend">註：同一模型可能跨多種能力；節點形狀只取主要路線。品牌圖示為簡化識別標記，商標權利歸原公司。</text>
+<line x1="700.0" y1="300" x2="700.0" y2="5204" stroke="#9CA3AF" stroke-width="2"/>
+<text x="710.0" y="282" class="year">2023</text>
+<line x1="1436.8" y1="300" x2="1436.8" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="2181.9" y1="300" x2="2181.9" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="2935.1" y1="300" x2="2935.1" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="3688.3" y1="300" x2="3688.3" y2="5204" stroke="#9CA3AF" stroke-width="2"/>
+<text x="3698.3" y="282" class="year">2024</text>
+<line x1="4433.3" y1="300" x2="4433.3" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="5178.4" y1="300" x2="5178.4" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="5931.6" y1="300" x2="5931.6" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="6684.8" y1="300" x2="6684.8" y2="5204" stroke="#9CA3AF" stroke-width="2"/>
+<text x="6694.8" y="282" class="year">2025</text>
+<line x1="7421.6" y1="300" x2="7421.6" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="8166.7" y1="300" x2="8166.7" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="8919.9" y1="300" x2="8919.9" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="9673.1" y1="300" x2="9673.1" y2="5204" stroke="#9CA3AF" stroke-width="2"/>
+<text x="9683.1" y="282" class="year">2026</text>
+<line x1="10409.9" y1="300" x2="10409.9" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<line x1="11155.0" y1="300" x2="11155.0" y2="5204" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="8 12"/>
+<rect x="0" y="330" width="12080" height="408" fill="#F9FAFB"/>
+<line x1="0" y1="738" x2="12080" y2="738" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="400" r="34" fill="#111111" opacity="0.12"/>
+<text x="82" y="408" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#111111">◎</text>
+<text x="135" y="394" class="vendor">OpenAI</text>
+<text x="137" y="421" class="count">28 個節點</text>
+<line x1="700" y1="696" x2="11900" y2="696" stroke="#111111" stroke-width="3" opacity="0.45"/>
+<line x1="1289.5" y1="696" x2="1289.5" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<rect x="1282.4736842105262" y="689" width="14" height="14" rx="2" fill="#111111"/>
+<a href="https://openai.com/index/gpt-4/" target="_blank">
+<rect class="labelbox" x="1214.5" y="635.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="1224.5" y="655.0" class="model">GPT-4</text>
+<text x="1224.5" y="674.0" class="date">2023-03-14</text>
+<text x="1354.5" y="674.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="3229.8" y1="696" x2="3229.8" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="3229.824561403509" cy="696" r="7" fill="#111111"/>
+<a href="https://openai.com/index/new-models-and-developer-products-announced-at-devday/" target="_blank">
+<rect class="labelbox" x="3131.8" y="635.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="3141.8" y="655.0" class="model">GPT-4 Turbo</text>
+<text x="3141.8" y="674.0" class="date">2023-11-06</text>
+</a>
+<line x1="4777.2" y1="696" x2="4777.2" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<rect x="4770.192982456141" y="689" width="14" height="14" rx="2" fill="#111111"/>
+<a href="https://openai.com/index/gpt-4o-and-more-tools-to-chatgpt-free/" target="_blank">
+<rect class="labelbox" x="4702.2" y="635.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="4712.2" y="655.0" class="model">GPT-4o</text>
+<text x="4712.2" y="674.0" class="date">2024-05-13</text>
+<text x="4842.2" y="674.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="5776.0" y1="696" x2="5776.0" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="5776.023391812865,688 5784.023391812865,696 5776.023391812865,704 5768.023391812865,696" fill="#111111"/>
+<a href="https://openai.com/index/learning-to-reason-with-llms/" target="_blank">
+<rect class="labelbox" x="5698.0" y="635.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="5708.0" y="655.0" class="model">o1-mini</text>
+<text x="5708.0" y="674.0" class="date">2024-09-12</text>
+<text x="5844.0" y="674.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="5776.0" y1="696" x2="5776.0" y2="627" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="5776.023391812865,688 5784.023391812865,696 5776.023391812865,704 5768.023391812865,696" fill="#111111"/>
+<a href="https://openai.com/index/learning-to-reason-with-llms/" target="_blank">
+<rect class="labelbox" x="5683.0" y="577.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="5693.0" y="597.0" class="model">o1-preview</text>
+<text x="5693.0" y="616.0" class="date">2024-09-12</text>
+<text x="5859.0" y="616.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="6463.7" y1="696" x2="6463.7" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6463.74269005848,688 6471.74269005848,696 6463.74269005848,704 6455.74269005848,696" fill="#111111"/>
+<a href="https://openai.com/index/introducing-chatgpt-pro/" target="_blank">
+<rect class="labelbox" x="6388.7" y="635.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="6398.7" y="655.0" class="model">o1</text>
+<text x="6398.7" y="674.0" class="date">2024-12-05</text>
+<text x="6528.7" y="674.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="6930.4" y1="696" x2="6930.4" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6930.409356725147,688 6938.409356725147,696 6930.409356725147,704 6922.409356725147,696" fill="#111111"/>
+<a href="https://openai.com/index/openai-o3-mini/" target="_blank">
+<rect class="labelbox" x="6852.4" y="635.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="6862.4" y="655.0" class="model">o3-mini</text>
+<text x="6862.4" y="674.0" class="date">2025-01-31</text>
+<text x="6998.4" y="674.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="7151.5" y1="696" x2="7151.5" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="7151.461988304094" cy="696" r="7" fill="#111111"/>
+<a href="https://openai.com/index/introducing-gpt-4-5/" target="_blank">
+<rect class="labelbox" x="7073.5" y="635.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="7083.5" y="655.0" class="model">GPT-4.5</text>
+<text x="7083.5" y="674.0" class="date">2025-02-27</text>
+</a>
+<line x1="7528.1" y1="696" x2="7528.1" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7528.070175438596,687 7537.070175438596,704 7519.070175438596,704" fill="#111111"/>
+<a href="https://openai.com/index/gpt-4-1/" target="_blank">
+<rect class="labelbox" x="7450.1" y="635.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="7460.1" y="655.0" class="model">GPT-4.1</text>
+<text x="7460.1" y="674.0" class="date">2025-04-14</text>
+<text x="7596.1" y="674.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="7528.1" y1="696" x2="7528.1" y2="627" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7528.070175438596,687 7537.070175438596,704 7519.070175438596,704" fill="#111111"/>
+<a href="https://openai.com/index/gpt-4-1/" target="_blank">
+<rect class="labelbox" x="7425.1" y="577.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="7435.1" y="597.0" class="model">GPT-4.1 mini</text>
+<text x="7435.1" y="616.0" class="date">2025-04-14</text>
+<text x="7621.1" y="616.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="7528.1" y1="696" x2="7528.1" y2="569" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="7528.070175438596" cy="696" r="7" fill="#111111"/>
+<a href="https://openai.com/index/gpt-4-1/" target="_blank">
+<rect class="labelbox" x="7425.1" y="519.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="7435.1" y="539.0" class="model">GPT-4.1 nano</text>
+<text x="7435.1" y="558.0" class="date">2025-04-14</text>
+</a>
+<line x1="7544.4" y1="696" x2="7544.4" y2="511" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7544.444444444445,688 7552.444444444445,696 7544.444444444445,704 7536.444444444445,696" fill="#111111"/>
+<a href="https://openai.com/index/introducing-o3-and-o4-mini/" target="_blank">
+<rect class="labelbox" x="7469.4" y="461.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="7479.4" y="481.0" class="model">o3</text>
+<text x="7479.4" y="500.0" class="date">2025-04-16</text>
+<text x="7609.4" y="500.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="7544.4" y1="696" x2="7544.4" y2="453" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7544.444444444445,688 7552.444444444445,696 7544.444444444445,704 7536.444444444445,696" fill="#111111"/>
+<a href="https://openai.com/index/introducing-o3-and-o4-mini/" target="_blank">
+<rect class="labelbox" x="7466.4" y="403.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="7476.4" y="423.0" class="model">o4-mini</text>
+<text x="7476.4" y="442.0" class="date">2025-04-16</text>
+<text x="7612.4" y="442.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="8469.6" y1="696" x2="8469.6" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8469.590643274852,688 8477.590643274852,696 8469.590643274852,704 8461.590643274852,696" fill="#111111"/>
+<a href="https://openai.com/gpt-5/" target="_blank">
+<rect class="labelbox" x="8394.6" y="635.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8404.6" y="655.0" class="model">GPT-5</text>
+<text x="8404.6" y="674.0" class="date">2025-08-07</text>
+<text x="8534.6" y="674.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="8788.9" y1="696" x2="8788.9" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8788.888888888889,687 8797.888888888889,704 8779.888888888889,704" fill="#111111"/>
+<a href="https://openai.com/index/introducing-gpt-5-codex/" target="_blank">
+<rect class="labelbox" x="8690.9" y="635.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8700.9" y="655.0" class="model">GPT-5-Codex</text>
+<text x="8700.9" y="674.0" class="date">2025-09-15</text>
+<text x="8876.9" y="674.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="9263.7" y1="696" x2="9263.7" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9263.74269005848,688 9271.74269005848,696 9263.74269005848,704 9255.74269005848,696" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="9185.7" y="635.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9195.7" y="655.0" class="model">GPT-5.1</text>
+<text x="9195.7" y="674.0" class="date">2025-11-12</text>
+<text x="9331.7" y="674.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="9321.1" y1="696" x2="9321.1" y2="627" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9321.052631578947,687 9330.052631578947,704 9312.052631578947,704" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="9193.1" y="577.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9203.1" y="597.0" class="model">GPT-5.1-Codex-Max</text>
+<text x="9203.1" y="616.0" class="date">2025-11-19</text>
+<text x="9439.1" y="616.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="9501.2" y1="696" x2="9501.2" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9501.169590643274,688 9509.169590643274,696 9501.169590643274,704 9493.169590643274,696" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="9423.2" y="635.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9433.2" y="655.0" class="model">GPT-5.2</text>
+<text x="9433.2" y="674.0" class="date">2025-12-11</text>
+<text x="9569.2" y="674.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="9558.5" y1="696" x2="9558.5" y2="569" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9558.479532163743,687 9567.479532163743,704 9549.479532163743,704" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="9450.5" y="519.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9460.5" y="539.0" class="model">GPT-5.2-Codex</text>
+<text x="9460.5" y="558.0" class="date">2025-12-18</text>
+<text x="9656.5" y="558.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="9959.6" y1="696" x2="9959.6" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9959.649122807017,687 9968.649122807017,704 9950.649122807017,704" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="9851.6" y="635.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9861.6" y="655.0" class="model">GPT-5.3-Codex</text>
+<text x="9861.6" y="674.0" class="date">2026-02-05</text>
+<text x="10057.6" y="674.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="10172.5" y1="696" x2="10172.5" y2="627" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="10172.51461988304" cy="696" r="7" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="10054.5" y="577.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="10064.5" y="597.0" class="model">GPT-5.3 Instant</text>
+<text x="10064.5" y="616.0" class="date">2026-03-03</text>
+</a>
+<line x1="10188.9" y1="696" x2="10188.9" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10188.888888888889,688 10196.888888888889,696 10188.888888888889,704 10180.888888888889,696" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="10110.9" y="635.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="10120.9" y="655.0" class="model">GPT-5.4</text>
+<text x="10120.9" y="674.0" class="date">2026-03-05</text>
+<text x="10256.9" y="674.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="10590.1" y1="696" x2="10590.1" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10590.058479532165,688 10598.058479532165,696 10590.058479532165,704 10582.058479532165,696" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="10512.1" y="635.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="10522.1" y="655.0" class="model">GPT-5.5</text>
+<text x="10522.1" y="674.0" class="date">2026-04-23</text>
+<text x="10658.1" y="674.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="11114.0" y1="696" x2="11114.0" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="11114.035087719298" cy="696" r="7" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="10976.0" y="635.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="10986.0" y="655.0" class="model">GPT-5.6 Sol Preview</text>
+<text x="10986.0" y="674.0" class="date">2026-06-26</text>
+</a>
+<line x1="11220.5" y1="696" x2="11220.5" y2="627" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="11220.46783625731" cy="696" r="7" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="11117.5" y="577.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="11127.5" y="597.0" class="model">GPT-5.6 Luna</text>
+<text x="11127.5" y="616.0" class="date">2026-07-09</text>
+</a>
+<line x1="11220.5" y1="696" x2="11220.5" y2="569" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11220.46783625731,688 11228.46783625731,696 11220.46783625731,704 11212.46783625731,696" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="11122.5" y="519.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="11132.5" y="539.0" class="model">GPT-5.6 Sol</text>
+<text x="11132.5" y="558.0" class="date">2026-07-09</text>
+<text x="11308.5" y="558.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="11220.5" y1="696" x2="11220.5" y2="511" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="11220.46783625731" cy="696" r="7" fill="#111111"/>
+<a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank">
+<rect class="labelbox" x="11112.5" y="461.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="11122.5" y="481.0" class="model">GPT-5.6 Terra</text>
+<text x="11122.5" y="500.0" class="date">2026-07-09</text>
+</a>
+<line x1="11678.9" y1="696" x2="11678.9" y2="685" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11678.947368421053,687 11687.947368421053,704 11669.947368421053,704" fill="#111111"/>
+<a href="https://openai.com/index/gpt-6-astra/" target="_blank">
+<rect class="labelbox" x="11580.9" y="635.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="11590.9" y="655.0" class="model">GPT-6 Astra</text>
+<text x="11590.9" y="674.0" class="date">2026-09-03</text>
+<text x="11766.9" y="674.0" text-anchor="end" class="tag">A</text>
+</a>
+<rect x="0" y="738" width="12080" height="292" fill="#FFFFFF"/>
+<line x1="0" y1="1030" x2="12080" y2="1030" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="808" r="34" fill="#D97757" opacity="0.12"/>
+<text x="82" y="816" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#D97757">AI</text>
+<text x="135" y="802" class="vendor">Anthropic</text>
+<text x="137" y="829" class="count">22 個節點</text>
+<line x1="700" y1="988" x2="11900" y2="988" stroke="#D97757" stroke-width="3" opacity="0.45"/>
+<line x1="4204.1" y1="988" x2="4204.1" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4204.093567251462" cy="988" r="7" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-3-family" target="_blank">
+<rect class="labelbox" x="4096.1" y="927.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="4106.1" y="947.0" class="model">Claude 3 Opus</text>
+<text x="4106.1" y="966.0" class="date">2024-03-04</text>
+</a>
+<line x1="4204.1" y1="988" x2="4204.1" y2="919" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4204.093567251462" cy="988" r="7" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-3-family" target="_blank">
+<rect class="labelbox" x="4086.1" y="869.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="4096.1" y="889.0" class="model">Claude 3 Sonnet</text>
+<text x="4096.1" y="908.0" class="date">2024-03-04</text>
+</a>
+<line x1="5096.5" y1="988" x2="5096.5" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="5096.491228070176,979 5105.491228070176,996 5087.491228070176,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-3-5-sonnet" target="_blank">
+<rect class="labelbox" x="4968.5" y="927.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="4978.5" y="947.0" class="model">Claude 3.5 Sonnet</text>
+<text x="4978.5" y="966.0" class="date">2024-06-21</text>
+<text x="5214.5" y="966.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="6103.5" y1="988" x2="6103.5" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<circle cx="6103.508771929824" cy="988" r="7" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/3-5-models-and-computer-use" target="_blank">
+<rect class="labelbox" x="5980.5" y="927.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="5990.5" y="947.0" class="model">Claude 3.5 Haiku</text>
+<text x="5990.5" y="966.0" class="date">2024-10-22</text>
+</a>
+<line x1="6103.5" y1="988" x2="6103.5" y2="919" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6103.508771929824,979 6112.508771929824,996 6094.508771929824,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/3-5-models-and-computer-use" target="_blank">
+<rect class="labelbox" x="5945.5" y="869.0" width="316.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="5955.5" y="889.0" class="model">Claude 3.5 Sonnet (New)</text>
+<text x="5955.5" y="908.0" class="date">2024-10-22</text>
+<text x="6251.5" y="908.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="7126.9" y1="988" x2="7126.9" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7126.900584795321,980 7134.900584795321,988 7126.900584795321,996 7118.900584795321,988" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank">
+<rect class="labelbox" x="6998.9" y="927.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="7008.9" y="947.0" class="model">Claude 3.7 Sonnet</text>
+<text x="7008.9" y="966.0" class="date">2025-02-24</text>
+<text x="7244.9" y="966.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="7839.2" y1="988" x2="7839.2" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7839.181286549708,980 7847.181286549708,988 7839.181286549708,996 7831.181286549708,988" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-4" target="_blank">
+<rect class="labelbox" x="7731.2" y="927.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="7741.2" y="947.0" class="model">Claude Opus 4</text>
+<text x="7741.2" y="966.0" class="date">2025-05-22</text>
+<text x="7937.2" y="966.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="7839.2" y1="988" x2="7839.2" y2="919" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7839.181286549708,979 7848.181286549708,996 7830.181286549708,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-4" target="_blank">
+<rect class="labelbox" x="7721.2" y="869.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="7731.2" y="889.0" class="model">Claude Sonnet 4</text>
+<text x="7731.2" y="908.0" class="date">2025-05-22</text>
+<text x="7947.2" y="908.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="8453.2" y1="988" x2="8453.2" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8453.216374269006,979 8462.216374269006,996 8444.216374269006,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-opus-4-1" target="_blank">
+<rect class="labelbox" x="8335.2" y="927.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="8345.2" y="947.0" class="model">Claude Opus 4.1</text>
+<text x="8345.2" y="966.0" class="date">2025-08-05</text>
+<text x="8561.2" y="966.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="8903.5" y1="988" x2="8903.5" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8903.508771929824,979 8912.508771929824,996 8894.508771929824,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-sonnet-4-5" target="_blank">
+<rect class="labelbox" x="8775.5" y="927.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="8785.5" y="947.0" class="model">Claude Sonnet 4.5</text>
+<text x="8785.5" y="966.0" class="date">2025-09-29</text>
+<text x="9021.5" y="966.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="9034.5" y1="988" x2="9034.5" y2="919" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<circle cx="9034.502923976608" cy="988" r="7" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-haiku-4-5" target="_blank">
+<rect class="labelbox" x="8911.5" y="869.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="8921.5" y="889.0" class="model">Claude Haiku 4.5</text>
+<text x="8921.5" y="908.0" class="date">2025-10-15</text>
+</a>
+<line x1="9362.0" y1="988" x2="9362.0" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9361.988304093567,979 9370.988304093567,996 9352.988304093567,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-opus-4-5" target="_blank">
+<rect class="labelbox" x="9244.0" y="927.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="9254.0" y="947.0" class="model">Claude Opus 4.5</text>
+<text x="9254.0" y="966.0" class="date">2025-11-24</text>
+<text x="9470.0" y="966.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="9959.6" y1="988" x2="9959.6" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9959.649122807017,979 9968.649122807017,996 9950.649122807017,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-opus-4-6" target="_blank">
+<rect class="labelbox" x="9841.6" y="927.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="9851.6" y="947.0" class="model">Claude Opus 4.6</text>
+<text x="9851.6" y="966.0" class="date">2026-02-05</text>
+<text x="10067.6" y="966.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="10057.9" y1="988" x2="10057.9" y2="919" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10057.894736842105,979 10066.894736842105,996 10048.894736842105,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-sonnet-4-6" target="_blank">
+<rect class="labelbox" x="9929.9" y="869.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="9939.9" y="889.0" class="model">Claude Sonnet 4.6</text>
+<text x="9939.9" y="908.0" class="date">2026-02-17</text>
+<text x="10175.9" y="908.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="10532.7" y1="988" x2="10532.7" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10532.748538011696,979 10541.748538011696,996 10523.748538011696,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">
+<rect class="labelbox" x="10414.7" y="927.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="10424.7" y="947.0" class="model">Claude Opus 4.7</text>
+<text x="10424.7" y="966.0" class="date">2026-04-16</text>
+<text x="10640.7" y="966.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="10876.6" y1="988" x2="10876.6" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10876.608187134503,979 10885.608187134503,996 10867.608187134503,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news/claude-opus-4-8" target="_blank">
+<rect class="labelbox" x="10758.6" y="927.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="10768.6" y="947.0" class="model">Claude Opus 4.8</text>
+<text x="10768.6" y="966.0" class="date">2026-05-28</text>
+<text x="10984.6" y="966.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="10974.9" y1="988" x2="10974.9" y2="919" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<circle cx="10974.853801169591" cy="988" r="7" fill="#D97757"/>
+<a href="https://www.anthropic.com/news" target="_blank">
+<rect class="labelbox" x="10861.9" y="869.0" width="226.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="10871.9" y="889.0" class="model">Claude Fable 5</text>
+<text x="10871.9" y="908.0" class="date">2026-06-09</text>
+</a>
+<line x1="10974.9" y1="988" x2="10974.9" y2="861" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<circle cx="10974.853801169591" cy="988" r="7" fill="#D97757"/>
+<a href="https://www.anthropic.com/news" target="_blank">
+<rect class="labelbox" x="10856.9" y="811.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="10866.9" y="831.0" class="model">Claude Mythos 5</text>
+<text x="10866.9" y="850.0" class="date">2026-06-09</text>
+</a>
+<line x1="11146.8" y1="988" x2="11146.8" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11146.783625730994,979 11155.783625730994,996 11137.783625730994,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news" target="_blank">
+<rect class="labelbox" x="11028.8" y="927.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="11038.8" y="947.0" class="model">Claude Sonnet 5</text>
+<text x="11038.8" y="966.0" class="date">2026-06-30</text>
+<text x="11254.8" y="966.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="11343.3" y1="988" x2="11343.3" y2="919" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11343.27485380117,979 11352.27485380117,996 11334.27485380117,996" fill="#D97757"/>
+<a href="https://www.anthropic.com/news" target="_blank">
+<rect class="labelbox" x="11235.3" y="869.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="11245.3" y="889.0" class="model">Claude Opus 5</text>
+<text x="11245.3" y="908.0" class="date">2026-07-24</text>
+<text x="11441.3" y="908.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="11662.6" y1="988" x2="11662.6" y2="977" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<circle cx="11662.573099415204" cy="988" r="7" fill="#D97757"/>
+<a href="https://www.anthropic.com/news" target="_blank">
+<rect class="labelbox" x="11539.6" y="927.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="11549.6" y="947.0" class="model">Claude Fable 5.1</text>
+<text x="11549.6" y="966.0" class="date">2026-09-01</text>
+</a>
+<line x1="11662.6" y1="988" x2="11662.6" y2="919" stroke="#D97757" stroke-width="1.5" opacity="0.65"/>
+<circle cx="11662.573099415204" cy="988" r="7" fill="#D97757"/>
+<a href="https://www.anthropic.com/news" target="_blank">
+<rect class="labelbox" x="11534.6" y="869.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#D97757" stroke-width="1.5"/>
+<text x="11544.6" y="889.0" class="model">Claude Mythos 5.1</text>
+<text x="11544.6" y="908.0" class="date">2026-09-01</text>
+</a>
+<rect x="0" y="1030" width="12080" height="292" fill="#F9FAFB"/>
+<line x1="0" y1="1322" x2="12080" y2="1322" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="1100" r="34" fill="#4285F4" opacity="0.12"/>
+<text x="82" y="1108" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#4285F4">✦</text>
+<text x="135" y="1094" class="vendor">Google</text>
+<text x="137" y="1121" class="count">24 個節點</text>
+<line x1="700" y1="1280" x2="11900" y2="1280" stroke="#4285F4" stroke-width="3" opacity="0.45"/>
+<line x1="3475.4" y1="1280" x2="3475.4" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<rect x="3468.438596491228" y="1273" width="14" height="14" rx="2" fill="#4285F4"/>
+<a href="https://blog.google/innovation-and-ai/technology/ai/google-gemini-ai/" target="_blank">
+<rect class="labelbox" x="3382.4" y="1219.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="3392.4" y="1239.0" class="model">Gemini 1.0</text>
+<text x="3392.4" y="1258.0" class="date">2023-12-06</text>
+<text x="3558.4" y="1258.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="4056.7" y1="1280" x2="4056.7" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<rect x="4049.7251461988308" y="1273" width="14" height="14" rx="2" fill="#4285F4"/>
+<a href="https://blog.google/innovation-and-ai/products/google-gemini-next-generation-model-february-2024/" target="_blank">
+<rect class="labelbox" x="3943.7" y="1219.0" width="226.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="3953.7" y="1239.0" class="model">Gemini 1.5 Pro</text>
+<text x="3953.7" y="1258.0" class="date">2024-02-15</text>
+<text x="4159.7" y="1258.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="4785.4" y1="1280" x2="4785.4" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<rect x="4778.380116959064" y="1273" width="14" height="14" rx="2" fill="#4285F4"/>
+<a href="https://blog.google/technology/developers/gemini-1-5-pro-and-1-5-flash-preview/" target="_blank">
+<rect class="labelbox" x="4662.4" y="1219.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="4672.4" y="1239.0" class="model">Gemini 1.5 Flash</text>
+<text x="4672.4" y="1258.0" class="date">2024-05-14</text>
+<text x="4898.4" y="1258.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="6512.9" y1="1280" x2="6512.9" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6512.8654970760235,1271 6521.8654970760235,1288 6503.8654970760235,1288" fill="#4285F4"/>
+<a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/" target="_blank">
+<rect class="labelbox" x="6324.9" y="1219.0" width="376.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="6334.9" y="1239.0" class="model">Gemini 2.0 Flash Experimental</text>
+<text x="6334.9" y="1258.0" class="date">2024-12-11</text>
+<text x="6690.9" y="1258.0" text-anchor="end" class="tag">A/MM</text>
+</a>
+<line x1="6971.3" y1="1280" x2="6971.3" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6971.3450292397665,1271 6980.3450292397665,1288 6962.3450292397665,1288" fill="#4285F4"/>
+<a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-updates-february-2025/" target="_blank">
+<rect class="labelbox" x="6848.3" y="1219.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="6858.3" y="1239.0" class="model">Gemini 2.0 Flash</text>
+<text x="6858.3" y="1258.0" class="date">2025-02-05</text>
+<text x="7084.3" y="1258.0" text-anchor="end" class="tag">A/MM</text>
+</a>
+<line x1="6971.3" y1="1280" x2="6971.3" y2="1211" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6971.3450292397665,1272 6979.3450292397665,1280 6971.3450292397665,1288 6963.3450292397665,1280" fill="#4285F4"/>
+<a href="https://blog.google/feed/gemini-app-experimental-models/" target="_blank">
+<rect class="labelbox" x="6781.3" y="1161.0" width="380.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="6791.3" y="1181.0" class="model">Gemini 2.0 Flash Thinking Experimental</text>
+<text x="6791.3" y="1200.0" class="date">2025-02-05</text>
+<text x="7151.3" y="1200.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="6971.3" y1="1280" x2="6971.3" y2="1153" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6971.3450292397665,1271 6980.3450292397665,1288 6962.3450292397665,1288" fill="#4285F4"/>
+<a href="https://blog.google/feed/gemini-app-experimental-models/" target="_blank">
+<rect class="labelbox" x="6793.3" y="1103.0" width="356.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="6803.3" y="1123.0" class="model">Gemini 2.0 Pro Experimental</text>
+<text x="6803.3" y="1142.0" class="date">2025-02-05</text>
+<text x="7139.3" y="1142.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="7257.9" y1="1280" x2="7257.9" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<rect x="7250.894736842105" y="1273" width="14" height="14" rx="2" fill="#4285F4"/>
+<a href="https://blog.google/technology/developers/gemma-3/" target="_blank">
+<rect class="labelbox" x="7179.9" y="1219.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="7189.9" y="1239.0" class="model">Gemma 3</text>
+<text x="7189.9" y="1258.0" class="date">2025-03-12</text>
+<text x="7325.9" y="1258.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<line x1="7364.3" y1="1280" x2="7364.3" y2="1211" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7364.327485380118,1272 7372.327485380118,1280 7364.327485380118,1288 7356.327485380118,1280" fill="#4285F4"/>
+<a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/" target="_blank">
+<rect class="labelbox" x="7186.3" y="1161.0" width="356.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="7196.3" y="1181.0" class="model">Gemini 2.5 Pro Experimental</text>
+<text x="7196.3" y="1200.0" class="date">2025-03-25</text>
+<text x="7532.3" y="1200.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="7552.6" y1="1280" x2="7552.6" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7552.631578947368,1272 7560.631578947368,1280 7552.631578947368,1288 7544.631578947368,1280" fill="#4285F4"/>
+<a href="https://blog.google/technology/developers/gemini-2-5-flash-preview/" target="_blank">
+<rect class="labelbox" x="7389.6" y="1219.0" width="326.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="7399.6" y="1239.0" class="model">Gemini 2.5 Flash Preview</text>
+<text x="7399.6" y="1258.0" class="date">2025-04-17</text>
+<text x="7705.6" y="1258.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="8052.0" y1="1280" x2="8052.0" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8052.046783625731,1272 8060.046783625731,1280 8052.046783625731,1288 8044.046783625731,1280" fill="#4285F4"/>
+<a href="https://blog.google/technology/ai/google-gemini-2-5-model-family-expands/" target="_blank">
+<rect class="labelbox" x="7914.0" y="1219.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="7924.0" y="1239.0" class="model">Gemini 2.5 Flash GA</text>
+<text x="7924.0" y="1258.0" class="date">2025-06-17</text>
+<text x="8180.0" y="1258.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="8052.0" y1="1280" x2="8052.0" y2="1211" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8052.046783625731,1272 8060.046783625731,1280 8052.046783625731,1288 8044.046783625731,1280" fill="#4285F4"/>
+<a href="https://blog.google/technology/ai/google-gemini-2-5-model-family-expands/" target="_blank">
+<rect class="labelbox" x="7924.0" y="1161.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="7934.0" y="1181.0" class="model">Gemini 2.5 Pro GA</text>
+<text x="7934.0" y="1200.0" class="date">2025-06-17</text>
+<text x="8170.0" y="1200.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="8420.5" y1="1280" x2="8420.5" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8420.46783625731,1272 8428.46783625731,1280 8420.46783625731,1288 8412.46783625731,1280" fill="#4285F4"/>
+<a href="https://deepmind.google/models/model-cards/" target="_blank">
+<rect class="labelbox" x="8272.5" y="1219.0" width="296.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="8282.5" y="1239.0" class="model">Gemini 2.5 Deep Think</text>
+<text x="8282.5" y="1258.0" class="date">2025-08-01</text>
+<text x="8558.5" y="1258.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="8969.0" y1="1280" x2="8969.0" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8969.005847953216,1271 8978.005847953216,1288 8960.005847953216,1288" fill="#4285F4"/>
+<a href="https://deepmind.google/models/model-cards/" target="_blank">
+<rect class="labelbox" x="8811.0" y="1219.0" width="316.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="8821.0" y="1239.0" class="model">Gemini 2.5 Computer Use</text>
+<text x="8821.0" y="1258.0" class="date">2025-10-07</text>
+<text x="9117.0" y="1258.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="9312.9" y1="1280" x2="9312.9" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9312.865497076024,1272 9320.865497076024,1280 9312.865497076024,1288 9304.865497076024,1280" fill="#4285F4"/>
+<a href="https://blog.google/technology/ai/google-gemini-3/" target="_blank">
+<rect class="labelbox" x="9209.9" y="1219.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="9219.9" y="1239.0" class="model">Gemini 3 Pro</text>
+<text x="9219.9" y="1258.0" class="date">2025-11-18</text>
+<text x="9405.9" y="1258.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="9550.3" y1="1280" x2="9550.3" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9550.29239766082,1272 9558.29239766082,1280 9550.29239766082,1288 9542.29239766082,1280" fill="#4285F4"/>
+<a href="https://blog.google/technology/ai/gemini-3-flash/" target="_blank">
+<rect class="labelbox" x="9437.3" y="1219.0" width="226.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="9447.3" y="1239.0" class="model">Gemini 3 Flash</text>
+<text x="9447.3" y="1258.0" class="date">2025-12-17</text>
+<text x="9653.3" y="1258.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="10074.3" y1="1280" x2="10074.3" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10074.269005847953,1272 10082.269005847953,1280 10074.269005847953,1288 10066.269005847953,1280" fill="#4285F4"/>
+<a href="https://deepmind.google/models/model-cards/gemini-3-1-pro/" target="_blank">
+<rect class="labelbox" x="9961.3" y="1219.0" width="226.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="9971.3" y="1239.0" class="model">Gemini 3.1 Pro</text>
+<text x="9971.3" y="1258.0" class="date">2026-02-19</text>
+<text x="10177.3" y="1258.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="10172.5" y1="1280" x2="10172.5" y2="1211" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<circle cx="10172.51461988304" cy="1280" r="7" fill="#4285F4"/>
+<a href="https://deepmind.google/models/model-cards/" target="_blank">
+<rect class="labelbox" x="10024.5" y="1161.0" width="296.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="10034.5" y="1181.0" class="model">Gemini 3.1 Flash-Lite</text>
+<text x="10034.5" y="1200.0" class="date">2026-03-03</text>
+</a>
+<line x1="10655.6" y1="1280" x2="10655.6" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<rect x="10648.555555555555" y="1273" width="14" height="14" rx="2" fill="#4285F4"/>
+<a href="https://deepmind.google/models/model-cards/" target="_blank">
+<rect class="labelbox" x="10527.6" y="1219.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="10537.6" y="1239.0" class="model">Gemini Omni Flash</text>
+<text x="10537.6" y="1258.0" class="date">2026-05</text>
+<text x="10773.6" y="1258.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="10802.9" y1="1280" x2="10802.9" y2="1211" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<rect x="10795.923976608186" y="1273" width="14" height="14" rx="2" fill="#4285F4"/>
+<a href="https://blog.google/technology/ai/gemini-3-5/" target="_blank">
+<rect class="labelbox" x="10679.9" y="1161.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="10689.9" y="1181.0" class="model">Gemini 3.5 Flash</text>
+<text x="10689.9" y="1200.0" class="date">2026-05-19</text>
+<text x="10915.9" y="1200.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="11318.7" y1="1280" x2="11318.7" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<circle cx="11318.713450292398" cy="1280" r="7" fill="#4285F4"/>
+<a href="https://deepmind.google/models/model-cards/" target="_blank">
+<rect class="labelbox" x="11170.7" y="1219.0" width="296.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="11180.7" y="1239.0" class="model">Gemini 3.5 Flash-Lite</text>
+<text x="11180.7" y="1258.0" class="date">2026-07-21</text>
+</a>
+<line x1="11318.7" y1="1280" x2="11318.7" y2="1211" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<rect x="11311.713450292398" y="1273" width="14" height="14" rx="2" fill="#4285F4"/>
+<a href="https://deepmind.google/models/model-cards/" target="_blank">
+<rect class="labelbox" x="11195.7" y="1161.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="11205.7" y="1181.0" class="model">Gemini 3.6 Flash</text>
+<text x="11205.7" y="1200.0" class="date">2026-07-21</text>
+<text x="11431.7" y="1200.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="11507.0" y1="1280" x2="11507.0" y2="1153" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<rect x="11500.017543859649" y="1273" width="14" height="14" rx="2" fill="#4285F4"/>
+<a href="https://deepmind.google/models/model-cards/" target="_blank">
+<rect class="labelbox" x="11384.0" y="1103.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="11394.0" y="1123.0" class="model">Gemini 3.7 Flash</text>
+<text x="11394.0" y="1142.0" class="date">2026-08-13</text>
+<text x="11620.0" y="1142.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="11670.8" y1="1280" x2="11670.8" y2="1269" stroke="#4285F4" stroke-width="1.5" opacity="0.65"/>
+<rect x="11663.760233918129" y="1273" width="14" height="14" rx="2" fill="#4285F4"/>
+<a href="https://deepmind.google/models/model-cards/" target="_blank">
+<rect class="labelbox" x="11547.8" y="1219.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5"/>
+<text x="11557.8" y="1239.0" class="model">Gemini 3.8 Flash</text>
+<text x="11557.8" y="1258.0" class="date">2026-09-02</text>
+<text x="11783.8" y="1258.0" text-anchor="end" class="tag">MM</text>
+</a>
+<rect x="0" y="1322" width="12080" height="292" fill="#FFFFFF"/>
+<line x1="0" y1="1614" x2="12080" y2="1614" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="1392" r="34" fill="#111111" opacity="0.12"/>
+<text x="82" y="1400" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#111111">xAI</text>
+<text x="135" y="1386" class="vendor">xAI</text>
+<text x="137" y="1413" class="count">11 個節點</text>
+<line x1="700" y1="1572" x2="11900" y2="1572" stroke="#111111" stroke-width="3" opacity="0.45"/>
+<line x1="3205.3" y1="1572" x2="3205.3" y2="1561" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="3205.2631578947367" cy="1572" r="7" fill="#111111"/>
+<a href="https://x.ai/news/announcing-grok" target="_blank">
+<rect class="labelbox" x="3117.3" y="1511.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="3127.3" y="1531.0" class="model">Grok Beta</text>
+<text x="3127.3" y="1550.0" class="date">2023-11-03</text>
+</a>
+<line x1="4310.5" y1="1572" x2="4310.5" y2="1561" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4310.526315789473" cy="1572" r="7" fill="#111111"/>
+<a href="https://x.ai/news/grok-os" target="_blank">
+<rect class="labelbox" x="4172.5" y="1511.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="4182.5" y="1531.0" class="model">Grok-1 Open Weights</text>
+<text x="4182.5" y="1550.0" class="date">2024-03-17</text>
+<text x="4438.5" y="1550.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="4400.6" y1="1572" x2="4400.6" y2="1503" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="4400.584795321638,1564 4408.584795321638,1572 4400.584795321638,1580 4392.584795321638,1572" fill="#111111"/>
+<a href="https://x.ai/news/grok-1.5" target="_blank">
+<rect class="labelbox" x="4317.6" y="1453.0" width="166.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="4327.6" y="1473.0" class="model">Grok-1.5</text>
+<text x="4327.6" y="1492.0" class="date">2024-03-28</text>
+<text x="4473.6" y="1492.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="4523.4" y1="1572" x2="4523.4" y2="1445" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<rect x="4516.391812865497" y="1565" width="14" height="14" rx="2" fill="#111111"/>
+<a href="https://x.ai/news/grok-1.5v" target="_blank">
+<rect class="labelbox" x="4435.4" y="1395.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="4445.4" y="1415.0" class="model">Grok-1.5V</text>
+<text x="4445.4" y="1434.0" class="date">2024-04-12</text>
+<text x="4601.4" y="1434.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="5530.4" y1="1572" x2="5530.4" y2="1561" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="5530.409356725146,1564 5538.409356725146,1572 5530.409356725146,1580 5522.409356725146,1572" fill="#111111"/>
+<a href="https://x.ai/news/grok-2" target="_blank">
+<rect class="labelbox" x="5432.4" y="1511.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="5442.4" y="1531.0" class="model">Grok-2 Beta</text>
+<text x="5442.4" y="1550.0" class="date">2024-08-13</text>
+<text x="5618.4" y="1550.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="6521.1" y1="1572" x2="6521.1" y2="1561" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="6521.0526315789475" cy="1572" r="7" fill="#111111"/>
+<a href="https://x.ai/news/grok-1212" target="_blank">
+<rect class="labelbox" x="6383.1" y="1511.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="6393.1" y="1531.0" class="model">Grok-2 (Dec update)</text>
+<text x="6393.1" y="1550.0" class="date">2024-12-12</text>
+</a>
+<line x1="7086.0" y1="1572" x2="7086.0" y2="1561" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7085.964912280701,1564 7093.964912280701,1572 7085.964912280701,1580 7077.964912280701,1572" fill="#111111"/>
+<a href="https://x.ai/news/grok-3" target="_blank">
+<rect class="labelbox" x="6988.0" y="1511.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="6998.0" y="1531.0" class="model">Grok 3 Beta</text>
+<text x="6998.0" y="1550.0" class="date">2025-02-19</text>
+<text x="7174.0" y="1550.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="8232.2" y1="1572" x2="8232.2" y2="1561" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8232.16374269006,1564 8240.16374269006,1572 8232.16374269006,1580 8224.16374269006,1572" fill="#111111"/>
+<a href="https://docs.x.ai/developers/release-notes" target="_blank">
+<rect class="labelbox" x="8157.2" y="1511.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8167.2" y="1531.0" class="model">Grok 4</text>
+<text x="8167.2" y="1550.0" class="date">2025-07-09</text>
+<text x="8297.2" y="1550.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="9321.1" y1="1572" x2="9321.1" y2="1561" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9321.052631578947,1563 9330.052631578947,1580 9312.052631578947,1580" fill="#111111"/>
+<a href="https://docs.x.ai/developers/release-notes" target="_blank">
+<rect class="labelbox" x="9213.1" y="1511.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9223.1" y="1531.0" class="model">Grok 4.1 Fast</text>
+<text x="9223.1" y="1550.0" class="date">2025-11-19</text>
+<text x="9419.1" y="1550.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="11212.3" y1="1572" x2="11212.3" y2="1561" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11212.280701754386,1563 11221.280701754386,1580 11203.280701754386,1580" fill="#111111"/>
+<a href="https://docs.x.ai/developers/release-notes" target="_blank">
+<rect class="labelbox" x="11129.3" y="1511.0" width="166.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="11139.3" y="1531.0" class="model">Grok 4.5</text>
+<text x="11139.3" y="1550.0" class="date">2026-07-08</text>
+<text x="11285.3" y="1550.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="11498.8" y1="1572" x2="11498.8" y2="1561" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11498.830409356726,1563 11507.830409356726,1580 11489.830409356726,1580" fill="#111111"/>
+<a href="https://docs.x.ai/developers/release-notes" target="_blank">
+<rect class="labelbox" x="11415.8" y="1511.0" width="166.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="11425.8" y="1531.0" class="model">Grok 4.6</text>
+<text x="11425.8" y="1550.0" class="date">2026-08-12</text>
+<text x="11571.8" y="1550.0" text-anchor="end" class="tag">A</text>
+</a>
+<rect x="0" y="1614" width="12080" height="292" fill="#F9FAFB"/>
+<line x1="0" y1="1906" x2="12080" y2="1906" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="1684" r="34" fill="#2F6BFF" opacity="0.12"/>
+<text x="82" y="1692" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#2F6BFF">≈</text>
+<text x="135" y="1678" class="vendor">DeepSeek</text>
+<text x="137" y="1705" class="count">18 個節點</text>
+<line x1="700" y1="1864" x2="11900" y2="1864" stroke="#2F6BFF" stroke-width="3" opacity="0.45"/>
+<line x1="4678.9" y1="1864" x2="4678.9" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4678.9473684210525" cy="1864" r="7" fill="#2F6BFF"/>
+<a href="https://www.deepseek.com/news/v2-5-final/" target="_blank">
+<rect class="labelbox" x="4580.9" y="1803.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="4590.9" y="1823.0" class="model">DeepSeek-V2</text>
+<text x="4590.9" y="1842.0" class="date">2024-05</text>
+<text x="4766.9" y="1842.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="5153.8" y1="1864" x2="5153.8" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="5153.801169590643,1855 5162.801169590643,1872 5144.801169590643,1872" fill="#2F6BFF"/>
+<a href="https://www.deepseek.com/en/news/deepseek-v2-5/" target="_blank">
+<rect class="labelbox" x="5005.8" y="1803.0" width="296.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="5015.8" y="1823.0" class="model">DeepSeek-V2-Chat-0628</text>
+<text x="5015.8" y="1842.0" class="date">2024-06-28</text>
+<text x="5291.8" y="1842.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="5366.7" y1="1864" x2="5366.7" y2="1795" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="5366.666666666667,1855 5375.666666666667,1872 5357.666666666667,1872" fill="#2F6BFF"/>
+<a href="https://www.deepseek.com/en/news/deepseek-v2-5/" target="_blank">
+<rect class="labelbox" x="5213.7" y="1745.0" width="306.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="5223.7" y="1765.0" class="model">DeepSeek-Coder-V2-0724</text>
+<text x="5223.7" y="1784.0" class="date">2024-07-24</text>
+<text x="5509.7" y="1784.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="5718.7" y1="1864" x2="5718.7" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="5718.713450292398,1855 5727.713450292398,1872 5709.713450292398,1872" fill="#2F6BFF"/>
+<a href="https://www.deepseek.com/en/news/deepseek-v2-5/" target="_blank">
+<rect class="labelbox" x="5610.7" y="1803.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="5620.7" y="1823.0" class="model">DeepSeek-V2.5</text>
+<text x="5620.7" y="1842.0" class="date">2024-09-05</text>
+<text x="5816.7" y="1842.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="6504.7" y1="1864" x2="6504.7" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<circle cx="6504.678362573099" cy="1864" r="7" fill="#2F6BFF"/>
+<a href="https://www.deepseek.com/news/v2-5-final/" target="_blank">
+<rect class="labelbox" x="6371.7" y="1803.0" width="266.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="6381.7" y="1823.0" class="model">DeepSeek-V2.5-1210</text>
+<text x="6381.7" y="1842.0" class="date">2024-12-10</text>
+<text x="6627.7" y="1842.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="6635.7" y1="1864" x2="6635.7" y2="1795" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<circle cx="6635.672514619882" cy="1864" r="7" fill="#2F6BFF"/>
+<a href="https://deepseek.com/en/news/deepseek-v3/" target="_blank">
+<rect class="labelbox" x="6537.7" y="1745.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="6547.7" y="1765.0" class="model">DeepSeek-V3</text>
+<text x="6547.7" y="1784.0" class="date">2024-12-26</text>
+<text x="6723.7" y="1784.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="6840.4" y1="1864" x2="6840.4" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6840.350877192983,1856 6848.350877192983,1864 6840.350877192983,1872 6832.350877192983,1864" fill="#2F6BFF"/>
+<a href="https://deepseek.com/news/deepseek-r1/" target="_blank">
+<rect class="labelbox" x="6742.4" y="1803.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="6752.4" y="1823.0" class="model">DeepSeek-R1</text>
+<text x="6752.4" y="1842.0" class="date">2025-01-20</text>
+<text x="6928.4" y="1842.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="7364.3" y1="1864" x2="7364.3" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7364.327485380118,1855 7373.327485380118,1872 7355.327485380118,1872" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news250325" target="_blank">
+<rect class="labelbox" x="7241.3" y="1803.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="7251.3" y="1823.0" class="model">DeepSeek-V3-0324</text>
+<text x="7251.3" y="1842.0" class="date">2025-03-25</text>
+<text x="7477.3" y="1842.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="7888.3" y1="1864" x2="7888.3" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7888.304093567252,1856 7896.304093567252,1864 7888.304093567252,1872 7880.304093567252,1864" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news250528" target="_blank">
+<rect class="labelbox" x="7765.3" y="1803.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="7775.3" y="1823.0" class="model">DeepSeek-R1-0528</text>
+<text x="7775.3" y="1842.0" class="date">2025-05-28</text>
+<text x="8001.3" y="1842.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="8584.2" y1="1864" x2="8584.2" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8584.21052631579,1855 8593.21052631579,1872 8575.21052631579,1872" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news250821" target="_blank">
+<rect class="labelbox" x="8476.2" y="1803.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="8486.2" y="1823.0" class="model">DeepSeek-V3.1</text>
+<text x="8486.2" y="1842.0" class="date">2025-08-21</text>
+<text x="8682.2" y="1842.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="8846.2" y1="1864" x2="8846.2" y2="1795" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8846.198830409357,1855 8855.198830409357,1872 8837.198830409357,1872" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news250922" target="_blank">
+<rect class="labelbox" x="8693.2" y="1745.0" width="306.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="8703.2" y="1765.0" class="model">DeepSeek-V3.1-Terminus</text>
+<text x="8703.2" y="1784.0" class="date">2025-09-22</text>
+<text x="8989.2" y="1784.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="8903.5" y1="1864" x2="8903.5" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<circle cx="8903.508771929824" cy="1864" r="7" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news250929" target="_blank">
+<rect class="labelbox" x="8775.5" y="1803.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="8785.5" y="1823.0" class="model">DeepSeek-V3.2-Exp</text>
+<text x="8785.5" y="1842.0" class="date">2025-09-29</text>
+<text x="9021.5" y="1842.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="9419.3" y1="1864" x2="9419.3" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9419.298245614036,1856 9427.298245614036,1864 9419.298245614036,1872 9411.298245614036,1864" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news251201" target="_blank">
+<rect class="labelbox" x="9311.3" y="1803.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="9321.3" y="1823.0" class="model">DeepSeek-V3.2</text>
+<text x="9321.3" y="1842.0" class="date">2025-12-01</text>
+<text x="9517.3" y="1842.0" text-anchor="end" class="tag">R/A/OSS</text>
+</a>
+<line x1="9419.3" y1="1864" x2="9419.3" y2="1795" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9419.298245614036,1856 9427.298245614036,1864 9419.298245614036,1872 9411.298245614036,1864" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news251201" target="_blank">
+<rect class="labelbox" x="9266.3" y="1745.0" width="306.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="9276.3" y="1765.0" class="model">DeepSeek-V3.2-Speciale</text>
+<text x="9276.3" y="1784.0" class="date">2025-12-01</text>
+<text x="9562.3" y="1784.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="10598.2" y1="1864" x2="10598.2" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10598.245614035088,1855 10607.245614035088,1872 10589.245614035088,1872" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news260424" target="_blank">
+<rect class="labelbox" x="10460.2" y="1803.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="10470.2" y="1823.0" class="model">DeepSeek-V4 Preview</text>
+<text x="10470.2" y="1842.0" class="date">2026-04-24</text>
+<text x="10726.2" y="1842.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="11400.6" y1="1864" x2="11400.6" y2="1853" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11400.584795321636,1855 11409.584795321636,1872 11391.584795321636,1872" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/updates/" target="_blank">
+<rect class="labelbox" x="11257.6" y="1803.0" width="286.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="11267.6" y="1823.0" class="model">DeepSeek-V4-Flash GA</text>
+<text x="11267.6" y="1842.0" class="date">2026-07-31</text>
+<text x="11533.6" y="1842.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="11507.0" y1="1864" x2="11507.0" y2="1795" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11507.017543859649,1856 11515.017543859649,1864 11507.017543859649,1872 11499.017543859649,1864" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news260813/" target="_blank">
+<rect class="labelbox" x="11374.0" y="1745.0" width="266.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="11384.0" y="1765.0" class="model">DeepSeek-V4-Pro GA</text>
+<text x="11384.0" y="1784.0" class="date">2026-08-13</text>
+<text x="11630.0" y="1784.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="11572.5" y1="1864" x2="11572.5" y2="1737" stroke="#2F6BFF" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11572.51461988304,1855 11581.51461988304,1872 11563.51461988304,1872" fill="#2F6BFF"/>
+<a href="https://api-docs.deepseek.com/news/news260821/" target="_blank">
+<rect class="labelbox" x="11389.5" y="1687.0" width="366.0" height="50" rx="10" fill="#FFFFFF" stroke="#2F6BFF" stroke-width="1.5"/>
+<text x="11399.5" y="1707.0" class="model">DeepSeek-V4-Flash-Vision-Exp</text>
+<text x="11399.5" y="1726.0" class="date">2026-08-21</text>
+<text x="11745.5" y="1726.0" text-anchor="end" class="tag">A/MM</text>
+</a>
+<rect x="0" y="1906" width="12080" height="234" fill="#FFFFFF"/>
+<line x1="0" y1="2140" x2="12080" y2="2140" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="1976" r="34" fill="#111111" opacity="0.12"/>
+<text x="82" y="1984" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#111111">◐</text>
+<text x="135" y="1970" class="vendor">Moonshot AI</text>
+<text x="137" y="1997" class="count">10 個節點</text>
+<line x1="700" y1="2098" x2="11900" y2="2098" stroke="#111111" stroke-width="3" opacity="0.45"/>
+<line x1="6840.4" y1="2098" x2="6840.4" y2="2087" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6840.350877192983,2090 6848.350877192983,2098 6840.350877192983,2106 6832.350877192983,2098" fill="#111111"/>
+<a href="https://github.com/MoonshotAI/Kimi-k1.5" target="_blank">
+<rect class="labelbox" x="6752.4" y="2037.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="6762.4" y="2057.0" class="model">Kimi k1.5</text>
+<text x="6762.4" y="2076.0" class="date">2025-01-20</text>
+<text x="6918.4" y="2076.0" text-anchor="end" class="tag">R/MM</text>
+</a>
+<line x1="7708.2" y1="2098" x2="7708.2" y2="2087" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7708.187134502924,2090 7716.187134502924,2098 7708.187134502924,2106 7700.187134502924,2098" fill="#111111"/>
+<a href="https://platform.moonshot.ai/docs/guide/kimi-thinking" target="_blank">
+<rect class="labelbox" x="7560.2" y="2037.0" width="296.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="7570.2" y="2057.0" class="model">kimi-thinking-preview</text>
+<text x="7570.2" y="2076.0" class="date">2025-05-06</text>
+<text x="7846.2" y="2076.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="8248.5" y1="2098" x2="8248.5" y2="2087" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8248.538011695906,2089 8257.538011695906,2106 8239.538011695906,2106" fill="#111111"/>
+<a href="https://github.com/MoonshotAI/Kimi-K2" target="_blank">
+<rect class="labelbox" x="8130.5" y="2037.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8140.5" y="2057.0" class="model">Kimi K2 Preview</text>
+<text x="8140.5" y="2076.0" class="date">2025-07-11</text>
+<text x="8356.5" y="2076.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="8707.0" y1="2098" x2="8707.0" y2="2087" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8707.017543859649,2089 8716.017543859649,2106 8698.017543859649,2106" fill="#111111"/>
+<a href="https://github.com/MoonshotAI/Kimi-K2" target="_blank">
+<rect class="labelbox" x="8604.0" y="2037.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8614.0" y="2057.0" class="model">Kimi K2 0905</text>
+<text x="8614.0" y="2076.0" class="date">2025-09-05</text>
+<text x="8800.0" y="2076.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="9214.6" y1="2098" x2="9214.6" y2="2087" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9214.619883040936,2090 9222.619883040936,2098 9214.619883040936,2106 9206.619883040936,2098" fill="#111111"/>
+<a href="https://platform.moonshot.ai/docs/guide/kimi-k2" target="_blank">
+<rect class="labelbox" x="9091.6" y="2037.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9101.6" y="2057.0" class="model">Kimi K2 Thinking</text>
+<text x="9101.6" y="2076.0" class="date">2025-11-06</text>
+<text x="9327.6" y="2076.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="9214.6" y1="2098" x2="9214.6" y2="2029" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9214.619883040936,2090 9222.619883040936,2098 9214.619883040936,2106 9206.619883040936,2098" fill="#111111"/>
+<a href="https://platform.moonshot.ai/docs/guide/kimi-k2" target="_blank">
+<rect class="labelbox" x="9061.6" y="1979.0" width="306.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9071.6" y="1999.0" class="model">Kimi K2 Thinking Turbo</text>
+<text x="9071.6" y="2018.0" class="date">2025-11-06</text>
+<text x="9357.6" y="2018.0" text-anchor="end" class="tag">R/A</text>
+</a>
+<line x1="9886.0" y1="2098" x2="9886.0" y2="2087" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9885.964912280702,2089 9894.964912280702,2106 9876.964912280702,2106" fill="#111111"/>
+<a href="https://platform.moonshot.ai/docs/guide/kimi-k2" target="_blank">
+<rect class="labelbox" x="9798.0" y="2037.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9808.0" y="2057.0" class="model">Kimi K2.5</text>
+<text x="9808.0" y="2076.0" class="date">2026-01-27</text>
+<text x="9964.0" y="2076.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="10565.5" y1="2098" x2="10565.5" y2="2087" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10565.497076023392,2089 10574.497076023392,2106 10556.497076023392,2106" fill="#111111"/>
+<a href="https://www.moonshot.cn/" target="_blank">
+<rect class="labelbox" x="10477.5" y="2037.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="10487.5" y="2057.0" class="model">Kimi K2.6</text>
+<text x="10487.5" y="2076.0" class="date">2026-04-20</text>
+<text x="10643.5" y="2076.0" text-anchor="end" class="tag">A/MM</text>
+</a>
+<line x1="11024.0" y1="2098" x2="11024.0" y2="2087" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11023.976608187135,2090 11031.976608187135,2098 11023.976608187135,2106 11015.976608187135,2098" fill="#111111"/>
+<a href="https://docs.modelstudio.console.alibabacloud.com/en/model-studio/kimi-k2-7-code" target="_blank">
+<rect class="labelbox" x="10911.0" y="2037.0" width="226.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="10921.0" y="2057.0" class="model">Kimi K2.7 Code</text>
+<text x="10921.0" y="2076.0" class="date">2026-06-15</text>
+<text x="11127.0" y="2076.0" text-anchor="end" class="tag">R/A/MM</text>
+</a>
+<line x1="11277.8" y1="2098" x2="11277.8" y2="2087" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11277.777777777777,2090 11285.777777777777,2098 11277.777777777777,2106 11269.777777777777,2098" fill="#111111"/>
+<a href="https://www.moonshot.cn/" target="_blank">
+<rect class="labelbox" x="11199.8" y="2037.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="11209.8" y="2057.0" class="model">Kimi K3</text>
+<text x="11209.8" y="2076.0" class="date">2026-07-16</text>
+<text x="11345.8" y="2076.0" text-anchor="end" class="tag">R/A/MM</text>
+</a>
+<rect x="0" y="2140" width="12080" height="350" fill="#F9FAFB"/>
+<line x1="0" y1="2490" x2="12080" y2="2490" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="2210" r="34" fill="#6F42C1" opacity="0.12"/>
+<text x="82" y="2218" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#6F42C1">Q</text>
+<text x="135" y="2204" class="vendor">Alibaba</text>
+<text x="137" y="2231" class="count">24 個節點</text>
+<line x1="700" y1="2448" x2="11900" y2="2448" stroke="#6F42C1" stroke-width="3" opacity="0.45"/>
+<line x1="3966.7" y1="2448" x2="3966.7" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<circle cx="3966.666666666667" cy="2448" r="7" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwen1.5/" target="_blank">
+<rect class="labelbox" x="3888.7" y="2387.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="3898.7" y="2407.0" class="model">Qwen1.5</text>
+<text x="3898.7" y="2426.0" class="date">2024-02-04</text>
+<text x="4034.7" y="2426.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="4981.9" y1="2448" x2="4981.9" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4981.87134502924" cy="2448" r="7" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwen2/" target="_blank">
+<rect class="labelbox" x="4906.9" y="2387.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="4916.9" y="2407.0" class="model">Qwen2</text>
+<text x="4916.9" y="2426.0" class="date">2024-06-07</text>
+<text x="5046.9" y="2426.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="5833.3" y1="2448" x2="5833.3" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="5833.333333333333,2439 5842.333333333333,2456 5824.333333333333,2456" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwen2.5/" target="_blank">
+<rect class="labelbox" x="5755.3" y="2387.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="5765.3" y="2407.0" class="model">Qwen2.5</text>
+<text x="5765.3" y="2426.0" class="date">2024-09-19</text>
+<text x="5901.3" y="2426.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="6300.0" y1="2448" x2="6300.0" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<circle cx="6300.0" cy="2448" r="7" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwen2.5-turbo/" target="_blank">
+<rect class="labelbox" x="6177.0" y="2387.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="6187.0" y="2407.0" class="model">Qwen2.5-Turbo 1M</text>
+<text x="6187.0" y="2426.0" class="date">2024-11-15</text>
+</a>
+<line x1="6406.4" y1="2448" x2="6406.4" y2="2379" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6406.432748538013,2440 6414.432748538013,2448 6406.432748538013,2456 6398.432748538013,2448" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwq-32b-preview/" target="_blank">
+<rect class="labelbox" x="6288.4" y="2329.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="6298.4" y="2349.0" class="model">QwQ-32B-Preview</text>
+<text x="6298.4" y="2368.0" class="date">2024-11-28</text>
+<text x="6514.4" y="2368.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="6889.5" y1="2448" x2="6889.5" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<rect x="6882.473684210527" y="2441" width="14" height="14" rx="2" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwen2.5-vl/" target="_blank">
+<rect class="labelbox" x="6796.5" y="2387.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="6806.5" y="2407.0" class="model">Qwen2.5-VL</text>
+<text x="6806.5" y="2426.0" class="date">2025-01-26</text>
+<text x="6972.5" y="2426.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<line x1="6897.7" y1="2448" x2="6897.7" y2="2379" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<circle cx="6897.66081871345" cy="2448" r="7" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwen2.5-1m/" target="_blank">
+<rect class="labelbox" x="6804.7" y="2329.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="6814.7" y="2349.0" class="model">Qwen2.5-1M</text>
+<text x="6814.7" y="2368.0" class="date">2025-01-27</text>
+<text x="6980.7" y="2368.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="7208.8" y1="2448" x2="7208.8" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7208.771929824561,2440 7216.771929824561,2448 7208.771929824561,2456 7200.771929824561,2448" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwq-32b/" target="_blank">
+<rect class="labelbox" x="7130.8" y="2387.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="7140.8" y="2407.0" class="model">QwQ-32B</text>
+<text x="7140.8" y="2426.0" class="date">2025-03-06</text>
+<text x="7276.8" y="2426.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="7380.7" y1="2448" x2="7380.7" y2="2379" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<rect x="7373.701754385965" y="2441" width="14" height="14" rx="2" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwen2.5-omni/" target="_blank">
+<rect class="labelbox" x="7277.7" y="2329.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="7287.7" y="2349.0" class="model">Qwen2.5-Omni</text>
+<text x="7287.7" y="2368.0" class="date">2025-03-27</text>
+<text x="7473.7" y="2368.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<line x1="7650.9" y1="2448" x2="7650.9" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7650.877192982456,2440 7658.877192982456,2448 7650.877192982456,2456 7642.877192982456,2448" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwen3/" target="_blank">
+<rect class="labelbox" x="7575.9" y="2387.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="7585.9" y="2407.0" class="model">Qwen3</text>
+<text x="7585.9" y="2426.0" class="date">2025-04-29</text>
+<text x="7715.9" y="2426.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="8862.6" y1="2448" x2="8862.6" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8862.573099415204,2439 8871.573099415204,2456 8853.573099415204,2456" fill="#6F42C1"/>
+<a href="https://qwenlm.github.io/blog/qwen3-max/" target="_blank">
+<rect class="labelbox" x="8774.6" y="2387.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="8784.6" y="2407.0" class="model">Qwen3-Max</text>
+<text x="8784.6" y="2426.0" class="date">2025-09-24</text>
+<text x="8940.6" y="2426.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="10041.5" y1="2448" x2="10041.5" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10041.520467836257,2440 10049.520467836257,2448 10041.520467836257,2456 10033.520467836257,2448" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/models" target="_blank">
+<rect class="labelbox" x="9938.5" y="2387.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="9948.5" y="2407.0" class="model">Qwen3.5 Plus</text>
+<text x="9948.5" y="2426.0" class="date">2026-02-15</text>
+<text x="10134.5" y="2426.0" text-anchor="end" class="tag">R/A/MM</text>
+</a>
+<line x1="10107.0" y1="2448" x2="10107.0" y2="2379" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10107.017543859649,2440 10115.017543859649,2448 10107.017543859649,2456 10099.017543859649,2448" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/models" target="_blank">
+<rect class="labelbox" x="9999.0" y="2329.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="10009.0" y="2349.0" class="model">Qwen3.5 Flash</text>
+<text x="10009.0" y="2368.0" class="date">2026-02-23</text>
+<text x="10205.0" y="2368.0" text-anchor="end" class="tag">R/MM</text>
+</a>
+<line x1="10418.1" y1="2448" x2="10418.1" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10418.12865497076,2440 10426.12865497076,2448 10418.12865497076,2456 10410.12865497076,2448" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/qwen3-6-plus" target="_blank">
+<rect class="labelbox" x="10315.1" y="2387.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="10325.1" y="2407.0" class="model">Qwen3.6 Plus</text>
+<text x="10325.1" y="2426.0" class="date">2026-04-02</text>
+<text x="10511.1" y="2426.0" text-anchor="end" class="tag">R/A/MM</text>
+</a>
+<line x1="10532.7" y1="2448" x2="10532.7" y2="2379" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10532.748538011696,2440 10540.748538011696,2448 10532.748538011696,2456 10524.748538011696,2448" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/models" target="_blank">
+<rect class="labelbox" x="10424.7" y="2329.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="10434.7" y="2349.0" class="model">Qwen3.6 Flash</text>
+<text x="10434.7" y="2368.0" class="date">2026-04-16</text>
+<text x="10630.7" y="2368.0" text-anchor="end" class="tag">R/MM</text>
+</a>
+<line x1="10581.9" y1="2448" x2="10581.9" y2="2321" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10581.87134502924,2440 10589.87134502924,2448 10581.87134502924,2456 10573.87134502924,2448" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/models" target="_blank">
+<rect class="labelbox" x="10483.9" y="2271.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="10493.9" y="2291.0" class="model">Qwen3.6-27B</text>
+<text x="10493.9" y="2310.0" class="date">2026-04-22</text>
+<text x="10669.9" y="2310.0" text-anchor="end" class="tag">R/MM/OSS</text>
+</a>
+<line x1="10786.5" y1="2448" x2="10786.5" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10786.549707602338,2439 10795.549707602338,2456 10777.549707602338,2456" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/models" target="_blank">
+<rect class="labelbox" x="10648.5" y="2387.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="10658.5" y="2407.0" class="model">Qwen3.7 Max Preview</text>
+<text x="10658.5" y="2426.0" class="date">2026-05-17</text>
+<text x="10914.5" y="2426.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="10860.2" y1="2448" x2="10860.2" y2="2379" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10860.233918128655,2439 10869.233918128655,2456 10851.233918128655,2456" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/qwen3-7-plus" target="_blank">
+<rect class="labelbox" x="10757.2" y="2329.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="10767.2" y="2349.0" class="model">Qwen3.7 Plus</text>
+<text x="10767.2" y="2368.0" class="date">2026-05-26</text>
+<text x="10953.2" y="2368.0" text-anchor="end" class="tag">A/MM</text>
+</a>
+<line x1="11269.6" y1="2448" x2="11269.6" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11269.590643274852,2439 11278.590643274852,2456 11260.590643274852,2456" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/models" target="_blank">
+<rect class="labelbox" x="11161.6" y="2387.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="11171.6" y="2407.0" class="model">Qwen3.7 Flash</text>
+<text x="11171.6" y="2426.0" class="date">2026-07-15</text>
+<text x="11367.6" y="2426.0" text-anchor="end" class="tag">A/MM</text>
+</a>
+<line x1="11417.0" y1="2448" x2="11417.0" y2="2379" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11416.959064327486,2439 11425.959064327486,2456 11407.959064327486,2456" fill="#6F42C1"/>
+<a href="https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max" target="_blank">
+<rect class="labelbox" x="11319.0" y="2329.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="11329.0" y="2349.0" class="model">Qwen3.8 Max</text>
+<text x="11329.0" y="2368.0" class="date">2026-08-02</text>
+<text x="11505.0" y="2368.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="11498.8" y1="2448" x2="11498.8" y2="2321" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<circle cx="11498.830409356726" cy="2448" r="7" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/models" target="_blank">
+<rect class="labelbox" x="11370.8" y="2271.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="11380.8" y="2291.0" class="model">Qwen3.8-2.4T-A95B</text>
+<text x="11380.8" y="2310.0" class="date">2026-08-12</text>
+<text x="11616.8" y="2310.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="11539.8" y1="2448" x2="11539.8" y2="2437" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11539.766081871345,2440 11547.766081871345,2448 11539.766081871345,2456 11531.766081871345,2448" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/models" target="_blank">
+<rect class="labelbox" x="11441.8" y="2387.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="11451.8" y="2407.0" class="model">Qwen3.8-27B</text>
+<text x="11451.8" y="2426.0" class="date">2026-08-17</text>
+<text x="11627.8" y="2426.0" text-anchor="end" class="tag">R/MM/OSS</text>
+</a>
+<line x1="11613.5" y1="2448" x2="11613.5" y2="2263" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11613.450292397662,2439 11622.450292397662,2456 11604.450292397662,2456" fill="#6F42C1"/>
+<a href="https://www.alibabacloud.com/help/en/model-studio/models" target="_blank">
+<rect class="labelbox" x="11505.5" y="2213.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="11515.5" y="2233.0" class="model">Qwen3.8 Flash</text>
+<text x="11515.5" y="2252.0" class="date">2026-08-26</text>
+<text x="11711.5" y="2252.0" text-anchor="end" class="tag">A/MM</text>
+</a>
+<line x1="11670.8" y1="2448" x2="11670.8" y2="2379" stroke="#6F42C1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11670.760233918129,2439 11679.760233918129,2456 11661.760233918129,2456" fill="#6F42C1"/>
+<a href="https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max" target="_blank">
+<rect class="labelbox" x="11547.8" y="2329.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#6F42C1" stroke-width="1.5"/>
+<text x="11557.8" y="2349.0" class="model">Qwen3.8 Max 0902</text>
+<text x="11557.8" y="2368.0" class="date">2026-09-02</text>
+<text x="11783.8" y="2368.0" text-anchor="end" class="tag">A</text>
+</a>
+<rect x="0" y="2490" width="12080" height="234" fill="#FFFFFF"/>
+<line x1="0" y1="2724" x2="12080" y2="2724" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="2560" r="34" fill="#111111" opacity="0.12"/>
+<text x="82" y="2568" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#111111">Z</text>
+<text x="135" y="2554" class="vendor">Z.ai / Zhipu</text>
+<text x="137" y="2581" class="count">11 個節點</text>
+<line x1="700" y1="2682" x2="11900" y2="2682" stroke="#111111" stroke-width="3" opacity="0.45"/>
+<line x1="8387.7" y1="2682" x2="8387.7" y2="2671" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8387.719298245614,2674 8395.719298245614,2682 8387.719298245614,2690 8379.719298245614,2682" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="8309.7" y="2621.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8319.7" y="2641.0" class="model">GLM-4.5</text>
+<text x="8319.7" y="2660.0" class="date">2025-07-28</text>
+<text x="8455.7" y="2660.0" text-anchor="end" class="tag">R/A/OSS</text>
+</a>
+<line x1="8502.3" y1="2682" x2="8502.3" y2="2613" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<rect x="8495.33918128655" y="2675" width="14" height="14" rx="2" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="8419.3" y="2563.0" width="166.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8429.3" y="2583.0" class="model">GLM-4.5V</text>
+<text x="8429.3" y="2602.0" class="date">2025-08-11</text>
+<text x="8575.3" y="2602.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<line x1="8911.7" y1="2682" x2="8911.7" y2="2671" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8911.695906432748,2673 8920.695906432748,2690 8902.695906432748,2690" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="8833.7" y="2621.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8843.7" y="2641.0" class="model">GLM-4.6</text>
+<text x="8843.7" y="2660.0" class="date">2025-09-30</text>
+<text x="8979.7" y="2660.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="9476.6" y1="2682" x2="9476.6" y2="2671" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9476.608187134503,2673 9485.608187134503,2690 9467.608187134503,2690" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="9393.6" y="2621.0" width="166.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9403.6" y="2641.0" class="model">GLM-4.6V</text>
+<text x="9403.6" y="2660.0" class="date">2025-12-08</text>
+<text x="9549.6" y="2660.0" text-anchor="end" class="tag">A/MM/OSS</text>
+</a>
+<line x1="9591.2" y1="2682" x2="9591.2" y2="2613" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9591.228070175439,2673 9600.228070175439,2690 9582.228070175439,2690" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="9513.2" y="2563.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9523.2" y="2583.0" class="model">GLM-4.7</text>
+<text x="9523.2" y="2602.0" class="date">2025-12-22</text>
+<text x="9659.2" y="2602.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="9820.5" y1="2682" x2="9820.5" y2="2671" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="9820.46783625731" cy="2682" r="7" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="9712.5" y="2621.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9722.5" y="2641.0" class="model">GLM-4.7-Flash</text>
+<text x="9722.5" y="2660.0" class="date">2026-01-19</text>
+</a>
+<line x1="10017.0" y1="2682" x2="10017.0" y2="2671" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10016.959064327486,2674 10024.959064327486,2682 10016.959064327486,2690 10008.959064327486,2682" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="9942.0" y="2621.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9952.0" y="2641.0" class="model">GLM-5</text>
+<text x="9952.0" y="2660.0" class="date">2026-02-12</text>
+<text x="10082.0" y="2660.0" text-anchor="end" class="tag">R/A/OSS</text>
+</a>
+<line x1="10270.8" y1="2682" x2="10270.8" y2="2671" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10270.760233918129,2673 10279.760233918129,2690 10261.760233918129,2690" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="10172.8" y="2621.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="10182.8" y="2641.0" class="model">GLM-5-Turbo</text>
+<text x="10182.8" y="2660.0" class="date">2026-03-15</text>
+<text x="10358.8" y="2660.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="10459.1" y1="2682" x2="10459.1" y2="2671" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10459.064327485381,2673 10468.064327485381,2690 10450.064327485381,2690" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="10381.1" y="2621.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="10391.1" y="2641.0" class="model">GLM-5.1</text>
+<text x="10391.1" y="2660.0" class="date">2026-04-07</text>
+<text x="10527.1" y="2660.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="11097.7" y1="2682" x2="11097.7" y2="2671" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11097.66081871345,2673 11106.66081871345,2690 11088.66081871345,2690" fill="#111111"/>
+<a href="https://z.ai/blog" target="_blank">
+<rect class="labelbox" x="11019.7" y="2621.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="11029.7" y="2641.0" class="model">GLM-5.2</text>
+<text x="11029.7" y="2660.0" class="date">2026-06-24</text>
+<text x="11165.7" y="2660.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="11539.8" y1="2682" x2="11539.8" y2="2671" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11539.766081871345,2673 11548.766081871345,2690 11530.766081871345,2690" fill="#111111"/>
+<a href="https://docs.z.ai/release-notes/new-released" target="_blank">
+<rect class="labelbox" x="11461.8" y="2621.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="11471.8" y="2641.0" class="model">GLM-5.3</text>
+<text x="11471.8" y="2660.0" class="date">2026-08-17</text>
+<text x="11607.8" y="2660.0" text-anchor="end" class="tag">A</text>
+</a>
+<rect x="0" y="2724" width="12080" height="190" fill="#F9FAFB"/>
+<line x1="0" y1="2914" x2="12080" y2="2914" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="2794" r="34" fill="#F15B5A" opacity="0.12"/>
+<text x="82" y="2802" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#F15B5A">M²</text>
+<text x="135" y="2788" class="vendor">MiniMax</text>
+<text x="137" y="2815" class="count">6 個節點</text>
+<line x1="700" y1="2872" x2="11900" y2="2872" stroke="#F15B5A" stroke-width="3" opacity="0.45"/>
+<line x1="8043.9" y1="2872" x2="8043.9" y2="2861" stroke="#F15B5A" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8043.859649122807,2864 8051.859649122807,2872 8043.859649122807,2880 8035.859649122807,2872" fill="#F15B5A"/>
+<a href="https://www.minimax.io/news/minimax-m1" target="_blank">
+<rect class="labelbox" x="7950.9" y="2811.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#F15B5A" stroke-width="1.5"/>
+<text x="7960.9" y="2831.0" class="model">MiniMax M1</text>
+<text x="7960.9" y="2850.0" class="date">2025-06-16</text>
+<text x="8126.9" y="2850.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="9132.7" y1="2872" x2="9132.7" y2="2861" stroke="#F15B5A" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9132.748538011696,2863 9141.748538011696,2880 9123.748538011696,2880" fill="#F15B5A"/>
+<a href="https://www.minimax.io/news/minimax-m2" target="_blank">
+<rect class="labelbox" x="9039.7" y="2811.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#F15B5A" stroke-width="1.5"/>
+<text x="9049.7" y="2831.0" class="model">MiniMax M2</text>
+<text x="9049.7" y="2850.0" class="date">2025-10-27</text>
+<text x="9215.7" y="2850.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="9599.4" y1="2872" x2="9599.4" y2="2861" stroke="#F15B5A" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9599.415204678364,2863 9608.415204678364,2880 9590.415204678364,2880" fill="#F15B5A"/>
+<a href="https://www.minimax.io/news" target="_blank">
+<rect class="labelbox" x="9496.4" y="2811.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#F15B5A" stroke-width="1.5"/>
+<text x="9506.4" y="2831.0" class="model">MiniMax M2.1</text>
+<text x="9506.4" y="2850.0" class="date">2025-12-23</text>
+<text x="9692.4" y="2850.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="10017.0" y1="2872" x2="10017.0" y2="2861" stroke="#F15B5A" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10016.959064327486,2863 10025.959064327486,2880 10007.959064327486,2880" fill="#F15B5A"/>
+<a href="https://www.minimax.io/news" target="_blank">
+<rect class="labelbox" x="9914.0" y="2811.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#F15B5A" stroke-width="1.5"/>
+<text x="9924.0" y="2831.0" class="model">MiniMax M2.5</text>
+<text x="9924.0" y="2850.0" class="date">2026-02-12</text>
+<text x="10110.0" y="2850.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="10295.3" y1="2872" x2="10295.3" y2="2861" stroke="#F15B5A" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10295.321637426901,2863 10304.321637426901,2880 10286.321637426901,2880" fill="#F15B5A"/>
+<a href="https://www.minimax.io/news" target="_blank">
+<rect class="labelbox" x="10192.3" y="2811.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#F15B5A" stroke-width="1.5"/>
+<text x="10202.3" y="2831.0" class="model">MiniMax M2.7</text>
+<text x="10202.3" y="2850.0" class="date">2026-03-18</text>
+<text x="10388.3" y="2850.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="10909.4" y1="2872" x2="10909.4" y2="2861" stroke="#F15B5A" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10909.3567251462,2863 10918.3567251462,2880 10900.3567251462,2880" fill="#F15B5A"/>
+<a href="https://www.minimax.io/news" target="_blank">
+<rect class="labelbox" x="10816.4" y="2811.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#F15B5A" stroke-width="1.5"/>
+<text x="10826.4" y="2831.0" class="model">MiniMax M3</text>
+<text x="10826.4" y="2850.0" class="date">2026-06-01</text>
+<text x="10992.4" y="2850.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<rect x="0" y="2914" width="12080" height="234" fill="#FFFFFF"/>
+<line x1="0" y1="3148" x2="12080" y2="3148" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="2984" r="34" fill="#1877F2" opacity="0.12"/>
+<text x="82" y="2992" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#1877F2">∞</text>
+<text x="135" y="2978" class="vendor">Meta</text>
+<text x="137" y="3005" class="count">6 個節點</text>
+<line x1="700" y1="3106" x2="11900" y2="3106" stroke="#1877F2" stroke-width="3" opacity="0.45"/>
+<line x1="4572.5" y1="3106" x2="4572.5" y2="3095" stroke="#1877F2" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4572.514619883041" cy="3106" r="7" fill="#1877F2"/>
+<a href="https://ai.meta.com/blog/meta-llama-3/" target="_blank">
+<rect class="labelbox" x="4494.5" y="3045.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#1877F2" stroke-width="1.5"/>
+<text x="4504.5" y="3065.0" class="model">Llama 3</text>
+<text x="4504.5" y="3084.0" class="date">2024-04-18</text>
+<text x="4640.5" y="3084.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="5358.5" y1="3106" x2="5358.5" y2="3095" stroke="#1877F2" stroke-width="1.5" opacity="0.65"/>
+<circle cx="5358.479532163743" cy="3106" r="7" fill="#1877F2"/>
+<a href="https://ai.meta.com/blog/meta-llama-3-1/" target="_blank">
+<rect class="labelbox" x="5270.5" y="3045.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#1877F2" stroke-width="1.5"/>
+<text x="5280.5" y="3065.0" class="model">Llama 3.1</text>
+<text x="5280.5" y="3084.0" class="date">2024-07-23</text>
+<text x="5436.5" y="3084.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="5882.5" y1="3106" x2="5882.5" y2="3095" stroke="#1877F2" stroke-width="1.5" opacity="0.65"/>
+<rect x="5875.456140350877" y="3099" width="14" height="14" rx="2" fill="#1877F2"/>
+<a href="https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/" target="_blank">
+<rect class="labelbox" x="5794.5" y="3045.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#1877F2" stroke-width="1.5"/>
+<text x="5804.5" y="3065.0" class="model">Llama 3.2</text>
+<text x="5804.5" y="3084.0" class="date">2024-09-25</text>
+<text x="5960.5" y="3084.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<line x1="6431.0" y1="3106" x2="6431.0" y2="3095" stroke="#1877F2" stroke-width="1.5" opacity="0.65"/>
+<circle cx="6430.994152046784" cy="3106" r="7" fill="#1877F2"/>
+<a href="https://ai.meta.com/blog/" target="_blank">
+<rect class="labelbox" x="6323.0" y="3045.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#1877F2" stroke-width="1.5"/>
+<text x="6333.0" y="3065.0" class="model">Llama 3.3 70B</text>
+<text x="6333.0" y="3084.0" class="date">2024-12</text>
+<text x="6529.0" y="3084.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="7454.4" y1="3106" x2="7454.4" y2="3095" stroke="#1877F2" stroke-width="1.5" opacity="0.65"/>
+<rect x="7447.385964912281" y="3099" width="14" height="14" rx="2" fill="#1877F2"/>
+<a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/" target="_blank">
+<rect class="labelbox" x="7331.4" y="3045.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#1877F2" stroke-width="1.5"/>
+<text x="7341.4" y="3065.0" class="model">Llama 4 Maverick</text>
+<text x="7341.4" y="3084.0" class="date">2025-04-05</text>
+<text x="7567.4" y="3084.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<line x1="7454.4" y1="3106" x2="7454.4" y2="3037" stroke="#1877F2" stroke-width="1.5" opacity="0.65"/>
+<rect x="7447.385964912281" y="3099" width="14" height="14" rx="2" fill="#1877F2"/>
+<a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/" target="_blank">
+<rect class="labelbox" x="7346.4" y="2987.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#1877F2" stroke-width="1.5"/>
+<text x="7356.4" y="3007.0" class="model">Llama 4 Scout</text>
+<text x="7356.4" y="3026.0" class="date">2025-04-05</text>
+<text x="7552.4" y="3026.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<rect x="0" y="3148" width="12080" height="190" fill="#F9FAFB"/>
+<line x1="0" y1="3338" x2="12080" y2="3338" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="3218" r="34" fill="#F97316" opacity="0.12"/>
+<text x="82" y="3226" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#F97316">M</text>
+<text x="135" y="3212" class="vendor">Mistral AI</text>
+<text x="137" y="3239" class="count">11 個節點</text>
+<line x1="700" y1="3296" x2="11900" y2="3296" stroke="#F97316" stroke-width="3" opacity="0.45"/>
+<line x1="2902.3" y1="3296" x2="2902.3" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<circle cx="2902.33918128655" cy="3296" r="7" fill="#F97316"/>
+<a href="https://mistral.ai/news/announcing-mistral-7b/" target="_blank">
+<rect class="labelbox" x="2809.3" y="3235.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="2819.3" y="3255.0" class="model">Mistral 7B</text>
+<text x="2819.3" y="3274.0" class="date">2023-09-27</text>
+<text x="2985.3" y="3274.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="3516.4" y1="3296" x2="3516.4" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<circle cx="3516.374269005848" cy="3296" r="7" fill="#F97316"/>
+<a href="https://mistral.ai/news/mixtral-of-experts/" target="_blank">
+<rect class="labelbox" x="3413.4" y="3235.0" width="206.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="3423.4" y="3255.0" class="model">Mixtral 8x7B</text>
+<text x="3423.4" y="3274.0" class="date">2023-12-11</text>
+<text x="3609.4" y="3274.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="4146.8" y1="3296" x2="4146.8" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4146.783625730994" cy="3296" r="7" fill="#F97316"/>
+<a href="https://mistral.ai/news/mistral-large/" target="_blank">
+<rect class="labelbox" x="4038.8" y="3235.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="4048.8" y="3255.0" class="model">Mistral Large</text>
+<text x="4048.8" y="3274.0" class="date">2024-02-26</text>
+</a>
+<line x1="5366.7" y1="3296" x2="5366.7" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<polygon points="5366.666666666667,3287 5375.666666666667,3304 5357.666666666667,3304" fill="#F97316"/>
+<a href="https://mistral.ai/news/mistral-large-2407/" target="_blank">
+<rect class="labelbox" x="5248.7" y="3235.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="5258.7" y="3255.0" class="model">Mistral Large 2</text>
+<text x="5258.7" y="3274.0" class="date">2024-07-24</text>
+<text x="5474.7" y="3274.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="6922.2" y1="3296" x2="6922.2" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<circle cx="6922.222222222223" cy="3296" r="7" fill="#F97316"/>
+<a href="https://mistral.ai/news/" target="_blank">
+<rect class="labelbox" x="6804.2" y="3235.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="6814.2" y="3255.0" class="model">Mistral Small 3</text>
+<text x="6814.2" y="3274.0" class="date">2025-01-30</text>
+<text x="7030.2" y="3274.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="7298.8" y1="3296" x2="7298.8" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<rect x="7291.830409356725" y="3289" width="14" height="14" rx="2" fill="#F97316"/>
+<a href="https://mistral.ai/news/" target="_blank">
+<rect class="labelbox" x="7170.8" y="3235.0" width="256.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="7180.8" y="3255.0" class="model">Mistral Small 3.1</text>
+<text x="7180.8" y="3274.0" class="date">2025-03-17</text>
+<text x="7416.8" y="3274.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<line x1="7716.4" y1="3296" x2="7716.4" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7716.374269005848,3287 7725.374269005848,3304 7707.374269005848,3304" fill="#F97316"/>
+<a href="https://mistral.ai/news/mistral-medium-3/" target="_blank">
+<rect class="labelbox" x="7593.4" y="3235.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="7603.4" y="3255.0" class="model">Mistral Medium 3</text>
+<text x="7603.4" y="3274.0" class="date">2025-05-07</text>
+<text x="7829.4" y="3274.0" text-anchor="end" class="tag">A/MM</text>
+</a>
+<line x1="7994.7" y1="3296" x2="7994.7" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7994.736842105262,3288 8002.736842105262,3296 7994.736842105262,3304 7986.736842105262,3296" fill="#F97316"/>
+<a href="https://mistral.ai/news/magistral/" target="_blank">
+<rect class="labelbox" x="7906.7" y="3235.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="7916.7" y="3255.0" class="model">Magistral</text>
+<text x="7916.7" y="3274.0" class="date">2025-06-10</text>
+<text x="8072.7" y="3274.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="9427.5" y1="3296" x2="9427.5" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<rect x="9420.48538011696" y="3289" width="14" height="14" rx="2" fill="#F97316"/>
+<a href="https://mistral.ai/news/mistral-3/" target="_blank">
+<rect class="labelbox" x="9309.5" y="3235.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="9319.5" y="3255.0" class="model">Mistral Large 3</text>
+<text x="9319.5" y="3274.0" class="date">2025-12-02</text>
+<text x="9535.5" y="3274.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<line x1="10278.9" y1="3296" x2="10278.9" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10278.947368421053,3288 10286.947368421053,3296 10278.947368421053,3304 10270.947368421053,3296" fill="#F97316"/>
+<a href="https://mistral.ai/news/" target="_blank">
+<rect class="labelbox" x="10160.9" y="3235.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="10170.9" y="3255.0" class="model">Mistral Small 4</text>
+<text x="10170.9" y="3274.0" class="date">2026-03-16</text>
+<text x="10386.9" y="3274.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="10835.7" y1="3296" x2="10835.7" y2="3285" stroke="#F97316" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10835.672514619882,3287 10844.672514619882,3304 10826.672514619882,3304" fill="#F97316"/>
+<a href="https://mistral.ai/news/" target="_blank">
+<rect class="labelbox" x="10702.7" y="3235.0" width="266.0" height="50" rx="10" fill="#FFFFFF" stroke="#F97316" stroke-width="1.5"/>
+<text x="10712.7" y="3255.0" class="model">Mistral Medium 3.5</text>
+<text x="10712.7" y="3274.0" class="date">2026-05-23</text>
+<text x="10958.7" y="3274.0" text-anchor="end" class="tag">A</text>
+</a>
+<rect x="0" y="3338" width="12080" height="292" fill="#FFFFFF"/>
+<line x1="0" y1="3630" x2="12080" y2="3630" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="3408" r="34" fill="#39594D" opacity="0.12"/>
+<text x="82" y="3416" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#39594D">●</text>
+<text x="135" y="3402" class="vendor">Cohere</text>
+<text x="137" y="3429" class="count">8 個節點</text>
+<line x1="700" y1="3588" x2="11900" y2="3588" stroke="#39594D" stroke-width="3" opacity="0.45"/>
+<line x1="4261.4" y1="3588" x2="4261.4" y2="3577" stroke="#39594D" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4261.403508771929" cy="3588" r="7" fill="#39594D"/>
+<a href="https://cohere.com/blog/command-r" target="_blank">
+<rect class="labelbox" x="4173.4" y="3527.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#39594D" stroke-width="1.5"/>
+<text x="4183.4" y="3547.0" class="model">Command R</text>
+<text x="4183.4" y="3566.0" class="date">2024-03-11</text>
+<text x="4339.4" y="3566.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="4457.9" y1="3588" x2="4457.9" y2="3577" stroke="#39594D" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4457.894736842105" cy="3588" r="7" fill="#39594D"/>
+<a href="https://cohere.com/blog/command-r-plus-microsoft-azure" target="_blank">
+<rect class="labelbox" x="4364.9" y="3527.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#39594D" stroke-width="1.5"/>
+<text x="4374.9" y="3547.0" class="model">Command R+</text>
+<text x="4374.9" y="3566.0" class="date">2024-04-04</text>
+<text x="4540.9" y="3566.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="7266.1" y1="3588" x2="7266.1" y2="3577" stroke="#39594D" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7266.081871345029,3579 7275.081871345029,3596 7257.081871345029,3596" fill="#39594D"/>
+<a href="https://cohere.com/blog/command-a" target="_blank">
+<rect class="labelbox" x="7178.1" y="3527.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#39594D" stroke-width="1.5"/>
+<text x="7188.1" y="3547.0" class="model">Command A</text>
+<text x="7188.1" y="3566.0" class="date">2025-03-13</text>
+<text x="7344.1" y="3566.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="8412.3" y1="3588" x2="8412.3" y2="3577" stroke="#39594D" stroke-width="1.5" opacity="0.65"/>
+<rect x="8405.280701754386" y="3581" width="14" height="14" rx="2" fill="#39594D"/>
+<a href="https://cohere.com/blog" target="_blank">
+<rect class="labelbox" x="8289.3" y="3527.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#39594D" stroke-width="1.5"/>
+<text x="8299.3" y="3547.0" class="model">Command A Vision</text>
+<text x="8299.3" y="3566.0" class="date">2025-07-31</text>
+<text x="8525.3" y="3566.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<line x1="8584.2" y1="3588" x2="8584.2" y2="3519" stroke="#39594D" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8584.21052631579,3580 8592.21052631579,3588 8584.21052631579,3596 8576.21052631579,3588" fill="#39594D"/>
+<a href="https://cohere.com/blog" target="_blank">
+<rect class="labelbox" x="8446.2" y="3469.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#39594D" stroke-width="1.5"/>
+<text x="8456.2" y="3489.0" class="model">Command A Reasoning</text>
+<text x="8456.2" y="3508.0" class="date">2025-08-21</text>
+<text x="8712.2" y="3508.0" text-anchor="end" class="tag">R/A/OSS</text>
+</a>
+<line x1="8641.5" y1="3588" x2="8641.5" y2="3461" stroke="#39594D" stroke-width="1.5" opacity="0.65"/>
+<circle cx="8641.520467836257" cy="3588" r="7" fill="#39594D"/>
+<a href="https://cohere.com/blog" target="_blank">
+<rect class="labelbox" x="8503.5" y="3411.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#39594D" stroke-width="1.5"/>
+<text x="8513.5" y="3431.0" class="model">Command A Translate</text>
+<text x="8513.5" y="3450.0" class="date">2025-08-28</text>
+<text x="8769.5" y="3450.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="10811.1" y1="3588" x2="10811.1" y2="3577" stroke="#39594D" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10811.111111111111,3580 10819.111111111111,3588 10811.111111111111,3596 10803.111111111111,3588" fill="#39594D"/>
+<a href="https://cohere.com/blog/command-a-plus" target="_blank">
+<rect class="labelbox" x="10718.1" y="3527.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#39594D" stroke-width="1.5"/>
+<text x="10728.1" y="3547.0" class="model">Command A+</text>
+<text x="10728.1" y="3566.0" class="date">2026-05-20</text>
+<text x="10894.1" y="3566.0" text-anchor="end" class="tag">R/A/MM</text>
+</a>
+<line x1="10974.9" y1="3588" x2="10974.9" y2="3519" stroke="#39594D" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10974.853801169591,3579 10983.853801169591,3596 10965.853801169591,3596" fill="#39594D"/>
+<a href="https://cohere.com/blog" target="_blank">
+<rect class="labelbox" x="10856.9" y="3469.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#39594D" stroke-width="1.5"/>
+<text x="10866.9" y="3489.0" class="model">North Mini Code</text>
+<text x="10866.9" y="3508.0" class="date">2026-06-09</text>
+<text x="11082.9" y="3508.0" text-anchor="end" class="tag">A</text>
+</a>
+<rect x="0" y="3630" width="12080" height="234" fill="#F9FAFB"/>
+<line x1="0" y1="3864" x2="12080" y2="3864" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="3700" r="34" fill="#111111" opacity="0.12"/>
+<text x="82" y="3708" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#111111">21</text>
+<text x="135" y="3694" class="vendor">AI21 Labs</text>
+<text x="137" y="3721" class="count">8 個節點</text>
+<line x1="700" y1="3822" x2="11900" y2="3822" stroke="#111111" stroke-width="3" opacity="0.45"/>
+<line x1="4400.6" y1="3822" x2="4400.6" y2="3811" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4400.584795321638" cy="3822" r="7" fill="#111111"/>
+<a href="https://www.ai21.com/blog/introducing-jamba/" target="_blank">
+<rect class="labelbox" x="4325.6" y="3761.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="4335.6" y="3781.0" class="model">Jamba</text>
+<text x="4335.6" y="3800.0" class="date">2024-03-28</text>
+<text x="4465.6" y="3800.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="4687.1" y1="3822" x2="4687.1" y2="3811" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="4687.1345029239765" cy="3822" r="7" fill="#111111"/>
+<a href="https://www.ai21.com/blog/introducing-jamba-instruct/" target="_blank">
+<rect class="labelbox" x="4574.1" y="3761.0" width="226.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="4584.1" y="3781.0" class="model">Jamba-Instruct</text>
+<text x="4584.1" y="3800.0" class="date">2024-05-02</text>
+<text x="4790.1" y="3800.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="5604.1" y1="3822" x2="5604.1" y2="3811" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="5604.093567251462" cy="3822" r="7" fill="#111111"/>
+<a href="https://www.ai21.com/blog/jamba-models/" target="_blank">
+<rect class="labelbox" x="5486.1" y="3761.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="5496.1" y="3781.0" class="model">Jamba 1.5 Large</text>
+<text x="5496.1" y="3800.0" class="date">2024-08-22</text>
+<text x="5712.1" y="3800.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="5604.1" y1="3822" x2="5604.1" y2="3753" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="5604.093567251462" cy="3822" r="7" fill="#111111"/>
+<a href="https://www.ai21.com/blog/jamba-models/" target="_blank">
+<rect class="labelbox" x="5491.1" y="3703.0" width="226.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="5501.1" y="3723.0" class="model">Jamba 1.5 Mini</text>
+<text x="5501.1" y="3742.0" class="date">2024-08-22</text>
+<text x="5707.1" y="3742.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="7208.8" y1="3822" x2="7208.8" y2="3811" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7208.771929824561,3813 7217.771929824561,3830 7199.771929824561,3830" fill="#111111"/>
+<a href="https://www.ai21.com/blog/jamba-1-6/" target="_blank">
+<rect class="labelbox" x="7120.8" y="3761.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="7130.8" y="3781.0" class="model">Jamba 1.6</text>
+<text x="7130.8" y="3800.0" class="date">2025-03-06</text>
+<text x="7286.8" y="3800.0" text-anchor="end" class="tag">A</text>
+</a>
+<line x1="8977.2" y1="3822" x2="8977.2" y2="3811" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8977.192982456141,3814 8985.192982456141,3822 8977.192982456141,3830 8969.192982456141,3822" fill="#111111"/>
+<a href="https://www.ai21.com/blog/" target="_blank">
+<rect class="labelbox" x="8844.2" y="3761.0" width="266.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8854.2" y="3781.0" class="model">Jamba Reasoning 3B</text>
+<text x="8854.2" y="3800.0" class="date">2025-10-08</text>
+<text x="9100.2" y="3800.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="9730.4" y1="3822" x2="9730.4" y2="3811" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="9730.409356725148" cy="3822" r="7" fill="#111111"/>
+<a href="https://www.ai21.com/blog/introducing-jamba2/" target="_blank">
+<rect class="labelbox" x="9642.4" y="3761.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9652.4" y="3781.0" class="model">Jamba2 3B</text>
+<text x="9652.4" y="3800.0" class="date">2026-01-08</text>
+<text x="9808.4" y="3800.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<line x1="9730.4" y1="3822" x2="9730.4" y2="3753" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<circle cx="9730.409356725148" cy="3822" r="7" fill="#111111"/>
+<a href="https://www.ai21.com/blog/introducing-jamba2/" target="_blank">
+<rect class="labelbox" x="9632.4" y="3703.0" width="196.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="9642.4" y="3723.0" class="model">Jamba2 Mini</text>
+<text x="9642.4" y="3742.0" class="date">2026-01-08</text>
+<text x="9818.4" y="3742.0" text-anchor="end" class="tag">OSS</text>
+</a>
+<rect x="0" y="3864" width="12080" height="292" fill="#FFFFFF"/>
+<line x1="0" y1="4156" x2="12080" y2="4156" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="3934" r="34" fill="#20808D" opacity="0.12"/>
+<text x="82" y="3942" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#20808D">✣</text>
+<text x="135" y="3928" class="vendor">Perplexity</text>
+<text x="137" y="3955" class="count">5 個節點</text>
+<line x1="700" y1="4114" x2="11900" y2="4114" stroke="#20808D" stroke-width="3" opacity="0.45"/>
+<line x1="6848.5" y1="4114" x2="6848.5" y2="4103" stroke="#20808D" stroke-width="1.5" opacity="0.65"/>
+<circle cx="6848.538011695906" cy="4114" r="7" fill="#20808D"/>
+<a href="https://www.perplexity.ai/hub/blog" target="_blank">
+<rect class="labelbox" x="6740.5" y="4053.0" width="216.0" height="50" rx="10" fill="#FFFFFF" stroke="#20808D" stroke-width="1.5"/>
+<text x="6750.5" y="4073.0" class="model">Sonar Pro API</text>
+<text x="6750.5" y="4092.0" class="date">2025-01-21</text>
+</a>
+<line x1="7020.5" y1="4114" x2="7020.5" y2="4045" stroke="#20808D" stroke-width="1.5" opacity="0.65"/>
+<circle cx="7020.46783625731" cy="4114" r="7" fill="#20808D"/>
+<a href="https://www.perplexity.ai/hub/blog" target="_blank">
+<rect class="labelbox" x="6945.5" y="3995.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#20808D" stroke-width="1.5"/>
+<text x="6955.5" y="4015.0" class="model">Sonar</text>
+<text x="6955.5" y="4034.0" class="date">2025-02-11</text>
+</a>
+<line x1="7045.0" y1="4114" x2="7045.0" y2="3987" stroke="#20808D" stroke-width="1.5" opacity="0.65"/>
+<circle cx="7045.029239766082" cy="4114" r="7" fill="#20808D"/>
+<a href="https://www.perplexity.ai/hub/blog" target="_blank">
+<rect class="labelbox" x="6907.0" y="3937.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#20808D" stroke-width="1.5"/>
+<text x="6917.0" y="3957.0" class="model">Sonar Deep Research</text>
+<text x="6917.0" y="3976.0" class="date">2025-02-14</text>
+</a>
+<line x1="7315.2" y1="4114" x2="7315.2" y2="4103" stroke="#20808D" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7315.204678362574,4106 7323.204678362574,4114 7315.204678362574,4122 7307.204678362574,4114" fill="#20808D"/>
+<a href="https://www.perplexity.ai/hub/blog" target="_blank">
+<rect class="labelbox" x="7197.2" y="4053.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#20808D" stroke-width="1.5"/>
+<text x="7207.2" y="4073.0" class="model">Sonar Reasoning</text>
+<text x="7207.2" y="4092.0" class="date">2025-03-19</text>
+<text x="7423.2" y="4092.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="7315.2" y1="4114" x2="7315.2" y2="4045" stroke="#20808D" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7315.204678362574,4106 7323.204678362574,4114 7315.204678362574,4122 7307.204678362574,4114" fill="#20808D"/>
+<a href="https://www.perplexity.ai/hub/blog" target="_blank">
+<rect class="labelbox" x="7177.2" y="3995.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#20808D" stroke-width="1.5"/>
+<text x="7187.2" y="4015.0" class="model">Sonar Reasoning Pro</text>
+<text x="7187.2" y="4034.0" class="date">2025-03-19</text>
+<text x="7443.2" y="4034.0" text-anchor="end" class="tag">R</text>
+</a>
+<rect x="0" y="4156" width="12080" height="234" fill="#F9FAFB"/>
+<line x1="0" y1="4390" x2="12080" y2="4390" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="4226" r="34" fill="#76B900" opacity="0.12"/>
+<text x="82" y="4234" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#76B900">NV</text>
+<text x="135" y="4220" class="vendor">NVIDIA</text>
+<text x="137" y="4247" class="count">6 個節點</text>
+<line x1="700" y1="4348" x2="11900" y2="4348" stroke="#76B900" stroke-width="3" opacity="0.45"/>
+<line x1="7307.0" y1="4348" x2="7307.0" y2="4337" stroke="#76B900" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7307.017543859649,4340 7315.017543859649,4348 7307.017543859649,4356 7299.017543859649,4348" fill="#76B900"/>
+<a href="https://nvidianews.nvidia.com/news/nvidia-launches-family-of-open-reasoning-ai-models-for-developers-and-enterprises-to-build-agentic-ai-platforms" target="_blank">
+<rect class="labelbox" x="7117.0" y="4287.0" width="380.0" height="50" rx="10" fill="#FFFFFF" stroke="#76B900" stroke-width="1.5"/>
+<text x="7127.0" y="4307.0" class="model">Llama Nemotron Reasoning Family</text>
+<text x="7127.0" y="4326.0" class="date">2025-03-18</text>
+<text x="7487.0" y="4326.0" text-anchor="end" class="tag">R/A/OSS</text>
+</a>
+<line x1="7470.8" y1="4348" x2="7470.8" y2="4279" stroke="#76B900" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7470.7602339181285,4340 7478.7602339181285,4348 7470.7602339181285,4356 7462.7602339181285,4348" fill="#76B900"/>
+<a href="https://docs.api.nvidia.com/nim/reference/nvidia-llama-3_1-nemotron-ultra-253b-v1" target="_blank">
+<rect class="labelbox" x="7280.8" y="4229.0" width="380.0" height="50" rx="10" fill="#FFFFFF" stroke="#76B900" stroke-width="1.5"/>
+<text x="7290.8" y="4249.0" class="model">Llama-3.1-Nemotron-Ultra-253B-v1</text>
+<text x="7290.8" y="4268.0" class="date">2025-04-07</text>
+<text x="7650.8" y="4268.0" text-anchor="end" class="tag">R/A/OSS</text>
+</a>
+<line x1="9533.9" y1="4348" x2="9533.9" y2="4337" stroke="#76B900" stroke-width="1.5" opacity="0.65"/>
+<polygon points="9533.91812865497,4339 9542.91812865497,4356 9524.91812865497,4356" fill="#76B900"/>
+<a href="https://www.nvidia.com/en-us/ai-data-science/foundation-models/nemotron/" target="_blank">
+<rect class="labelbox" x="9415.9" y="4287.0" width="236.0" height="50" rx="10" fill="#FFFFFF" stroke="#76B900" stroke-width="1.5"/>
+<text x="9425.9" y="4307.0" class="model">Nemotron 3 Nano</text>
+<text x="9425.9" y="4326.0" class="date">2025-12-15</text>
+<text x="9641.9" y="4326.0" text-anchor="end" class="tag">A/OSS</text>
+</a>
+<line x1="10229.8" y1="4348" x2="10229.8" y2="4337" stroke="#76B900" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10229.824561403508,4340 10237.824561403508,4348 10229.824561403508,4356 10221.824561403508,4348" fill="#76B900"/>
+<a href="https://research.nvidia.com/labs/nemotron/Nemotron-3-Super/" target="_blank">
+<rect class="labelbox" x="10106.8" y="4287.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#76B900" stroke-width="1.5"/>
+<text x="10116.8" y="4307.0" class="model">Nemotron 3 Super</text>
+<text x="10116.8" y="4326.0" class="date">2026-03-10</text>
+<text x="10342.8" y="4326.0" text-anchor="end" class="tag">R/A/OSS</text>
+</a>
+<line x1="10933.9" y1="4348" x2="10933.9" y2="4337" stroke="#76B900" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10933.91812865497,4340 10941.91812865497,4348 10933.91812865497,4356 10925.91812865497,4348" fill="#76B900"/>
+<a href="https://research.nvidia.com/labs/nemotron/Nemotron-3-Ultra/" target="_blank">
+<rect class="labelbox" x="10810.9" y="4287.0" width="246.0" height="50" rx="10" fill="#FFFFFF" stroke="#76B900" stroke-width="1.5"/>
+<text x="10820.9" y="4307.0" class="model">Nemotron 3 Ultra</text>
+<text x="10820.9" y="4326.0" class="date">2026-06-04</text>
+<text x="11046.9" y="4326.0" text-anchor="end" class="tag">R/A/OSS</text>
+</a>
+<line x1="11490.6" y1="4348" x2="11490.6" y2="4337" stroke="#76B900" stroke-width="1.5" opacity="0.65"/>
+<polygon points="11490.6432748538,4340 11498.6432748538,4348 11490.6432748538,4356 11482.6432748538,4348" fill="#76B900"/>
+<a href="https://www.nvidia.com/en-us/ai-data-science/foundation-models/nemotron/" target="_blank">
+<rect class="labelbox" x="11337.6" y="4287.0" width="306.0" height="50" rx="10" fill="#FFFFFF" stroke="#76B900" stroke-width="1.5"/>
+<text x="11347.6" y="4307.0" class="model">Nemotron 3.5 Lightning</text>
+<text x="11347.6" y="4326.0" class="date">2026-08-11</text>
+<text x="11633.6" y="4326.0" text-anchor="end" class="tag">R/A/OSS</text>
+</a>
+<rect x="0" y="4390" width="12080" height="190" fill="#FFFFFF"/>
+<line x1="0" y1="4580" x2="12080" y2="4580" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="4460" r="34" fill="#FF9900" opacity="0.12"/>
+<text x="82" y="4468" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#FF9900">a→z</text>
+<text x="135" y="4454" class="vendor">Amazon</text>
+<text x="137" y="4481" class="count">2 個節點</text>
+<line x1="700" y1="4538" x2="11900" y2="4538" stroke="#FF9900" stroke-width="3" opacity="0.45"/>
+<line x1="6447.4" y1="4538" x2="6447.4" y2="4527" stroke="#FF9900" stroke-width="1.5" opacity="0.65"/>
+<rect x="6440.368421052632" y="4531" width="14" height="14" rx="2" fill="#FF9900"/>
+<a href="https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws" target="_blank">
+<rect class="labelbox" x="6257.4" y="4477.0" width="380.0" height="50" rx="10" fill="#FFFFFF" stroke="#FF9900" stroke-width="1.5"/>
+<text x="6267.4" y="4497.0" class="model">Amazon Nova Micro / Lite / Pro</text>
+<text x="6267.4" y="4516.0" class="date">2024-12-03</text>
+<text x="6627.4" y="4516.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="7659.1" y1="4538" x2="7659.1" y2="4527" stroke="#FF9900" stroke-width="1.5" opacity="0.65"/>
+<rect x="7652.06432748538" y="4531" width="14" height="14" rx="2" fill="#FF9900"/>
+<a href="https://aws.amazon.com/blogs/aws/amazon-nova-premier-our-most-capable-model-for-complex-tasks-and-teacher-for-model-distillation/" target="_blank">
+<rect class="labelbox" x="7521.1" y="4477.0" width="276.0" height="50" rx="10" fill="#FFFFFF" stroke="#FF9900" stroke-width="1.5"/>
+<text x="7531.1" y="4497.0" class="model">Amazon Nova Premier</text>
+<text x="7531.1" y="4516.0" class="date">2025-04-30</text>
+<text x="7787.1" y="4516.0" text-anchor="end" class="tag">MM</text>
+</a>
+<rect x="0" y="4580" width="12080" height="190" fill="#F9FAFB"/>
+<line x1="0" y1="4770" x2="12080" y2="4770" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="4650" r="34" fill="#5E5E5E" opacity="0.12"/>
+<text x="82" y="4658" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#5E5E5E">⊞</text>
+<text x="135" y="4644" class="vendor">Microsoft</text>
+<text x="137" y="4671" class="count">3 個節點</text>
+<line x1="700" y1="4728" x2="11900" y2="4728" stroke="#5E5E5E" stroke-width="3" opacity="0.45"/>
+<line x1="6431.0" y1="4728" x2="6431.0" y2="4717" stroke="#5E5E5E" stroke-width="1.5" opacity="0.65"/>
+<polygon points="6430.994152046784,4720 6438.994152046784,4728 6430.994152046784,4736 6422.994152046784,4728" fill="#5E5E5E"/>
+<a href="https://www.microsoft.com/en-us/research/publication/phi-4-technical-report/" target="_blank">
+<rect class="labelbox" x="6356.0" y="4667.0" width="150.0" height="50" rx="10" fill="#FFFFFF" stroke="#5E5E5E" stroke-width="1.5"/>
+<text x="6366.0" y="4687.0" class="model">Phi-4</text>
+<text x="6366.0" y="4706.0" class="date">2024-12</text>
+<text x="6496.0" y="4706.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="8224.0" y1="4728" x2="8224.0" y2="4717" stroke="#5E5E5E" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8223.976608187135,4720 8231.976608187135,4728 8223.976608187135,4736 8215.976608187135,4728" fill="#5E5E5E"/>
+<a href="https://www.microsoft.com/en-us/research/blog/phi-4-reasoning-plus-and-phi-4-reasoning/" target="_blank">
+<rect class="labelbox" x="8034.0" y="4667.0" width="380.0" height="50" rx="10" fill="#FFFFFF" stroke="#5E5E5E" stroke-width="1.5"/>
+<text x="8044.0" y="4687.0" class="model">Phi-4-reasoning / reasoning-plus</text>
+<text x="8044.0" y="4706.0" class="date">2025-07-08</text>
+<text x="8404.0" y="4706.0" text-anchor="end" class="tag">R/OSS</text>
+</a>
+<line x1="10180.7" y1="4728" x2="10180.7" y2="4717" stroke="#5E5E5E" stroke-width="1.5" opacity="0.65"/>
+<polygon points="10180.701754385964,4720 10188.701754385964,4728 10180.701754385964,4736 10172.701754385964,4728" fill="#5E5E5E"/>
+<a href="https://www.microsoft.com/en-us/research/blog/phi-4-reasoning-vision/" target="_blank">
+<rect class="labelbox" x="10027.7" y="4667.0" width="306.0" height="50" rx="10" fill="#FFFFFF" stroke="#5E5E5E" stroke-width="1.5"/>
+<text x="10037.7" y="4687.0" class="model">Phi-4-reasoning-vision</text>
+<text x="10037.7" y="4706.0" class="date">2026-03-04</text>
+<text x="10323.7" y="4706.0" text-anchor="end" class="tag">R/MM/OSS</text>
+</a>
+<rect x="0" y="4770" width="12080" height="234" fill="#FFFFFF"/>
+<line x1="0" y1="5004" x2="12080" y2="5004" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="4840" r="34" fill="#2932E1" opacity="0.12"/>
+<text x="82" y="4848" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#2932E1">百度</text>
+<text x="135" y="4834" class="vendor">Baidu</text>
+<text x="137" y="4861" class="count">3 個節點</text>
+<line x1="700" y1="4962" x2="11900" y2="4962" stroke="#2932E1" stroke-width="3" opacity="0.45"/>
+<line x1="7290.6" y1="4962" x2="7290.6" y2="4951" stroke="#2932E1" stroke-width="1.5" opacity="0.65"/>
+<rect x="7283.643274853801" y="4955" width="14" height="14" rx="2" fill="#2932E1"/>
+<a href="https://home.baidu.com/home/index/news_detail/id/18020" target="_blank">
+<rect class="labelbox" x="7202.6" y="4901.0" width="176.0" height="50" rx="10" fill="#FFFFFF" stroke="#2932E1" stroke-width="1.5"/>
+<text x="7212.6" y="4921.0" class="model">ERNIE 4.5</text>
+<text x="7212.6" y="4940.0" class="date">2025-03-16</text>
+<text x="7368.6" y="4940.0" text-anchor="end" class="tag">MM</text>
+</a>
+<line x1="7290.6" y1="4962" x2="7290.6" y2="4893" stroke="#2932E1" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7290.643274853801,4954 7298.643274853801,4962 7290.643274853801,4970 7282.643274853801,4962" fill="#2932E1"/>
+<a href="https://home.baidu.com/home/index/news_detail/id/18020" target="_blank">
+<rect class="labelbox" x="7207.6" y="4843.0" width="166.0" height="50" rx="10" fill="#FFFFFF" stroke="#2932E1" stroke-width="1.5"/>
+<text x="7217.6" y="4863.0" class="model">ERNIE X1</text>
+<text x="7217.6" y="4882.0" class="date">2025-03-16</text>
+<text x="7363.6" y="4882.0" text-anchor="end" class="tag">R</text>
+</a>
+<line x1="8158.5" y1="4962" x2="8158.5" y2="4951" stroke="#2932E1" stroke-width="1.5" opacity="0.65"/>
+<rect x="8151.479532163743" y="4955" width="14" height="14" rx="2" fill="#2932E1"/>
+<a href="https://ernie.baidu.com/blog/posts/ernie4.5/" target="_blank">
+<rect class="labelbox" x="7975.5" y="4901.0" width="366.0" height="50" rx="10" fill="#FFFFFF" stroke="#2932E1" stroke-width="1.5"/>
+<text x="7985.5" y="4921.0" class="model">ERNIE 4.5 Open-source Family</text>
+<text x="7985.5" y="4940.0" class="date">2025-06-30</text>
+<text x="8331.5" y="4940.0" text-anchor="end" class="tag">MM/OSS</text>
+</a>
+<rect x="0" y="5004" width="12080" height="190" fill="#F9FAFB"/>
+<line x1="0" y1="5194" x2="12080" y2="5194" stroke="#E5E7EB" stroke-width="1"/>
+<circle cx="82" cy="5074" r="34" fill="#111111" opacity="0.12"/>
+<text x="82" y="5082" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#111111">▥</text>
+<text x="135" y="5068" class="vendor">ByteDance</text>
+<text x="137" y="5095" class="count">2 個節點</text>
+<line x1="700" y1="5152" x2="11900" y2="5152" stroke="#111111" stroke-width="3" opacity="0.45"/>
+<line x1="7765.5" y1="5152" x2="7765.5" y2="5141" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="7765.497076023393,5144 7773.497076023393,5152 7765.497076023393,5160 7757.497076023393,5152" fill="#111111"/>
+<a href="https://seed.bytedance.com/en/blog/first-release-of-seed-vlm-tech-report-comprehensive-solutions-for-image-video-gui-and-game" target="_blank">
+<rect class="labelbox" x="7672.5" y="5091.0" width="186.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="7682.5" y="5111.0" class="model">Seed1.5-VL</text>
+<text x="7682.5" y="5130.0" class="date">2025-05-13</text>
+<text x="7848.5" y="5130.0" text-anchor="end" class="tag">R/MM</text>
+</a>
+<line x1="8117.5" y1="5152" x2="8117.5" y2="5141" stroke="#111111" stroke-width="1.5" opacity="0.65"/>
+<polygon points="8117.543859649122,5144 8125.543859649122,5152 8117.543859649122,5160 8109.543859649122,5152" fill="#111111"/>
+<a href="https://seed.bytedance.com/en/blog/introduction-to-techniques-used-in-seed1-6" target="_blank">
+<rect class="labelbox" x="8039.5" y="5091.0" width="156.0" height="50" rx="10" fill="#FFFFFF" stroke="#111111" stroke-width="1.5"/>
+<text x="8049.5" y="5111.0" class="model">Seed1.6</text>
+<text x="8049.5" y="5130.0" class="date">2025-06-25</text>
+<text x="8185.5" y="5130.0" text-anchor="end" class="tag">R/MM</text>
+</a>
+<line x1="70" y1="5244" x2="12010" y2="5244" stroke="#D1D5DB"/>
+<text x="70" y="5269" class="legend">整理：2026-09-11。主圖聚焦語言／推理／Agent 模型；Sora、Veo、Kling、Runway、Wan、Hailuo 等影像／影片生成模型建議另做「生成媒體模型時間軸」。</text>
+<text x="12010" y="5301" text-anchor="end" class="legend">資料詳情與來源：AI模型完整族譜_2023-2026_v2.xlsx</text>
+</svg></div></div>
+
+<div class="fab">
+  <button id="fabPlus" aria-label="放大">＋</button>
+  <button id="fabMinus" aria-label="縮小">－</button>
+</div>
+
+<div id="tip" class="tip">拖曳瀏覽 · 雙指縮放 · 上方可跳品牌</div>
+
+<script>
+(()=>{
+const SVG_W=12080.0,SVG_H=5374.0;
+const viewer=document.getElementById('viewer'),stage=document.getElementById('stage'),pct=document.getElementById('pct'),brandJump=document.getElementById('brandJump'),tip=document.getElementById('tip');
+let z=1,pinchStartDistance=0,pinchStartZoom=1,pinchContentX=0,pinchContentY=0;
+const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+
+function applyZoom(next,anchorClientX=null,anchorClientY=null){
+  const oldZ=z; next=clamp(next,.08,4);
+  let contentX=null,contentY=null;
+  if(anchorClientX!==null){
+    const rect=viewer.getBoundingClientRect();
+    const vx=anchorClientX-rect.left,vy=anchorClientY-rect.top;
+    contentX=(viewer.scrollLeft+vx)/oldZ; contentY=(viewer.scrollTop+vy)/oldZ;
+  }
+  z=next;
+  stage.style.transform='scale('+z+')';
+  stage.style.width=(SVG_W*z)+'px';
+  stage.style.height=(SVG_H*z)+'px';
+  pct.textContent=Math.round(z*100)+'%';
+  if(contentX!==null){
+    const rect=viewer.getBoundingClientRect();
+    viewer.scrollLeft=contentX*z-(anchorClientX-rect.left);
+    viewer.scrollTop=contentY*z-(anchorClientY-rect.top);
+  }
+}
+
+function fitWidth(){
+  applyZoom(Math.max(.08,(viewer.clientWidth-12)/SVG_W));
+  viewer.scrollLeft=0; viewer.scrollTop=0;
+}
+function zoomBy(mult){
+  const r=viewer.getBoundingClientRect();
+  applyZoom(z*mult,r.left+r.width/2,r.top+r.height/2);
+}
+
+document.getElementById('fitBtn').onclick=fitWidth;
+document.getElementById('plusBtn').onclick=()=>zoomBy(1.25);
+document.getElementById('minusBtn').onclick=()=>zoomBy(.8);
+document.getElementById('fabPlus').onclick=()=>zoomBy(1.25);
+document.getElementById('fabMinus').onclick=()=>zoomBy(.8);
+document.getElementById('topBtn').onclick=()=>viewer.scrollTo({top:0,left:0,behavior:'smooth'});
+brandJump.onchange=e=>{
+  if(!e.target.value)return;
+  viewer.scrollTo({top:Math.max(0,parseFloat(e.target.value)*z-15),behavior:'smooth'});
+  e.target.selectedIndex=0;
+};
+
+// Drag-to-pan for mouse/pen, plus single-finger pan and two-finger pinch on touch.
+let dragActive=false,dragPointerId=null,dragStartX=0,dragStartY=0,dragScrollLeft=0,dragScrollTop=0;
+viewer.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='touch'||e.button!==0)return;
+  dragActive=true;dragPointerId=e.pointerId;
+  dragStartX=e.clientX;dragStartY=e.clientY;
+  dragScrollLeft=viewer.scrollLeft;dragScrollTop=viewer.scrollTop;
+  viewer.classList.add('dragging');
+  try{viewer.setPointerCapture(e.pointerId)}catch(_){ }
+  e.preventDefault();
+});
+viewer.addEventListener('pointermove',e=>{
+  if(!dragActive||e.pointerId!==dragPointerId)return;
+  viewer.scrollLeft=dragScrollLeft-(e.clientX-dragStartX);
+  viewer.scrollTop=dragScrollTop-(e.clientY-dragStartY);
+  e.preventDefault();
+});
+function endPointerDrag(e){
+  if(!dragActive)return;
+  if(e&&dragPointerId!==null&&e.pointerId!==dragPointerId)return;
+  dragActive=false;dragPointerId=null;viewer.classList.remove('dragging');
+}
+viewer.addEventListener('pointerup',endPointerDrag);
+viewer.addEventListener('pointercancel',endPointerDrag);
+viewer.addEventListener('lostpointercapture',()=>{dragActive=false;dragPointerId=null;viewer.classList.remove('dragging')});
+
+let touchDrag=false,touchStartX=0,touchStartY=0,touchScrollLeft=0,touchScrollTop=0;
+viewer.addEventListener('touchstart',e=>{
+  if(e.touches.length===1){
+    const a=e.touches[0];
+    touchDrag=true;touchStartX=a.clientX;touchStartY=a.clientY;
+    touchScrollLeft=viewer.scrollLeft;touchScrollTop=viewer.scrollTop;
+    viewer.classList.add('dragging');e.preventDefault();
+  }else if(e.touches.length===2){
+    touchDrag=false;viewer.classList.remove('dragging');e.preventDefault();
+    const a=e.touches[0],b=e.touches[1],rect=viewer.getBoundingClientRect();
+    pinchStartDistance=Math.hypot(b.clientX-a.clientX,b.clientY-a.clientY);
+    pinchStartZoom=z;
+    const midX=(a.clientX+b.clientX)/2,midY=(a.clientY+b.clientY)/2;
+    pinchContentX=(viewer.scrollLeft+(midX-rect.left))/z;
+    pinchContentY=(viewer.scrollTop+(midY-rect.top))/z;
+  }
+},{passive:false});
+viewer.addEventListener('touchmove',e=>{
+  if(e.touches.length===1&&touchDrag){
+    const a=e.touches[0];
+    viewer.scrollLeft=touchScrollLeft-(a.clientX-touchStartX);
+    viewer.scrollTop=touchScrollTop-(a.clientY-touchStartY);
+    e.preventDefault();
+  }else if(e.touches.length===2&&pinchStartDistance>0){
+    touchDrag=false;viewer.classList.remove('dragging');e.preventDefault();
+    const a=e.touches[0],b=e.touches[1],rect=viewer.getBoundingClientRect();
+    const dist=Math.hypot(b.clientX-a.clientX,b.clientY-a.clientY);
+    const midX=(a.clientX+b.clientX)/2,midY=(a.clientY+b.clientY)/2;
+    z=clamp(pinchStartZoom*dist/pinchStartDistance,.08,4);
+    stage.style.transform='scale('+z+')';
+    stage.style.width=(SVG_W*z)+'px';stage.style.height=(SVG_H*z)+'px';
+    pct.textContent=Math.round(z*100)+'%';
+    viewer.scrollLeft=pinchContentX*z-(midX-rect.left);
+    viewer.scrollTop=pinchContentY*z-(midY-rect.top);
+  }
+},{passive:false});
+viewer.addEventListener('touchend',e=>{
+  if(e.touches.length===0){touchDrag=false;viewer.classList.remove('dragging')}
+  if(e.touches.length<2)pinchStartDistance=0;
+},{passive:false});
+viewer.addEventListener('touchcancel',()=>{touchDrag=false;pinchStartDistance=0;viewer.classList.remove('dragging')});
+
+viewer.addEventListener('wheel',e=>{
+  if(e.ctrlKey||e.metaKey){
+    e.preventDefault();applyZoom(z*(e.deltaY<0?1.12:.89),e.clientX,e.clientY);
+  }
+},{passive:false});
+
+requestAnimationFrame(()=>{
+  fitWidth();
+  if(matchMedia('(max-width:760px)').matches){
+    setTimeout(()=>{tip.classList.add('show');setTimeout(()=>tip.classList.remove('show'),2600)},450);
+  }
+});
+})();
+</script>
+</body>
+</html>
