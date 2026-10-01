@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-01",
+  "baselinePath": "archive/2026-10-01-base.html",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。",
+  "additions": [
+    {
+      "vendor": "DeepSeek",
+      "model": "DeepSeek-V4.1-Flash",
+      "date": "2026-09-10",
+      "category": "通用／推理／多模態",
+      "tags": "R/A/MM/OW",
+      "note": "DeepSeek V4.1 Flash；官方 9/10 發布，API 以 deepseek-flash 提供。",
+      "sources": [
+        "https://api-docs.deepseek.com/news/news260910/",
+        "https://api-docs.deepseek.com/updates/"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-Live-1",
+      "date": "2026-09-10",
+      "category": "即時語音／全雙工",
+      "tags": "VOICE/MM",
+      "note": "OpenAI API 即時語音模型，主打自然全雙工語音、指令遵循與 telephony 支援。",
+      "sources": [
+        "https://openai.com/news/research/"
+      ]
+    },
+    {
+      "vendor": "Cohere",
+      "model": "North Small Translate 1.0",
+      "date": "2026-09-10",
+      "category": "翻譯／開放權重",
+      "tags": "MT/OW",
+      "note": "Cohere North 翻譯支線，支援 50+ 語言；開放權重授權不是等同無限制商用。",
+      "sources": [
+        "https://cohere.com/blog",
+        "https://docs.cohere.com/docs/north-small-translate-1.0"
+      ]
+    },
+    {
+      "vendor": "Alibaba",
+      "model": "Qwen3.8-Omni-Flash",
+      "date": "2026-09-18",
+      "category": "原生全模態／Agent",
+      "tags": "A/MM",
+      "note": "Qwen3.8 原生全模態模型，強調規劃、工具呼叫與多模態任務交付。",
+      "sources": [
+        "https://qwen.ai/research/qwen3.8-livetranslate"
+      ]
+    },
+    {
+      "vendor": "Alibaba",
+      "model": "Qwen3.8-LiveTranslate",
+      "date": "2026-09-18",
+      "category": "即時翻譯／語音",
+      "tags": "VOICE/MT",
+      "note": "Qwen 即時口譯模型；支援說話者辨識與低延遲同步翻譯。",
+      "sources": [
+        "https://qwen.ai/blog?id=qwen3.8-livetranslate"
+      ]
+    },
+    {
+      "vendor": "Alibaba",
+      "model": "Qwen-Image-2.1",
+      "date": "2026-09-20",
+      "category": "影像生成／編輯／開放權重",
+      "tags": "IMAGE/OW",
+      "note": "Qwen 影像支線；統一文字生圖與影像編輯，7B 視覺生成元件。",
+      "sources": [
+        "https://qwen.ai/blog/qwen-robot-2026-6-16"
+      ]
+    },
+    {
+      "vendor": "xAI",
+      "model": "Grok 4.7",
+      "date": "2026-09-21",
+      "category": "通用／程式／Agent／知識工作",
+      "tags": "R/A/MM",
+      "note": "xAI frontier model；500k context，文字與圖片輸入，支援 low/medium/high/xhigh reasoning effort。",
+      "sources": [
+        "https://docs.x.ai/developers/release-notes"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-6 Sol",
+      "date": "2026-09-22",
+      "category": "通用／程式／電腦操作",
+      "tags": "R/A/MM",
+      "note": "GPT-6 中階主力，將 Astra 的專業工作、程式、電腦操作能力下放到較低成本層級。",
+      "sources": [
+        "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-6 Luna",
+      "date": "2026-09-22",
+      "category": "快速／低成本／通用",
+      "tags": "A/MM",
+      "note": "GPT-6 快速低成本層級；與 GPT-6 Sol 同日發布。",
+      "sources": [
+        "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
+      ]
+    },
+    {
+      "vendor": "Anthropic",
+      "model": "Claude Opus 5.5",
+      "date": "2026-09-22",
+      "category": "高階通用／程式／Agent",
+      "tags": "R/A/MM",
+      "note": "Claude 5.5 家族高階型號；Anthropic 表示多數工作達 Fable 5.1 水準，成本低於 Opus 5。",
+      "sources": [
+        "https://www.anthropic.com/news"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "Gemini 3.8 Flash TTS",
+      "date": "2026-09-23",
+      "category": "文字轉語音",
+      "tags": "VOICE",
+      "note": "Gemini 3.8 音訊生成支線，高表現 TTS 模型。",
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "Gemini 3.8 Flash-Lite TTS",
+      "date": "2026-09-23",
+      "category": "文字轉語音／低成本",
+      "tags": "VOICE",
+      "note": "Gemini 3.8 TTS 輕量版本，與 Flash TTS 同日發布。",
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "Gemini 3.8 Live with Live Avatar",
+      "date": "2026-09-24",
+      "category": "即時語音＋低延遲影片",
+      "tags": "VOICE/MM",
+      "note": "把 Gemini 3.8 Live 對話能力與低延遲串流影片結合的 Live Avatar 支線。",
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-with-live-avatar/"
+      ]
+    },
+    {
+      "vendor": "Anthropic",
+      "model": "Claude Sonnet 5.5",
+      "date": "2026-09-28",
+      "category": "通用／程式／Agent／文件",
+      "tags": "R/A/MM",
+      "note": "Claude 5.5 家族第二款；比 Sonnet 5 更快，主打日常任務、除錯、文件、簡報與試算表。",
+      "sources": [
+        "https://www.anthropic.com/claude-sonnet-5-5",
+        "https://www.anthropic.com/news"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-6.1 Sol",
+      "date": "2026-09-29",
+      "category": "通用／Agent／程式／電腦操作",
+      "tags": "R/A/MM",
+      "note": "GPT-6 系列新迭代，定位為接近 Astra 智慧但成本更低的 Sol。",
+      "sources": [
+        "https://openai.com/index/introducing-gpt-6-1-sol/",
+        "https://openai.com/research/index/publication/"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "Gemini 4 Argon",
+      "date": "2026-09-30",
+      "category": "高階推理／長程工作流／資安",
+      "tags": "R/A/MM",
+      "note": "Gemini 4 世代首發 Argon，1M token，聚焦長程軟體工程、企業知識工作與資安防禦；首波存取有限。",
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
+      ]
+    },
+    {
+      "vendor": "Cohere",
+      "model": "Embed 5 Pro",
+      "date": "2026-09-30",
+      "category": "Embedding／檢索",
+      "tags": "EMBED/MM",
+      "note": "Cohere Embed 5 高品質版本，支援文字、圖片與混合輸入，128k context。",
+      "sources": [
+        "https://docs.cohere.com/changelog/embed-v5",
+        "https://cohere.com/blog"
+      ]
+    },
+    {
+      "vendor": "Cohere",
+      "model": "Embed 5 Fast",
+      "date": "2026-09-30",
+      "category": "Embedding／低延遲檢索",
+      "tags": "EMBED/MM",
+      "note": "Cohere Embed 5 高吞吐低延遲版本，與 Pro 共用 embedding space。",
+      "sources": [
+        "https://docs.cohere.com/changelog/embed-v5",
+        "https://cohere.com/blog"
+      ]
+    },
+    {
+      "vendor": "Z.ai / Zhipu",
+      "model": "GLM-5.3-Flash",
+      "date": "2026-10-01",
+      "category": "原生多模態／Agent／程式",
+      "tags": "A/MM/OW",
+      "note": "GLM-5 家族首個原生多模態模型；320B total / 18B active，強調效率、視覺理解與 agent 工作流。",
+      "sources": [
+        "https://autoclaw.z.ai/blog/model/glm-5.3-flash/"
+      ]
+    }
+  ]
+}
