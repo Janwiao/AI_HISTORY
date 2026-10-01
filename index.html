@@ -1,9 +1,27 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover"><meta name="theme-color" content="#111827"><title>AI 模型完整族譜時間軸</title><style>
 :root{--bar:60px;--ink:#111827;--line:#dbe2ea}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:#eef2f7;color:var(--ink)}button,select{font:inherit}.toolbar{position:fixed;z-index:30;top:0;left:0;right:0;min-height:var(--bar);display:flex;align-items:center;gap:7px;padding:8px 10px;background:#111827;color:#fff}.toolbar button,.toolbar select{height:40px;border:0;border-radius:10px;padding:0 11px;background:#fff;color:#111827;font-weight:700}.toolbar .primary{background:#2563eb;color:#fff}.toolbar .spacer{flex:1}.stamp{font-size:12px;opacity:.8}.viewer{position:absolute;top:var(--bar);left:0;right:0;bottom:0;overflow:auto;background:#fff;touch-action:none;cursor:grab;overscroll-behavior:contain}.viewer.dragging{cursor:grabbing;user-select:none}.sizer{position:relative}.stage{position:absolute;left:0;top:0;transform-origin:0 0}.loading{position:absolute;inset:0;display:grid;place-items:center;background:#fff;z-index:4;color:#475569}.panel{position:fixed;z-index:40;top:var(--bar);right:0;bottom:0;width:min(520px,100vw);background:#fff;border-left:1px solid var(--line);box-shadow:-8px 0 24px #0002;overflow:auto;padding:18px}.panel[hidden]{display:none}.panel header{display:flex;align-items:center;position:sticky;top:-18px;background:#fff;padding:18px 0 12px}.panel h2{margin:0;flex:1}.change{border:1px solid var(--line);border-radius:14px;padding:13px;margin:10px 0;background:#f8fafc}.change h3{margin:5px 0}.change p{font-size:14px;line-height:1.5}.small{font-size:12px;color:#64748b}.badge{display:inline-block;padding:3px 7px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-size:11px;font-weight:800}.actions{display:flex;gap:8px}.actions button,.actions a{border:0;border-radius:8px;padding:7px 9px;background:#111827;color:#fff;text-decoration:none;font-size:12px}dialog{border:0;border-radius:16px;max-width:620px;width:calc(100% - 28px);box-shadow:0 18px 60px #0005}dialog::backdrop{background:#0008}.sources{display:flex;gap:8px;flex-wrap:wrap}.sources a{padding:7px 9px;background:#eef2ff;border-radius:8px;text-decoration:none}.node:hover .card,.node:focus .card{stroke-width:3}.node.highlight .card{stroke:#ef4444;stroke-width:4;fill:#fff7ed}
 @media(max-width:760px){:root{--bar:108px}.toolbar{flex-wrap:wrap}.toolbar select{width:42vw}.desktop{display:none}.stamp{width:100%;order:9}.panel{top:var(--bar)}}
+
+/* Keep the separate Agents & Tools page reachable on desktop and phones. */
+.toolbar{flex-wrap:wrap;min-height:60px;padding-top:max(8px,env(safe-area-inset-top));padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right))}
+.toolbar .page-link{display:inline-flex;align-items:center;min-height:40px;padding:0 11px;border-radius:10px;border:1px solid #64748b;color:#fff;text-decoration:none;font-weight:700;white-space:nowrap}
+.toolbar .page-link:hover,.toolbar .page-link:focus-visible{background:#334155}
+.toolbar button,.toolbar select{flex-shrink:0}
+.toolbar .stamp{overflow-wrap:anywhere}
+@media(max-width:760px){.toolbar{min-height:108px}.toolbar select{max-width:190px}.toolbar .page-link{font-size:13px}}
 </style></head><body>
-<div class="toolbar" id="toolbar"><select id="brandJump"><option>載入中…</option></select><button id="fitBtn">符合寬度</button><button id="readBtn" class="desktop">100%</button><button id="minusBtn" class="desktop">－</button><span id="pct">100%</span><button id="plusBtn" class="desktop">＋</button><button id="updatesButton" class="primary">最新更新</button><span class="spacer"></span><span class="stamp" id="stamp"></span></div>
+<div class="toolbar" id="toolbar"><select id="brandJump"><option>載入中…</option></select><button id="fitBtn">符合寬度</button><button id="readBtn" class="desktop">100%</button><button id="minusBtn" class="desktop">－</button><span id="pct">100%</span><button id="plusBtn" class="desktop">＋</button><button id="updatesButton" class="primary">最新更新</button><a class="page-link" href="./agents.html">Agents &amp; Tools</a><span class="spacer"></span><span class="stamp" id="stamp"></span></div>
 <div class="viewer" id="viewer" tabindex="0"><div class="sizer" id="sizer"><div class="stage" id="stage"></div></div><div class="loading" id="loading">載入 AI 模型時間軸…</div></div>
 <aside class="panel" id="updatesPanel" hidden><header><h2>最新時間軸更新</h2><button id="closeUpdates">關閉</button></header><p id="scope"></p><div id="changeList"></div><p class="small">舊資料沿用更新前網站快照；新增節點採官方／原廠來源。</p></aside>
 <dialog id="detail"><h2 id="detailTitle"></h2><p class="small" id="detailMeta"></p><p id="detailNote"></p><div class="sources" id="detailSources"></div><p><button id="closeDetail">關閉</button></p></dialog>
+<script>
+// Toolbar can wrap after adding navigation. Match the canvas inset to its real height.
+(() => {
+  const toolbar = document.getElementById('toolbar');
+  const sync = () => document.documentElement.style.setProperty('--bar', Math.ceil(toolbar.getBoundingClientRect().height) + 'px');
+  if ('ResizeObserver' in window) new ResizeObserver(sync).observe(toolbar);
+  window.addEventListener('resize', sync);
+  sync();
+})();
+</script>
 <script src="assets/timeline.js?v=20261001"></script></body></html>
