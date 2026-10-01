@@ -23,6 +23,9 @@ async function boot({mobile=false,url='https://example.test/AI_HISTORY/',fetchFa
   const captures=new Set();v.setPointerCapture=id=>captures.add(id);v.hasPointerCapture=id=>captures.has(id);v.releasePointerCapture=id=>captures.delete(id);
   w.fetch=async url=>({ok:!fetchFailure,status:fetchFailure?503:200,json:async()=>JSON.parse(fs.readFileSync(path.join(root,url.split('?')[0]),'utf8')),text:async()=>fs.readFileSync(path.join(root,url.split('?')[0]),'utf8')});
   w.eval(fs.readFileSync(path.join(root,'assets/data.js'),'utf8'));
+  w.eval(fs.readFileSync(path.join(root,'assets/brand-data.js'),'utf8'));
+  w.eval(fs.readFileSync(path.join(root,'assets/brand-evolution.js'),'utf8'));
+  w.eval(fs.readFileSync(path.join(root,'assets/overview-magnifier.js'),'utf8'));
   w.eval(fs.readFileSync(path.join(root,'assets/explorer.js'),'utf8'));
   await wait(30);
   return {dom,w,d,errors,v,click:id=>d.getElementById(id).click(),set:(id,value)=>{d.getElementById(id).value=value;d.getElementById(id).dispatchEvent(new w.Event('change'));}};
@@ -115,4 +118,54 @@ test('closing detail via Back preserves list and timeline browsing position',asy
       assert.equal(c.d.getElementById('listResults').scrollTop,2400);assert.equal(c.v.scrollTop,2400);assert.equal(c.v.scrollLeft,2000);
     }finally{c.dom.window.close()}
   }
+});
+
+
+test('brand dialog opens from existing labels, retains all brand nodes and main filters/viewport',async()=>{
+ const c=await boot({mobile:true});try{
+ c.set('brandJump','OpenAI');c.set('yearFilter','2026');const mainCount=c.d.querySelectorAll('.model-card').length;
+ c.v.scrollLeft=1234;c.v.scrollTop=789;c.d.getElementById('listResults').scrollTop=333;
+ const entry=c.d.querySelector('#listResults [data-brand="OpenAI"]');entry.focus();entry.click();
+ assert.equal(c.d.getElementById('brandEvolution').open,true);assert.equal(c.d.querySelectorAll('[data-brand-node]').length,32);
+ assert.match(c.d.getElementById('brandCanvas').textContent,/X：發布時間/);assert.match(c.d.getElementById('brandCanvas').textContent,/Y：模型系列/);
+ const node=c.d.querySelector('[data-brand-node]');node.dispatchEvent(new c.w.MouseEvent('click',{bubbles:true,cancelable:true}));
+ assert.equal(c.d.getElementById('brandNodeDetail').hidden,false);assert.ok(c.d.querySelectorAll('#brandNodeSources a').length);
+ assert.ok([...c.d.querySelectorAll('#brandNodeSources a')].every(a=>a.rel.includes('noopener')));
+ assert.ok(c.w.location.hash.startsWith('#brand='));c.click('brandZoomIn');assert.equal(c.d.getElementById('brandZoomLabel').textContent,'125%');
+ c.click('closeBrand');await wait(35);assert.equal(c.d.getElementById('brandEvolution').open,false);assert.equal(c.d.activeElement,entry);
+ assert.equal(c.d.querySelectorAll('.model-card').length,mainCount);assert.equal(c.d.getElementById('yearFilter').value,'2026');
+ assert.equal(c.v.scrollLeft,1234);assert.equal(c.v.scrollTop,789);assert.equal(c.d.getElementById('listResults').scrollTop,333);
+ }finally{c.dom.window.close()}
+});
+test('brand history Back/Forward, Escape, direct links, and invalid brand are safe',async()=>{
+ const c=await boot({url:'https://example.test/AI_HISTORY/?view=list#brand=OpenAI'});try{
+ assert.equal(c.d.getElementById('brandEvolution').open,true);c.click('closeBrand');assert.equal(c.w.location.hash,'');
+ const entry=c.d.querySelector('#listResults [data-brand="Alibaba"]');entry.click();
+ c.w.history.back();await wait(35);assert.equal(c.d.getElementById('brandEvolution').open,false);
+ c.w.history.forward();await wait(35);assert.equal(c.d.getElementById('brandEvolution').open,true);assert.match(c.d.getElementById('brandTitle').textContent,/Qwen/);
+ c.d.getElementById('brandEvolution').dispatchEvent(new c.w.Event('cancel',{cancelable:true}));await wait(35);assert.equal(c.d.getElementById('brandEvolution').open,false);
+ c.w.history.pushState({},'','#brand=does-not-exist');c.w.dispatchEvent(new c.w.HashChangeEvent('hashchange'));assert.equal(c.d.getElementById('brandEvolution').open,false);
+ }finally{c.dom.window.close()}
+});
+test('timeline brand keyboard/tap opens and drag/cancel never opens',async()=>{
+ const c=await boot();try{
+ const entry=c.d.querySelector('#stage [data-brand="OpenAI"]');
+ pointer(c,entry,'pointerdown',1,100,400);pointer(c,c.v,'pointermove',1,160,400);pointer(c,c.v,'pointerup',1,160,400);assert.equal(c.d.getElementById('brandEvolution').open,false);
+ pointer(c,entry,'pointerdown',1,100,400);pointer(c,c.v,'pointercancel',1,100,400);assert.equal(c.d.getElementById('brandEvolution').open,false);
+ entry.dispatchEvent(new c.w.KeyboardEvent('keydown',{key:' ',bubbles:true,cancelable:true}));assert.equal(c.d.getElementById('brandEvolution').open,true);
+ c.click('closeBrand');await wait(35);pointer(c,entry,'pointerdown',1,100,400);pointer(c,c.v,'pointerup',1,100,400);assert.equal(c.d.getElementById('brandEvolution').open,true);
+ const sameDate=[...c.d.querySelectorAll('[data-brand-node]')].filter(n=>n.textContent.includes('2025-04-14'));assert.ok(sameDate.length>=3);
+ const rects=sameDate.map(n=>n.querySelector('rect'));assert.equal(new Set(rects.map(r=>r.getAttribute('y'))).size,rects.length);
+ }finally{c.dom.window.close()}
+});
+
+test('short-height brand layout keeps chart and selected detail reachable through outer scrolling',()=>{
+ const dom=new JSDOM('<!doctype html><style></style>');try{
+ const style=dom.window.document.querySelector('style');style.textContent=fs.readFileSync(path.join(root,'assets/brand-evolution.css'),'utf8');
+ const rule=[...style.sheet.cssRules].find(r=>r.conditionText==='(max-height:620px)');assert.ok(rule);
+ const rules=Object.fromEntries([...rule.cssRules].map(r=>[r.selectorText,r.style]));
+ assert.equal(rules['#brandEvolution'].getPropertyValue('overflow'),'auto');
+ assert.equal(rules['.be-plot'].getPropertyValue('flex'),'0 0 220px');
+ assert.equal(rules['.be-detail'].getPropertyValue('max-height'),'none');assert.equal(rules['.be-detail'].getPropertyValue('overflow'),'visible');
+ }finally{dom.window.close()}
 });

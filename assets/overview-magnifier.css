@@ -1,0 +1,6 @@
+/* Additive overview controls: no changes to the existing chart or control layout. */
+.zoom-controls{position:relative}
+.zoom-controls .overview-magnifier-toggle{position:absolute;right:0;bottom:calc(100% + 9px);min-height:36px;padding:0 12px;border:1px solid #536483;border-radius:9px;background:#111a2ded;color:#dce4ff;box-shadow:0 3px 14px #0b102022;font-size:12px;white-space:nowrap}
+.zoom-controls .overview-magnifier-toggle[aria-pressed=true]{border-color:#9aaaff;background:#263453;color:#fff}
+.overview-magnifier-lens{position:fixed;z-index:12;box-sizing:border-box;overflow:hidden;border:3px solid #768bde;border-radius:50%;background:#f5f7fb;box-shadow:0 7px 30px #14203a42,0 0 0 1px #fff9;pointer-events:none!important;contain:layout paint;user-select:none}
+@media(hover:none) and (pointer:coarse){.overview-magnifier-toggle,.overview-magnifier-lens{display:none!important}}

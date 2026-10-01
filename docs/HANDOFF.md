@@ -116,3 +116,14 @@ docs/HANDOFF.md                         本交接文件
 測試：`node --check`、純資料測試及 jsdom DOM 狀態測試。涵蓋完整合併數、手機預設與更新入口、交叉篩選／能力搜尋、空結果重置、重複詳情／Escape／定位、模型直達與 popstate、拖曳／雙指轉單指／取消捕捉／失焦、HTTP 失敗。jsdom 為模擬 DOM，不是真正排版引擎，不能以此宣稱手機 Safari 或實際雙指已驗證。環境的 Chromium 程序因 socket 限制無法啟動，localhost 預覽亦受 cloud browser 限制；正式發布後應於實際網站另做視覺與互動回歸。部署狀態需按對應提交查證。
 
 發布相容：新版入口使用 `assets/explorer.js`；舊 `assets/timeline.js` 保留改版前 runtime，避免 CDN 尚有舊 HTML 時引用新版 DOM API 而停在載入畫面。後續修改新版請以 explorer.js 為準。
+
+## 11. 額外探索工具｜品牌演進與總覽放大鏡
+
+沿用第 10 節已部署版型，僅將既有品牌文字改為可操作入口，加上獨立原生 dialog，不重排主頁。
+
+- `assets/brand-data.js`：依品牌與模型名稱做保守的系列分類，未知名稱保留「其他／未分類」，不推論官方繼承。
+- `assets/brand-evolution.js`／`.css`：共用主程式已載入的全部合併 rows；X 日期、Y 名稱系列，同日共用日期位置但錯開標籤。點節點顯示說明、精度及 HTTP(S) 原始來源。`#brand=` 可直達品牌；Close／Escape／Back／Forward 不清除主頁篩選、比例或捲動位置。
+- `assets/overview-magnifier.js`／`.css`：在原主圖「總覽」模式提供可關閉的唯讀懸停放大鏡；使用獨立 Shadow DOM 的 SVG 快取，不增加可點擊模型數或影響主圖資料、焦點。拖曳、觸控、失焦、取消捕捉、視圖變更和 modal 開啟時隱藏。
+- `index.html` 只新增模組載入與關閉狀態的 dialog。`assets/explorer.js` 只加品牌入口、對新模組的 init／open 與總覽生命週期 hooks；舊 `assets/timeline.js`、底稿、Excel、Agent 頁、資料內容皆未改。
+
+驗證：新增 family 與放大鏡測試，並擴充 DOM 測試；整合時 30 項全通過，另做 JavaScript 語法與 whitespace 檢查。涵蓋資料完整性、同日標籤、品牌節點/來源、深連結、焦點返回、Back/Forward、原篩選/位置保存、放大鏡座標與手勢隔離。Chromium 程序仍因環境 socket 權限無法啟動，因此 DOM 測試不等同真實瀏覽器版面或手機觸控驗證。這段記錄本機實作與測試，不代表本批已提交或部署；發布前須取得授權並查對應 commit/Pages 狀態。

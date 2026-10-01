@@ -2,6 +2,7 @@
 (() => {
   const $ = id => document.getElementById(id);
   const D = window.TimelineData, viewer = $('viewer'), stage = $('stage'), sizer = $('sizer');
+  const overviewMagnifier = window.OverviewMagnifier?.create({ viewer, stage, controls: document.querySelector('.zoom-controls') });
   const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const mobile = () => matchMedia('(max-width:760px)').matches;
   let manifest, rows = [], shown = [], brands = [], positions = new Map(), width = 12080, height = 5400, scale = 1;
@@ -54,6 +55,7 @@
   syncToolbar();
 
   function renderTimeline() {
+    overviewMagnifier?.setOverview(false);
     positions = new Map();
     const activeBrands = brands.filter(b => shown.some(r => r.vendor === b.name));
     const startYear = filters.year ? +filters.year : Math.min(2023, ...shown.map(r => r.year));
@@ -105,7 +107,7 @@
         svg += `<a href="#model=${encodeURIComponent(D.key(row))}" data-key="${esc(D.key(row))}" class="node" role="button" tabindex="0" aria-label="${esc(`${row.model}，${row.vendor}，${dateLabel(row)}，查看詳情與來源`)}"><rect class="card" x="${p.bx}" y="${p.by}" width="${p.w}" height="76" rx="10" fill="${row.isUpdated ? '#edf1ff' : '#fff'}" stroke="${color}" stroke-width="1.25"/><text x="${p.bx + 13}" y="${p.by + 24}" class="model">${esc(row.model)}</text><text x="${p.bx + 13}" y="${p.by + 44}" class="date">${esc(row.date)}${row.precision === 'month' ? ' · 月份' : ''}${row.isUpdated ? ' · 本次收錄' : ''}</text><text x="${p.bx + 13}" y="${p.by + 63}" class="category">${esc(D.category(row).slice(0, 38))}</text></a>`;
       }
       // Reposition only this label horizontally while panning; model nodes remain at their exact dates.
-      svg += `<g class="lane-label" data-top="${brand.top}"><rect x="0" y="${brand.top + 9}" width="330" height="32" rx="7" fill="${i % 2 ? '#f2f5fa' : '#fff'}"/><circle cx="16" cy="${brand.top + 25}" r="4" fill="${color}"/><text x="29" y="${brand.top + 30}" style="font-size:15px;font-weight:700">${esc(formatBrand(brand.name))}<tspan style="fill:#687992;font-size:11px;font-weight:400">　${brand.rows.length} 個節點</tspan></text></g>`;
+      svg += `<g class="lane-label" data-top="${brand.top}"><a class="brand-entry" data-brand="${esc(brand.name)}" href="#brand=${encodeURIComponent(brand.name)}" role="button" tabindex="0" aria-haspopup="dialog" aria-label="查看 ${esc(formatBrand(brand.name))} 品牌演進圖"><title>點擊查看品牌演進圖</title><rect x="0" y="${brand.top + 9}" width="330" height="32" rx="7" fill="${i % 2 ? '#f2f5fa' : '#fff'}"/><circle cx="16" cy="${brand.top + 25}" r="4" fill="${color}"/><text x="29" y="${brand.top + 30}" style="font-size:15px;font-weight:700">${esc(formatBrand(brand.name))}<tspan style="fill:#687992;font-size:11px;font-weight:400">　${brand.rows.length} 個節點 ↗</tspan></text></a></g>`;
     });
     svg += '<g id="dateRuler"><rect width="100%" height="40" fill="#f5f7fb"/>';
     for (const tick of ticks) svg += `<text x="${tick.x + 6}" y="26" style="font-size:13px;fill:#536580;font-weight:700">${tick.label}</text>`;
@@ -124,6 +126,7 @@
   let scrollFrame;
   viewer.addEventListener('scroll', () => { if (!scrollFrame) scrollFrame = requestAnimationFrame(() => { scrollFrame = null; updateStickyLabels(); }); });
   function applyZoom(next, cx = viewer.clientWidth / 2, cy = viewer.clientHeight / 2) {
+    overviewMagnifier?.setOverview(false);
     const worldX = (viewer.scrollLeft + cx) / scale, worldY = (viewer.scrollTop + cy) / scale;
     scale = Math.max(.025, Math.min(3, next));
     sizer.style.width = width * scale + 'px'; sizer.style.height = height * scale + 'px';
@@ -151,9 +154,10 @@
     if (candidates.length) jump(D.key(candidates[candidates.length - 1]));
   }
   function renderList() {
-    $('listResults').innerHTML = [...shown].reverse().map(row => `<article class="model-card"><div class="card-top"><span class="brand-label">${esc(formatBrand(row.vendor))}</span>${row.isUpdated ? '<span class="record-status">本次收錄</span>' : ''}</div><h2><button class="model-title" data-detail="${esc(D.key(row))}">${esc(row.model)}</button></h2><time datetime="${esc(row.date)}">${esc(dateLabel(row))}</time><p class="category">${esc(D.category(row))}</p><div class="card-actions"><button data-detail="${esc(D.key(row))}">詳情與來源 ↗</button><button data-locate="${esc(D.key(row))}" aria-label="在時間軸定位 ${esc(row.model)}">定位時間軸</button></div></article>`).join('') + '<p class="list-footer">依發布日期由新到舊。月份資料保留原有精度；「本次收錄」為本批增量紀錄。<br>歷史底稿尚未逐筆重新查核；模型能力分類不代表 Agent 產品升代。</p>';
+    $('listResults').innerHTML = [...shown].reverse().map(row => `<article class="model-card"><div class="card-top"><button class="brand-label brand-entry" data-brand="${esc(row.vendor)}" aria-haspopup="dialog" aria-label="查看 ${esc(formatBrand(row.vendor))} 品牌演進圖">${esc(formatBrand(row.vendor))} ↗</button>${row.isUpdated ? '<span class="record-status">本次收錄</span>' : ''}</div><h2><button class="model-title" data-detail="${esc(D.key(row))}">${esc(row.model)}</button></h2><time datetime="${esc(row.date)}">${esc(dateLabel(row))}</time><p class="category">${esc(D.category(row))}</p><div class="card-actions"><button data-detail="${esc(D.key(row))}">詳情與來源 ↗</button><button data-locate="${esc(D.key(row))}" aria-label="在時間軸定位 ${esc(row.model)}">定位時間軸</button></div></article>`).join('') + '<p class="list-footer">依發布日期由新到舊。月份資料保留原有精度；「本次收錄」為本批增量紀錄。<br>歷史底稿尚未逐筆重新查核；模型能力分類不代表 Agent 產品升代。</p>';
   }
   function setMode(next, save = true) {
+    overviewMagnifier?.setOverview(false);
     resetGesture();
     mode = next;
     const timeline = mode === 'timeline';
@@ -245,9 +249,9 @@
 
   // A gesture remains a drag after any movement or second pointer. Rebase at every
   // pointer-count transition so two fingers -> one finger never jumps or opens a node.
-  const pointers = new Map(); let pan = null, pinch = null, gestureMoved = false, tapKey = null;
+  const pointers = new Map(); let pan = null, pinch = null, gestureMoved = false, tapKey = null, tapBrand = null;
   function resetGesture() {
-    const ids = [...pointers.keys()]; pointers.clear(); pan = pinch = null; tapKey = null; gestureMoved = false;
+    const ids = [...pointers.keys()]; pointers.clear(); pan = pinch = null; tapKey = tapBrand = null; gestureMoved = false;
     viewer.classList.remove('dragging');
     ids.forEach(id => { try { if (viewer.hasPointerCapture(id)) viewer.releasePointerCapture(id); } catch {} });
   }
@@ -257,12 +261,12 @@
       const [a,b] = points, rect = viewer.getBoundingClientRect();
       const x = (a.x+b.x)/2 - rect.left, y = (a.y+b.y)/2 - rect.top;
       pinch = { distance: Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)), scale, worldX: (viewer.scrollLeft+x)/scale, worldY: (viewer.scrollTop+y)/scale };
-      pan = null; gestureMoved = true; tapKey = null;
+      pan = null; gestureMoved = true; tapKey = tapBrand = null;
     } else if (points.length === 1) { pan = { ...points[0], left: viewer.scrollLeft, top: viewer.scrollTop }; pinch = null; }
   }
   viewer.addEventListener('pointerdown', event => {
     if (!ready || event.pointerType === 'mouse' && event.button !== 0) return;
-    if (!pointers.size) { gestureMoved = false; tapKey = event.target.closest('[data-key]')?.dataset.key || null; }
+    if (!pointers.size) { gestureMoved = false; tapKey = event.target.closest('[data-key]')?.dataset.key || null; tapBrand = event.target.closest('[data-brand]')?.dataset.brand || null; }
     pointers.set(event.pointerId, { x:event.clientX, y:event.clientY }); rebaseGesture();
     try { viewer.setPointerCapture(event.pointerId); } catch {}
     viewer.classList.add('dragging'); event.preventDefault();
@@ -286,19 +290,25 @@
   function finishPointer(event) {
     if (!pointers.has(event.pointerId)) return;
     const action = event.type === 'pointerup' && pointers.size === 1 && !gestureMoved ? tapKey : null;
+    const brandAction = event.type === 'pointerup' && pointers.size === 1 && !gestureMoved ? tapBrand : null;
     pointers.delete(event.pointerId);
-    if (event.type !== 'pointerup') { gestureMoved = true; tapKey = null; }
+    if (event.type !== 'pointerup') { gestureMoved = true; tapKey = tapBrand = null; }
     if (pointers.size) rebaseGesture(); else resetGesture();
     if (action) showDetail(action);
+    if (brandAction) window.BrandEvolution?.open(brandAction, true, [...stage.querySelectorAll('[data-brand]')].find(el => el.dataset.brand === brandAction));
   }
   ['pointerup','pointercancel','lostpointercapture'].forEach(type => viewer.addEventListener(type, finishPointer));
   window.addEventListener('blur', resetGesture);
   document.addEventListener('visibilitychange', () => { if (document.hidden) resetGesture(); });
   viewer.addEventListener('click', event => {
+    const brand = event.target.closest('[data-brand]');
+    if (brand) { event.preventDefault(); if (event.detail === 0) window.BrandEvolution?.open(brand.dataset.brand, true, brand); return; }
     const node = event.target.closest('[data-key]');
     if (node) { event.preventDefault(); if (event.detail === 0) showDetail(node.dataset.key); }
   });
   viewer.addEventListener('keydown', event => {
+    const brand = event.target.closest('[data-brand]');
+    if (brand && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); window.BrandEvolution?.open(brand.dataset.brand, true, brand); return; }
     const node = event.target.closest('[data-key]');
     if (node && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); showDetail(node.dataset.key); return; }
     if (event.target !== viewer) return;
@@ -317,7 +327,7 @@
     const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? viewer.clientHeight : 1);
     applyZoom(scale*Math.exp(-delta*.002),event.clientX-rect.left,event.clientY-rect.top);
   }, { passive:false });
-  $('fitBtn').onclick = () => { if (ready) { resetGesture(); applyZoom((viewer.clientWidth-20)/width,0,0); viewer.scrollTo(0,0); toast('總覽適合看分布；點 100% 或「最新」回到閱讀大小'); } };
+  $('fitBtn').onclick = () => { if (ready) { resetGesture(); applyZoom((viewer.clientWidth-20)/width,0,0); viewer.scrollTo(0,0); overviewMagnifier?.setOverview(true); toast('總覽適合看分布；點 100% 或「最新」回到閱讀大小'); } };
   $('readBtn').onclick = () => ready && applyZoom(1);
   $('plusBtn').onclick = () => ready && applyZoom(scale*1.25);
   $('minusBtn').onclick = () => ready && applyZoom(scale*.8);
@@ -347,6 +357,8 @@
     catch { $('copyStatus').textContent = '無法自動複製；可直接複製瀏覽器網址列的節點連結'; }
   };
   $('listResults').onclick = event => {
+    const brand = event.target.closest('[data-brand]');
+    if (brand) { window.BrandEvolution?.open(brand.dataset.brand, true, brand); return; }
     const detail = event.target.closest('[data-detail]'), location = event.target.closest('[data-locate]');
     if (detail) showDetail(detail.dataset.detail);
     if (location) locate(location.dataset.locate);
@@ -382,6 +394,7 @@
       $('brandJump').innerHTML = '<option value="">所有品牌</option>' + brands.map(b => `<option value="${esc(b.name)}">${esc(formatBrand(b.name))}</option>`).join('');
       $('yearFilter').innerHTML = '<option value="">所有年份</option>' + [...new Set(rows.map(r => r.year))].sort((a,b)=>b-a).map(year=>`<option value="${year}">${year} 年</option>`).join('');
       $('typeFilter').innerHTML = '<option value="">所有能力</option>' + Object.entries(D.labels).map(([value,label])=>`<option value="${value}">${label}</option>`).join('');
+      window.BrandEvolution?.init({ rows, brands });
       readUrl(); ready = true; renderUpdates(); applyFilters({save:false}); $('loading').hidden = true;
       if (mobile()) $('gestureHelp').textContent = '單指拖曳 · 雙指縮放';
       const key = modelFromHash(); if (key) showDetail(key,false);

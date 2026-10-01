@@ -8,7 +8,12 @@
   <title>AI 模型族譜時間軸｜AI HISTORY</title>
   <link rel="stylesheet" href="assets/app.css?v=20261001-ux1">
   <script src="assets/data.js?v=20261001-ux1" defer></script>
-  <script src="assets/explorer.js?v=20261001-ux1" defer></script>
+  <link rel="stylesheet" href="assets/brand-evolution.css?v=20261001-brand1">
+  <script src="assets/brand-data.js?v=20261001-brand1" defer></script>
+  <script src="assets/brand-evolution.js?v=20261001-brand1" defer></script>
+  <link rel="stylesheet" href="assets/overview-magnifier.css?v=20261001-brand1">
+  <script src="assets/overview-magnifier.js?v=20261001-brand1" defer></script>
+  <script src="assets/explorer.js?v=20261001-brand1" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#content">跳至模型內容</a>
@@ -42,6 +47,7 @@
 </main>
 <dialog id="updatesPanel" class="updates-dialog" aria-labelledby="updatesTitle"><header class="dialog-heading"><div><span class="eyebrow">CHANGELOG</span><h2 id="updatesTitle">本次資料更新</h2></div><button id="closeUpdates" class="close" aria-label="關閉更新面板">×</button></header><p id="scope" class="muted"></p><div id="changeList"></div><p class="fineprint">「本次收錄」代表這批增量資料，並不等於剛發布。歷史底稿尚未逐筆重新查核。</p></dialog>
 <dialog id="detail" aria-labelledby="detailTitle" aria-describedby="detailNote"><header class="dialog-heading"><span class="eyebrow" id="detailVendor"></span><button id="closeDetail" class="close" aria-label="關閉模型詳情">×</button></header><h2 id="detailTitle"></h2><p class="detail-meta" id="detailMeta"></p><div class="detail-tags" id="detailTags"></div><p id="detailNote"></p><p class="fineprint" id="detailProvenance"></p><h3 class="sources-heading">查看原始來源</h3><div class="sources" id="detailSources"></div><div class="detail-actions"><button id="locateDetail">在時間軸定位</button><button id="copyLink" class="secondary">複製節點連結</button></div><p id="copyStatus" class="fineprint" role="status"></p></dialog>
+<dialog id="brandEvolution" aria-labelledby="brandTitle" aria-describedby="brandLegend"><header class="dialog-heading"><div><span class="eyebrow">BRAND CHRONOLOGY</span><h2 id="brandTitle">品牌演進</h2></div><button id="closeBrand" class="close" aria-label="關閉品牌演進">×</button></header><p id="brandSummary"></p><p id="brandLegend" class="be-note">同系列按發布時間連線，不代表官方繼承關係或能力高低。同日紀錄共用時間位置，標籤錯開；月份資料保留原精度。</p><div class="be-controls" role="group" aria-label="品牌圖縮放"><button id="brandZoomOut" aria-label="縮小品牌圖">−</button><button id="brandZoomReset" aria-label="品牌圖回到 100%"><span id="brandZoomLabel">100%</span></button><button id="brandZoomIn" aria-label="放大品牌圖">＋</button><button id="brandStart">回到起點</button><span class="be-help">捲動查看 · Ctrl / ⌘ + 滾輪縮放 · 點模型看來源</span></div><div id="brandPlot" class="be-plot" tabindex="0" aria-label="可捲動品牌演進圖，使用方向鍵捲動，加減鍵縮放"><div id="brandSizer" class="be-sizer"><div id="brandCanvas" class="be-canvas"></div></div></div><section id="brandNodeDetail" class="be-detail" aria-label="所選模型詳情" aria-live="polite" hidden><h3 id="brandNodeName"></h3><p id="brandNodeMeta"></p><p id="brandNodeNote"></p><p id="brandNodeProvenance"></p><div id="brandNodeSources" class="be-sources"></div></section></dialog>
 <div id="toast" class="toast" role="status" hidden></div>
 <noscript><div class="noscript">時間軸需要 JavaScript。請啟用 JavaScript，或閱讀 <a href="./agents.html">Agents &amp; Tools</a>。</div></noscript>
 </body>
