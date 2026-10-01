@@ -23,7 +23,7 @@ async function boot({mobile=false,url='https://example.test/AI_HISTORY/',fetchFa
   const captures=new Set();v.setPointerCapture=id=>captures.add(id);v.hasPointerCapture=id=>captures.has(id);v.releasePointerCapture=id=>captures.delete(id);
   w.fetch=async url=>({ok:!fetchFailure,status:fetchFailure?503:200,json:async()=>JSON.parse(fs.readFileSync(path.join(root,url.split('?')[0]),'utf8')),text:async()=>fs.readFileSync(path.join(root,url.split('?')[0]),'utf8')});
   w.eval(fs.readFileSync(path.join(root,'assets/data.js'),'utf8'));
-  w.eval(fs.readFileSync(path.join(root,'assets/timeline.js'),'utf8'));
+  w.eval(fs.readFileSync(path.join(root,'assets/explorer.js'),'utf8'));
   await wait(30);
   return {dom,w,d,errors,v,click:id=>d.getElementById(id).click(),set:(id,value)=>{d.getElementById(id).value=value;d.getElementById(id).dispatchEvent(new w.Event('change'));}};
 }

@@ -106,7 +106,7 @@ docs/HANDOFF.md                         本交接文件
 本次沿用同一 repository、模型／Agent 分頁、全部歷史資料與 GitHub Pages 發布設定。沒有改 DNS、主站或其他專案。
 
 - `index.html` 改為清楚的導覽、搜尋／篩選、時間軸／閱讀列表切換及原生 dialog；新增 `assets/app.css` 管理深色介面與淺色 SVG 畫布，手機預設列表、電腦預設 100% 的近期閱讀位置。更新面板不自動開啟。
-- `assets/data.js` 為共用純資料函式：UTC 日期嚴格解析、月份精度、增量合併、能力分類、關鍵字與條件交集。`assets/timeline.js` 保留底稿解析並提供列表、SVG、網址狀態、來源詳情、鍵盤與 Pointer Events。
+- `assets/data.js` 為共用純資料函式：UTC 日期嚴格解析、月份精度、增量合併、能力分類、關鍵字與條件交集。`assets/explorer.js` 保留底稿解析並提供列表、SVG、網址狀態、來源詳情、鍵盤與 Pointer Events。
 - 實際底稿 208 筆 + 增量 19 筆 = 227 唯一節點、19 品牌；四筆 `YYYY-MM` 保留月份精度，不偽裝成精確到日。日期無效時顯示錯誤，不再靜默刪去。增量若出現新品牌也會自動加入。
 - 「NEW」改成「本次收錄」，避免把補漏／更正當成剛發布；其餘歷史來源仍未逐筆重查。
 - Qwen3.8-Omni-Flash：官方 https://qwen.ai/blog?id=qwen3.8-omni-flash ，內文 2026-09-18。Qwen-Image-2.1：官方 https://qwen.ai/blog?id=qwen-image-2.1 ，內文 2026-09-20；補 https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/LICENSE 研究授權，商用需另行授權。模型名稱、日期、OW 分類不變。
@@ -114,3 +114,5 @@ docs/HANDOFF.md                         本交接文件
 - 雙指縮放結束改單指時重新建立拖曳起點；pointercancel、lostpointercapture、blur、切換視圖均清空手勢。拖曳不會誤開詳情；來源僅允許 HTTP(S)，另開分頁含 noopener/noreferrer。
 
 測試：`node --check`、純資料測試及 jsdom DOM 狀態測試。涵蓋完整合併數、手機預設與更新入口、交叉篩選／能力搜尋、空結果重置、重複詳情／Escape／定位、模型直達與 popstate、拖曳／雙指轉單指／取消捕捉／失焦、HTTP 失敗。jsdom 為模擬 DOM，不是真正排版引擎，不能以此宣稱手機 Safari 或實際雙指已驗證。環境的 Chromium 程序因 socket 限制無法啟動，localhost 預覽亦受 cloud browser 限制；正式發布後應於實際網站另做視覺與互動回歸。部署狀態需按對應提交查證。
+
+發布相容：新版入口使用 `assets/explorer.js`；舊 `assets/timeline.js` 保留改版前 runtime，避免 CDN 尚有舊 HTML 時引用新版 DOM API 而停在載入畫面。後續修改新版請以 explorer.js 為準。
