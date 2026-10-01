@@ -47,7 +47,7 @@
       "tags": "A/MM",
       "note": "Qwen3.8 原生全模態模型，強調規劃、工具呼叫與多模態任務交付。",
       "sources": [
-        "https://qwen.ai/research/qwen3.8-livetranslate"
+        "https://qwen.ai/blog?id=qwen3.8-omni-flash"
       ]
     },
     {
@@ -67,9 +67,10 @@
       "date": "2026-09-20",
       "category": "影像生成／編輯／開放權重",
       "tags": "IMAGE/OW",
-      "note": "Qwen 影像支線；統一文字生圖與影像編輯，7B 視覺生成元件。",
+      "note": "Qwen 影像支線；統一文字生圖與影像編輯，7B 視覺生成元件，原生支援透明圖像；權重採研究授權，商用需另行取得授權。",
       "sources": [
-        "https://qwen.ai/blog/qwen-robot-2026-6-16"
+        "https://qwen.ai/blog?id=qwen-image-2.1",
+        "https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/LICENSE"
       ]
     },
     {
