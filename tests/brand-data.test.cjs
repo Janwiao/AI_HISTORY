@@ -33,10 +33,10 @@ test('UMD exposes the same small API in a browser without dependencies', () => {
   assert.equal(context.window.BrandEvolutionData.family({ vendor: 'OpenAI', model: 'GPT-4' }).id, 'gpt');
 });
 
-test('all 227 merged nodes are retained exactly once with no product injection', () => {
+test('all 234 merged nodes are retained exactly once with no product injection', () => {
   assert.equal(baseline().length, 208);
-  assert.equal(records.length, 227);
-  assert.equal(new Set(records.map(D.key)).size, 227);
+  assert.equal(records.length, 234);
+  assert.equal(new Set(records.map(D.key)).size, 234);
   const all = [];
   for (const vendor of new Set(records.map(row => row.vendor))) {
     const lanes = B.group(records, vendor);
@@ -129,4 +129,9 @@ test('every archived and updated model has an explicit name-based grouping', () 
       assert.deepEqual(lane.rows, lane.rows.slice().sort((a, b) => a.time - b.time || a.model.localeCompare(b.model)));
     }
   }
+});
+
+test('October additions use explicit lanes without claiming genetic ancestry',()=>{
+  const expected=[['OpenAI','GPT-6.1 Terra','gpt-terra'],['Anthropic','Claude Haiku 5.5','claude-haiku'],['DeepSeek','DeepSeek-V4.1-Flash-1017','deepseek-v'],['xAI','Grok Voice 3.0','grok-voice'],['Cohere','Rerank 5 Pro','cohere-rerank'],['Cohere','Rerank 5 Fast','cohere-rerank'],['Z.ai / Zhipu','GLM-Legal','glm-legal']];
+  for(const [vendor,model,id] of expected) assert.equal(classify(vendor,model).id,id);
 });

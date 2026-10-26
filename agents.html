@@ -26,6 +26,16 @@ a{color:inherit}.wrap{width:min(1160px,calc(100% - 32px));margin:auto}.nav{posit
 <div class="tabs"><button class="on" data-f="all">全部</button><button data-f="agent">Agent / Harness</button><button data-f="coding">Coding</button><button data-f="decision">Decision Layer</button></div>
 <div class="note">此區刻意與「AI 模型族譜」分開。同一產品可能調用 GPT、Claude、Gemini 或開源模型；因此不以底層模型品牌分類，而以產品／Agent 系統自身的迭代為主。</div>
 <section class="grid">
+<article class="card" data-k="agent" id="claude-duet" data-checked-at="2026-10-26" aria-labelledby="duet-title">
+<div class="top"><div class="icon" aria-hidden="true">◇</div><div><div class="kind">Anthropic · Proactive Agent</div><h2 id="duet-title">Claude Duet</h2></div></div>
+<p class="desc">以 Claude Opus 5.5 為基礎的主動式 Agent 產品，能使用自己的虛擬機與瀏覽器處理背景工作。這是產品，不是新模型版本。</p>
+<div class="facts"><span class="pill">Research Preview</span><span class="pill">Waitlist</span><span class="pill">Cloud Computer</span></div>
+<div class="timeline"><div class="event"><time class="date" datetime="2026-10-21">2026-10-21 · 研究預覽公告</time><b>美國 Pro／Max 使用者候補申請</b><span>公告提供獨立 iOS、Android 與網頁入口，需候補取得資格；與原 Claude 方案共用用量，不代表全球全面開放。</span></div></div>
+<p class="desc">官方說明發送訊息、付款、簽署及刪除等重要操作須先取得同意；背景檢查也會消耗方案用量。</p>
+<p class="date">本卡查核：<time datetime="2026-10-26">2026-10-26</time>；其餘既有卡片不代表同日重查。</p>
+<div class="links"><a href="https://claude.com/resources/articles/claude-duet" target="_blank" rel="noopener noreferrer">官方公告 ↗</a></div>
+</article>
+
 <article class="card" data-k="agent" id="openai-dots" data-product="openai-dots" data-checked-at="2026-10-01" aria-labelledby="dots-title">
 <div class="top"><div class="icon" aria-hidden="true">●</div><div><div class="kind">OpenAI · Always-on Agent</div><h2 id="dots-title">dots <span class="alias">（DOT）</span></h2></div></div>
 <p class="desc">OpenAI 的全天候 Agent 產品，由 GPT-6 Astra 驅動，使用自己的雲端電腦、瀏覽器與已授權的應用程式執行工作。<strong>dots 是運用模型做事的系統，不是另一個 GPT 模型版本。</strong>官方名稱為 dots，單一代理稱為 dot。</p>
@@ -47,3 +57,4 @@ a{color:inherit}.wrap{width:min(1160px,calc(100% - 32px));margin:auto}.nav{posit
 </section></main>
 <script>const bs=[...document.querySelectorAll("[data-f]")],cs=[...document.querySelectorAll(".card")];bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.classList.remove("on"));b.classList.add("on");cs.forEach(c=>c.hidden=b.dataset.f!=="all"&&c.dataset.k!==b.dataset.f)})</script>
 </body></html>
+
