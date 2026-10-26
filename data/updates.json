@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-26",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -30,11 +30,12 @@
     {
       "vendor": "Cohere",
       "model": "North Small Translate 1.0",
-      "date": "2026-09-10",
+      "date": "2026-09-09",
       "category": "翻譯／開放權重",
       "tags": "MT/OW",
-      "note": "Cohere North 翻譯支線，支援 50+ 語言；開放權重授權不是等同無限制商用。",
+      "note": "Cohere North 翻譯支線，支援 50+ 語言；開放權重授權不是等同無限制商用。 日期依官方 changelog 修正為 9/9；官方模型 ID 為 north-small-translate-09-2026。",
       "sources": [
+        "https://docs.cohere.com/v2/changelog",
         "https://cohere.com/blog",
         "https://docs.cohere.com/docs/north-small-translate-1.0"
       ]
@@ -212,12 +213,90 @@
     {
       "vendor": "Z.ai / Zhipu",
       "model": "GLM-5.3-Flash",
-      "date": "2026-10-01",
+      "date": "2026-08-27",
       "category": "原生多模態／Agent／程式",
       "tags": "A/MM/OW",
-      "note": "GLM-5 家族首個原生多模態模型；320B total / 18B active，強調效率、視覺理解與 agent 工作流。",
+      "note": "GLM-5 家族首個原生多模態模型；320B total / 18B active，強調效率、視覺理解與 agent 工作流。 日期依原官方來源頁標示修正為 2026-08-27（原收錄 2026-10-01），不以本站查核日充當公告日。",
       "sources": [
         "https://autoclaw.z.ai/blog/model/glm-5.3-flash/"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-6.1 Terra",
+      "date": "2026-10-26",
+      "category": "通用／程式／電腦操作",
+      "tags": "R/A/MM",
+      "note": "視覺推理與電腦操作模型；API ID 為 gpt-6.1-terra。公告及系統卡分別確認功能與發布日期。",
+      "sources": [
+        "https://openai.com/index/introducing-gpt-6-1-terra/",
+        "https://deploymentsafety.openai.com/gpt-6-1-terra"
+      ]
+    },
+    {
+      "vendor": "Anthropic",
+      "model": "Claude Haiku 5.5",
+      "date": "2026-10-07",
+      "category": "通用／程式／Agent",
+      "tags": "R/A/MM",
+      "note": "Haiku 系列更新，支援可調推理 effort，定位高用量工作與瀏覽器操作；API ID 為 claude-haiku-5-5。",
+      "sources": [
+        "https://www.anthropic.com/claude-haiku-5-5"
+      ]
+    },
+    {
+      "vendor": "DeepSeek",
+      "model": "DeepSeek-V4.1-Flash-1017",
+      "date": "2026-10-17",
+      "category": "通用／推理／Agent",
+      "tags": "R/A",
+      "note": "V4.1 Flash 的 1017 修訂版；官方更新紀錄表示網頁、App 已更新，API 仍使用 deepseek-flash，並非新增 API 別名。",
+      "sources": [
+        "https://api-docs.deepseek.com/updates/"
+      ]
+    },
+    {
+      "vendor": "xAI",
+      "model": "Grok Voice 3.0",
+      "date": "2026-10-14",
+      "category": "即時語音／Speech-to-Speech",
+      "tags": "VOICE",
+      "note": "Speech-to-Speech 語音模型更新；官方 release notes 宣布 Voice 3.0，latest 別名指向此版。不是 Grok 通用旗艦升代。",
+      "sources": [
+        "https://docs.x.ai/developers/release-notes"
+      ]
+    },
+    {
+      "vendor": "Cohere",
+      "model": "Rerank 5 Pro",
+      "date": "2026-10-21",
+      "category": "檢索重排序／Rerank",
+      "tags": "RERANK",
+      "note": "重排序模型，API ID rerank-v5.0-pro，偏重排序品質。不是 Embedding 模型，不需要因更換重排序模型而重建向量索引。",
+      "sources": [
+        "https://docs.cohere.com/v2/changelog"
+      ]
+    },
+    {
+      "vendor": "Cohere",
+      "model": "Rerank 5 Fast",
+      "date": "2026-10-21",
+      "category": "檢索重排序／Rerank",
+      "tags": "RERANK",
+      "note": "重排序模型，API ID rerank-v5.0-fast，偏重低延遲及高吞吐；與 Embed 5 分屬不同用途。",
+      "sources": [
+        "https://docs.cohere.com/v2/changelog"
+      ]
+    },
+    {
+      "vendor": "Z.ai / Zhipu",
+      "model": "GLM-Legal",
+      "date": "2026-10-13",
+      "category": "法律專用／Agent",
+      "tags": "A",
+      "note": "基於 GLM-5.3-Flash 的法律專用模型；日期為官方 Beta 邀請公告。API 需申請存取，文中 AutoClaw 整合仍寫即將提供，不能視為全面上線。",
+      "sources": [
+        "https://autoclaw.z.ai/blog/model/GLM-Legal/"
       ]
     }
   ]

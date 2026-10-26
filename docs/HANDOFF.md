@@ -127,3 +127,8 @@ docs/HANDOFF.md                         本交接文件
 - `index.html` 只新增模組載入與關閉狀態的 dialog。`assets/explorer.js` 只加品牌入口、對新模組的 init／open 與總覽生命週期 hooks；舊 `assets/timeline.js`、底稿、Excel、Agent 頁、資料內容皆未改。
 
 驗證：新增 family 與放大鏡測試，並擴充 DOM 測試；整合時 30 項全通過，另做 JavaScript 語法與 whitespace 檢查。涵蓋資料完整性、同日標籤、品牌節點/來源、深連結、焦點返回、Back/Forward、原篩選/位置保存、放大鏡座標與手勢隔離。Chromium 程序仍因環境 socket 權限無法啟動，因此 DOM 測試不等同真實瀏覽器版面或手機觸控驗證。這段記錄本機實作與測試，不代表本批已提交或部署；發布前須取得授權並查對應 commit/Pages 狀態。
+
+
+## 2026-10-26 DOT 增補交接
+
+本次需求為分支審查，**不依前文舊流程直接改 main 或部署**。以 [本批驗收文件](UPDATE_2026-10-26.zh-TW.md) 為準：新增七個模型、一個 Agent 產品、兩筆日期修正。現在合併為 234 個節點；此前 227 筆描述保留為歷史紀錄，不代表現況。封存底稿與 Excel 未改。

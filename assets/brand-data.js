@@ -34,7 +34,7 @@
       rule('gemma', 'Gemma', /^Gemma \d+(?:\.\d+)*(?: [a-z\d-]+)*$/i),
       rule('google-image', 'Imagen', /^Imagen \d+(?:\.\d+)*(?: [a-z\d-]+)*$/i)
     ]],
-    ['xAI', [rule('grok', 'Grok', /^Grok(?:[- ]\d+(?:\.\d+)*V?(?: [a-z\d ()-]+)*| Beta)$/i)]],
+    ['xAI', [rule('grok-voice', 'Grok Voice', /^Grok Voice \d+(?:\.\d+)*$/i), rule('grok', 'Grok', /^Grok(?:[- ]\d+(?:\.\d+)*V?(?: [a-z\d ()-]+)*| Beta)$/i)]],
     ['DeepSeek', [
       rule('deepseek-coder', 'DeepSeek Coder', /^DeepSeek-Coder-V\d+(?:\.\d+)*(?:[- ][a-z\d]+)*$/i),
       rule('deepseek-r', 'DeepSeek R', /^DeepSeek-R\d+(?:\.\d+)*(?:[- ][a-z\d]+)*$/i),
@@ -51,7 +51,7 @@
       rule('qwq', 'QwQ', /^QwQ-\d+B(?:-Preview)?$/i),
       rule('qwen', 'Qwen', /^Qwen\d+(?:\.\d+)*(?:[- ][a-z\d.]+)*$/i)
     ]],
-    ['Z.ai / Zhipu', [rule('glm', 'GLM', /^GLM-\d+(?:\.\d+)*V?(?:[- ][a-z\d]+)*$/i)]],
+    ['Z.ai / Zhipu', [rule('glm-legal', 'GLM Legal', /^GLM-Legal$/i), rule('glm', 'GLM', /^GLM-\d+(?:\.\d+)*V?(?:[- ][a-z\d]+)*$/i)]],
     ['MiniMax', [rule('minimax-m', 'MiniMax M', /^MiniMax M\d+(?:\.\d+)*$/i)]],
     ['Meta', [rule('llama', 'Llama', /^Llama \d+(?:\.\d+)*(?: [a-z\d]+)*$/i)]],
     ['Mistral AI', [
@@ -60,6 +60,7 @@
       rule('magistral', 'Magistral', /^Magistral(?: [a-z\d.]+)*$/i)
     ]],
     ['Cohere', [
+      rule('cohere-rerank', 'Rerank', /^Rerank \d+(?:\.\d+)*(?: (?:Pro|Fast))?$/i),
       rule('cohere-translation', '翻譯模型', /^(?:Command A Translate|North Small Translate \d+(?:\.\d+)*)$/i),
       rule('cohere-embedding', 'Embed', /^Embed \d+(?:\.\d+)*(?: (?:Pro|Fast))?$/i),
       rule('command', 'Command', /^Command (?:R\+?|A\+?)(?: (?:Vision|Reasoning))?$/i),
@@ -82,7 +83,7 @@
     rule('voice', '語音（依原始類別）', /語音|音訊|text.to.speech|speech|audio/i)
   ];
   const specializedIds = new Set([
-    'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
+    'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
     'gemini-live', 'google-image', 'qwen-image', 'qwen-translation', 'qwen-voice',
     'qwen-embedding', 'cohere-translation', 'cohere-embedding'
   ]);
@@ -126,3 +127,4 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.BrandEvolutionData = api;
 })(typeof window !== 'undefined' ? window : globalThis);
+

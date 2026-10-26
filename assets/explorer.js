@@ -104,7 +104,7 @@
       for (const row of brand.rows) {
         const p = positions.get(D.key(row));
         svg += `<line x1="${p.x}" x2="${p.x}" y1="${brand.base}" y2="${p.by + 76}" stroke="${color}" opacity=".45"/><circle cx="${p.x}" cy="${brand.base}" r="5" fill="${color}"/>`;
-        svg += `<a href="#model=${encodeURIComponent(D.key(row))}" data-key="${esc(D.key(row))}" class="node" role="button" tabindex="0" aria-label="${esc(`${row.model}，${row.vendor}，${dateLabel(row)}，查看詳情與來源`)}"><rect class="card" x="${p.bx}" y="${p.by}" width="${p.w}" height="76" rx="10" fill="${row.isUpdated ? '#edf1ff' : '#fff'}" stroke="${color}" stroke-width="1.25"/><text x="${p.bx + 13}" y="${p.by + 24}" class="model">${esc(row.model)}</text><text x="${p.bx + 13}" y="${p.by + 44}" class="date">${esc(row.date)}${row.precision === 'month' ? ' · 月份' : ''}${row.isUpdated ? ' · 本次收錄' : ''}</text><text x="${p.bx + 13}" y="${p.by + 63}" class="category">${esc(D.category(row).slice(0, 38))}</text></a>`;
+        svg += `<a href="#model=${encodeURIComponent(D.key(row))}" data-key="${esc(D.key(row))}" class="node" role="button" tabindex="0" aria-label="${esc(`${row.model}，${row.vendor}，${dateLabel(row)}，查看詳情與來源`)}"><rect class="card" x="${p.bx}" y="${p.by}" width="${p.w}" height="76" rx="10" fill="${row.isUpdated ? '#edf1ff' : '#fff'}" stroke="${color}" stroke-width="1.25"/><text x="${p.bx + 13}" y="${p.by + 24}" class="model">${esc(row.model)}</text><text x="${p.bx + 13}" y="${p.by + 44}" class="date">${esc(row.date)}${row.precision === 'month' ? ' · 月份' : ''}${row.isUpdated ? ' · 增補收錄' : ''}</text><text x="${p.bx + 13}" y="${p.by + 63}" class="category">${esc(D.category(row).slice(0, 38))}</text></a>`;
       }
       // Reposition only this label horizontally while panning; model nodes remain at their exact dates.
       svg += `<g class="lane-label" data-top="${brand.top}"><a class="brand-entry" data-brand="${esc(brand.name)}" href="#brand=${encodeURIComponent(brand.name)}" role="button" tabindex="0" aria-haspopup="dialog" aria-label="查看 ${esc(formatBrand(brand.name))} 品牌演進圖"><title>點擊查看品牌演進圖</title><rect x="0" y="${brand.top + 9}" width="330" height="32" rx="7" fill="${i % 2 ? '#f2f5fa' : '#fff'}"/><circle cx="16" cy="${brand.top + 25}" r="4" fill="${color}"/><text x="29" y="${brand.top + 30}" style="font-size:15px;font-weight:700">${esc(formatBrand(brand.name))}<tspan style="fill:#687992;font-size:11px;font-weight:400">　${brand.rows.length} 個節點 ↗</tspan></text></a></g>`;
@@ -154,7 +154,7 @@
     if (candidates.length) jump(D.key(candidates[candidates.length - 1]));
   }
   function renderList() {
-    $('listResults').innerHTML = [...shown].reverse().map(row => `<article class="model-card"><div class="card-top"><button class="brand-label brand-entry" data-brand="${esc(row.vendor)}" aria-haspopup="dialog" aria-label="查看 ${esc(formatBrand(row.vendor))} 品牌演進圖">${esc(formatBrand(row.vendor))} ↗</button>${row.isUpdated ? '<span class="record-status">本次收錄</span>' : ''}</div><h2><button class="model-title" data-detail="${esc(D.key(row))}">${esc(row.model)}</button></h2><time datetime="${esc(row.date)}">${esc(dateLabel(row))}</time><p class="category">${esc(D.category(row))}</p><div class="card-actions"><button data-detail="${esc(D.key(row))}">詳情與來源 ↗</button><button data-locate="${esc(D.key(row))}" aria-label="在時間軸定位 ${esc(row.model)}">定位時間軸</button></div></article>`).join('') + '<p class="list-footer">依發布日期由新到舊。月份資料保留原有精度；「本次收錄」為本批增量紀錄。<br>歷史底稿尚未逐筆重新查核；模型能力分類不代表 Agent 產品升代。</p>';
+    $('listResults').innerHTML = [...shown].reverse().map(row => `<article class="model-card"><div class="card-top"><button class="brand-label brand-entry" data-brand="${esc(row.vendor)}" aria-haspopup="dialog" aria-label="查看 ${esc(formatBrand(row.vendor))} 品牌演進圖">${esc(formatBrand(row.vendor))} ↗</button>${row.isUpdated ? '<span class="record-status">增補收錄</span>' : ''}</div><h2><button class="model-title" data-detail="${esc(D.key(row))}">${esc(row.model)}</button></h2><time datetime="${esc(row.date)}">${esc(dateLabel(row))}</time><p class="category">${esc(D.category(row))}</p><div class="card-actions"><button data-detail="${esc(D.key(row))}">詳情與來源 ↗</button><button data-locate="${esc(D.key(row))}" aria-label="在時間軸定位 ${esc(row.model)}">定位時間軸</button></div></article>`).join('') + '<p class="list-footer">依發布日期由新到舊。月份資料保留原有精度；「增補收錄」為累計增量紀錄。<br>歷史底稿尚未逐筆重新查核；模型能力分類不代表 Agent 產品升代。</p>';
   }
   function setMode(next, save = true) {
     overviewMagnifier?.setOverview(false);
@@ -240,10 +240,10 @@
     setMode('timeline'); jump(key, true);
   }
   function renderUpdates() {
-    $('stamp').textContent = `資料批次 ${manifest.checkedAt}`;
-    $('updatesButton').textContent = `本次更新 ${manifest.additions.length}`;
-    $('scope').textContent = `${manifest.checkedAt} 批次收錄 ${manifest.additions.length} 筆增量；包括新增或更正，不代表全部皆於當日發布。`;
-    $('changeList').innerHTML = [...manifest.additions].sort((a,b) => (D.parseDate(b.date)?.time || 0) - (D.parseDate(a.date)?.time || 0)).map(row => `<article class="change"><span class="record-status">本次收錄</span><h3>${esc(row.model)}</h3><div class="change-meta">${esc(formatBrand(row.vendor))} · ${esc(row.date)} · ${esc(row.category)}</div><p>${esc(row.note)}</p><div class="actions"><button data-update-detail="${esc(D.key(row))}">詳情與來源</button><button data-update-locate="${esc(D.key(row))}">定位時間軸</button></div></article>`).join('');
+    $('stamp').textContent = `最近增補 ${manifest.checkedAt}`;
+    $('updatesButton').textContent = `增補紀錄 ${manifest.additions.length}`;
+    $('scope').textContent = `累計收錄 ${manifest.additions.length} 筆增量；最近增補查核 ${manifest.checkedAt}。包含新增或更正，不代表全部當日發布或重新查核。`;
+    $('changeList').innerHTML = [...manifest.additions].sort((a,b) => (D.parseDate(b.date)?.time || 0) - (D.parseDate(a.date)?.time || 0)).map(row => `<article class="change"><span class="record-status">增補收錄</span><h3>${esc(row.model)}</h3><div class="change-meta">${esc(formatBrand(row.vendor))} · ${esc(row.date)} · ${esc(row.category)}</div><p>${esc(row.note)}</p><div class="actions"><button data-update-detail="${esc(D.key(row))}">詳情與來源</button><button data-update-locate="${esc(D.key(row))}">定位時間軸</button></div></article>`).join('');
   }
   function toast(text) { clearTimeout(toastTimer); $('toast').textContent = text; $('toast').hidden = false; toastTimer = setTimeout(() => { $('toast').hidden = true; }, 3500); }
 
@@ -385,7 +385,7 @@
   async function load() {
     $('retryLoad').hidden = true;
     try {
-      manifest = await (await fetchChecked('data/updates.json?v=20261001-ux1','更新資料')).json();
+      manifest = await (await fetchChecked('data/updates.json?v=20261026-content1','更新資料')).json();
       if (!Array.isArray(manifest.additions) || !D.parseDate(manifest.checkedAt)) throw Error('更新資料格式不正確');
       const base = parseBaseline(await (await fetchChecked(manifest.baselinePath,'歷史底稿')).text());
       const merged = D.merge(base,manifest.additions); rows = merged.rows;
@@ -407,3 +407,4 @@
   $('retryLoad').onclick = load;
   load();
 })();
+
