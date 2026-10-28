@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-26",
+  "checkedAt": "2026-10-28",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -297,6 +297,17 @@
       "note": "基於 GLM-5.3-Flash 的法律專用模型；日期為官方 Beta 邀請公告。API 需申請存取，文中 AutoClaw 整合仍寫即將提供，不能視為全面上線。",
       "sources": [
         "https://autoclaw.z.ai/blog/model/GLM-Legal/"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "Genie 4",
+      "date": "2026-10-27",
+      "category": "世界模型／即時互動模擬／原生音訊",
+      "tags": "WORLD/MM",
+      "note": "Google DeepMind 世界模型，生成可即時互動的場景與原生音訊。10/27 公告已向可信測試者推出研究預覽；Project Genie 的 Google AI Ultra 使用者及 Gemini API／AI Studio 早期合作夥伴存取仍寫即將推出，不是全面開放，也不是 Gemini 通用旗艦升代。",
+      "sources": [
+        "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"
       ]
     }
   ]

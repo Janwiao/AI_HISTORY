@@ -28,6 +28,7 @@
       rule('claude-mythos', 'Claude Mythos', /^Claude Mythos \d+(?:\.\d+)*$/i)
     ]],
     ['Google', [
+      rule('genie', 'Genie 世界模型', /^Genie \d+(?:\.\d+)*$/i),
       rule('gemini-tts', 'Gemini TTS', /^Gemini \d+(?:\.\d+)* Flash(?:-Lite)? TTS$/i),
       rule('gemini-live', 'Gemini Live', /^Gemini \d+(?:\.\d+)* Live(?: with Live Avatar)?$/i),
       rule('gemini', 'Gemini', /^Gemini (?:\d+(?:\.\d+)*(?: [a-z\d-]+)*|Omni Flash)$/i),
@@ -83,7 +84,7 @@
     rule('voice', '語音（依原始類別）', /語音|音訊|text.to.speech|speech|audio/i)
   ];
   const specializedIds = new Set([
-    'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
+    'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
     'gemini-live', 'google-image', 'qwen-image', 'qwen-translation', 'qwen-voice',
     'qwen-embedding', 'cohere-translation', 'cohere-embedding'
   ]);
@@ -127,4 +128,5 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.BrandEvolutionData = api;
 })(typeof window !== 'undefined' ? window : globalThis);
+
 

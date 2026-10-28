@@ -32,9 +32,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-10-26');
-  assert.equal(updates.additions.length,26);
-  assert.equal(new Set(updates.additions.map(D.key)).size,26);
+  assert.equal(updates.checkedAt,'2026-10-28');
+  assert.equal(updates.additions.length,27);
+  assert.equal(new Set(updates.additions.map(D.key)).size,27);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -51,4 +51,14 @@ test('Rerank is a retrieval ranking capability, not embedding or general generat
     assert.equal(D.matches(row,{type:'embedding'}),false);
   }
   assert.ok(D.types({tags:'EMBED',category:'Embedding／檢索'}).includes('embedding'));
+});
+
+
+test('Genie 4 is a dated research-preview world model, not Gemini flagship',()=>{
+ const row=updates.additions.find(r=>r.model==='Genie 4');
+ assert.equal(row.date,'2026-10-27'); assert.equal(row.vendor,'Google');
+ assert.match(row.note,/可信測試者/); assert.match(row.note,/即將推出/);
+ assert.equal(row.sources[0],'https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/');
+ assert.ok(D.types(row).includes('world')); assert.ok(!D.types(row).includes('general'));
+ assert.equal(require('../assets/brand-data.js').family(row).id,'genie');
 });

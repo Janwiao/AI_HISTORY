@@ -15,6 +15,7 @@
   function types(row) {
     const t = tags(row), c = row.category || '';
     const found = [];
+    if (t.includes('WORLD') || /世界模型/.test(c)) found.push('world');
     if (t.includes('R') || /推理/.test(c)) found.push('reasoning');
     if (t.includes('A') || /程式|Coding|Agent/i.test(c)) found.push('coding');
     if (t.includes('MM') || /多模態|全模態/.test(c)) found.push('multimodal');
@@ -23,10 +24,10 @@
     if (t.includes('RERANK') || /Rerank|重排序/i.test(c)) found.push('rerank');
     else if (t.includes('EMBED') || /Embedding|檢索/i.test(c)) found.push('embedding');
     if (t.includes('MT') || /翻譯/.test(c)) found.push('translation');
-    if (!found.some(x => ['voice','image','embedding','rerank','translation'].includes(x))) found.push('general');
+    if (!found.some(x => ['world','voice','image','embedding','rerank','translation'].includes(x))) found.push('general');
     return found;
   }
-  const labels = { general: '通用模型', reasoning: '推理', coding: '程式／Agent 能力', multimodal: '多模態', voice: '語音', image: '影像', embedding: 'Embedding', rerank: '檢索重排序', translation: '翻譯' };
+  const labels = { general: '通用模型', world: '世界模型', reasoning: '推理', coding: '程式／Agent 能力', multimodal: '多模態', voice: '語音', image: '影像', embedding: 'Embedding', rerank: '檢索重排序', translation: '翻譯' };
   function category(row) {
     return row.category && row.category !== '歷史節點' ? row.category : types(row).filter(x => x !== 'general').map(x => labels[x]).join('／') || '通用模型';
   }
@@ -51,4 +52,5 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.TimelineData = api;
 })(typeof window !== 'undefined' ? window : globalThis);
+
 

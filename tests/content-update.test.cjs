@@ -13,6 +13,7 @@ test('Agent product stays separate, carries preview scope and safe source link',
 });
 test('changed runtime and manifest URLs use fresh cache revisions',()=>{
  const page=read('index.html');
- for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261026-content1`));
- assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261026-content1'));
+ for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261028-content1`));
+ assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261028-content1'));
 });
+

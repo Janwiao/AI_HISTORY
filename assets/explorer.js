@@ -385,7 +385,7 @@
   async function load() {
     $('retryLoad').hidden = true;
     try {
-      manifest = await (await fetchChecked('data/updates.json?v=20261026-content1','更新資料')).json();
+      manifest = await (await fetchChecked('data/updates.json?v=20261028-content1','更新資料')).json();
       if (!Array.isArray(manifest.additions) || !D.parseDate(manifest.checkedAt)) throw Error('更新資料格式不正確');
       const base = parseBaseline(await (await fetchChecked(manifest.baselinePath,'歷史底稿')).text());
       const merged = D.merge(base,manifest.additions); rows = merged.rows;
@@ -407,4 +407,5 @@
   $('retryLoad').onclick = load;
   load();
 })();
+
 
