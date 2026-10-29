@@ -34,9 +34,9 @@ function pointer(ctx,target,type,id,x,y) {
   const e=new ctx.w.Event(type,{bubbles:true,cancelable:true});
   Object.assign(e,{pointerId:id,pointerType:'touch',clientX:x,clientY:y,button:0});target.dispatchEvent(e);
 }
-test('desktop loads 235 unique records, all dates and 19 brands at readable scale; updates closed', async()=>{
+test('desktop loads 238 unique records, all dates and 19 brands at readable scale; updates closed', async()=>{
   const c=await boot();try{
-    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,235);assert.equal(c.d.querySelectorAll('.model-card').length,235);
+    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,238);assert.equal(c.d.querySelectorAll('.model-card').length,238);
     assert.equal(c.d.querySelectorAll('#brandJump option').length,20);assert.equal(c.d.getElementById('pct').textContent,'100%');
     assert.equal(c.d.getElementById('updatesPanel').open,false);assert.equal(c.d.getElementById('listResults').hidden,true);
     assert.equal(c.d.querySelectorAll('.model-card time[datetime="2026-05"]').length,1);
@@ -57,7 +57,7 @@ test('filter intersections, empty/reset, capability search and URL restoration',
     assert.equal(c.d.querySelectorAll('.node').length,1);assert.match(c.w.location.search,/brand=Alibaba/);
     c.d.getElementById('search').value='nonexistent';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.equal(c.d.getElementById('emptyState').hidden,false);assert.equal(c.v.hidden,true);
-    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,235);assert.equal(c.d.getElementById('emptyState').hidden,true);
+    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,238);assert.equal(c.d.getElementById('emptyState').hidden,true);
     c.d.getElementById('search').value='推理';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.ok(c.d.querySelectorAll('.node').length>=75);
     c.w.history.pushState({},'', '?brand=Alibaba&year=2026&type=image&view=list');c.w.dispatchEvent(new c.w.PopStateEvent('popstate'));
@@ -126,7 +126,7 @@ test('brand dialog opens from existing labels, retains all brand nodes and main 
  c.set('brandJump','OpenAI');c.set('yearFilter','2026');const mainCount=c.d.querySelectorAll('.model-card').length;
  c.v.scrollLeft=1234;c.v.scrollTop=789;c.d.getElementById('listResults').scrollTop=333;
  const entry=c.d.querySelector('#listResults [data-brand="OpenAI"]');entry.focus();entry.click();
- assert.equal(c.d.getElementById('brandEvolution').open,true);assert.equal(c.d.querySelectorAll('[data-brand-node]').length,33);
+ assert.equal(c.d.getElementById('brandEvolution').open,true);assert.equal(c.d.querySelectorAll('[data-brand-node]').length,35);
  assert.match(c.d.getElementById('brandCanvas').textContent,/X：發布時間/);assert.match(c.d.getElementById('brandCanvas').textContent,/Y：模型系列/);
  const node=c.d.querySelector('[data-brand-node]');node.dispatchEvent(new c.w.MouseEvent('click',{bubbles:true,cancelable:true}));
  assert.equal(c.d.getElementById('brandNodeDetail').hidden,false);assert.ok(c.d.querySelectorAll('#brandNodeSources a').length);
@@ -176,7 +176,7 @@ test('Rerank filter is selectable and excludes Embed while cumulative scope is e
   c.set('typeFilter','rerank');
   const cards=[...c.d.querySelectorAll('.model-card')];
   assert.equal(cards.length,2);assert.ok(cards.every(card=>card.textContent.includes('Rerank 5')));
-  assert.match(c.d.getElementById('scope').textContent,/累計收錄 27 筆增量/);
+  assert.match(c.d.getElementById('scope').textContent,/累計收錄 30 筆增量/);
   assert.match(c.d.getElementById('scope').textContent,/不代表全部當日發布或重新查核/);
  }finally{c.dom.window.close()}
 });

@@ -32,9 +32,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-10-28');
-  assert.equal(updates.additions.length,27);
-  assert.equal(new Set(updates.additions.map(D.key)).size,27);
+  assert.equal(updates.checkedAt,'2026-10-29');
+  assert.equal(updates.additions.length,30);
+  assert.equal(new Set(updates.additions.map(D.key)).size,30);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -61,4 +61,15 @@ test('Genie 4 is a dated research-preview world model, not Gemini flagship',()=>
  assert.equal(row.sources[0],'https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/');
  assert.ok(D.types(row).includes('world')); assert.ok(!D.types(row).includes('general'));
  assert.equal(require('../assets/brand-data.js').family(row).id,'genie');
+});
+
+test('Carbon and Live additions preserve announcement dates and restricted rollout scope',()=>{
+ const carbon=updates.additions.find(r=>r.model==='Gemini 4 Carbon');
+ assert.equal(carbon.date,'2026-10-28'); assert.match(carbon.note,/部分資安防禦者/); assert.match(carbon.note,/仍待推出/);
+ assert.equal(carbon.sources[0],'https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/');
+ for(const name of ['GPT-Live-1.1','GPT-Live-1.1 Quip']){
+  const row=updates.additions.find(r=>r.model===name);
+  assert.equal(row.date,'2026-10-15'); assert.ok(D.types(row).includes('voice'));
+  assert.equal(row.sources[0],'https://deploymentsafety.openai.com/gpt-live-1-1/');
+ }
 });

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-28",
+  "checkedAt": "2026-10-29",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -308,6 +308,39 @@
       "note": "Google DeepMind 世界模型，生成可即時互動的場景與原生音訊。10/27 公告已向可信測試者推出研究預覽；Project Genie 的 Google AI Ultra 使用者及 Gemini API／AI Studio 早期合作夥伴存取仍寫即將推出，不是全面開放，也不是 Gemini 通用旗艦升代。",
       "sources": [
         "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "Gemini 4 Carbon",
+      "date": "2026-10-28",
+      "category": "高階推理／長程工作流／資安",
+      "tags": "R/A/MM",
+      "note": "Google 10/28 公告的 Gemini 4 新模型，聚焦長程工程與資安防禦。公告表示本週起向部分資安防禦者提供，並透過 Fairwind Program 逐步擴大可信合作夥伴存取；開發者、企業與消費者產品全面存取仍待推出，不等同公開全面上線。",
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-Live-1.1",
+      "date": "2026-10-15",
+      "category": "即時語音／全雙工",
+      "tags": "VOICE/MM",
+      "note": "GPT-Live-1 後繼語音模型，支援持續聆聽與回應。10/15 系統卡列為 Plus 及以上方案預設語音模型，包含 Codex 與 dots；這是語音支線，不是新 Agent 產品。",
+      "sources": [
+        "https://deploymentsafety.openai.com/gpt-live-1-1/"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-Live-1.1 Quip",
+      "date": "2026-10-15",
+      "category": "即時語音／全雙工",
+      "tags": "VOICE/MM",
+      "note": "GPT-Live-1 mini 後繼語音模型；10/15 系統卡列為 Plus 及以上方案以外使用者的預設語音模型。與 GPT-Live-1.1 同屬語音支線，不推論 API 已全面提供。",
+      "sources": [
+        "https://deploymentsafety.openai.com/gpt-live-1-1/"
       ]
     }
   ]
