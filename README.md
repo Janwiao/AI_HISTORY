@@ -79,3 +79,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-10-29 自主資料增補
 
 新增 Gemini 4 Carbon（10/28 公告、限制存取）及 GPT-Live-1.1／Quip（10/15 語音支線補漏）。目前 238 個模型節點、19 品牌；7 張 Agent 卡不變。查核日不表示所有歷史均已重驗。詳見 [本批查核](docs/UPDATE_2026-10-29.zh-TW.md)。
+
+## 2026-10-30 自主資料增補
+
+新增 GPT-6 Luna（October 29）ChatGPT 修訂節點；日期依系統卡正文，不依含 10/28 的網址。既有 dots 卡補 10/28 美國 Pro 簡訊 beta 事件，不算新模型。共 239 個模型節點、19 品牌、7 張 Agent 卡。詳見 [本批查核](docs/UPDATE_2026-10-30.zh-TW.md)。

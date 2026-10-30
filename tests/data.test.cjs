@@ -32,9 +32,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-10-29');
-  assert.equal(updates.additions.length,30);
-  assert.equal(new Set(updates.additions.map(D.key)).size,30);
+  assert.equal(updates.checkedAt,'2026-10-30');
+  assert.equal(updates.additions.length,31);
+  assert.equal(new Set(updates.additions.map(D.key)).size,31);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -73,3 +73,12 @@ test('Carbon and Live additions preserve announcement dates and restricted rollo
   assert.equal(row.sources[0],'https://deploymentsafety.openai.com/gpt-live-1-1/');
  }
 });
+
+test('Luna dated revision uses body date, not URL date or an invented 6.1 name',()=>{
+ const row=updates.additions.find(r=>r.model==='GPT-6 Luna (October 29)');
+ assert.equal(row.date,'2026-10-29'); assert.match(row.note,/ChatGPT/); assert.match(row.note,/不是 GPT-6.1 Luna/);
+ assert.ok(updates.additions.some(r=>r.model==='GPT-6 Luna'&&r.date==='2026-09-22'));
+ assert.equal(row.sources[0],'https://deploymentsafety.openai.com/gpt-6-luna-october-28-2026-addendum');
+});
+
+test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('../assets/brand-data.js').family({vendor:'OpenAI',model:'GPT-6 Luna (October 29)'}).id,'gpt-luna');});

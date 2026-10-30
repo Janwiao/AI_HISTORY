@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-29",
+  "checkedAt": "2026-10-30",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -341,6 +341,17 @@
       "note": "GPT-Live-1 mini 後繼語音模型；10/15 系統卡列為 Plus 及以上方案以外使用者的預設語音模型。與 GPT-Live-1.1 同屬語音支線，不推論 API 已全面提供。",
       "sources": [
         "https://deploymentsafety.openai.com/gpt-live-1-1/"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-6 Luna (October 29)",
+      "date": "2026-10-29",
+      "category": "通用／ChatGPT 修訂版",
+      "tags": "A/MM",
+      "note": "OpenAI 系統卡確認 ChatGPT 中 GPT-6 Luna 的 10/29 修訂，回應更精簡並減少過度附和。是 10/7 ChatGPT 版本的更新，不是 GPT-6.1 Luna，也不推論 Codex、Work 或 API 同步更換。日期採系統卡標題及正文 10/29，不採 URL 的 10/28。",
+      "sources": [
+        "https://deploymentsafety.openai.com/gpt-6-luna-october-28-2026-addendum"
       ]
     }
   ]

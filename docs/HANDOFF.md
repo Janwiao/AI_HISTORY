@@ -143,3 +143,7 @@ docs/HANDOFF.md                         本交接文件
 ## 2026-10-29 自主維護交接
 
 依既有自主維護授權新增 Gemini 4 Carbon 及 GPT-Live-1.1／Quip，共 238 個節點、19 品牌。保留限定推出與語音支線區分，不改 Agent 卡、版型或安全／網域設定。詳見 [本批查核](UPDATE_2026-10-29.zh-TW.md)。
+
+## 2026-10-30 自主維護交接
+
+新增 GPT-6 Luna（October 29）ChatGPT 修訂，保留原 9/22 Luna；不冒稱 GPT-6.1 Luna 或 Codex／Work 同步更新。dots 卡補美國 Pro 簡訊 beta，七卡不變。模型總數 239。詳見 [本批查核](UPDATE_2026-10-30.zh-TW.md)。

@@ -12,7 +12,7 @@
       rule('o4', 'o4', /^o4(?:[- ](?:mini|preview|pro))?$/i),
       rule('codex', 'Codex 模型', /^(?:GPT-\d+(?:\.\d+)*-Codex(?:-[a-z\d]+)*|codex-mini(?:-latest)?)$/i),
       rule('gpt-sol', 'GPT Sol', /^GPT-\d+(?:\.\d+)* Sol(?: Preview)?$/i),
-      rule('gpt-luna', 'GPT Luna', /^GPT-\d+(?:\.\d+)* Luna(?: Preview)?$/i),
+      rule('gpt-luna', 'GPT Luna', /^GPT-\d+(?:\.\d+)* Luna(?: Preview| \(October 29\))?$/i),
       rule('gpt-terra', 'GPT Terra', /^GPT-\d+(?:\.\d+)* Terra(?: Preview)?$/i),
       rule('gpt-astra', 'GPT Astra', /^GPT-\d+(?:\.\d+)* Astra(?: Preview)?$/i),
       rule('gpt-live', 'GPT-Live', /^GPT-Live-\d+(?:\.\d+)*(?:[- ][a-z\d]+)*$/i),

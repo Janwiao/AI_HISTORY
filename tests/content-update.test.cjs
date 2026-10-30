@@ -13,7 +13,15 @@ test('Agent product stays separate, carries preview scope and safe source link',
 });
 test('changed runtime and manifest URLs use fresh cache revisions',()=>{
  const page=read('index.html');
- for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261029-content1`));
- assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261029-content1'));
+ for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261030-content1`));
+ assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261030-content1'));
 });
 
+
+test('dots texting stays a US Pro beta product event, preserving seven cards',()=>{
+ const page=read('agents.html');
+ assert.match(page,/data-product="openai-dots" data-checked-at="2026-10-30"/);
+ assert.match(page,/2026-10-28 · Texting beta/);assert.match(page,/美國 Pro/);assert.match(page,/iMessage 或 RCS/);
+ assert.match(page,/不是新模型或全球全面開放/);
+ assert.equal((page.match(/<article class="card"/g)||[]).length,7);
+});
