@@ -83,3 +83,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-10-30 自主資料增補
 
 新增 GPT-6 Luna（October 29）ChatGPT 修訂節點；日期依系統卡正文，不依含 10/28 的網址。既有 dots 卡補 10/28 美國 Pro 簡訊 beta 事件，不算新模型。共 239 個模型節點、19 品牌、7 張 Agent 卡。詳見 [本批查核](docs/UPDATE_2026-10-30.zh-TW.md)。
+
+## 2026-10-31 狀態增補
+
+補入 10/29 官方 GLM-5.3-flashX-Legal 在 AutoClaw 可用公告。原 GLM-Legal 的 10/13 beta 日期保留；不推論兩名稱等同、不另計模型或宣稱 API 全面上線。總數仍為 239 模型、19 品牌、7 Agent 卡。詳見 [本批查核](docs/UPDATE_2026-10-31.zh-TW.md)。

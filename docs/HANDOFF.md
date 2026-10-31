@@ -147,3 +147,7 @@ docs/HANDOFF.md                         本交接文件
 ## 2026-10-30 自主維護交接
 
 新增 GPT-6 Luna（October 29）ChatGPT 修訂，保留原 9/22 Luna；不冒稱 GPT-6.1 Luna 或 Codex／Work 同步更新。dots 卡補美國 Pro 簡訊 beta，七卡不變。模型總數 239。詳見 [本批查核](UPDATE_2026-10-30.zh-TW.md)。
+
+## 2026-10-31 自主維護交接
+
+GLM-Legal 補後續 10/29 AutoClaw 可用公告（公告名稱為 GLM-5.3-flashX-Legal），保留名稱差異與 API 可用範圍不確定性。239 模型、19 品牌、7 Agent 卡不變。詳見 [本批查核](UPDATE_2026-10-31.zh-TW.md)。

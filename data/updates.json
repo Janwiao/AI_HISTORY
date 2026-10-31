@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-30",
+  "checkedAt": "2026-10-31",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -294,9 +294,10 @@
       "date": "2026-10-13",
       "category": "法律專用／Agent",
       "tags": "A",
-      "note": "基於 GLM-5.3-Flash 的法律專用模型；日期為官方 Beta 邀請公告。API 需申請存取，文中 AutoClaw 整合仍寫即將提供，不能視為全面上線。",
+      "note": "基於 GLM-5.3-Flash 的法律專用模型；節點日期保留 10/13 官方 Beta 邀請公告，當時 API 需申請，AutoClaw 整合仍預告即將提供。後續 10/29 官方另以 GLM-5.3-flashX-Legal 名稱宣布已可直接在 AutoClaw 使用；兩名稱是否為相同權重／改名未明說，故不宣稱等同、不另計新模型，也不推論 API 已全面開放。",
       "sources": [
-        "https://autoclaw.z.ai/blog/model/GLM-Legal/"
+        "https://autoclaw.z.ai/blog/model/GLM-Legal/",
+        "https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/"
       ]
     },
     {
