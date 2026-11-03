@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-31",
+  "checkedAt": "2026-11-03",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -181,9 +181,10 @@
       "date": "2026-09-30",
       "category": "高階推理／長程工作流／資安",
       "tags": "R/A/MM",
-      "note": "Gemini 4 世代首發 Argon，1M token，聚焦長程軟體工程、企業知識工作與資安防禦；首波存取有限。",
+      "note": "Gemini 4 世代首發 Argon，聚焦長程軟體工程、企業知識工作與資安防禦；9/30 首波存取有限。後續 10/13 官方宣布全球提供開發者／企業 API（AI Studio、Gemini platform），以及指定 Google AI Pro／Ultra 產品；保留 9/30 首發日期，不另計新模型。",
       "sources": [
-        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/"
       ]
     },
     {
@@ -353,6 +354,19 @@
       "note": "OpenAI 系統卡確認 ChatGPT 中 GPT-6 Luna 的 10/29 修訂，回應更精簡並減少過度附和。是 10/7 ChatGPT 版本的更新，不是 GPT-6.1 Luna，也不推論 Codex、Work 或 API 同步更換。日期採系統卡標題及正文 10/29，不採 URL 的 10/28。",
       "sources": [
         "https://deploymentsafety.openai.com/gpt-6-luna-october-28-2026-addendum"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-6 Rosalind Research",
+      "date": "2026-10-30",
+      "category": "生命科學／研究專用部署／推理",
+      "tags": "R/SCIENCE",
+      "note": "生命科學研究支線，API ID 為 gpt-6-rosalind；系統卡稱 GPT-Rosalind-6，與 GPT-6 Astra 使用相同權重，未新增訓練或後訓練，因此不是通用旗艦升代或全新基礎權重。10/30 向經核准的 Research 客戶有限推出 Work、Codex 與 API（API 另需核准），不在 Chat 分頁；Discovery 核准不等於 Research 存取。此節點記錄專用部署版本，而非新增 Agent 產品。",
+      "sources": [
+        "https://help.openai.com/en/articles/9624314-model-release-notes",
+        "https://deploymentsafety.openai.com/gpt-rosalind-6",
+        "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research"
       ]
     }
   ]

@@ -6,6 +6,7 @@
   const rule = (id, label, pattern) => ({ id, label, pattern });
   const catalogs = new Map([
     ['OpenAI', [
+      rule('gpt-rosalind', 'GPT Rosalind 研究支線', /^GPT-\d+(?:\.\d+)* Rosalind Research$/i),
       rule('gpt', 'GPT', /^GPT-\d+(?:\.\d+)*(?:o)?(?: (?:Turbo|mini|nano|Instant))?$/i),
       rule('o1', 'o1', /^o1(?:[- ](?:mini|preview|pro))?$/i),
       rule('o3', 'o3', /^o3(?:[- ](?:mini|preview|pro))?$/i),
@@ -128,5 +129,6 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.BrandEvolutionData = api;
 })(typeof window !== 'undefined' ? window : globalThis);
+
 
 

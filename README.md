@@ -87,3 +87,8 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-10-31 狀態增補
 
 補入 10/29 官方 GLM-5.3-flashX-Legal 在 AutoClaw 可用公告。原 GLM-Legal 的 10/13 beta 日期保留；不推論兩名稱等同、不另計模型或宣稱 API 全面上線。總數仍為 239 模型、19 品牌、7 Agent 卡。詳見 [本批查核](docs/UPDATE_2026-10-31.zh-TW.md)。
+
+
+## 2026-11-03 自主資料增補
+
+新增 GPT-6 Rosalind Research（10/30 有限推出），明示與 Astra 相同權重的研究專用部署支線，不當作新基礎權重或通用升代；Argon 補 10/13 指定產品全球開放狀態，保留 9/30 首發日期。共 240 個模型／版本節點、19 品牌、7 Agent 卡；不代表 240 組不同權重。詳見 [本批查核](docs/UPDATE_2026-11-03.zh-TW.md)。
