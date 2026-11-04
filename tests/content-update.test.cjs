@@ -13,8 +13,8 @@ test('Agent product stays separate, carries preview scope and safe source link',
 });
 test('changed runtime and manifest URLs use fresh cache revisions',()=>{
  const page=read('index.html');
- for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261103-content1`));
- assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261103-content1'));
+ for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261104-content1`));
+ assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261104-content1'));
 });
 
 
@@ -25,4 +25,5 @@ test('dots texting stays a US Pro beta product event, preserving seven cards',()
  assert.match(page,/不是新模型或全球全面開放/);
  assert.equal((page.match(/<article class="card"/g)||[]).length,7);
 });
+
 

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-03",
+  "checkedAt": "2026-11-04",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -367,6 +367,20 @@
         "https://help.openai.com/en/articles/9624314-model-release-notes",
         "https://deploymentsafety.openai.com/gpt-rosalind-6",
         "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research"
+      ]
+    },
+    {
+      "vendor": "Meituan",
+      "model": "LongCat-2.5",
+      "date": "2026-11-02",
+      "category": "原生多模態／推理／程式／長程 Agent",
+      "tags": "R/A/MM",
+      "note": "美團 LongCat 原生多模態模型，主打視覺理解、程式與長程工程任務。節點採官方 API changelog 及美團新聞頁的 11/2 正式發布／API 可用日；技術文章與首頁另標 11/1，不把兩日期混為同一事件。與 9/25 的 LongCat-2.5-Preview 分開，亦不是 Claude Code、Codex 或 Hermes 產品升版；這些是可整合的執行框架。已核實 API 提供，不據此宣稱權重已開放。",
+      "sources": [
+        "https://longcat.ai/platform/docs/ChangeLog.html",
+        "https://longcat.ai/blog/longcat-2.5",
+        "https://www.meituan.com/news/NN261102280001343",
+        "https://longcat.ai/platform/docs/"
       ]
     }
   ]

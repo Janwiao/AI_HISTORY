@@ -32,9 +32,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-03');
-  assert.equal(updates.additions.length,32);
-  assert.equal(new Set(updates.additions.map(D.key)).size,32);
+  assert.equal(updates.checkedAt,'2026-11-04');
+  assert.equal(updates.additions.length,33);
+  assert.equal(new Set(updates.additions.map(D.key)).size,33);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -85,7 +85,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,32);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,33);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -102,4 +102,12 @@ test('Argon retains announcement date and records later scoped availability with
  const rows=updates.additions.filter(r=>r.model==='Gemini 4 Argon');assert.equal(rows.length,1);
  assert.equal(rows[0].date,'2026-09-30');assert.match(rows[0].note,/10\/13/);assert.match(rows[0].note,/指定/);
  assert.ok(rows[0].sources.some(s=>s.endsWith('/introducing-gemini-4-argon/')));
+});
+
+test('LongCat formal API release preserves distinct article and preview dates',()=>{
+ const row=updates.additions.find(r=>r.model==='LongCat-2.5');assert.equal(row.vendor,'Meituan');assert.equal(row.date,'2026-11-02');
+ assert.match(row.note,/11\/1/);assert.match(row.note,/LongCat-2.5-Preview/);assert.match(row.note,/不據此宣稱權重已開放/);
+ assert.equal(updates.additions.filter(r=>r.model==='LongCat-2.5').length,1);
+ assert.equal(require('../assets/brand-data.js').family(row).id,'longcat');
+ assert.ok(D.types(row).includes('multimodal'));assert.ok(!row.tags.includes('OW'));
 });

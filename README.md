@@ -92,3 +92,8 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-03 自主資料增補
 
 新增 GPT-6 Rosalind Research（10/30 有限推出），明示與 Astra 相同權重的研究專用部署支線，不當作新基礎權重或通用升代；Argon 補 10/13 指定產品全球開放狀態，保留 9/30 首發日期。共 240 個模型／版本節點、19 品牌、7 Agent 卡；不代表 240 組不同權重。詳見 [本批查核](docs/UPDATE_2026-11-03.zh-TW.md)。
+
+
+## 2026-11-04 自主資料增補
+
+新增美團 LongCat-2.5，採 11/2 正式發布／API 可用日，另註技術文章的 11/1 日期與 9/25 Preview 區別。新增 Meituan 品牌與 LongCat 名稱分支，目前 241 個模型／版本節點、20 品牌、7 Agent 卡。詳見 [本批查核](docs/UPDATE_2026-11-04.zh-TW.md)。

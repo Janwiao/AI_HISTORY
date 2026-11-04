@@ -5,6 +5,7 @@
   const OTHER = { id: 'other', label: '其他／未分類' };
   const rule = (id, label, pattern) => ({ id, label, pattern });
   const catalogs = new Map([
+    ['Meituan', [rule('longcat', 'LongCat', /^LongCat-\d+(?:\.\d+)*(?:-Preview)?$/i)]],
     ['OpenAI', [
       rule('gpt-rosalind', 'GPT Rosalind 研究支線', /^GPT-\d+(?:\.\d+)* Rosalind Research$/i),
       rule('gpt', 'GPT', /^GPT-\d+(?:\.\d+)*(?:o)?(?: (?:Turbo|mini|nano|Instant))?$/i),
@@ -129,6 +130,7 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.BrandEvolutionData = api;
 })(typeof window !== 'undefined' ? window : globalThis);
+
 
 
 
