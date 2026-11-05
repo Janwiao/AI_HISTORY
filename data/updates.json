@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-04",
+  "checkedAt": "2026-11-05",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -193,10 +193,11 @@
       "date": "2026-09-30",
       "category": "Embedding／檢索",
       "tags": "EMBED/MM",
-      "note": "Cohere Embed 5 高品質版本，支援文字、圖片與混合輸入，128k context。",
+      "note": "Cohere Embed 5 高品質版本，支援文字、圖片與混合輸入，128k context。 後續 11/4 官方宣布已於 OpenRouter 提供（ID：cohere/embed-5-pro）；此為供應管道擴充，保留原首發日期，不另計新模型。",
       "sources": [
         "https://docs.cohere.com/changelog/embed-v5",
-        "https://cohere.com/blog"
+        "https://cohere.com/blog",
+        "https://docs.cohere.com/v2/changelog/embed-rerank-v5-openrouter"
       ]
     },
     {
@@ -205,10 +206,11 @@
       "date": "2026-09-30",
       "category": "Embedding／低延遲檢索",
       "tags": "EMBED/MM",
-      "note": "Cohere Embed 5 高吞吐低延遲版本，與 Pro 共用 embedding space。",
+      "note": "Cohere Embed 5 高吞吐低延遲版本，與 Pro 共用 embedding space。 後續 11/4 官方宣布已於 OpenRouter 提供（ID：cohere/embed-5-fast）；此為供應管道擴充，保留原首發日期，不另計新模型。",
       "sources": [
         "https://docs.cohere.com/changelog/embed-v5",
-        "https://cohere.com/blog"
+        "https://cohere.com/blog",
+        "https://docs.cohere.com/v2/changelog/embed-rerank-v5-openrouter"
       ]
     },
     {
@@ -273,9 +275,10 @@
       "date": "2026-10-21",
       "category": "檢索重排序／Rerank",
       "tags": "RERANK",
-      "note": "重排序模型，API ID rerank-v5.0-pro，偏重排序品質。不是 Embedding 模型，不需要因更換重排序模型而重建向量索引。",
+      "note": "重排序模型，API ID rerank-v5.0-pro，偏重排序品質。不是 Embedding 模型，不需要因更換重排序模型而重建向量索引。 後續 11/4 官方宣布已於 OpenRouter 提供（ID：cohere/rerank-5-pro）；此為供應管道擴充，保留原首發日期，不另計新模型。",
       "sources": [
-        "https://docs.cohere.com/v2/changelog"
+        "https://docs.cohere.com/v2/changelog",
+        "https://docs.cohere.com/v2/changelog/embed-rerank-v5-openrouter"
       ]
     },
     {
@@ -284,9 +287,10 @@
       "date": "2026-10-21",
       "category": "檢索重排序／Rerank",
       "tags": "RERANK",
-      "note": "重排序模型，API ID rerank-v5.0-fast，偏重低延遲及高吞吐；與 Embed 5 分屬不同用途。",
+      "note": "重排序模型，API ID rerank-v5.0-fast，偏重低延遲及高吞吐；與 Embed 5 分屬不同用途。 後續 11/4 官方宣布已於 OpenRouter 提供（ID：cohere/rerank-5-fast）；此為供應管道擴充，保留原首發日期，不另計新模型。",
       "sources": [
-        "https://docs.cohere.com/v2/changelog"
+        "https://docs.cohere.com/v2/changelog",
+        "https://docs.cohere.com/v2/changelog/embed-rerank-v5-openrouter"
       ]
     },
     {
@@ -381,6 +385,30 @@
         "https://longcat.ai/blog/longcat-2.5",
         "https://www.meituan.com/news/NN261102280001343",
         "https://longcat.ai/platform/docs/"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-Image-2.6 Sunburst",
+      "date": "2026-11-04",
+      "category": "影像生成／影像編輯",
+      "tags": "IMAGE",
+      "note": "Images 2.6 影像支線，偏重精細畫面與中／高品質設定下的跨輪編輯一致性；API ID 為 gpt-image-2.6-sunburst。11/4 公告確認 API 提供，並宣布 Images 2.6 於 ChatGPT／Codex 全球各訂閱層級推出。GIF 輸出是影像功能，不當作影片模型或通用 GPT 升代；兩個官方模型名稱分列，但不推論底層權重是否不同。",
+      "sources": [
+        "https://openai.com/index/introducing-images-2-6/",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-Image-2.6 Flare",
+      "date": "2026-11-04",
+      "category": "影像生成／影像編輯",
+      "tags": "IMAGE",
+      "note": "Images 2.6 影像支線，偏重快速生成與迭代，亦改善版面構圖；API ID 為 gpt-image-2.6-flare。11/4 公告確認 API 提供，並宣布 Images 2.6 於 ChatGPT／Codex 全球各訂閱層級推出。GIF 輸出是影像功能，不當作影片模型或通用 GPT 升代；兩個官方模型名稱分列，但不推論底層權重是否不同。",
+      "sources": [
+        "https://openai.com/index/introducing-images-2-6/",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
       ]
     }
   ]

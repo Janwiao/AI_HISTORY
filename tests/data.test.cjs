@@ -32,9 +32,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-04');
-  assert.equal(updates.additions.length,33);
-  assert.equal(new Set(updates.additions.map(D.key)).size,33);
+  assert.equal(updates.checkedAt,'2026-11-05');
+  assert.equal(updates.additions.length,35);
+  assert.equal(new Set(updates.additions.map(D.key)).size,35);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -85,7 +85,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,33);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,35);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -110,4 +110,26 @@ test('LongCat formal API release preserves distinct article and preview dates',(
  assert.equal(updates.additions.filter(r=>r.model==='LongCat-2.5').length,1);
  assert.equal(require('../assets/brand-data.js').family(row).id,'longcat');
  assert.ok(D.types(row).includes('multimodal'));assert.ok(!row.tags.includes('OW'));
+});
+
+test('Images 2.6 keeps two named API models in the image branch',()=>{
+ const B=require('../assets/brand-data.js');
+ const rows=updates.additions.filter(r=>/^GPT-Image-2\.6 /.test(r.model));
+ assert.equal(rows.length,2);
+ for(const variant of ['Sunburst','Flare']) {
+  const row=rows.find(r=>r.model===`GPT-Image-2.6 ${variant}`);
+  assert.equal(row.vendor,'OpenAI');assert.equal(row.date,'2026-11-04');
+  assert.deepEqual(D.types(row),['image']);assert.equal(B.family(row).id,'openai-image');
+  assert.match(row.note,/不推論底層權重是否不同/);
+  assert.ok(row.sources.includes(`https://developers.openai.com/api/docs/models/gpt-image-2.6-${variant.toLowerCase()}`));
+ }
+});
+test('Cohere OpenRouter expansion preserves four original model release dates',()=>{
+ for(const name of ['Embed 5 Pro','Embed 5 Fast','Rerank 5 Pro','Rerank 5 Fast']) {
+  const rows=updates.additions.filter(r=>r.vendor==='Cohere'&&r.model===name);
+  assert.equal(rows.length,1);const row=rows[0];
+  assert.equal(row.date,name.startsWith('Embed')?'2026-09-30':'2026-10-21');
+  assert.match(row.note,/11\/4/);assert.match(row.note,/OpenRouter/);assert.match(row.note,/不另計新模型/);
+  assert.ok(row.sources.includes('https://docs.cohere.com/v2/changelog/embed-rerank-v5-openrouter'));
+ }
 });
