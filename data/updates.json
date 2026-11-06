@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-05",
+  "checkedAt": "2026-11-06",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -409,6 +409,40 @@
       "sources": [
         "https://openai.com/index/introducing-images-2-6/",
         "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-6 Cyber",
+      "date": "2026-11-05",
+      "category": "資安研究專用",
+      "tags": "CYBER",
+      "note": "針對授權範圍內的漏洞研究、驗證與修補訓練的資安模型支線。11/5 初期僅向部分已核准的 Daybreak Red 客戶透過 API 與 Codex 提供；擴至所有 Daybreak Red 客戶仍待推出，不是一般使用者全面可用，也不是 Codex 產品升版。",
+      "sources": [
+        "https://openai.com/index/introducing-gpt-6-cyber/"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "Gemini Omni 1.2 Flash",
+      "date": "2026-11-05",
+      "category": "影片生成／影片編輯",
+      "tags": "VIDEO",
+      "note": "影片生成／編輯模型支線，支援原生最長 15 秒影片、多輪對話編輯與參考素材一致性。11/5 官方宣布 Gemini API 與 Gemini for business 一般可用；Gemini app 的 AI Ultra 訂閱者則開始分批取得。各產品推出範圍不可混為所有帳號同日可用，不是通用 Gemini 旗艦升代。",
+      "sources": [
+        "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/?utm_campaign=gdm&utm_content=&utm_medium=referral&utm_source=deepmind.google"
+      ]
+    },
+    {
+      "vendor": "Tencent",
+      "model": "Hy4",
+      "date": "2026-11-04",
+      "category": "多模態／推理／程式與 Agent 能力",
+      "tags": "R/A/MM",
+      "note": "騰訊 Hy4 正式版，與先前 Hy4 Preview 區分。11/4 官方發布並於 TokenHub 提供，具視覺理解、工具使用與長程任務能力。官方新聞稿表示權重及系統卡將於之後數日釋出，本次不據此宣稱權重已開放；Hy4 Flash 仍是預告，不另加已發布節點。",
+      "sources": [
+        "https://cloud.tencent.com/document/product/1823/130675",
+        "https://www.prnewswire.com/apac/news-releases/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models-302929177.html"
       ]
     }
   ]

@@ -5,8 +5,10 @@
   const OTHER = { id: 'other', label: '其他／未分類' };
   const rule = (id, label, pattern) => ({ id, label, pattern });
   const catalogs = new Map([
+    ['Tencent', [rule('tencent-hy', 'Hy', /^Hy\d+(?:\.\d+)*(?: Preview| Flash)?$/i)]],
     ['Meituan', [rule('longcat', 'LongCat', /^LongCat-\d+(?:\.\d+)*(?:-Preview)?$/i)]],
     ['OpenAI', [
+      rule('gpt-cyber', 'GPT Cyber 資安支線', /^GPT-\d+(?:\.\d+)* Cyber$/i),
       rule('gpt-rosalind', 'GPT Rosalind 研究支線', /^GPT-\d+(?:\.\d+)* Rosalind Research$/i),
       rule('gpt', 'GPT', /^GPT-\d+(?:\.\d+)*(?:o)?(?: (?:Turbo|mini|nano|Instant))?$/i),
       rule('o1', 'o1', /^o1(?:[- ](?:mini|preview|pro))?$/i),
@@ -30,6 +32,7 @@
       rule('claude-mythos', 'Claude Mythos', /^Claude Mythos \d+(?:\.\d+)*$/i)
     ]],
     ['Google', [
+      rule('gemini-omni', 'Gemini Omni 影片支線', /^Gemini Omni(?: \d+(?:\.\d+)*)? Flash$/i),
       rule('genie', 'Genie 世界模型', /^Genie \d+(?:\.\d+)*$/i),
       rule('gemini-tts', 'Gemini TTS', /^Gemini \d+(?:\.\d+)* Flash(?:-Lite)? TTS$/i),
       rule('gemini-live', 'Gemini Live', /^Gemini \d+(?:\.\d+)* Live(?: with Live Avatar)?$/i),
@@ -86,7 +89,7 @@
     rule('voice', '語音（依原始類別）', /語音|音訊|text.to.speech|speech|audio/i)
   ];
   const specializedIds = new Set([
-    'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
+    'gpt-cyber', 'gemini-omni', 'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
     'gemini-live', 'google-image', 'qwen-image', 'qwen-translation', 'qwen-voice',
     'qwen-embedding', 'cohere-translation', 'cohere-embedding'
   ]);

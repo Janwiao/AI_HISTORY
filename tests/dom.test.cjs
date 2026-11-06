@@ -7,6 +7,12 @@ const path = require('node:path');
 const { JSDOM } = require('jsdom');
 const root = path.join(__dirname,'..');
 const wait = ms => new Promise(resolve=>setTimeout(resolve,ms));
+// Wait for async jsdom history effects rather than assuming a 25–35 ms deadline.
+async function until(predicate) {
+  const deadline=Date.now()+2000;
+  while(!predicate() && Date.now()<deadline) await wait(10);
+  assert.ok(predicate(),'async history state did not settle');
+}
 async function boot({mobile=false,url='https://example.test/AI_HISTORY/',fetchFailure=false}={}) {
   const dom = new JSDOM(fs.readFileSync(path.join(root,'index.html'),'utf8'),{url,runScripts:'outside-only',pretendToBeVisual:true});
   const w=dom.window,d=w.document,errors=[];
@@ -34,10 +40,10 @@ function pointer(ctx,target,type,id,x,y) {
   const e=new ctx.w.Event(type,{bubbles:true,cancelable:true});
   Object.assign(e,{pointerId:id,pointerType:'touch',clientX:x,clientY:y,button:0});target.dispatchEvent(e);
 }
-test('desktop loads 243 unique records, all dates and 20 brands at readable scale; updates closed', async()=>{
+test('desktop loads 246 unique records, all dates and 21 brands at readable scale; updates closed', async()=>{
   const c=await boot();try{
-    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,243);assert.equal(c.d.querySelectorAll('.model-card').length,243);
-    assert.equal(c.d.querySelectorAll('#brandJump option').length,21);assert.equal(c.d.getElementById('pct').textContent,'100%');
+    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,246);assert.equal(c.d.querySelectorAll('.model-card').length,246);
+    assert.equal(c.d.querySelectorAll('#brandJump option').length,22);assert.equal(c.d.getElementById('pct').textContent,'100%');
     assert.equal(c.d.getElementById('updatesPanel').open,false);assert.equal(c.d.getElementById('listResults').hidden,true);
     assert.equal(c.d.querySelectorAll('.model-card time[datetime="2026-05"]').length,1);
   }finally{c.dom.window.close()}
@@ -57,7 +63,7 @@ test('filter intersections, empty/reset, capability search and URL restoration',
     assert.equal(c.d.querySelectorAll('.node').length,1);assert.match(c.w.location.search,/brand=Alibaba/);
     c.d.getElementById('search').value='nonexistent';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.equal(c.d.getElementById('emptyState').hidden,false);assert.equal(c.v.hidden,true);
-    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,243);assert.equal(c.d.getElementById('emptyState').hidden,true);
+    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,246);assert.equal(c.d.getElementById('emptyState').hidden,true);
     c.d.getElementById('search').value='推理';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.ok(c.d.querySelectorAll('.node').length>=75);
     c.w.history.pushState({},'', '?brand=Alibaba&year=2026&type=image&view=list');c.w.dispatchEvent(new c.w.PopStateEvent('popstate'));
@@ -67,8 +73,8 @@ test('filter intersections, empty/reset, capability search and URL restoration',
 test('details open repeatedly, source links are safe, Escape closes and locate restores canvas',async()=>{
   const c=await boot({mobile:true});try{
     const card=()=>[...c.d.querySelectorAll('.model-card')].find(el=>el.textContent.includes('Qwen-Image-2.1'));
-    for(let i=0;i<3;i++){card().querySelector('[data-detail]').click();assert.equal(c.d.getElementById('detail').open,true);assert.equal(c.d.querySelectorAll('#detailSources a').length,2);c.click('closeDetail');await wait(25);assert.equal(c.d.getElementById('detail').open,false);assert.equal(c.w.location.hash,'')}
-    card().querySelector('[data-detail]').click();c.d.getElementById('detail').dispatchEvent(new c.w.Event('cancel',{cancelable:true}));await wait(25);assert.equal(c.d.getElementById('detail').open,false);
+    for(let i=0;i<3;i++){card().querySelector('[data-detail]').click();assert.equal(c.d.getElementById('detail').open,true);assert.equal(c.d.querySelectorAll('#detailSources a').length,2);c.click('closeDetail');await until(()=>!c.d.getElementById('detail').open && !c.w.location.hash);assert.equal(c.d.getElementById('detail').open,false);assert.equal(c.w.location.hash,'')}
+    card().querySelector('[data-detail]').click();c.d.getElementById('detail').dispatchEvent(new c.w.Event('cancel',{cancelable:true}));await until(()=>!c.d.getElementById('detail').open && !c.w.location.hash);assert.equal(c.d.getElementById('detail').open,false);
     card().querySelector('[data-detail]').click();c.click('locateDetail');assert.equal(c.v.hidden,false);assert.equal(c.d.getElementById('detail').open,false);assert.match(c.d.querySelector('.highlight').getAttribute('aria-label'),/Qwen-Image-2.1/);
     c.d.querySelector('.highlight').dispatchEvent(new c.w.KeyboardEvent('keydown',{key:' ',bubbles:true,cancelable:true}));assert.equal(c.d.getElementById('detail').open,true);
     assert.ok([...c.d.querySelectorAll('#detailSources a')].every(a=>a.rel.includes('noopener')&&a.rel.includes('noreferrer')));
@@ -79,7 +85,7 @@ test('shared model URL loads detail; history navigation does not erase destinati
     assert.equal(c.d.getElementById('detail').open,true);assert.equal(c.d.getElementById('detailTitle').textContent,'Qwen-Image-2.1');
     c.w.history.pushState({},'', '?brand=OpenAI&view=timeline#model='+encodeURIComponent('OpenAI|GPT-6.1 Sol'));c.w.dispatchEvent(new c.w.PopStateEvent('popstate'));await wait(10);
     assert.equal(c.d.getElementById('detailTitle').textContent,'GPT-6.1 Sol');assert.match(decodeURIComponent(c.w.location.hash),/GPT-6.1 Sol/);
-    c.click('closeDetail');await wait(25);assert.equal(c.w.location.hash,'');
+    c.click('closeDetail');await until(()=>!c.w.location.hash);assert.equal(c.w.location.hash,'');
   }finally{c.dom.window.close()}
 });
 test('drag never opens detail; pinch to one pointer rebases; cancel/lost capture/blur clear state',async()=>{
@@ -104,9 +110,9 @@ test('real history Back dismisses details and Forward restores the same node',as
     const first=c.d.querySelector('[data-detail]');const expected=first.dataset.detail;
     const originalLength=c.w.history.length;first.click();
     assert.equal(c.w.history.length,originalLength+1);assert.equal(c.d.getElementById('detail').open,true);
-    c.w.history.back();await wait(35);assert.equal(c.d.getElementById('detail').open,false);assert.equal(c.w.location.hash,'');
-    c.w.history.forward();await wait(35);assert.equal(c.d.getElementById('detail').open,true);assert.equal(decodeURIComponent(c.w.location.hash.slice(7)),expected);
-    c.click('closeDetail');await wait(35);assert.equal(c.d.getElementById('detail').open,false);assert.equal(c.w.location.hash,'');
+    c.w.history.back();await until(()=>!c.d.getElementById('detail').open && !c.w.location.hash);assert.equal(c.d.getElementById('detail').open,false);assert.equal(c.w.location.hash,'');
+    c.w.history.forward();await until(()=>c.d.getElementById('detail').open);assert.equal(c.d.getElementById('detail').open,true);assert.equal(decodeURIComponent(c.w.location.hash.slice(7)),expected);
+    c.click('closeDetail');await until(()=>!c.d.getElementById('detail').open && !c.w.location.hash);assert.equal(c.d.getElementById('detail').open,false);assert.equal(c.w.location.hash,'');
   }finally{c.dom.window.close()}
 });
 
@@ -114,7 +120,7 @@ test('closing detail via Back preserves list and timeline browsing position',asy
   for(const mobile of [true,false]){
     const c=await boot({mobile});try{
       c.d.getElementById('listResults').scrollTop=2400;c.v.scrollTop=2400;c.v.scrollLeft=2000;
-      c.d.querySelector('[data-detail]').click();c.click('closeDetail');await wait(35);
+      c.d.querySelector('[data-detail]').click();c.click('closeDetail');await until(()=>!c.d.getElementById('detail').open && !c.w.location.hash);
       assert.equal(c.d.getElementById('listResults').scrollTop,2400);assert.equal(c.v.scrollTop,2400);assert.equal(c.v.scrollLeft,2000);
     }finally{c.dom.window.close()}
   }
@@ -126,13 +132,13 @@ test('brand dialog opens from existing labels, retains all brand nodes and main 
  c.set('brandJump','OpenAI');c.set('yearFilter','2026');const mainCount=c.d.querySelectorAll('.model-card').length;
  c.v.scrollLeft=1234;c.v.scrollTop=789;c.d.getElementById('listResults').scrollTop=333;
  const entry=c.d.querySelector('#listResults [data-brand="OpenAI"]');entry.focus();entry.click();
- assert.equal(c.d.getElementById('brandEvolution').open,true);assert.equal(c.d.querySelectorAll('[data-brand-node]').length,39);
+ assert.equal(c.d.getElementById('brandEvolution').open,true);assert.equal(c.d.querySelectorAll('[data-brand-node]').length,40);
  assert.match(c.d.getElementById('brandCanvas').textContent,/X：發布時間/);assert.match(c.d.getElementById('brandCanvas').textContent,/Y：模型系列/);
  const node=c.d.querySelector('[data-brand-node]');node.dispatchEvent(new c.w.MouseEvent('click',{bubbles:true,cancelable:true}));
  assert.equal(c.d.getElementById('brandNodeDetail').hidden,false);assert.ok(c.d.querySelectorAll('#brandNodeSources a').length);
  assert.ok([...c.d.querySelectorAll('#brandNodeSources a')].every(a=>a.rel.includes('noopener')));
  assert.ok(c.w.location.hash.startsWith('#brand='));c.click('brandZoomIn');assert.equal(c.d.getElementById('brandZoomLabel').textContent,'125%');
- c.click('closeBrand');await wait(35);assert.equal(c.d.getElementById('brandEvolution').open,false);assert.equal(c.d.activeElement,entry);
+ c.click('closeBrand');await until(()=>!c.d.getElementById('brandEvolution').open);assert.equal(c.d.getElementById('brandEvolution').open,false);assert.equal(c.d.activeElement,entry);
  assert.equal(c.d.querySelectorAll('.model-card').length,mainCount);assert.equal(c.d.getElementById('yearFilter').value,'2026');
  assert.equal(c.v.scrollLeft,1234);assert.equal(c.v.scrollTop,789);assert.equal(c.d.getElementById('listResults').scrollTop,333);
  }finally{c.dom.window.close()}
@@ -141,9 +147,9 @@ test('brand history Back/Forward, Escape, direct links, and invalid brand are sa
  const c=await boot({url:'https://example.test/AI_HISTORY/?view=list#brand=OpenAI'});try{
  assert.equal(c.d.getElementById('brandEvolution').open,true);c.click('closeBrand');assert.equal(c.w.location.hash,'');
  const entry=c.d.querySelector('#listResults [data-brand="Alibaba"]');entry.click();
- c.w.history.back();await wait(35);assert.equal(c.d.getElementById('brandEvolution').open,false);
- c.w.history.forward();await wait(35);assert.equal(c.d.getElementById('brandEvolution').open,true);assert.match(c.d.getElementById('brandTitle').textContent,/Qwen/);
- c.d.getElementById('brandEvolution').dispatchEvent(new c.w.Event('cancel',{cancelable:true}));await wait(35);assert.equal(c.d.getElementById('brandEvolution').open,false);
+ c.w.history.back();await until(()=>!c.d.getElementById('brandEvolution').open);assert.equal(c.d.getElementById('brandEvolution').open,false);
+ c.w.history.forward();await until(()=>c.d.getElementById('brandEvolution').open);assert.equal(c.d.getElementById('brandEvolution').open,true);assert.match(c.d.getElementById('brandTitle').textContent,/Qwen/);
+ c.d.getElementById('brandEvolution').dispatchEvent(new c.w.Event('cancel',{cancelable:true}));await until(()=>!c.d.getElementById('brandEvolution').open);assert.equal(c.d.getElementById('brandEvolution').open,false);
  c.w.history.pushState({},'','#brand=does-not-exist');c.w.dispatchEvent(new c.w.HashChangeEvent('hashchange'));assert.equal(c.d.getElementById('brandEvolution').open,false);
  }finally{c.dom.window.close()}
 });
@@ -153,7 +159,7 @@ test('timeline brand keyboard/tap opens and drag/cancel never opens',async()=>{
  pointer(c,entry,'pointerdown',1,100,400);pointer(c,c.v,'pointermove',1,160,400);pointer(c,c.v,'pointerup',1,160,400);assert.equal(c.d.getElementById('brandEvolution').open,false);
  pointer(c,entry,'pointerdown',1,100,400);pointer(c,c.v,'pointercancel',1,100,400);assert.equal(c.d.getElementById('brandEvolution').open,false);
  entry.dispatchEvent(new c.w.KeyboardEvent('keydown',{key:' ',bubbles:true,cancelable:true}));assert.equal(c.d.getElementById('brandEvolution').open,true);
- c.click('closeBrand');await wait(35);pointer(c,entry,'pointerdown',1,100,400);pointer(c,c.v,'pointerup',1,100,400);assert.equal(c.d.getElementById('brandEvolution').open,true);
+ c.click('closeBrand');await until(()=>!c.d.getElementById('brandEvolution').open);pointer(c,entry,'pointerdown',1,100,400);pointer(c,c.v,'pointerup',1,100,400);assert.equal(c.d.getElementById('brandEvolution').open,true);
  const sameDate=[...c.d.querySelectorAll('[data-brand-node]')].filter(n=>n.textContent.includes('2025-04-14'));assert.ok(sameDate.length>=3);
  const rects=sameDate.map(n=>n.querySelector('rect'));assert.equal(new Set(rects.map(r=>r.getAttribute('y'))).size,rects.length);
  }finally{c.dom.window.close()}
@@ -176,7 +182,7 @@ test('Rerank filter is selectable and excludes Embed while cumulative scope is e
   c.set('typeFilter','rerank');
   const cards=[...c.d.querySelectorAll('.model-card')];
   assert.equal(cards.length,2);assert.ok(cards.every(card=>card.textContent.includes('Rerank 5')));
-  assert.match(c.d.getElementById('scope').textContent,/累計收錄 35 筆增量/);
+  assert.match(c.d.getElementById('scope').textContent,/累計收錄 38 筆增量/);
   assert.match(c.d.getElementById('scope').textContent,/不代表全部當日發布或重新查核/);
  }finally{c.dom.window.close()}
 });
@@ -184,11 +190,11 @@ test('Duet participates in original Agent filters without changing existing card
  const dom=new JSDOM(fs.readFileSync(path.join(root,'agents.html'),'utf8'),{runScripts:'dangerously'});
  try{
   const d=dom.window.document,duet=d.getElementById('claude-duet');
-  assert.equal(d.querySelectorAll('.card').length,7);
+  assert.equal(d.querySelectorAll('.card').length,9);
   d.querySelector('[data-f="coding"]').click();assert.equal(duet.hidden,true);
   d.querySelector('[data-f="agent"]').click();assert.equal(duet.hidden,false);
-  assert.equal(d.querySelectorAll('.card:not([hidden])').length,4);
-  d.querySelector('[data-f="all"]').click();assert.equal(d.querySelectorAll('.card:not([hidden])').length,7);
+  assert.equal(d.querySelectorAll('.card:not([hidden])').length,6);
+  d.querySelector('[data-f="all"]').click();assert.equal(d.querySelectorAll('.card:not([hidden])').length,9);
  }finally{dom.window.close()}
 });
 
@@ -236,5 +242,26 @@ test('Images 2.6 appears in image search, timeline and source details',async()=>
  assert.equal(c.d.getElementById('brandEvolution').open,true);
  assert.match(c.d.getElementById('brandCanvas').textContent,/GPT-Image-2\.6 Sunburst/);
  assert.match(c.d.getElementById('brandCanvas').textContent,/GPT-Image-2\.6 Flare/);
+ }finally{c.dom.window.close()}
+});
+
+test('new cyber and video filters retain detail and brand lanes',async()=>{
+ for(const [model,brand,type,lane] of [['GPT-6 Cyber','OpenAI','cyber','GPT Cyber 資安支線'],['Gemini Omni 1.2 Flash','Google','video','Gemini Omni 影片支線']]){
+  const c=await boot({mobile:true,url:`https://example.test/AI_HISTORY/?brand=${brand}&type=${type}&view=list`});try{
+   assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.model-card').length,1);assert.equal(c.d.querySelectorAll('.node').length,1);
+   assert.equal(c.d.getElementById('typeFilter').value,type);
+   c.d.querySelector('[data-detail]').click();assert.equal(c.d.getElementById('detailTitle').textContent,model);
+   assert.ok(c.d.querySelectorAll('#detailSources a').length>=1);c.click('closeDetail');
+   c.d.querySelector('#listResults [data-brand]').click();assert.equal(c.d.getElementById('brandEvolution').open,true);
+   assert.ok(c.d.getElementById('brandCanvas').textContent.includes(model));assert.ok(c.d.getElementById('brandCanvas').textContent.includes(lane));
+  }finally{c.dom.window.close()}
+ }
+});
+test('Tencent new brand is present in filter, timeline, list and brand dialog',async()=>{
+ const c=await boot({url:'https://example.test/AI_HISTORY/?brand=Tencent&view=list'});try{
+  assert.deepEqual(c.errors,[]);assert.equal(c.d.getElementById('brandJump').value,'Tencent');
+  assert.equal(c.d.querySelectorAll('.model-card').length,1);assert.equal(c.d.querySelectorAll('.node').length,1);
+  assert.match(c.d.getElementById('listResults').textContent,/Hy4/);
+  c.d.querySelector('#listResults [data-brand="Tencent"]').click();assert.match(c.d.getElementById('brandCanvas').textContent,/Hy4/);
  }finally{c.dom.window.close()}
 });

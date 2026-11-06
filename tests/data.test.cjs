@@ -32,9 +32,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-05');
-  assert.equal(updates.additions.length,35);
-  assert.equal(new Set(updates.additions.map(D.key)).size,35);
+  assert.equal(updates.checkedAt,'2026-11-06');
+  assert.equal(updates.additions.length,38);
+  assert.equal(new Set(updates.additions.map(D.key)).size,38);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -85,7 +85,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,35);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,38);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -132,4 +132,22 @@ test('Cohere OpenRouter expansion preserves four original model release dates',(
   assert.match(row.note,/11\/4/);assert.match(row.note,/OpenRouter/);assert.match(row.note,/不另計新模型/);
   assert.ok(row.sources.includes('https://docs.cohere.com/v2/changelog/embed-rerank-v5-openrouter'));
  }
+});
+
+test('November 6 model additions retain exact availability and specialized branches',()=>{
+ const B=require('../assets/brand-data.js');
+ const cyber=updates.additions.find(r=>r.model==='GPT-6 Cyber');
+ assert.equal(cyber.date,'2026-11-05');assert.equal(cyber.vendor,'OpenAI');
+ assert.deepEqual(D.types(cyber),['cyber']);assert.equal(B.family(cyber).id,'gpt-cyber');
+ assert.match(cyber.note,/部分已核准/);assert.match(cyber.note,/仍待推出/);assert.ok(!D.types(cyber).includes('general'));
+ const omni=updates.additions.find(r=>r.model==='Gemini Omni 1.2 Flash');
+ assert.equal(omni.date,'2026-11-05');assert.equal(omni.vendor,'Google');
+ assert.deepEqual(D.types(omni),['video']);assert.equal(B.family(omni).id,'gemini-omni');
+ assert.match(omni.note,/15 秒/);assert.match(omni.note,/一般可用/);assert.match(omni.note,/AI Ultra/);assert.match(omni.note,/分批/);
+ const hy=updates.additions.find(r=>r.model==='Hy4');
+ assert.equal(hy.date,'2026-11-04');assert.equal(hy.vendor,'Tencent');
+ assert.equal(B.family(hy).id,'tencent-hy');assert.ok(D.types(hy).includes('multimodal'));
+ assert.match(hy.note,/不據此宣稱權重已開放/);assert.match(hy.note,/Hy4 Preview/);assert.match(hy.note,/Hy4 Flash 仍是預告/);assert.ok(!hy.tags.includes('OW'));
+ for(const row of [cyber,omni,hy])assert.equal(updates.additions.filter(r=>D.key(r)===D.key(row)).length,1);
+ assert.ok(!updates.additions.some(r=>/Mistral Studio|Meta Muse|Hy4 Flash/.test(r.model)));
 });

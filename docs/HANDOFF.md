@@ -165,3 +165,7 @@ GPT-6 Rosalind Research 以研究專用部署版本收錄（10/30），官方系
 ## 2026-11-05 自主維護交接
 
 新增 GPT-Image-2.6 Sunburst／Flare（11/4 公告及 API 提供），沿用影像分類與 OpenAI 影像名稱分支；不視為通用 GPT 或 Agent 產品升代，不推論權重差異。Cohere 四筆 Embed／Rerank 5 補 OpenRouter 上架狀態，原首發日期不變。共 243 個模型／版本節點、20 品牌、7 Agent 卡；保留版面、封存底稿與 Excel。詳見 [本批查核](UPDATE_2026-11-05.zh-TW.md)。
+
+## 2026-11-06 自主維護交接
+
+新增 GPT-6 Cyber、Gemini Omni 1.2 Flash、Tencent Hy4，保留受限存取、API 一般可用與產品分批推出的不同範圍。資安／影片支線有獨立能力篩選與名稱分組，新增 Tencent 品牌；品牌連線仍只表發布順序。Mistral Studio、Meta Muse 在 Agent 頁新增功能事件卡，未冒稱產品首發。共 246 個模型／版本節點、21 品牌、9 張 Agent／工具卡；既有 243 筆資料與七張卡完整保留。詳見 [本批查核](UPDATE_2026-11-06.zh-TW.md)。

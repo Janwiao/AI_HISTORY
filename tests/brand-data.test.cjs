@@ -33,10 +33,10 @@ test('UMD exposes the same small API in a browser without dependencies', () => {
   assert.equal(context.window.BrandEvolutionData.family({ vendor: 'OpenAI', model: 'GPT-4' }).id, 'gpt');
 });
 
-test('all 243 merged nodes are retained exactly once with no product injection', () => {
+test('all 246 merged nodes are retained exactly once with no product injection', () => {
   assert.equal(baseline().length, 208);
-  assert.equal(records.length, 243);
-  assert.equal(new Set(records.map(D.key)).size, 243);
+  assert.equal(records.length, 246);
+  assert.equal(new Set(records.map(D.key)).size, 246);
   const all = [];
   for (const vendor of new Set(records.map(row => row.vendor))) {
     const lanes = B.group(records, vendor);

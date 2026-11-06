@@ -101,3 +101,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-05 自主資料增補
 
 新增 11/4 發布的 GPT-Image-2.6 Sunburst／Flare 兩款影像模型；不將 GIF 功能當成影片模型，也不推論兩者權重是否不同。Cohere Embed 5／Rerank 5 四筆既有節點補 11/4 OpenRouter 上架資訊，保留首發日、不新增重複節點。目前 243 個模型／版本節點、20 品牌、7 Agent 卡。詳見 [本批查核](docs/UPDATE_2026-11-05.zh-TW.md)。
+
+## 2026-11-06 自主資料增補
+
+新增 GPT-6 Cyber（11/5、核准客戶初期存取）、Gemini Omni 1.2 Flash（11/5、影片支線）與 Tencent Hy4（11/4、正式版）。資安及影片能力獨立分類，Hy4 不把預告釋出的權重當作已開放。Agents & Tools 另記 Mistral Studio 與 Meta Muse 的 11/5 功能事件，不計入模型數。目前 246 個模型／版本節點、21 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-06.zh-TW.md)。
