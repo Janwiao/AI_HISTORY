@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-06",
+  "checkedAt": "2026-11-07",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -443,6 +443,54 @@
       "sources": [
         "https://cloud.tencent.com/document/product/1823/130675",
         "https://www.prnewswire.com/apac/news-releases/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models-302929177.html"
+      ]
+    },
+    {
+      "vendor": "Moonshot AI",
+      "model": "Kimi K3.1 Pro",
+      "date": "2026-10-24",
+      "category": "原生多模態／推理／程式／長程 Agent／開放權重",
+      "tags": "R/A/MM/OW",
+      "note": "Kimi K3 的後訓練版本，支援文字與圖片輸入及 1M context。日期採 Moonshot 官網研究索引的 10/24；公告確認 Kimi、Work、Code 與 API 託管存取。Highspeed 為同日另列的高速供應選項，本輪僅附註，不推論不同權重或另計模型。公告原預告 11/4 前釋出權重；11/7 已查見官方權重模型卡，但實際首次公開日期未核實，不把預告日當發布證據。授權以官方模型卡為準。",
+      "sources": [
+        "https://www.moonshot.ai/",
+        "https://www.kimi.com/en/blog/kimi-k3-1-pro",
+        "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+      ]
+    },
+    {
+      "vendor": "SenseTime",
+      "model": "SenseNova 6.8 Flash",
+      "date": "2026-11-02",
+      "category": "通用／多模態／Agent／設計與辦公",
+      "tags": "A/MM",
+      "note": "商湯日日新 SenseNova 6.8 Flash 正式版。採官方正文 2026/11/02 與當日發布敘述，不採網址內的 20261103。公告確認 SenseNova Studio、Token Plan 與小浣熊體驗；主動互動示範使用內部研發版，不能將所有展示功能視為對外正式提供，也不推論已開放權重。",
+      "sources": [
+        "https://www.sensetime.com/cn/news/sensenova-6-8-flash-release-20261103-1421"
+      ]
+    },
+    {
+      "vendor": "Thinking Machines Lab",
+      "model": "Inkling 2 Small",
+      "date": "2026-11-05",
+      "category": "通用／多模態／推理／程式／Agent",
+      "tags": "R/A/MM",
+      "note": "Thinking Machines Lab 第二代 Inkling 模型；594B total／17B active MoE，接受文字及圖片、輸出文字，支援可調推理 effort。11/5 在 Tinker Playground 與推理／微調 API 提供，首發仍為封閉權重；Apache 2.0 權重是完成外部安全測試後下週釋出的計畫，不標為已開放，也不是 Tinker 產品首發。",
+      "sources": [
+        "https://thinkingmachines.ai/news/inkling-2-small/",
+        "https://thinkingmachines.ai/model-card/inkling-2-small/"
+      ]
+    },
+    {
+      "vendor": "Kakao",
+      "model": "Kanana-2-v-decide",
+      "date": "2026-11-06",
+      "category": "多模態決策／分類／開放權重",
+      "tags": "DECISION/MM/OW",
+      "note": "Kakao 11/6 官方公告的文字與圖片決策模型，以機率、選項或分數支援 Agent 判斷，不是生成長篇回答的通用聊天模型。官方宣布已於 Hugging Face 公開，checkpoint 為 kakaocorp/kanana-2-v-decide-3b-2611；不把名稱中的 3b 當作已核實總參數，也不推論無限制商用。與 Agent 頁 Jev 的 Decision Layer 產品分類不同。",
+      "sources": [
+        "https://www.kakaocorp.com/page/detail/12193?lang=KOR",
+        "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611"
       ]
     }
   ]

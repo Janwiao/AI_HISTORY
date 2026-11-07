@@ -2,6 +2,30 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const D = require('../assets/data.js');
 const updates = require('../data/updates.json');
+test('November 7 additions use verified announcement dates without duplicating products or Highspeed',()=>{
+ const expected={'Kimi K3.1 Pro':['Moonshot AI','2026-10-24'],'SenseNova 6.8 Flash':['SenseTime','2026-11-02'],'Inkling 2 Small':['Thinking Machines Lab','2026-11-05'],'Kanana-2-v-decide':['Kakao','2026-11-06']};
+ for(const [name,[vendor,date]] of Object.entries(expected)){
+  const rows=updates.additions.filter(r=>r.model===name);assert.equal(rows.length,1);
+  assert.equal(rows[0].vendor,vendor);assert.equal(rows[0].date,date);
+  assert.ok(rows[0].sources.every(s=>new URL(s).protocol==='https:'));
+ }
+ assert.ok(!updates.additions.some(r=>/Highspeed|^Tinker$/.test(r.model)));
+ const sense=updates.additions.find(r=>r.model==='SenseNova 6.8 Flash');
+ assert.match(sense.note,/內部研發版/);assert.match(sense.sources[0],/20261103/);
+});
+test('Inkling and Kimi distinguish hosted availability from promised and observed weights',()=>{
+ const ink=updates.additions.find(r=>r.model==='Inkling 2 Small');
+ assert.ok(!D.tags(ink).includes('OW'));assert.match(ink.note,/封閉權重/);assert.match(ink.note,/計畫/);
+ const kimi=updates.additions.find(r=>r.model==='Kimi K3.1 Pro');
+ assert.match(kimi.note,/首次公開日期未核實/);assert.match(kimi.note,/不推論不同權重/);
+ assert.ok(kimi.sources.includes('https://www.moonshot.ai/'));
+});
+test('Kanana decisions are multimodal classification rather than general generation or Agent product',()=>{
+ const row=updates.additions.find(r=>r.model==='Kanana-2-v-decide');
+ assert.deepEqual(D.types(row),['decision','multimodal']);
+ assert.equal(D.matches(row,{type:'decision'}),true);assert.equal(D.matches(row,{type:'general'}),false);
+ assert.match(row.note,/機率、選項或分數/);assert.match(row.note,/Jev/);
+});
 test('strict UTC dates preserve month precision and reject invalid rollover', () => {
   assert.deepEqual(D.parseDate('2026-05'), { time: Date.UTC(2026,4,1), precision:'month', year:2026 });
   assert.equal(D.parseDate('2024-02-29').time, Date.UTC(2024,1,29));
@@ -32,9 +56,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-06');
-  assert.equal(updates.additions.length,38);
-  assert.equal(new Set(updates.additions.map(D.key)).size,38);
+  assert.equal(updates.checkedAt,'2026-11-07');
+  assert.equal(updates.additions.length,42);
+  assert.equal(new Set(updates.additions.map(D.key)).size,42);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -85,7 +109,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,38);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,42);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));

@@ -105,3 +105,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-06 自主資料增補
 
 新增 GPT-6 Cyber（11/5、核准客戶初期存取）、Gemini Omni 1.2 Flash（11/5、影片支線）與 Tencent Hy4（11/4、正式版）。資安及影片能力獨立分類，Hy4 不把預告釋出的權重當作已開放。Agents & Tools 另記 Mistral Studio 與 Meta Muse 的 11/5 功能事件，不計入模型數。目前 246 個模型／版本節點、21 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-06.zh-TW.md)。
+
+## 2026-11-07 自主資料增補
+
+新增 Kanana-2-v-decide（11/6）與 Inkling 2 Small（11/5），並補收 Kimi K3.1 Pro（10/24）及 SenseNova 6.8 Flash（正文 11/2）。託管存取、權重預告與已觀察到的權重模型卡分開記錄；決策／分類模型不混入通用生成模型或 Agent 產品。目前 250 個模型／版本節點、24 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-07.zh-TW.md)。

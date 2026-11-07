@@ -5,6 +5,9 @@
   const OTHER = { id: 'other', label: '其他／未分類' };
   const rule = (id, label, pattern) => ({ id, label, pattern });
   const catalogs = new Map([
+    ['Kakao', [rule('kanana-decide', 'Kanana 決策支線', /^Kanana-\d+-v-decide$/i)]],
+    ['SenseTime', [rule('sensenova', 'SenseNova', /^SenseNova \d+(?:\.\d+)*(?: Flash)?$/i)]],
+    ['Thinking Machines Lab', [rule('inkling', 'Inkling', /^Inkling(?: \d+)?(?:[- ]Small)?$/i)]],
     ['Tencent', [rule('tencent-hy', 'Hy', /^Hy\d+(?:\.\d+)*(?: Preview| Flash)?$/i)]],
     ['Meituan', [rule('longcat', 'LongCat', /^LongCat-\d+(?:\.\d+)*(?:-Preview)?$/i)]],
     ['OpenAI', [
@@ -89,7 +92,7 @@
     rule('voice', '語音（依原始類別）', /語音|音訊|text.to.speech|speech|audio/i)
   ];
   const specializedIds = new Set([
-    'gpt-cyber', 'gemini-omni', 'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
+    'kanana-decide', 'gpt-cyber', 'gemini-omni', 'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
     'gemini-live', 'google-image', 'qwen-image', 'qwen-translation', 'qwen-voice',
     'qwen-embedding', 'cohere-translation', 'cohere-embedding'
   ]);

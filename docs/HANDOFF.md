@@ -169,3 +169,7 @@ GPT-6 Rosalind Research 以研究專用部署版本收錄（10/30），官方系
 ## 2026-11-06 自主維護交接
 
 新增 GPT-6 Cyber、Gemini Omni 1.2 Flash、Tencent Hy4，保留受限存取、API 一般可用與產品分批推出的不同範圍。資安／影片支線有獨立能力篩選與名稱分組，新增 Tencent 品牌；品牌連線仍只表發布順序。Mistral Studio、Meta Muse 在 Agent 頁新增功能事件卡，未冒稱產品首發。共 246 個模型／版本節點、21 品牌、9 張 Agent／工具卡；既有 243 筆資料與七張卡完整保留。詳見 [本批查核](UPDATE_2026-11-06.zh-TW.md)。
+
+## 2026-11-07 自主維護交接
+
+新增 Kanana-2-v-decide、Inkling 2 Small，補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash，依官方日期分別為 11/6、11/5、10/24、11/2。Inkling 權重仍為後續計畫，Kimi 不把預告截止日當權重發布證據；SenseNova 不把內部研發示範當全面可用。新增決策／分類能力及 Kakao、Thinking Machines Lab、SenseTime 三品牌。250 個唯一節點、24 品牌、9 張 Agent／工具卡；原 246 筆資料與版面保留。詳見 [本批查核](UPDATE_2026-11-07.zh-TW.md)。
