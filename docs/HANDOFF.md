@@ -173,3 +173,7 @@ GPT-6 Rosalind Research 以研究專用部署版本收錄（10/30），官方系
 ## 2026-11-07 自主維護交接
 
 新增 Kanana-2-v-decide、Inkling 2 Small，補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash，依官方日期分別為 11/6、11/5、10/24、11/2。Inkling 權重仍為後續計畫，Kimi 不把預告截止日當權重發布證據；SenseNova 不把內部研發示範當全面可用。新增決策／分類能力及 Kakao、Thinking Machines Lab、SenseTime 三品牌。250 個唯一節點、24 品牌、9 張 Agent／工具卡；原 246 筆資料與版面保留。詳見 [本批查核](UPDATE_2026-11-07.zh-TW.md)。
+
+## 2026-11-08 自主維護交接
+
+補收 Mistral Large 4 預覽與日期修訂、EmbeddingGemma 2，增至 253 個模型／版本節點，品牌及 Agent 卡數不變。括號 October 29 為本站修訂標籤，不是官方新型號；EmbeddingGemma 採獨立名稱分支。原 250 筆資料、封存底稿與版面保留。詳見 [本批查核](UPDATE_2026-11-08.zh-TW.md)，不可將補漏當成當日新發布或全量稽核完成。

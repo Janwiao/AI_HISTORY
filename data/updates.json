@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-07",
+  "checkedAt": "2026-11-08",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -491,6 +491,45 @@
       "sources": [
         "https://www.kakaocorp.com/page/detail/12193?lang=KOR",
         "https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611"
+      ]
+    },
+    {
+      "vendor": "Mistral AI",
+      "model": "Mistral Large 4",
+      "date": "2026-10-06",
+      "category": "通用／推理／多模態",
+      "tags": "R/A/MM",
+      "note": "又稱 Le Chonk。10/6 首次提供 Mistral Studio 預覽 API；此節點記錄公開預覽，當日權重仍是月底釋出計畫。10/29 改良權重版本另列日期節點，兩者不是獨立基礎模型家族；與 Mistral Studio 產品分開。",
+      "sources": [
+        "https://mistral.ai/news/mistral-large-4/",
+        "https://docs.mistral.ai/resources/changelogs"
+      ]
+    },
+    {
+      "vendor": "Mistral AI",
+      "model": "Mistral Large 4 (October 29)",
+      "date": "2026-10-29",
+      "category": "通用／推理／多模態",
+      "tags": "R/A/MM/OW",
+      "note": "官方 10/29 發布經後續強化學習改良的 Le Chonk 權重，保留 10/6 公開預覽紀錄。括號日期是本站用來區別修訂的標籤，不是官方新型號。採 Mistral Ecosystem Open-Weight License；經營 Model-as-a-Service 的企業需另取得商用授權，不等於無限制開源。",
+      "sources": [
+        "https://mistral.ai/news/mistral-large-4-oss/",
+        "https://mistral.ai/news/?categories=company",
+        "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B",
+        "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B/blob/main/LICENSE"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "EmbeddingGemma 2",
+      "date": "2026-10-06",
+      "category": "多模態／Embedding",
+      "tags": "MM/EMBED/OW",
+      "note": "10/6 公告並提供權重的端側多模態嵌入模型，將文字、圖片、影片及音訊轉為共同向量表示，用於搜尋與檢索。Apache 2.0 授權；屬 Embedding 支線，不是 Gemma／Gemini 通用生成模型升代。公告中的 Model Garden 供應仍為後續計畫。",
+      "sources": [
+        "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/",
+        "https://ai.google.dev/gemma/docs/embeddinggemma/model_card_2",
+        "https://huggingface.co/google/embeddinggemma-2"
       ]
     }
   ]

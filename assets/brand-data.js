@@ -40,6 +40,7 @@
       rule('gemini-tts', 'Gemini TTS', /^Gemini \d+(?:\.\d+)* Flash(?:-Lite)? TTS$/i),
       rule('gemini-live', 'Gemini Live', /^Gemini \d+(?:\.\d+)* Live(?: with Live Avatar)?$/i),
       rule('gemini', 'Gemini', /^Gemini (?:\d+(?:\.\d+)*(?: [a-z\d-]+)*|Omni Flash)$/i),
+      rule('embedding-gemma', 'EmbeddingGemma', /^EmbeddingGemma \d+(?:\.\d+)*$/i),
       rule('gemma', 'Gemma', /^Gemma \d+(?:\.\d+)*(?: [a-z\d-]+)*$/i),
       rule('google-image', 'Imagen', /^Imagen \d+(?:\.\d+)*(?: [a-z\d-]+)*$/i)
     ]],
@@ -64,7 +65,7 @@
     ['MiniMax', [rule('minimax-m', 'MiniMax M', /^MiniMax M\d+(?:\.\d+)*$/i)]],
     ['Meta', [rule('llama', 'Llama', /^Llama \d+(?:\.\d+)*(?: [a-z\d]+)*$/i)]],
     ['Mistral AI', [
-      rule('mistral', 'Mistral', /^Mistral (?:\d+B|Large|Medium|Small)(?: \d+(?:\.\d+)*)?$/i),
+      rule('mistral', 'Mistral', /^Mistral (?:\d+B|Large|Medium|Small)(?: \d+(?:\.\d+)*)?(?: \(October 29\))?$/i),
       rule('mixtral', 'Mixtral', /^Mixtral \d+x\d+B$/i),
       rule('magistral', 'Magistral', /^Magistral(?: [a-z\d.]+)*$/i)
     ]],
@@ -92,7 +93,7 @@
     rule('voice', '語音（依原始類別）', /語音|音訊|text.to.speech|speech|audio/i)
   ];
   const specializedIds = new Set([
-    'kanana-decide', 'gpt-cyber', 'gemini-omni', 'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
+    'embedding-gemma', 'kanana-decide', 'gpt-cyber', 'gemini-omni', 'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
     'gemini-live', 'google-image', 'qwen-image', 'qwen-translation', 'qwen-voice',
     'qwen-embedding', 'cohere-translation', 'cohere-embedding'
   ]);

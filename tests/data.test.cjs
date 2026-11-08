@@ -2,6 +2,27 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const D = require('../assets/data.js');
 const updates = require('../data/updates.json');
+test('November 8 backfill distinguishes Mistral preview from improved open-weight revision',()=>{
+ const preview=updates.additions.find(r=>r.model==='Mistral Large 4');
+ const release=updates.additions.find(r=>r.model==='Mistral Large 4 (October 29)');
+ assert.equal(preview.vendor,'Mistral AI');assert.equal(preview.date,'2026-10-06');
+ assert.equal(release.vendor,'Mistral AI');assert.equal(release.date,'2026-10-29');
+ assert.ok(!D.tags(preview).includes('OW'));assert.ok(D.tags(release).includes('OW'));
+ assert.match(preview.note,/公開預覽/);assert.match(preview.note,/權重仍是/);
+ assert.match(release.note,/本站/);assert.match(release.note,/不是官方新型號/);
+ assert.match(release.note,/Model-as-a-Service/);assert.match(release.note,/另取得商用授權/);
+ assert.equal(release.sources[0],'https://mistral.ai/news/mistral-large-4-oss/');
+ for(const row of [preview,release])assert.ok(D.types(row).includes('general'));
+ assert.ok(!updates.additions.some(r=>r.model==='Le Chonk'||r.model==='Mistral Studio'));
+});
+test('EmbeddingGemma 2 is an open multimodal embedder rather than a generative or audio model',()=>{
+ const row=updates.additions.find(r=>r.model==='EmbeddingGemma 2');
+ assert.equal(row.vendor,'Google');assert.equal(row.date,'2026-10-06');
+ assert.deepEqual(D.types(row),['multimodal','embedding']);
+ assert.ok(D.tags(row).includes('OW'));assert.match(row.note,/Apache 2.0/);
+ assert.match(row.note,/Model Garden.*後續計畫/);
+ assert.ok(row.sources.includes('https://ai.google.dev/gemma/docs/embeddinggemma/model_card_2'));
+});
 test('November 7 additions use verified announcement dates without duplicating products or Highspeed',()=>{
  const expected={'Kimi K3.1 Pro':['Moonshot AI','2026-10-24'],'SenseNova 6.8 Flash':['SenseTime','2026-11-02'],'Inkling 2 Small':['Thinking Machines Lab','2026-11-05'],'Kanana-2-v-decide':['Kakao','2026-11-06']};
  for(const [name,[vendor,date]] of Object.entries(expected)){
@@ -56,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-07');
-  assert.equal(updates.additions.length,42);
-  assert.equal(new Set(updates.additions.map(D.key)).size,42);
+  assert.equal(updates.checkedAt,'2026-11-08');
+  assert.equal(updates.additions.length,45);
+  assert.equal(new Set(updates.additions.map(D.key)).size,45);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -109,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,42);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,45);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));

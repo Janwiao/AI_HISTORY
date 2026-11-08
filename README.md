@@ -109,3 +109,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-07 自主資料增補
 
 新增 Kanana-2-v-decide（11/6）與 Inkling 2 Small（11/5），並補收 Kimi K3.1 Pro（10/24）及 SenseNova 6.8 Flash（正文 11/2）。託管存取、權重預告與已觀察到的權重模型卡分開記錄；決策／分類模型不混入通用生成模型或 Agent 產品。目前 250 個模型／版本節點、24 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-07.zh-TW.md)。
+
+## 2026-11-08 歷史補漏
+
+補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 10/6 EmbeddingGemma 2。區分預覽與權重發布，保留 Mistral 商用授權限制；EmbeddingGemma 獨立列為嵌入模型支線。共 253 個模型／版本節點、24 品牌、9 張 Agent／工具卡。本批是歷史補漏，不是 11/8 新發布。詳見 [本批查核](docs/UPDATE_2026-11-08.zh-TW.md)。
