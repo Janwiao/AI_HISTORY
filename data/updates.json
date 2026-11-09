@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-09",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -530,6 +530,46 @@
         "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/",
         "https://ai.google.dev/gemma/docs/embeddinggemma/model_card_2",
         "https://huggingface.co/google/embeddinggemma-2"
+      ]
+    },
+    {
+      "vendor": "Nous Research",
+      "model": "Arete-27B",
+      "date": "2026-11-06",
+      "category": "通用／價值對齊後訓練／文字",
+      "tags": "OW",
+      "note": "Nous Research 以 Qwen3.8-27B 做監督式微調（SFT）的後訓練模型；模型卡描述為文字資料訓練，未改架構。日期採官網所列 11/6 官方公告，不採彙整網站的 11/8 收錄日。權重、訓練資料與評測已公開，權重模型卡標示 Apache 2.0。價值對齊目標及評測結果是開發者自述，不代表無偏見或通用能力全面提升；與 Hermes Agent 產品分開。",
+      "sources": [
+        "https://nousresearch.com/arete",
+        "https://nousresearch.com/",
+        "https://x.com/NousResearch/status/2118822925445050435",
+        "https://huggingface.co/NousResearch/Arete-27B"
+      ]
+    },
+    {
+      "vendor": "humans&",
+      "model": "Ampersand v0.1",
+      "date": "2026-10-20",
+      "category": "協作／文字／Agent 能力",
+      "tags": "A",
+      "note": "以 GLM 5.3 為基礎的協作模型，接受與輸出文字，面向多人協作、長期目標與工具使用。官方模型卡明列 10/20 發布，透過 Agents API 以 ampersand-v0.1 提供；不是 11/6 新發布。API 產品名稱不改變其模型身分，不額外增加 Agent 產品卡；公告未提供開放權重，本筆不標 OW，也不推論所有帳號或地區均可用。",
+      "sources": [
+        "https://ampersand.humansand.ai/blog/",
+        "https://ampersand.humansand.ai/blog/model-card.html",
+        "https://ampersand.humansand.ai/docs/"
+      ]
+    },
+    {
+      "vendor": "Ricursive Intelligence",
+      "model": "Ripple-65B Preview",
+      "date": "2026-11-04",
+      "category": "通用／推理／程式／Agent 能力",
+      "tags": "R/A/OW",
+      "note": "Ricursive 的 65B dense Transformer 預覽模型，從頭預訓練並針對程式與 Agent 任務後訓練；日期採官方電子報明列的 11/4。Apache 2.0 權重已公開，支援最高 1Mi context。此節點收錄 instruction-tuned Preview；BF16／NVFP4 是數值格式，不重複計數，另提供的 Base checkpoint 不與 instruction-tuned 版本混稱。公告確認 Together AI、GMI Cloud、OpenRouter 可用；Fireworks 在當日公告仍是稍後上線計畫。",
+      "sources": [
+        "https://ricursive-news.beehiiv.com/p/ripple-65b-preview",
+        "https://www.ricursive.com/ripple",
+        "https://huggingface.co/ricursiveAI/Ripple-65B-Preview"
       ]
     }
   ]

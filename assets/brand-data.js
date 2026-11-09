@@ -5,6 +5,9 @@
   const OTHER = { id: 'other', label: '其他／未分類' };
   const rule = (id, label, pattern) => ({ id, label, pattern });
   const catalogs = new Map([
+    ['Nous Research', [rule('arete', 'Arete 後訓練支線', /^Arete-\d+B$/i)]],
+    ['humans&', [rule('ampersand', 'Ampersand 協作模型', /^Ampersand v\d+(?:\.\d+)*$/i)]],
+    ['Ricursive Intelligence', [rule('ripple', 'Ripple', /^Ripple-\d+B Preview$/i)]],
     ['Kakao', [rule('kanana-decide', 'Kanana 決策支線', /^Kanana-\d+-v-decide$/i)]],
     ['SenseTime', [rule('sensenova', 'SenseNova', /^SenseNova \d+(?:\.\d+)*(?: Flash)?$/i)]],
     ['Thinking Machines Lab', [rule('inkling', 'Inkling', /^Inkling(?: \d+)?(?:[- ]Small)?$/i)]],

@@ -13,8 +13,8 @@ test('Agent product stays separate, carries preview scope and safe source link',
 });
 test('changed runtime and manifest URLs use fresh cache revisions',()=>{
  const page=read('index.html');
- for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261108-content1`));
- assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261108-content1'));
+ for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261109-content1`));
+ assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261109-content1'));
 });
 
 
@@ -34,15 +34,35 @@ test('new Agent cards are dated product events with scoped previews and safe sou
   assert.equal(d.querySelectorAll('article.card').length,9);
   const studio=d.getElementById('mistral-studio'),muse=d.getElementById('meta-muse');
   for(const card of [studio,muse]){
-   assert.equal(card.dataset.k,'agent');assert.equal(card.dataset.checkedAt,'2026-11-06');
+   assert.equal(card.dataset.k,'agent');assert.equal(card.dataset.checkedAt,card.id==='meta-muse'?'2026-11-09':'2026-11-06');
    assert.ok(card.querySelector('time[datetime="2026-11-05"]'));
    assert.ok([...card.querySelectorAll('a')].every(a=>a.protocol==='https:'&&a.rel.includes('noopener')&&a.rel.includes('noreferrer')));
   }
   assert.match(studio.textContent,/公開預覽/);assert.match(studio.textContent,/私人預覽/);assert.match(studio.textContent,/不將公告日視為產品首次推出/);
-  assert.match(muse.textContent,/美國/);assert.match(muse.textContent,/即將推出/);assert.match(muse.textContent,/不是新的基礎模型/);
+  assert.match(muse.textContent,/美國/);assert.match(muse.textContent,/即將推出/);assert.match(muse.textContent,/不另增模型節點/);
   for(const filter of ['coding','decision','agent','all']){
    d.querySelector(`[data-f="${filter}"]`).click();
    for(const card of [studio,muse])assert.equal(card.hidden,!['agent','all'].includes(filter));
+  }
+ }finally{dom.window.close()}
+});
+
+test('Hermes security and Meta specialization are dated events in existing Agent cards',()=>{
+ const {JSDOM}=require('jsdom');const dom=new JSDOM(read('agents.html'),{runScripts:'dangerously'});const d=dom.window.document;
+ try{
+  const hermes=d.getElementById('hermes-agent'),muse=d.getElementById('meta-muse');
+  assert.equal(d.querySelectorAll('article.card').length,9);
+  for(const card of [hermes,muse]){
+   assert.equal(card.dataset.k,'agent');assert.equal(card.dataset.checkedAt,'2026-11-09');
+   assert.ok([...card.querySelectorAll('a')].every(a=>a.protocol==='https:'&&a.rel.includes('noopener')&&a.rel.includes('noreferrer')));
+  }
+  assert.ok(hermes.querySelector('time[datetime="2026-11-08"]'));
+  assert.match(hermes.textContent,/不等於安全沙箱/);assert.match(hermes.textContent,/不是新模型/);assert.match(hermes.textContent,/Desktop 預設關閉/);
+  assert.ok(muse.querySelector('time[datetime="2026-11-05"]'));assert.ok(muse.querySelector('time[datetime="2026-11-06"]'));
+  assert.match(muse.textContent,/Active Memory 與 Active Focus/);assert.match(muse.textContent,/未公布新模型型號、API 或開放權重/);
+  for(const filter of ['coding','decision','agent','all']){
+   d.querySelector(`[data-f="${filter}"]`).click();
+   for(const card of [hermes,muse])assert.equal(card.hidden,!['agent','all'].includes(filter));
   }
  }finally{dom.window.close()}
 });

@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-08');
-  assert.equal(updates.additions.length,45);
-  assert.equal(new Set(updates.additions.map(D.key)).size,45);
+  assert.equal(updates.checkedAt,'2026-11-09');
+  assert.equal(updates.additions.length,48);
+  assert.equal(new Set(updates.additions.map(D.key)).size,48);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,45);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,48);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -195,4 +195,23 @@ test('November 6 model additions retain exact availability and specialized branc
  assert.match(hy.note,/不據此宣稱權重已開放/);assert.match(hy.note,/Hy4 Preview/);assert.match(hy.note,/Hy4 Flash 仍是預告/);assert.ok(!hy.tags.includes('OW'));
  for(const row of [cyber,omni,hy])assert.equal(updates.additions.filter(r=>D.key(r)===D.key(row)).length,1);
  assert.ok(!updates.additions.some(r=>/Mistral Studio|Meta Muse|Hy4 Flash/.test(r.model)));
+});
+
+test('November 9 backfill uses first-party dates and keeps derivative models distinct from products',()=>{
+ const expected={'Arete-27B':['Nous Research','2026-11-06'],'Ampersand v0.1':['humans&','2026-10-20'],'Ripple-65B Preview':['Ricursive Intelligence','2026-11-04']};
+ for(const [model,[vendor,date]] of Object.entries(expected)){
+  const rows=updates.additions.filter(r=>r.model===model);assert.equal(rows.length,1);
+  assert.equal(rows[0].vendor,vendor);assert.equal(rows[0].date,date);
+  assert.ok(D.types(rows[0]).includes('general'));
+  assert.ok(rows[0].sources.every(s=>new URL(s).protocol==='https:'));
+ }
+ const arete=updates.additions.find(r=>r.model==='Arete-27B');
+ assert.match(arete.note,/Qwen3.8-27B/);assert.match(arete.note,/監督式微調/);assert.match(arete.note,/開發者自述/);
+ assert.ok(D.tags(arete).includes('OW'));assert.ok(!D.types(arete).includes('multimodal'));
+ const amp=updates.additions.find(r=>r.model==='Ampersand v0.1');
+ assert.match(amp.note,/GLM 5.3/);assert.match(amp.note,/Agents API/);assert.ok(!D.tags(amp).includes('OW'));
+ const ripple=updates.additions.find(r=>r.model==='Ripple-65B Preview');
+ assert.match(ripple.note,/Apache 2.0/);assert.match(ripple.note,/BF16／NVFP4.*不重複計數/);assert.match(ripple.note,/Fireworks.*計畫/);
+ assert.ok(D.tags(ripple).includes('OW'));assert.ok(D.types(ripple).includes('coding'));
+ assert.ok(!updates.additions.some(r=>/hermes-security|^Meta Muse$|^Agents API$/.test(r.model)));
 });

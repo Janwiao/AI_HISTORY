@@ -113,3 +113,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-08 歷史補漏
 
 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 10/6 EmbeddingGemma 2。區分預覽與權重發布，保留 Mistral 商用授權限制；EmbeddingGemma 獨立列為嵌入模型支線。共 253 個模型／版本節點、24 品牌、9 張 Agent／工具卡。本批是歷史補漏，不是 11/8 新發布。詳見 [本批查核](docs/UPDATE_2026-11-08.zh-TW.md)。
+
+## 2026-11-09 資料補漏與產品事件
+
+補收 Arete-27B（11/6）、Ampersand v0.1（10/20）與 Ripple-65B Preview（11/4），日期採第一方公告，不採新聞彙整收錄日。新增 Nous Research、humans&、Ricursive Intelligence 三品牌，目前 256 個模型／版本節點、27 品牌。Hermes Security plugin（11/8）與 Meta 專用模型推出（11/6）補入既有 Agent 卡，仍為 9 張卡，不額外計入模型數。詳見 [本批查核](docs/UPDATE_2026-11-09.zh-TW.md)。
