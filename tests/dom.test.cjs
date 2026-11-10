@@ -76,9 +76,9 @@ test('new brands and decision filter retain list, timeline, details and brand na
   }finally{c.dom.window.close()}
  }
 });
-test('desktop loads 256 unique records, all dates and 27 brands at readable scale; updates closed', async()=>{
+test('desktop loads 258 unique records, all dates and 27 brands at readable scale; updates closed', async()=>{
   const c=await boot();try{
-    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,256);assert.equal(c.d.querySelectorAll('.model-card').length,256);
+    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,258);assert.equal(c.d.querySelectorAll('.model-card').length,258);
     assert.equal(c.d.querySelectorAll('#brandJump option').length,28);assert.equal(c.d.getElementById('pct').textContent,'100%');
     assert.equal(c.d.getElementById('updatesPanel').open,false);assert.equal(c.d.getElementById('listResults').hidden,true);
     assert.equal(c.d.querySelectorAll('.model-card time[datetime="2026-05"]').length,1);
@@ -99,7 +99,7 @@ test('filter intersections, empty/reset, capability search and URL restoration',
     assert.equal(c.d.querySelectorAll('.node').length,1);assert.match(c.w.location.search,/brand=Alibaba/);
     c.d.getElementById('search').value='nonexistent';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.equal(c.d.getElementById('emptyState').hidden,false);assert.equal(c.v.hidden,true);
-    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,256);assert.equal(c.d.getElementById('emptyState').hidden,true);
+    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,258);assert.equal(c.d.getElementById('emptyState').hidden,true);
     c.d.getElementById('search').value='推理';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.ok(c.d.querySelectorAll('.node').length>=75);
     c.w.history.pushState({},'', '?brand=Alibaba&year=2026&type=image&view=list');c.w.dispatchEvent(new c.w.PopStateEvent('popstate'));
@@ -218,7 +218,7 @@ test('Rerank filter is selectable and excludes Embed while cumulative scope is e
   c.set('typeFilter','rerank');
   const cards=[...c.d.querySelectorAll('.model-card')];
   assert.equal(cards.length,2);assert.ok(cards.every(card=>card.textContent.includes('Rerank 5')));
-  assert.match(c.d.getElementById('scope').textContent,/累計收錄 48 筆增量/);
+  assert.match(c.d.getElementById('scope').textContent,/累計收錄 50 筆增量/);
   assert.match(c.d.getElementById('scope').textContent,/不代表全部當日發布或重新查核/);
  }finally{c.dom.window.close()}
 });
@@ -318,4 +318,20 @@ test('November 9 brands render safely in list, timeline, source details and bran
    c.click('timelineView');assert.equal(c.v.hidden,false);
   }finally{c.dom.window.close()}
  }
+});
+
+test('5.2 versions render once in list and timeline with sources and brand lanes',async()=>{
+ const c=await boot({mobile:true,url:'https://example.test/AI_HISTORY/?brand=Anthropic&q=5.2&view=list'});try{
+  assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.model-card').length,2);assert.equal(c.d.querySelectorAll('.node').length,2);
+  const names=new Set();
+  for(const button of c.d.querySelectorAll('.model-card [data-detail]')){
+   button.click();names.add(c.d.getElementById('detailTitle').textContent);
+   assert.match(c.d.getElementById('detailMeta').textContent,/2026-11-09/);
+   assert.equal(c.d.querySelectorAll('#detailSources a').length,4);c.click('closeDetail');
+  }
+  assert.deepEqual([...names].sort(),['Claude Fable 5.2','Claude Mythos 5.2']);
+  c.d.querySelector('#listResults [data-brand]').click();
+  for(const name of names)assert.ok(c.d.getElementById('brandCanvas').textContent.includes(name));
+  c.click('closeBrand');assert.equal(c.d.querySelectorAll('.model-card').length,2);
+ }finally{c.dom.window.close()}
 });

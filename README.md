@@ -117,3 +117,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-09 資料補漏與產品事件
 
 補收 Arete-27B（11/6）、Ampersand v0.1（10/20）與 Ripple-65B Preview（11/4），日期採第一方公告，不採新聞彙整收錄日。新增 Nous Research、humans&、Ricursive Intelligence 三品牌，目前 256 個模型／版本節點、27 品牌。Hermes Security plugin（11/8）與 Meta 專用模型推出（11/6）補入既有 Agent 卡，仍為 9 張卡，不額外計入模型數。詳見 [本批查核](docs/UPDATE_2026-11-09.zh-TW.md)。
+
+## 2026-11-10 自主資料增補
+
+新增 11/9 發布的 Claude Fable 5.2／Mythos 5.2；官方明示相同底層模型，分列一般提供與驗證計畫限定的命名版本，不宣稱兩組不同權重。共 258 個模型／版本節點、27 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-10.zh-TW.md)。

@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-09');
-  assert.equal(updates.additions.length,48);
-  assert.equal(new Set(updates.additions.map(D.key)).size,48);
+  assert.equal(updates.checkedAt,'2026-11-10');
+  assert.equal(updates.additions.length,50);
+  assert.equal(new Set(updates.additions.map(D.key)).size,50);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,48);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,50);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -214,4 +214,18 @@ test('November 9 backfill uses first-party dates and keeps derivative models dis
  assert.match(ripple.note,/Apache 2.0/);assert.match(ripple.note,/BF16／NVFP4.*不重複計數/);assert.match(ripple.note,/Fireworks.*計畫/);
  assert.ok(D.tags(ripple).includes('OW'));assert.ok(D.types(ripple).includes('coding'));
  assert.ok(!updates.additions.some(r=>/hermes-security|^Meta Muse$|^Agents API$/.test(r.model)));
+});
+
+test('Fable and Mythos 5.2 are dated named versions with shared underlying model and scoped access',()=>{
+ const names=['Claude Fable 5.2','Claude Mythos 5.2'];
+ for(const name of names){
+  const rows=updates.additions.filter(r=>r.model===name);assert.equal(rows.length,1);
+  const row=rows[0];assert.equal(row.vendor,'Anthropic');assert.equal(row.date,'2026-11-09');
+  assert.match(row.note,/相同底層模型/);assert.match(row.note,/不代表兩組不同權重/);
+  assert.match(row.note,/fast mode 不另計模型/);assert.ok(!D.tags(row).includes('OW'));
+  assert.ok(row.sources.includes('https://platform.claude.com/docs/en/release-notes/overview'));
+ }
+ assert.match(updates.additions.find(r=>r.model===names[0]).note,/一般提供/);
+ assert.match(updates.additions.find(r=>r.model===names[1]).note,/受限存取/);
+ assert.ok(!updates.additions.some(r=>/5.2.*fast/i.test(r.model)));
 });

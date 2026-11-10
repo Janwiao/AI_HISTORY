@@ -46,10 +46,10 @@ test('UMD exposes the same small API in a browser without dependencies', () => {
   assert.equal(context.window.BrandEvolutionData.family({ vendor: 'OpenAI', model: 'GPT-4' }).id, 'gpt');
 });
 
-test('all 256 merged nodes are retained exactly once with no product injection', () => {
+test('all 258 merged nodes are retained exactly once with no product injection', () => {
   assert.equal(baseline().length, 208);
-  assert.equal(records.length, 256);
-  assert.equal(new Set(records.map(D.key)).size, 256);
+  assert.equal(records.length, 258);
+  assert.equal(new Set(records.map(D.key)).size, 258);
   const all = [];
   for (const vendor of new Set(records.map(row => row.vendor))) {
     const lanes = B.group(records, vendor);
@@ -157,4 +157,9 @@ test('November 9 brands have conservative independent name lanes',()=>{
   const row=updates.additions.find(r=>r.model===model);assert.equal(row.vendor,vendor);
   assert.equal(B.family(row).id,id);
  }
+});
+
+test('Fable and Mythos 5.2 retain separate existing named family lanes',()=>{
+ assert.equal(classify('Anthropic','Claude Fable 5.2').id,'claude-fable');
+ assert.equal(classify('Anthropic','Claude Mythos 5.2').id,'claude-mythos');
 });
