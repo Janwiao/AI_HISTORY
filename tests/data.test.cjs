@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-10');
-  assert.equal(updates.additions.length,50);
-  assert.equal(new Set(updates.additions.map(D.key)).size,50);
+  assert.equal(updates.checkedAt,'2026-11-11');
+  assert.equal(updates.additions.length,52);
+  assert.equal(new Set(updates.additions.map(D.key)).size,52);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,50);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,52);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -228,4 +228,23 @@ test('Fable and Mythos 5.2 are dated named versions with shared underlying model
  assert.match(updates.additions.find(r=>r.model===names[0]).note,/一般提供/);
  assert.match(updates.additions.find(r=>r.model===names[1]).note,/受限存取/);
  assert.ok(!updates.additions.some(r=>/5.2.*fast/i.test(r.model)));
+});
+
+test('November 11 additions use primary dates and distinguish model modalities and future Pro',()=>{
+ const image=updates.additions.find(r=>r.model==='Seedream 5.5'),ember=updates.additions.find(r=>r.model==='Muse Ember 1.0');
+ for(const row of [image,ember]){
+  assert.equal(row.date,'2026-11-09');assert.equal(updates.additions.filter(r=>D.key(r)===D.key(row)).length,1);
+  assert.ok(!D.tags(row).includes('OW'));assert.ok(row.sources.every(s=>s.startsWith('https://')));
+ }
+ assert.equal(image.vendor,'ByteDance');assert.deepEqual(D.types(image),['image']);assert.match(image.note,/Pro 版本將後續推出/);
+ assert.ok(!updates.additions.some(r=>r.model==='Seedream 5.5 Pro'));
+ assert.equal(ember.vendor,'Meta');assert.ok(D.types(ember).includes('general'));assert.ok(D.types(ember).includes('multimodal'));
+ assert.ok(!D.types(ember).includes('voice'));assert.ok(!D.types(ember).includes('video'));assert.match(ember.note,/輸出文字/);
+ assert.match(ember.note,/muse-ember-1.0/);
+});
+test('Carbon GA supplements rather than replaces initial restricted announcement',()=>{
+ const rows=updates.additions.filter(r=>r.model==='Gemini 4 Carbon');assert.equal(rows.length,1);
+ const r=rows[0];assert.equal(r.date,'2026-10-28');assert.match(r.note,/2026-11-10/);assert.match(r.note,/一般可用（GA）/);
+ assert.match(r.note,/Ultra/);assert.match(r.note,/分批推出/);assert.match(r.note,/不把 11\/10 擴大可用另計新模型/);
+ assert.ok(r.sources.includes('https://aistudio.google.com/docs/changelog'));
 });

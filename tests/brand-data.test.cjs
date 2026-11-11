@@ -46,10 +46,10 @@ test('UMD exposes the same small API in a browser without dependencies', () => {
   assert.equal(context.window.BrandEvolutionData.family({ vendor: 'OpenAI', model: 'GPT-4' }).id, 'gpt');
 });
 
-test('all 258 merged nodes are retained exactly once with no product injection', () => {
+test('all 260 merged nodes are retained exactly once with no product injection', () => {
   assert.equal(baseline().length, 208);
-  assert.equal(records.length, 258);
-  assert.equal(new Set(records.map(D.key)).size, 258);
+  assert.equal(records.length, 260);
+  assert.equal(new Set(records.map(D.key)).size, 260);
   const all = [];
   for (const vendor of new Set(records.map(row => row.vendor))) {
     const lanes = B.group(records, vendor);
@@ -162,4 +162,12 @@ test('November 9 brands have conservative independent name lanes',()=>{
 test('Fable and Mythos 5.2 retain separate existing named family lanes',()=>{
  assert.equal(classify('Anthropic','Claude Fable 5.2').id,'claude-fable');
  assert.equal(classify('Anthropic','Claude Mythos 5.2').id,'claude-mythos');
+});
+
+test('Ember and Seedream have conservative family lanes, not Llama or Seed',()=>{
+ assert.equal(classify('Meta','Muse Ember 1.0').id,'muse-ember');
+ assert.equal(classify('Meta','Llama 4').id,'llama');
+ assert.equal(classify('ByteDance','Seedream 5.5').id,'seedream');
+ assert.equal(classify('ByteDance','Seed2.1').id,'seed');
+ assert.equal(classify('Meta','Muse unknown').id,'other');
 });

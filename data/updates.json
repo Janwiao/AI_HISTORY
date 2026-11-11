@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-10",
+  "checkedAt": "2026-11-11",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -322,9 +322,11 @@
       "date": "2026-10-28",
       "category": "高階推理／長程工作流／資安",
       "tags": "R/A/MM",
-      "note": "Google 10/28 公告的 Gemini 4 新模型，聚焦長程工程與資安防禦。公告表示本週起向部分資安防禦者提供，並透過 Fairwind Program 逐步擴大可信合作夥伴存取；開發者、企業與消費者產品全面存取仍待推出，不等同公開全面上線。",
+      "note": "Google 10/28 公告的 Gemini 4 模型，首發時透過 Fairwind Program 向部分資安防禦者及可信合作夥伴提供，當時一般存取仍待推出。後續 2026-11-10 Gemini API 發布紀錄明列 gemini-4-carbon 一般可用（GA）；官方公告開放付費開發者與企業，並向 Google AI Ultra 訂戶在 Antigravity、Gemini app 及 Search AI Mode 分批推出。保留 10/28 首發日期，不把 11/10 擴大可用另計新模型，也不推論所有免費帳號或地區均已開放。",
       "sources": [
-        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+        "https://aistudio.google.com/docs/changelog",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/"
       ]
     },
     {
@@ -598,6 +600,31 @@
         "https://platform.claude.com/docs/en/release-notes/overview",
         "https://platform.claude.com/docs/en/models/mythos-5-2/overview",
         "https://support.claude.com/en/articles/15425695-covered-models"
+      ]
+    },
+    {
+      "vendor": "ByteDance",
+      "model": "Seedream 5.5",
+      "date": "2026-11-09",
+      "category": "影像生成／影像編輯",
+      "tags": "IMAGE",
+      "note": "日期採 ByteDance Seed 公告正文。影像生成與多輪編輯模型，支援原生 RGBA 透明背景；100 輪編輯保留效果及評測優勢為官方展示，不是本站獨立驗證。官網提供試用入口，但本次未核實所有地區、帳號與 API 可用範圍；不標示開放權重。公告稱 Pro 版本將後續推出，故不新增 Seedream 5.5 Pro；不與 Seedance 影片或 Seed 通用模型混稱。",
+      "sources": [
+        "https://seed.bytedance.com/en/blog/more-realistic-images-more-stable-editing-across-100-rounds-introducing-seedream-5-5",
+        "https://seed.bytedance.com/en/seedream5_5"
+      ]
+    },
+    {
+      "vendor": "Meta",
+      "model": "Muse Ember 1.0",
+      "date": "2026-11-09",
+      "category": "通用／推理／程式／多模態",
+      "tags": "R/A/MM",
+      "note": "Meta 官方公告名為 Muse Ember，API ID 為 muse-ember-1.0；以官方 11/9 公告及當日 Meta Model API／Muse Code 可用日收錄，不採二手清單 11/10 日期。面向高頻重複的工具調用、程式子任務與文件處理；可理解文字、影像、音訊、影片與 PDF，輸出文字，不是音訊或影片生成模型。模型文件列 1,048,576 context、524,288 最大輸出；託管 Standard mode，未標示開放權重。這是模型，不與 Muse 個人 Agent 產品卡重複計數。",
+      "sources": [
+        "https://research.meta.ai/blog/muse-ember",
+        "https://dev.meta.ai/docs/muse-ember",
+        "https://dev.meta.ai/models/muse-ember"
       ]
     }
   ]
