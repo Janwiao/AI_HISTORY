@@ -5,6 +5,7 @@
   const OTHER = { id: 'other', label: '其他／未分類' };
   const rule = (id, label, pattern) => ({ id, label, pattern });
   const catalogs = new Map([
+    ['ElevenLabs', [rule('scribe', 'Scribe 語音轉寫', /^Scribe v\d+(?:\.\d+)*(?: Live)?$/i)]],
     ['Nous Research', [rule('arete', 'Arete 後訓練支線', /^Arete-\d+B$/i)]],
     ['humans&', [rule('ampersand', 'Ampersand 協作模型', /^Ampersand v\d+(?:\.\d+)*$/i)]],
     ['Ricursive Intelligence', [rule('ripple', 'Ripple', /^Ripple-\d+B Preview$/i)]],
@@ -38,6 +39,7 @@
       rule('claude-mythos', 'Claude Mythos', /^Claude Mythos \d+(?:\.\d+)*$/i)
     ]],
     ['Google', [
+      rule('gemini-decision', 'Gemini Decision 決策支線', /^Gemini Decision \d+(?:\.\d+)*$/i),
       rule('gemini-omni', 'Gemini Omni 影片支線', /^Gemini Omni(?: \d+(?:\.\d+)*)? Flash$/i),
       rule('genie', 'Genie 世界模型', /^Genie \d+(?:\.\d+)*$/i),
       rule('gemini-tts', 'Gemini TTS', /^Gemini \d+(?:\.\d+)* Flash(?:-Lite)? TTS$/i),
@@ -96,7 +98,7 @@
     rule('voice', '語音（依原始類別）', /語音|音訊|text.to.speech|speech|audio/i)
   ];
   const specializedIds = new Set([
-    'embedding-gemma', 'kanana-decide', 'gpt-cyber', 'gemini-omni', 'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
+    'scribe', 'gemini-decision', 'embedding-gemma', 'kanana-decide', 'gpt-cyber', 'gemini-omni', 'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
     'gemini-live', 'google-image', 'qwen-image', 'qwen-translation', 'qwen-voice',
     'qwen-embedding', 'cohere-translation', 'cohere-embedding'
   ]);

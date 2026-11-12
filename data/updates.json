@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-11",
+  "checkedAt": "2026-11-12",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。 2026-11-12 增補 Qwen4-Max-Preview、Gemini Decision 1 及 Scribe v3／v3 Live；預覽、決策分類與語音轉寫支線分開標示，不代表全量歷史重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -625,6 +625,52 @@
         "https://research.meta.ai/blog/muse-ember",
         "https://dev.meta.ai/docs/muse-ember",
         "https://dev.meta.ai/models/muse-ember"
+      ]
+    },
+    {
+      "vendor": "Alibaba",
+      "model": "Qwen4-Max-Preview",
+      "date": "2026-11-11",
+      "category": "通用／推理／多模態／預覽",
+      "tags": "R/A/MM",
+      "note": "官方 11/11 推出多模態模型預覽，支援文字生成、圖像／影片理解及工具呼叫。API 僅限 Token Plan，不支援按量付費；預覽為 11/11 10:00 至 11/25 24:00（UTC+8），官方預告期滿退役。不把預覽當成正式版或開放權重發布。",
+      "sources": [
+        "https://docs.qwencloud.com/changelog/models",
+        "https://docs.qwencloud.com/developer-guides/getting-started/latest-model"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "Gemini Decision 1",
+      "date": "2026-11-11",
+      "category": "多模態決策／分類",
+      "tags": "DECISION/MM",
+      "note": "官方 11/11 發布 gemini-decision-1，透過 Decisions API 對文字、圖片、音訊、影片與 PDF 進行二元判斷、多選分類及評分。回傳機率／信心分數，不是通用文字生成模型；Decisions API 是服務介面，不另計一個模型。Gemini API／AI Studio 已提供，Google Cloud 支援仍為後續計畫。",
+      "sources": [
+        "https://aistudio.google.com/docs/changelog",
+        "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
+      ]
+    },
+    {
+      "vendor": "ElevenLabs",
+      "model": "Scribe v3",
+      "date": "2026-11-10",
+      "category": "語音辨識／錄音轉寫",
+      "tags": "VOICE",
+      "note": "官方 11/10 發布錄音轉文字模型，當日於 ElevenAPI 提供，模型 ID 為 scribe_v3。屬語音辨識支線，不是語音生成或 Agent 產品；不將官方比較測試當作本站獨立驗證。",
+      "sources": [
+        "https://elevenlabs.io/blog/scribe-v3"
+      ]
+    },
+    {
+      "vendor": "ElevenLabs",
+      "model": "Scribe v3 Live",
+      "date": "2026-11-10",
+      "category": "語音辨識／即時轉寫",
+      "tags": "VOICE",
+      "note": "官方 11/10 發布即時語音轉文字模型，支援即時說話者標記及對話輪替判斷；當日於 ElevenAPI 與 ElevenAgents 提供，模型 ID 為 scribe_v3_live。屬轉寫模型，不把 ElevenAgents 產品另計新模型。",
+      "sources": [
+        "https://elevenlabs.io/blog/scribe-v3"
       ]
     }
   ]

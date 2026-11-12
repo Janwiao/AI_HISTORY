@@ -125,3 +125,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-11 自主資料增補
 
 新增 Seedream 5.5 與 Muse Ember 1.0（均採 11/9 官方公告日），並補既有 Gemini 4 Carbon 的 11/10 API GA 與 Ultra 分批推出狀態，保留 10/28 首發日、不重複計數。共 260 個模型／版本節點、27 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-11.zh-TW.md)。
+
+## 2026-11-12 自主資料增補
+
+新增 11/11 的 Qwen4-Max-Preview 與 Gemini Decision 1，以及 11/10 的 Scribe v3／v3 Live。保留 Qwen 限期 Token Plan 預覽，決策分類與語音轉寫各有獨立名稱支線。新增 ElevenLabs 品牌，共 264 個模型／版本節點、28 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-12.zh-TW.md)。

@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-11');
-  assert.equal(updates.additions.length,52);
-  assert.equal(new Set(updates.additions.map(D.key)).size,52);
+  assert.equal(updates.checkedAt,'2026-11-12');
+  assert.equal(updates.additions.length,56);
+  assert.equal(new Set(updates.additions.map(D.key)).size,56);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,52);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,56);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -247,4 +247,23 @@ test('Carbon GA supplements rather than replaces initial restricted announcement
  const r=rows[0];assert.equal(r.date,'2026-10-28');assert.match(r.note,/2026-11-10/);assert.match(r.note,/一般可用（GA）/);
  assert.match(r.note,/Ultra/);assert.match(r.note,/分批推出/);assert.match(r.note,/不把 11\/10 擴大可用另計新模型/);
  assert.ok(r.sources.includes('https://aistudio.google.com/docs/changelog'));
+});
+
+test('November 12 additions preserve primary dates, distinct modalities and preview access',()=>{
+ const expected={'Qwen4-Max-Preview':['Alibaba','2026-11-11'],'Gemini Decision 1':['Google','2026-11-11'],'Scribe v3':['ElevenLabs','2026-11-10'],'Scribe v3 Live':['ElevenLabs','2026-11-10']};
+ for(const [name,[vendor,date]] of Object.entries(expected)){
+  const rows=updates.additions.filter(r=>r.model===name);assert.equal(rows.length,1);
+  assert.equal(rows[0].vendor,vendor);assert.equal(rows[0].date,date);assert.ok(!D.tags(rows[0]).includes('OW'));
+  assert.ok(rows[0].sources.length&&rows[0].sources.every(s=>new URL(s).protocol==='https:'));
+ }
+ const qwen=updates.additions.find(r=>r.model==='Qwen4-Max-Preview');
+ assert.ok(D.types(qwen).includes('general'));assert.ok(D.types(qwen).includes('multimodal'));
+ assert.ok(!D.types(qwen).includes('video'));assert.match(qwen.note,/僅限 Token Plan/);assert.match(qwen.note,/不支援按量付費/);
+ assert.match(qwen.note,/11\/25 24:00（UTC\+8）/);assert.match(qwen.note,/期滿退役/);
+ const decision=updates.additions.find(r=>r.model==='Gemini Decision 1');
+ assert.deepEqual(D.types(decision),['decision','multimodal']);assert.match(decision.note,/Google Cloud.*後續計畫/);
+ for(const name of ['Scribe v3','Scribe v3 Live']){
+  const row=updates.additions.find(r=>r.model===name);assert.deepEqual(D.types(row),['voice']);assert.match(row.note,/ElevenAPI/);
+ }
+ assert.ok(!updates.additions.some(r=>['Decisions API','ElevenAgents','Qwen4-Max'].includes(r.model)));
 });
