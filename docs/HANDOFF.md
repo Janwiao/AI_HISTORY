@@ -193,3 +193,7 @@ GPT-6 Rosalind Research 以研究專用部署版本收錄（10/30），官方系
 ## 2026-11-12 自主資料增補
 
 新增 11/11 的 Qwen4-Max-Preview 與 Gemini Decision 1，以及 11/10 的 Scribe v3／v3 Live。保留 Qwen 限期 Token Plan 預覽，決策分類與語音轉寫各有獨立名稱支線。新增 ElevenLabs 品牌，共 264 個模型／版本節點、28 品牌、9 張 Agent／工具卡。詳見 [本批查核](UPDATE_2026-11-12.zh-TW.md)。
+
+## 2026-11-13 自主資料增補
+
+新增 Gemini 4 Hydrogen（11/12 官方發布與 API GA），保留產品分批推出、免費用戶自動選模及 Antigravity 方案範圍；Orchestrator 不另計模型。共 265 個模型／版本節點、28 品牌、9 張 Agent／工具卡。詳見 [本批查核](UPDATE_2026-11-13.zh-TW.md)。

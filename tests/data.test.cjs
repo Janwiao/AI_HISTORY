@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-12');
-  assert.equal(updates.additions.length,56);
-  assert.equal(new Set(updates.additions.map(D.key)).size,56);
+  assert.equal(updates.checkedAt,'2026-11-13');
+  assert.equal(updates.additions.length,57);
+  assert.equal(new Set(updates.additions.map(D.key)).size,57);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,56);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,57);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -266,4 +266,11 @@ test('November 12 additions preserve primary dates, distinct modalities and prev
   const row=updates.additions.find(r=>r.model===name);assert.deepEqual(D.types(row),['voice']);assert.match(row.note,/ElevenAPI/);
  }
  assert.ok(!updates.additions.some(r=>['Decisions API','ElevenAgents','Qwen4-Max'].includes(r.model)));
+});
+
+test('Hydrogen is a November 12 GA model, not an Orchestrator product node',()=>{
+ const r=updates.additions.find(r=>r.model==='Gemini 4 Hydrogen');assert.equal(r.date,'2026-11-12');assert.equal(r.vendor,'Google');
+ assert.ok(D.types(r).includes('general'));assert.ok(D.types(r).includes('multimodal'));assert.ok(!D.tags(r).includes('OW'));
+ assert.match(r.note,/一般可用/);assert.match(r.note,/分批推出/);assert.match(r.note,/免費用戶透過自動選模/);
+ assert.equal(require('../assets/brand-data.js').family(r).id,'gemini');assert.ok(!updates.additions.some(r=>r.model==='Orchestrator'));
 });
