@@ -5,6 +5,7 @@
   const OTHER = { id: 'other', label: '其他／未分類' };
   const rule = (id, label, pattern) => ({ id, label, pattern });
   const catalogs = new Map([
+    ['Salesforce', [rule('sov-transcribe', 'SOV 語音轉寫', /^SOV-Transcribe-\d+$/i)]],
     ['ElevenLabs', [rule('scribe', 'Scribe 語音轉寫', /^Scribe v\d+(?:\.\d+)*(?: Live)?$/i)]],
     ['Nous Research', [rule('arete', 'Arete 後訓練支線', /^Arete-\d+B$/i)]],
     ['humans&', [rule('ampersand', 'Ampersand 協作模型', /^Ampersand v\d+(?:\.\d+)*$/i)]],

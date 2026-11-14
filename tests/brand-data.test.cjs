@@ -46,10 +46,10 @@ test('UMD exposes the same small API in a browser without dependencies', () => {
   assert.equal(context.window.BrandEvolutionData.family({ vendor: 'OpenAI', model: 'GPT-4' }).id, 'gpt');
 });
 
-test('all 265 merged nodes are retained exactly once with no product injection', () => {
+test('all 266 merged nodes are retained exactly once with no product injection', () => {
   assert.equal(baseline().length, 208);
-  assert.equal(records.length, 265);
-  assert.equal(new Set(records.map(D.key)).size, 265);
+  assert.equal(records.length, 266);
+  assert.equal(new Set(records.map(D.key)).size, 266);
   const all = [];
   for (const vendor of new Set(records.map(row => row.vendor))) {
     const lanes = B.group(records, vendor);
@@ -176,7 +176,7 @@ test('Qwen preview retains Qwen family while Decision and Scribe have distinct s
  for(const [name,id] of [['Qwen4-Max-Preview','qwen'],['Gemini Decision 1','gemini-decision'],['Scribe v3','scribe'],['Scribe v3 Live','scribe']]){
   const row=updates.additions.find(r=>r.model===name);assert.equal(B.family(row).id,id);
  }
- assert.equal(new Set(records.map(r=>r.vendor)).size,28);
+ assert.equal(new Set(records.map(r=>r.vendor)).size,29);
  assert.equal(B.group(records,'ElevenLabs').length,1);
  assert.equal(B.group(records,'ElevenLabs')[0].rows.length,2);
 });

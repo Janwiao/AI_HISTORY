@@ -133,3 +133,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-13 自主資料增補
 
 新增 Gemini 4 Hydrogen（11/12 官方發布與 API GA），保留產品分批推出、免費用戶自動選模及 Antigravity 方案範圍；Orchestrator 不另計模型。共 265 個模型／版本節點、28 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-13.zh-TW.md)。
+
+## 2026-11-14 自主資料增補
+
+補收 SOV-Transcribe-1（11/12 官方發布／開放權重），明示非串流語音轉寫、Apache 2.0 與語言範圍，新增 Salesforce 品牌及獨立語音分支。共 266 個模型／版本節點、29 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-14.zh-TW.md)。
