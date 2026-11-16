@@ -5,6 +5,7 @@
   const OTHER = { id: 'other', label: '其他／未分類' };
   const rule = (id, label, pattern) => ({ id, label, pattern });
   const catalogs = new Map([
+    ['Huawei', [rule('openpangu', 'openPangu', /^openPangu-\d+(?:\.\d+)*(?:-Pro|-Flash)?$/i)]],
     ['IBM', [rule('granite-llmon', 'Granite LLMON 實驗支線', /^Granite-4\.1-\d+B-LLMON-preview$/i)]],
     ['InclusionAI', [rule('duo', 'Duo 視聽互動', /^Duo-\d+\.\d+$/i)]],
     ['Salesforce', [rule('sov-transcribe', 'SOV 語音轉寫', /^SOV-Transcribe-\d+$/i)]],
@@ -85,7 +86,7 @@
       rule('north-code', 'North Code', /^North Mini Code$/i)
     ]],
     ['AI21 Labs', [rule('jamba', 'Jamba', /^Jamba(?:\d+)?(?:[- ][a-z\d.]+)*$/i)]],
-    ['Perplexity', [rule('sonar', 'Sonar', /^Sonar(?: (?:Pro|API|Deep|Research|Reasoning))*$/i)]],
+    ['Perplexity', [rule('pplx-decider', 'Decider 決策模型', /^Decider(?: Flash)? v\d+(?:\.\d+)*$/i), rule('sonar', 'Sonar', /^Sonar(?: (?:Pro|API|Deep|Research|Reasoning))*$/i)]],
     ['NVIDIA', [rule('nemotron', 'Nemotron', /^(?:Llama Nemotron Reasoning Family|Llama-\d+(?:\.\d+)*-Nemotron-[a-z\d-]+|Nemotron \d+(?:\.\d+)*(?: [a-z\d]+)*)$/i)]],
     ['Amazon', [rule('nova', 'Amazon Nova', /^Amazon Nova (?:Micro \/ Lite \/ Pro|Premier)$/i)]],
     ['Microsoft', [rule('phi', 'Phi', /^Phi-\d+(?:\.\d+)*(?:-reasoning(?:-vision| \/ reasoning-plus)?)?$/i)]],

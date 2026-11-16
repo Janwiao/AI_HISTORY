@@ -46,10 +46,10 @@ test('UMD exposes the same small API in a browser without dependencies', () => {
   assert.equal(context.window.BrandEvolutionData.family({ vendor: 'OpenAI', model: 'GPT-4' }).id, 'gpt');
 });
 
-test('all 270 merged nodes are retained exactly once with no product injection', () => {
+test('all 273 merged nodes are retained exactly once with no product injection', () => {
   assert.equal(baseline().length, 208);
-  assert.equal(records.length, 270);
-  assert.equal(new Set(records.map(D.key)).size, 270);
+  assert.equal(records.length, 273);
+  assert.equal(new Set(records.map(D.key)).size, 273);
   const all = [];
   for (const vendor of new Set(records.map(row => row.vendor))) {
     const lanes = B.group(records, vendor);
@@ -176,7 +176,14 @@ test('Qwen preview retains Qwen family while Decision and Scribe have distinct s
  for(const [name,id] of [['Qwen4-Max-Preview','qwen'],['Gemini Decision 1','gemini-decision'],['Scribe v3','scribe'],['Scribe v3 Live','scribe']]){
   const row=updates.additions.find(r=>r.model===name);assert.equal(B.family(row).id,id);
  }
- assert.equal(new Set(records.map(r=>r.vendor)).size,31);
+ assert.equal(new Set(records.map(r=>r.vendor)).size,32);
  assert.equal(B.group(records,'ElevenLabs').length,1);
  assert.equal(B.group(records,'ElevenLabs')[0].rows.length,2);
+});
+
+test('Huawei and Perplexity new models have scoped name lanes and original event dates',()=>{
+ for(const [vendor,model,id,date] of [['Huawei','openPangu-2.1-Pro','openpangu','2026-11-15'],['Perplexity','Decider v1.3','pplx-decider','2026-11-12'],['Perplexity','Decider Flash v1.3','pplx-decider','2026-11-12']]){
+  const row=updates.additions.find(r=>r.vendor===vendor&&r.model===model);
+  assert.equal(row.date,date);assert.equal(B.family(row).id,id);assert.ok(row.sources.length>=2);
+ }
 });

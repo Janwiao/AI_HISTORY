@@ -141,3 +141,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-15 自主資料增補
 
 補收 IBM Granite 4.1 LLMON 3B／8B 實驗預覽（11/12）及 Duo v1 的 1.0／1.2 視聽互動研究預覽（11/13）。區分權重已釋出、線上／離線管線及 v2 預告，不把提示格式或量化檔另計模型。共 270 個模型／版本節點、31 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-15.zh-TW.md)。
+
+## 2026-11-16 自主資料增補
+
+補收 openPangu-2.1-Pro（11/15 華為雲指定區域 MaaS）及 Perplexity Decider v1.3／Flash v1.3（11/12）。區分託管 API 與權重存取，不另計 Decisions API。共 273 個模型／版本節點、32 品牌、9 張 Agent／工具卡。 詳見 [本批查核](docs/UPDATE_2026-11-16.zh-TW.md)。
