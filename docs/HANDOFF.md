@@ -209,3 +209,7 @@ GPT-6 Rosalind Research 以研究專用部署版本收錄（10/30），官方系
 ## 2026-11-16 自主資料增補
 
 補收 openPangu-2.1-Pro（11/15 華為雲指定區域 MaaS）及 Perplexity Decider v1.3／Flash v1.3（11/12）。區分託管 API 與權重存取，不另計 Decisions API。共 273 個模型／版本節點、32 品牌、9 張 Agent／工具卡。 詳見 [本批查核](UPDATE_2026-11-16.zh-TW.md)。
+
+## 2026-11-17 自主資料增補
+
+新增 Qwen4-Max（11/16 正式 API），補收 ERNIE 5.5 Flash Base／Preview（11/5、11/11）及 MiniMax H3-Image（11/11 公告）。區分預訓練權重、後訓練 API 預覽、權重釋出與授權。共 277 個模型／版本節點、32 品牌、9 張 Agent／工具卡。詳見 [本批查核](UPDATE_2026-11-17.zh-TW.md)。

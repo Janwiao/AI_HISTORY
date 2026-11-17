@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-16",
+  "checkedAt": "2026-11-17",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。 2026-11-12 增補 Qwen4-Max-Preview、Gemini Decision 1 及 Scribe v3／v3 Live；預覽、決策分類與語音轉寫支線分開標示，不代表全量歷史重驗。 2026-11-13 增補 Gemini 4 Hydrogen，採 11/12 官方 GA 日期；產品分批推出與 API 可用範圍分開，不代表全量歷史重驗。 2026-11-14 補收 SOV-Transcribe-1，採 11/12 官方發布日；非串流語音轉寫與通用模型分開，不代表全量歷史重驗。 2026-11-15 補收 IBM LLMON 兩款實驗預覽及 Duo v1 的 1.0／1.2 版本；採官方模型發布日期，非全量歷史重驗。 2026-11-16 補收華為雲 openPangu-2.1-Pro（11/15 指定區域 MaaS 發布）及 Perplexity Decider v1.3／Flash v1.3（11/12 發布）；區分 API 與權重的存取證據，非全量歷史重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。 2026-11-12 增補 Qwen4-Max-Preview、Gemini Decision 1 及 Scribe v3／v3 Live；預覽、決策分類與語音轉寫支線分開標示，不代表全量歷史重驗。 2026-11-13 增補 Gemini 4 Hydrogen，採 11/12 官方 GA 日期；產品分批推出與 API 可用範圍分開，不代表全量歷史重驗。 2026-11-14 補收 SOV-Transcribe-1，採 11/12 官方發布日；非串流語音轉寫與通用模型分開，不代表全量歷史重驗。 2026-11-15 補收 IBM LLMON 兩款實驗預覽及 Duo v1 的 1.0／1.2 版本；採官方模型發布日期，非全量歷史重驗。 2026-11-16 補收華為雲 openPangu-2.1-Pro（11/15 指定區域 MaaS 發布）及 Perplexity Decider v1.3／Flash v1.3（11/12 發布）；區分 API 與權重的存取證據，非全量歷史重驗。 2026-11-17 增補 Qwen4-Max 正式 API（11/16），補收 ERNIE 5.5 Flash Base／Preview 與 MiniMax H3-Image；區分託管存取、預訓練權重及後訓練權重預告，非全量歷史重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -783,6 +783,57 @@
       "sources": [
         "https://www.perplexity.ai/en-GB/hub/blog/perplexity-decider",
         "https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.3"
+      ]
+    },
+    {
+      "vendor": "Baidu",
+      "model": "ERNIE 5.5 Flash Base",
+      "date": "2026-11-05",
+      "category": "通用語言／預訓練基礎權重",
+      "tags": "OW",
+      "note": "百度 11/5 發布預訓練檢查點，尚未做中期或後訓練。稀疏 MoE 為 280B 總參數、每 token 啟用 14B；預訓練上下文最多 128K，微調與推論可達 1M。權重以 ERNIE 5.5 Flash Base Model License v1.0 提供，不是 Apache 2.0，也不等於後來的 API Preview。",
+      "sources": [
+        "https://ernie.baidu.com/release/ernie-5-5-flash-base/",
+        "https://ernie.baidu.com/research",
+        "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base",
+        "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base/blob/main/LICENSE"
+      ]
+    },
+    {
+      "vendor": "Baidu",
+      "model": "ERNIE 5.5 Flash Preview",
+      "date": "2026-11-11",
+      "category": "通用文字／推理與程式預覽",
+      "tags": "R/A",
+      "note": "百度 11/11 公告為 Flash Base 的首個後訓練版本。280B 總參數、14B 啟用，支援 1M-token 上下文。文字模型；以程式操作外部 3D／圖像工具的示範不等於原生影像輸入或輸出。百度千帆 API 已開放，Apache 2.0 權重仍是 11/25 前公開的計畫；本次未確認後訓練權重已釋出。",
+      "sources": [
+        "https://ernie.baidu.com/release/ernie-5-5-flash-preview/",
+        "https://ernie.baidu.com/research",
+        "https://x.com/Baidu_ERNIE/status/2120425542688379314"
+      ]
+    },
+    {
+      "vendor": "MiniMax",
+      "model": "MiniMax H3-Image",
+      "date": "2026-11-11",
+      "category": "影像生成與編輯",
+      "tags": "IMAGE/OW",
+      "note": "採 MiniMax Research 11/11 公開發布公告日；模型庫授權檔另列 11/10 的 release／license date。以 H3 為基礎，支援文生圖、參考圖生成與影像編輯，官方展示最多 16 張參考圖及 4096×4096 輸出。API 與開放權重均已提供，權重適用自訂 Community License，不是 Apache 2.0；不另計快取或 API 選項。",
+      "sources": [
+        "https://www.minimax.io/blog/minimax-h3-image",
+        "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image",
+        "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image/blob/main/LICENSE"
+      ]
+    },
+    {
+      "vendor": "Alibaba",
+      "model": "Qwen4-Max",
+      "date": "2026-11-16",
+      "category": "通用多模態／推理與程式",
+      "tags": "R/A/MM",
+      "note": "阿里雲 Model Studio 11/16 列出正式 API qwen4-max，已確認新加坡區域／國際部署範圍。支援文字生成、圖像與影片理解、工具呼叫及結構化輸出；影片理解不等於影片生成。11/11 Token Plan 的 Qwen4-Max-Preview 為另一筆限期預覽，保留原紀錄；不推論兩者底層權重差異或宣稱正式版公開權重。",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/newly-released-models"
       ]
     }
   ]

@@ -76,9 +76,9 @@ test('new brands and decision filter retain list, timeline, details and brand na
   }finally{c.dom.window.close()}
  }
 });
-test('desktop loads 273 unique records, all dates and 32 brands at readable scale; updates closed', async()=>{
+test('desktop loads 277 unique records, all dates and 32 brands at readable scale; updates closed', async()=>{
   const c=await boot();try{
-    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,273);assert.equal(c.d.querySelectorAll('.model-card').length,273);
+    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,277);assert.equal(c.d.querySelectorAll('.model-card').length,277);
     assert.equal(c.d.querySelectorAll('#brandJump option').length,33);assert.equal(c.d.getElementById('pct').textContent,'100%');
     assert.equal(c.d.getElementById('updatesPanel').open,false);assert.equal(c.d.getElementById('listResults').hidden,true);
     assert.equal(c.d.querySelectorAll('.model-card time[datetime="2026-05"]').length,1);
@@ -99,7 +99,7 @@ test('filter intersections, empty/reset, capability search and URL restoration',
     assert.equal(c.d.querySelectorAll('.node').length,1);assert.match(c.w.location.search,/brand=Alibaba/);
     c.d.getElementById('search').value='nonexistent';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.equal(c.d.getElementById('emptyState').hidden,false);assert.equal(c.v.hidden,true);
-    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,273);assert.equal(c.d.getElementById('emptyState').hidden,true);
+    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,277);assert.equal(c.d.getElementById('emptyState').hidden,true);
     c.d.getElementById('search').value='推理';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.ok(c.d.querySelectorAll('.node').length>=75);
     c.w.history.pushState({},'', '?brand=Alibaba&year=2026&type=image&view=list');c.w.dispatchEvent(new c.w.PopStateEvent('popstate'));
@@ -218,7 +218,7 @@ test('Rerank filter is selectable and excludes Embed while cumulative scope is e
   c.set('typeFilter','rerank');
   const cards=[...c.d.querySelectorAll('.model-card')];
   assert.equal(cards.length,2);assert.ok(cards.every(card=>card.textContent.includes('Rerank 5')));
-  assert.match(c.d.getElementById('scope').textContent,/累計收錄 65 筆增量/);
+  assert.match(c.d.getElementById('scope').textContent,/累計收錄 69 筆增量/);
   assert.match(c.d.getElementById('scope').textContent,/不代表全部當日發布或重新查核/);
  }finally{c.dom.window.close()}
 });
@@ -355,14 +355,15 @@ test('November 12 models support capability filters, timeline, details, sources 
  for(const [brand,name,type,date] of [['Alibaba','Qwen4-Max-Preview','general','2026-11-11'],['Google','Gemini Decision 1','decision','2026-11-11'],['ElevenLabs','Scribe v3 Live','voice','2026-11-10']]){
   const c=await boot({mobile:true,url:`https://example.test/AI_HISTORY/?brand=${brand}&q=${encodeURIComponent(name)}&type=${type}&view=list`});try{
    assert.deepEqual(c.errors,[]);assert.equal(c.d.getElementById('brandJump').value,brand);
-   assert.equal(c.d.querySelectorAll('.model-card').length,1);assert.equal(c.d.querySelectorAll('.node').length,1);
-   c.d.querySelector('.model-card [data-detail]').click();assert.equal(c.d.getElementById('detailTitle').textContent,name);
+   const count=brand==='Alibaba'?2:1; // GA notes refer back to the exact Preview name.
+   assert.equal(c.d.querySelectorAll('.model-card').length,count);assert.equal(c.d.querySelectorAll('.node').length,count);
+   [...c.d.querySelectorAll('.model-card .model-title')].find(btn=>btn.textContent===name).click();assert.equal(c.d.getElementById('detailTitle').textContent,name);
    assert.ok(c.d.getElementById('detailMeta').textContent.includes(date));
    assert.ok(c.d.querySelectorAll('#detailSources a').length>=1);
    assert.ok([...c.d.querySelectorAll('#detailSources a')].every(a=>a.protocol==='https:'&&a.rel.includes('noopener')));
    c.click('closeDetail');c.d.querySelector('#listResults [data-brand]').click();
    assert.equal(c.d.getElementById('brandEvolution').open,true);assert.ok(c.d.getElementById('brandCanvas').textContent.includes(name));
-   c.click('closeBrand');assert.equal(c.d.querySelectorAll('.model-card').length,1);c.click('timelineView');assert.equal(c.v.hidden,false);
+   c.click('closeBrand');assert.equal(c.d.querySelectorAll('.model-card').length,count);c.click('timelineView');assert.equal(c.v.hidden,false);
   }finally{c.dom.window.close()}
  }
 });
@@ -394,6 +395,27 @@ test('Huawei and Perplexity are reachable by brand links and show official sourc
    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.model-card').length,count);assert.equal(c.d.querySelectorAll('.node').length,count);
    c.d.querySelector('.model-card [data-detail]').click();assert.ok(c.d.querySelectorAll('#detailSources a').length>=2);
    c.click('closeDetail');c.click('timelineView');assert.equal(c.v.hidden,false);
+  }finally{c.dom.window.close()}
+ }
+});
+
+test('November 17 models render dates, brand families and details on mobile',async()=>{
+ for(const [brand,name,type,date,family] of [
+  ['Alibaba','Qwen4-Max','multimodal','2026-11-16','Qwen'],
+  ['Baidu','ERNIE 5.5 Flash Base','general','2026-11-05','ERNIE Flash'],
+  ['Baidu','ERNIE 5.5 Flash Preview','general','2026-11-11','ERNIE Flash'],
+  ['MiniMax','MiniMax H3-Image','image','2026-11-11','MiniMax H']
+ ]){
+  const c=await boot({mobile:true,url:`https://example.test/AI_HISTORY/?brand=${brand}&q=${encodeURIComponent(name)}&type=${type}&view=list`});
+  try{
+   assert.deepEqual(c.errors,[]);const p=[...c.d.querySelectorAll('.model-card .model-title')].filter(b=>b.textContent===name);
+   assert.equal(p.length,1);p[0].click();
+   assert.equal(c.d.getElementById('detailTitle').textContent,name);
+   assert.match(c.d.getElementById('detailMeta').textContent,new RegExp(date));
+   assert.ok([...c.d.querySelectorAll('#detailSources a')].every(a=>a.protocol==='https:'&&a.rel.includes('noopener')));
+   c.click('closeDetail');c.d.querySelector('#listResults [data-brand]').click();
+   const content=c.d.getElementById('brandCanvas').textContent;
+   assert.ok(content.includes(name));assert.ok(content.includes(family));
   }finally{c.dom.window.close()}
  }
 });

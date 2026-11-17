@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-16');
-  assert.equal(updates.additions.length,65);
-  assert.equal(new Set(updates.additions.map(D.key)).size,65);
+  assert.equal(updates.checkedAt,'2026-11-17');
+  assert.equal(updates.additions.length,69);
+  assert.equal(new Set(updates.additions.map(D.key)).size,69);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,65);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,69);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -265,7 +265,7 @@ test('November 12 additions preserve primary dates, distinct modalities and prev
  for(const name of ['Scribe v3','Scribe v3 Live']){
   const row=updates.additions.find(r=>r.model===name);assert.deepEqual(D.types(row),['voice']);assert.match(row.note,/ElevenAPI/);
  }
- assert.ok(!updates.additions.some(r=>['Decisions API','ElevenAgents','Qwen4-Max'].includes(r.model)));
+ assert.ok(!updates.additions.some(r=>['Decisions API','ElevenAgents'].includes(r.model)));
 });
 
 test('Hydrogen is a November 12 GA model, not an Orchestrator product node',()=>{
@@ -278,3 +278,27 @@ test('Hydrogen is a November 12 GA model, not an Orchestrator product node',()=>
 test('SOV is non-streaming ASR with primary date and open weights',()=>{const r=updates.additions.find(r=>r.model==='SOV-Transcribe-1');assert.equal(r.date,'2026-11-12');assert.deepEqual(D.types(r),['voice']);assert.ok(D.tags(r).includes('OW'));assert.match(r.note,/非串流/);assert.match(r.note,/Apache 2.0/);assert.equal(require('../assets/brand-data.js').family(r).id,'sov-transcribe-voice');});
 
 test('LLMON and Duo preserve preview scope and distinct dates',()=>{for(const n of [3,8]){const r=updates.additions.find(x=>x.model===`Granite-4.1-${n}B-LLMON-preview`);assert.equal(r.date,'2026-11-12');assert.match(r.note,/不是.*安全保證/);assert.ok(D.types(r).includes('general'));assert.ok(D.tags(r).includes('OW'));}for(const v of ['1.0','1.2']){const r=updates.additions.find(x=>x.model===`Duo-${v}`);assert.equal(r.date,'2026-11-13');assert.ok(D.types(r).includes('world'));assert.match(r.note,/研究預覽/);assert.match(r.note,/Duo v2.*預告/);}assert.ok(!updates.additions.some(x=>x.model==='LLMON'||x.model==='Duo-2.0'));});
+
+test('November 17 update preserves four separate model records and weights/access evidence',()=>{
+ const B=require('../assets/brand-data.js');
+ for(const [vendor,model,date,family] of [
+  ['Alibaba','Qwen4-Max','2026-11-16','qwen'],
+  ['Baidu','ERNIE 5.5 Flash Base','2026-11-05','ernie-flash'],
+  ['Baidu','ERNIE 5.5 Flash Preview','2026-11-11','ernie-flash'],
+  ['MiniMax','MiniMax H3-Image','2026-11-11','minimax-h-image']
+ ]){
+  const rows=updates.additions.filter(r=>r.vendor===vendor&&r.model===model);
+  assert.equal(rows.length,1);assert.equal(rows[0].date,date);assert.equal(B.family(rows[0]).id,family);
+  assert.ok(rows[0].sources.every(s=>new URL(s).protocol==='https:'));
+ }
+ const get=name=>updates.additions.find(r=>r.model===name);
+ const base=get('ERNIE 5.5 Flash Base'), preview=get('ERNIE 5.5 Flash Preview');
+ assert.ok(D.tags(base).includes('OW'));assert.ok(!D.tags(preview).includes('OW'));
+ assert.match(base.note,/非|不是 Apache 2.0/);assert.match(preview.note,/千帆 API 已開放/);
+ assert.match(preview.note,/未確認後訓練權重已釋出/);assert.ok(!D.types(preview).includes('multimodal'));
+ const img=get('MiniMax H3-Image');assert.deepEqual(D.types(img),['image']);
+ assert.match(img.note,/11\/10.*Community License/);assert.ok(D.tags(img).includes('OW'));
+ const qwen=get('Qwen4-Max');assert.match(qwen.note,/新加坡區域／國際部署/);
+ assert.ok(D.types(qwen).includes('multimodal'));assert.ok(!D.types(qwen).includes('video'));
+ assert.equal(get('Qwen4-Max-Preview').date,'2026-11-11');
+});

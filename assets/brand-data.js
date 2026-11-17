@@ -71,7 +71,7 @@
       rule('qwen', 'Qwen', /^Qwen\d+(?:\.\d+)*(?:[- ][a-z\d.]+)*$/i)
     ]],
     ['Z.ai / Zhipu', [rule('glm-legal', 'GLM Legal', /^GLM-Legal$/i), rule('glm', 'GLM', /^GLM-\d+(?:\.\d+)*V?(?:[- ][a-z\d]+)*$/i)]],
-    ['MiniMax', [rule('minimax-m', 'MiniMax M', /^MiniMax M\d+(?:\.\d+)*$/i)]],
+    ['MiniMax', [rule('minimax-h', 'MiniMax H', /^MiniMax H\d+(?:\.\d+)*[- ]Image$/i), rule('minimax-m', 'MiniMax M', /^MiniMax M\d+(?:\.\d+)*$/i)]],
     ['Meta', [rule('muse-ember', 'Muse Ember', /^Muse Ember(?: \d+(?:\.\d+)*)?$/i), rule('llama', 'Llama', /^Llama \d+(?:\.\d+)*(?: [a-z\d]+)*$/i)]],
     ['Mistral AI', [
       rule('mistral', 'Mistral', /^Mistral (?:\d+B|Large|Medium|Small)(?: \d+(?:\.\d+)*)?(?: \(October 29\))?$/i),
@@ -90,7 +90,7 @@
     ['NVIDIA', [rule('nemotron', 'Nemotron', /^(?:Llama Nemotron Reasoning Family|Llama-\d+(?:\.\d+)*-Nemotron-[a-z\d-]+|Nemotron \d+(?:\.\d+)*(?: [a-z\d]+)*)$/i)]],
     ['Amazon', [rule('nova', 'Amazon Nova', /^Amazon Nova (?:Micro \/ Lite \/ Pro|Premier)$/i)]],
     ['Microsoft', [rule('phi', 'Phi', /^Phi-\d+(?:\.\d+)*(?:-reasoning(?:-vision| \/ reasoning-plus)?)?$/i)]],
-    ['Baidu', [rule('ernie', 'ERNIE', /^ERNIE (?:\d+(?:\.\d+)*(?: Open-source Family)?|X\d+)$/i)]],
+    ['Baidu', [rule('ernie-flash', 'ERNIE Flash', /^ERNIE \d+(?:\.\d+)* Flash (?:Base|Preview)$/i), rule('ernie', 'ERNIE', /^ERNIE (?:\d+(?:\.\d+)*(?: Open-source Family)?|X\d+)$/i)]],
     ['ByteDance', [rule('seedream', 'Seedream 影像支線', /^Seedream \d+(?:\.\d+)*(?: Pro)?$/i), rule('seed', 'Seed', /^Seed\d+(?:\.\d+)*(?:-VL)?$/i)]]
   ]);
   // Only explicit specialized categories may split an otherwise recognized name.
