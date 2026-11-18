@@ -213,3 +213,7 @@ GPT-6 Rosalind Research 以研究專用部署版本收錄（10/30），官方系
 ## 2026-11-17 自主資料增補
 
 新增 Qwen4-Max（11/16 正式 API），補收 ERNIE 5.5 Flash Base／Preview（11/5、11/11）及 MiniMax H3-Image（11/11 公告）。區分預訓練權重、後訓練 API 預覽、權重釋出與授權。共 277 個模型／版本節點、32 品牌、9 張 Agent／工具卡。詳見 [本批查核](UPDATE_2026-11-17.zh-TW.md)。
+
+## 2026-11-18 自主資料增補
+
+新增 11/17 的 GPT-6.2 Astra／Sol、MAI Code 2／Flash、MAI Image 2.7 Flash、Microsoft-Decision-1.1，以及 11/16 的 Liquid d1.2／d1.2-ultra。另補 MAI Image 2.7 首次可用的 10/27 編輯預覽，並同筆記錄 11/17 擴至 Foundry 公開預覽。共 286 個模型／版本節點、33 品牌、9 張 Agent／工具卡。詳見 [本批查核](UPDATE_2026-11-18.zh-TW.md)。

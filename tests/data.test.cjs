@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-17');
-  assert.equal(updates.additions.length,69);
-  assert.equal(new Set(updates.additions.map(D.key)).size,69);
+  assert.equal(updates.checkedAt,'2026-11-18');
+  assert.equal(updates.additions.length,78);
+  assert.equal(new Set(updates.additions.map(D.key)).size,78);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,69);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,78);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -301,4 +301,34 @@ test('November 17 update preserves four separate model records and weights/acces
  const qwen=get('Qwen4-Max');assert.match(qwen.note,/新加坡區域／國際部署/);
  assert.ok(D.types(qwen).includes('multimodal'));assert.ok(!D.types(qwen).includes('video'));
  assert.equal(get('Qwen4-Max-Preview').date,'2026-11-11');
+});
+
+test('Nov 18 records keep separate model identities, capability lanes and first-party access dates',()=>{
+ const B=require('../assets/brand-data.js');
+ const expected=[
+  ['OpenAI','GPT-6.2 Astra','2026-11-17','gpt-astra','general'],
+  ['OpenAI','GPT-6.2 Sol','2026-11-17','gpt-sol','general'],
+  ['Microsoft','MAI Code 2','2026-11-17','mai-code','coding'],
+  ['Microsoft','MAI Code 2 Flash','2026-11-17','mai-code','coding'],
+  ['Microsoft','MAI Image 2.7','2026-10-27','mai-image','image'],
+  ['Microsoft','MAI Image 2.7 Flash','2026-11-17','mai-image','image'],
+  ['Microsoft','Microsoft-Decision-1.1','2026-11-17','microsoft-decision','decision'],
+  ['Liquid AI','d1.2','2026-11-16','liquid-decision','decision'],
+  ['Liquid AI','d1.2-ultra','2026-11-16','liquid-decision','decision'],
+ ];
+ const get=name=>updates.additions.find(row=>row.model===name);
+ for(const [vendor,name,date,family,type] of expected){
+  const rows=updates.additions.filter(r=>r.vendor===vendor&&r.model===name);
+  assert.equal(rows.length,1);const row=rows[0];
+  assert.equal(row.date,date);assert.equal(B.family(row).id,family);assert.ok(D.types(row).includes(type));
+  assert.ok(row.sources.length&&row.sources.every(source=>new URL(source).protocol==='https:'));
+  assert.ok(!D.tags(row).includes('OW'));
+  if(type==='decision') assert.deepEqual(D.types(row),['decision','multimodal']);
+ }
+ assert.match(get('MAI Image 2.7').note,/10\/27.*11\/17.*不視為正式版/);
+ assert.match(get('MAI Code 2 Flash').note,/Copilot 已一般可用.*Foundry 則為限量存取預覽/);
+ assert.match(get('GPT-6.2 Astra').note,/gpt-6\.2-astra.*ChatGPT Work 與 Codex/);
+ assert.match(get('GPT-6.2 Sol').note,/Ultrafast 是執行選項/);
+ assert.match(get('d1.2').note,/OpenRouter 與 Vercel 是後續計畫/);
+ assert.ok(!updates.additions.some(r=>/^(?:Canvas|Copilot Fusion|Ultrafast|MAI Realtime 1)$/.test(r.model)));
 });

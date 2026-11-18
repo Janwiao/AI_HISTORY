@@ -89,7 +89,12 @@
     ['Perplexity', [rule('pplx-decider', 'Decider 決策模型', /^Decider(?: Flash)? v\d+(?:\.\d+)*$/i), rule('sonar', 'Sonar', /^Sonar(?: (?:Pro|API|Deep|Research|Reasoning))*$/i)]],
     ['NVIDIA', [rule('nemotron', 'Nemotron', /^(?:Llama Nemotron Reasoning Family|Llama-\d+(?:\.\d+)*-Nemotron-[a-z\d-]+|Nemotron \d+(?:\.\d+)*(?: [a-z\d]+)*)$/i)]],
     ['Amazon', [rule('nova', 'Amazon Nova', /^Amazon Nova (?:Micro \/ Lite \/ Pro|Premier)$/i)]],
-    ['Microsoft', [rule('phi', 'Phi', /^Phi-\d+(?:\.\d+)*(?:-reasoning(?:-vision| \/ reasoning-plus)?)?$/i)]],
+    ['Microsoft', [rule('phi', 'Phi', /^Phi-\d+(?:\.\d+)*(?:-reasoning(?:-vision| \/ reasoning-plus)?)?$/i),
+      rule('mai-code', 'MAI Code', /^MAI Code \d+(?:\.\d+)*(?: Flash)?$/i),
+      rule('mai-image', 'MAI Image 影像支線', /^MAI Image \d+(?:\.\d+)*(?: Flash)?$/i),
+      rule('microsoft-decision', 'Microsoft Decision', /^Microsoft-Decision-\d+(?:\.\d+)*$/i)
+    ]],
+    ['Liquid AI', [rule('liquid-decision', 'Liquid d 決策模型', /^d\d+(?:\.\d+)*(?:-ultra)?$/i)]],
     ['Baidu', [rule('ernie-flash', 'ERNIE Flash', /^ERNIE \d+(?:\.\d+)* Flash (?:Base|Preview)$/i), rule('ernie', 'ERNIE', /^ERNIE (?:\d+(?:\.\d+)*(?: Open-source Family)?|X\d+)$/i)]],
     ['ByteDance', [rule('seedream', 'Seedream 影像支線', /^Seedream \d+(?:\.\d+)*(?: Pro)?$/i), rule('seed', 'Seed', /^Seed\d+(?:\.\d+)*(?:-VL)?$/i)]]
   ]);
@@ -102,7 +107,7 @@
     rule('voice', '語音（依原始類別）', /語音|音訊|text.to.speech|speech|audio/i)
   ];
   const specializedIds = new Set([
-    'scribe', 'gemini-decision', 'embedding-gemma', 'kanana-decide', 'gpt-cyber', 'gemini-omni', 'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
+    'mai-image', 'microsoft-decision', 'liquid-decision', 'scribe', 'gemini-decision', 'embedding-gemma', 'kanana-decide', 'gpt-cyber', 'gemini-omni', 'genie', 'grok-voice', 'glm-legal', 'cohere-rerank', 'gpt-live', 'openai-image', 'openai-voice', 'openai-embedding', 'gemini-tts',
     'gemini-live', 'google-image', 'qwen-image', 'qwen-translation', 'qwen-voice',
     'qwen-embedding', 'cohere-translation', 'cohere-embedding'
   ]);

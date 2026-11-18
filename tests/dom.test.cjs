@@ -76,10 +76,10 @@ test('new brands and decision filter retain list, timeline, details and brand na
   }finally{c.dom.window.close()}
  }
 });
-test('desktop loads 277 unique records, all dates and 32 brands at readable scale; updates closed', async()=>{
+test('desktop loads 286 unique records, all dates and 33 brands at readable scale; updates closed', async()=>{
   const c=await boot();try{
-    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,277);assert.equal(c.d.querySelectorAll('.model-card').length,277);
-    assert.equal(c.d.querySelectorAll('#brandJump option').length,33);assert.equal(c.d.getElementById('pct').textContent,'100%');
+    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,286);assert.equal(c.d.querySelectorAll('.model-card').length,286);
+    assert.equal(c.d.querySelectorAll('#brandJump option').length,34);assert.equal(c.d.getElementById('pct').textContent,'100%');
     assert.equal(c.d.getElementById('updatesPanel').open,false);assert.equal(c.d.getElementById('listResults').hidden,true);
     assert.equal(c.d.querySelectorAll('.model-card time[datetime="2026-05"]').length,1);
   }finally{c.dom.window.close()}
@@ -99,7 +99,7 @@ test('filter intersections, empty/reset, capability search and URL restoration',
     assert.equal(c.d.querySelectorAll('.node').length,1);assert.match(c.w.location.search,/brand=Alibaba/);
     c.d.getElementById('search').value='nonexistent';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.equal(c.d.getElementById('emptyState').hidden,false);assert.equal(c.v.hidden,true);
-    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,277);assert.equal(c.d.getElementById('emptyState').hidden,true);
+    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,286);assert.equal(c.d.getElementById('emptyState').hidden,true);
     c.d.getElementById('search').value='推理';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.ok(c.d.querySelectorAll('.node').length>=75);
     c.w.history.pushState({},'', '?brand=Alibaba&year=2026&type=image&view=list');c.w.dispatchEvent(new c.w.PopStateEvent('popstate'));
@@ -168,7 +168,7 @@ test('brand dialog opens from existing labels, retains all brand nodes and main 
  c.set('brandJump','OpenAI');c.set('yearFilter','2026');const mainCount=c.d.querySelectorAll('.model-card').length;
  c.v.scrollLeft=1234;c.v.scrollTop=789;c.d.getElementById('listResults').scrollTop=333;
  const entry=c.d.querySelector('#listResults [data-brand="OpenAI"]');entry.focus();entry.click();
- assert.equal(c.d.getElementById('brandEvolution').open,true);assert.equal(c.d.querySelectorAll('[data-brand-node]').length,40);
+ assert.equal(c.d.getElementById('brandEvolution').open,true);assert.equal(c.d.querySelectorAll('[data-brand-node]').length,42);
  assert.match(c.d.getElementById('brandCanvas').textContent,/X：發布時間/);assert.match(c.d.getElementById('brandCanvas').textContent,/Y：模型系列/);
  const node=c.d.querySelector('[data-brand-node]');node.dispatchEvent(new c.w.MouseEvent('click',{bubbles:true,cancelable:true}));
  assert.equal(c.d.getElementById('brandNodeDetail').hidden,false);assert.ok(c.d.querySelectorAll('#brandNodeSources a').length);
@@ -218,7 +218,7 @@ test('Rerank filter is selectable and excludes Embed while cumulative scope is e
   c.set('typeFilter','rerank');
   const cards=[...c.d.querySelectorAll('.model-card')];
   assert.equal(cards.length,2);assert.ok(cards.every(card=>card.textContent.includes('Rerank 5')));
-  assert.match(c.d.getElementById('scope').textContent,/累計收錄 69 筆增量/);
+  assert.match(c.d.getElementById('scope').textContent,/累計收錄 78 筆增量/);
   assert.match(c.d.getElementById('scope').textContent,/不代表全部當日發布或重新查核/);
  }finally{c.dom.window.close()}
 });
@@ -416,6 +416,30 @@ test('November 17 models render dates, brand families and details on mobile',asy
    c.click('closeDetail');c.d.querySelector('#listResults [data-brand]').click();
    const content=c.d.getElementById('brandCanvas').textContent;
    assert.ok(content.includes(name));assert.ok(content.includes(family));
+  }finally{c.dom.window.close()}
+ }
+});
+
+test('new decision, coding and GPT release records surface with links and distinct mobile filters',async()=>{
+ for(const [brand,query,type,names] of [
+  ['Liquid AI','d1.2','decision',['d1.2','d1.2-ultra']],
+  ['Microsoft','MAI Code 2','coding',['MAI Code 2','MAI Code 2 Flash']],
+  ['OpenAI','GPT-6.2','general',['GPT-6.2 Astra','GPT-6.2 Sol']],
+ ]){
+  const url=new URL('https://example.test/AI_HISTORY/');
+  for(const [key,value] of Object.entries({brand,q:query,type,view:'list'})) url.searchParams.set(key,value);
+  const c=await boot({mobile:true,url:url.href});
+  try{
+   assert.deepEqual(c.errors,[]);
+   assert.equal(c.d.querySelectorAll('.node').length,names.length);
+   const opened=[];
+   const cards=[...c.d.querySelectorAll('.model-card')];assert.equal(cards.length,names.length);
+   for(const button of cards.map(card=>card.querySelector('[data-detail]'))){
+    button.click();opened.push(c.d.getElementById('detailTitle').textContent);
+    assert.ok([...c.d.querySelectorAll('#detailSources a')].every(a=>a.protocol==='https:'));
+    assert.ok(c.d.querySelector('#detailSources a'));c.click('closeDetail');
+   }
+   assert.deepEqual(opened.sort(),names.sort());
   }finally{c.dom.window.close()}
  }
 });
