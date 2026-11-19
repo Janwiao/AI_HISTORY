@@ -10,6 +10,7 @@
     ['InclusionAI', [rule('duo', 'Duo 視聽互動', /^Duo-\d+\.\d+$/i)]],
     ['Salesforce', [rule('sov-transcribe', 'SOV 語音轉寫', /^SOV-Transcribe-\d+$/i)]],
     ['ElevenLabs', [rule('scribe', 'Scribe 語音轉寫', /^Scribe v\d+(?:\.\d+)*(?: Live)?$/i)]],
+    ['RadixArk', [rule('daisyrose', 'DaisyRose 後訓練支線', /^DaisyRose-\d+B$/i)]],
     ['Nous Research', [rule('arete', 'Arete 後訓練支線', /^Arete-\d+B$/i)]],
     ['humans&', [rule('ampersand', 'Ampersand 協作模型', /^Ampersand v\d+(?:\.\d+)*$/i)]],
     ['Ricursive Intelligence', [rule('ripple', 'Ripple', /^Ripple-\d+B Preview$/i)]],

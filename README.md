@@ -153,3 +153,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-18 自主資料增補
 
 新增 11/17 的 GPT-6.2 Astra／Sol、MAI Code 2／Flash、MAI Image 2.7 Flash、Microsoft-Decision-1.1，以及 11/16 的 Liquid d1.2／d1.2-ultra。另補 MAI Image 2.7 首次可用的 10/27 編輯預覽，並同筆記錄 11/17 擴至 Foundry 公開預覽。共 286 個模型／版本節點、33 品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-18.zh-TW.md)。
+
+## 2026-11-19 自主資料增補
+
+新增 Gemini 4 Neon（11/18 付費 API GA）、Hy4 flash（11/16 託管首發，另記後續開放權重）與 DaisyRose-27B（11/18 開放權重）；Genie 4 保留 10/27 研究預覽首發日，補 11/18 起向符合資格的 Google AI Ultra 訂戶分批開放。共 289 個模型／版本節點、34 品牌、9 張 Agent／工具卡。 詳見 [本批查核](docs/UPDATE_2026-11-19.zh-TW.md)。

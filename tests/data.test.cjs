@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-18');
-  assert.equal(updates.additions.length,78);
-  assert.equal(new Set(updates.additions.map(D.key)).size,78);
+  assert.equal(updates.checkedAt,'2026-11-19');
+  assert.equal(updates.additions.length,81);
+  assert.equal(new Set(updates.additions.map(D.key)).size,81);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -99,10 +99,10 @@ test('Rerank is a retrieval ranking capability, not embedding or general generat
 });
 
 
-test('Genie 4 is a dated research-preview world model, not Gemini flagship',()=>{
+test('Genie 4 is a dated world model with a later rollout, not Gemini flagship',()=>{
  const row=updates.additions.find(r=>r.model==='Genie 4');
  assert.equal(row.date,'2026-10-27'); assert.equal(row.vendor,'Google');
- assert.match(row.note,/可信測試者/); assert.match(row.note,/即將推出/);
+ assert.match(row.note,/可信測試者/); assert.match(row.note,/11\/18.*Ultra/); assert.equal(updates.additions.filter(r=>r.model==='Genie 4').length,1);
  assert.equal(row.sources[0],'https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/');
  assert.ok(D.types(row).includes('world')); assert.ok(!D.types(row).includes('general'));
  assert.equal(require('../assets/brand-data.js').family(row).id,'genie');
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,78);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,81);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -192,9 +192,9 @@ test('November 6 model additions retain exact availability and specialized branc
  const hy=updates.additions.find(r=>r.model==='Hy4');
  assert.equal(hy.date,'2026-11-04');assert.equal(hy.vendor,'Tencent');
  assert.equal(B.family(hy).id,'tencent-hy');assert.ok(D.types(hy).includes('multimodal'));
- assert.match(hy.note,/不據此宣稱權重已開放/);assert.match(hy.note,/Hy4 Preview/);assert.match(hy.note,/Hy4 Flash 仍是預告/);assert.ok(!hy.tags.includes('OW'));
+ assert.match(hy.note,/不據此宣稱權重已開放/);assert.match(hy.note,/Hy4 Preview/);assert.match(hy.note,/Hy4 flash 另立節點/);assert.ok(!hy.tags.includes('OW'));
  for(const row of [cyber,omni,hy])assert.equal(updates.additions.filter(r=>D.key(r)===D.key(row)).length,1);
- assert.ok(!updates.additions.some(r=>/Mistral Studio|Meta Muse|Hy4 Flash/.test(r.model)));
+ assert.ok(!updates.additions.some(r=>/Mistral Studio|Meta Muse/.test(r.model)));
 });
 
 test('November 9 backfill uses first-party dates and keeps derivative models distinct from products',()=>{
@@ -331,4 +331,13 @@ test('Nov 18 records keep separate model identities, capability lanes and first-
  assert.match(get('GPT-6.2 Sol').note,/Ultrafast 是執行選項/);
  assert.match(get('d1.2').note,/OpenRouter 與 Vercel 是後續計畫/);
  assert.ok(!updates.additions.some(r=>/^(?:Canvas|Copilot Fusion|Ultrafast|MAI Realtime 1)$/.test(r.model)));
+});
+
+test('Nov 19 additions distinguish API rollout, hosted release and open weights',()=>{
+ const B=require('../assets/brand-data.js');
+ const find=(vendor,model)=>updates.additions.find(r=>r.vendor===vendor&&r.model===model);
+ const neon=find('Google','Gemini 4 Neon'), flash=find('Tencent','Hy4 flash'), rose=find('RadixArk','DaisyRose-27B');
+ assert.equal(neon.date,'2026-11-18');assert.match(neon.note,/付費.*GA/);assert.equal(B.family(neon).id,'gemini');
+ assert.equal(flash.date,'2026-11-16');assert.match(flash.note,/Tencent Hy License/);assert.ok(D.tags(flash).includes('OW'));assert.equal(B.family(flash).id,'tencent-hy');
+ assert.equal(rose.date,'2026-11-18');assert.match(rose.note,/Qwen3\.8-27B/);assert.match(rose.note,/Apache 2\.0/);assert.equal(B.family(rose).id,'daisyrose');
 });

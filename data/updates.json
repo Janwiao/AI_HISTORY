@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-18",
+  "checkedAt": "2026-11-19",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。 2026-11-12 增補 Qwen4-Max-Preview、Gemini Decision 1 及 Scribe v3／v3 Live；預覽、決策分類與語音轉寫支線分開標示，不代表全量歷史重驗。 2026-11-13 增補 Gemini 4 Hydrogen，採 11/12 官方 GA 日期；產品分批推出與 API 可用範圍分開，不代表全量歷史重驗。 2026-11-14 補收 SOV-Transcribe-1，採 11/12 官方發布日；非串流語音轉寫與通用模型分開，不代表全量歷史重驗。 2026-11-15 補收 IBM LLMON 兩款實驗預覽及 Duo v1 的 1.0／1.2 版本；採官方模型發布日期，非全量歷史重驗。 2026-11-16 補收華為雲 openPangu-2.1-Pro（11/15 指定區域 MaaS 發布）及 Perplexity Decider v1.3／Flash v1.3（11/12 發布）；區分 API 與權重的存取證據，非全量歷史重驗。 2026-11-17 增補 Qwen4-Max 正式 API（11/16），補收 ERNIE 5.5 Flash Base／Preview 與 MiniMax H3-Image；區分託管存取、預訓練權重及後訓練權重預告，非全量歷史重驗。 2026-11-18 增補 GPT-6.2 Astra／Sol、Microsoft 的程式／影像／決策與 Liquid d1.2 支線；保留 MAI Image 2.7 的 10/27 編輯預覽及 11/17 Foundry 公開預覽，未重新查核全部歷史。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。 2026-11-12 增補 Qwen4-Max-Preview、Gemini Decision 1 及 Scribe v3／v3 Live；預覽、決策分類與語音轉寫支線分開標示，不代表全量歷史重驗。 2026-11-13 增補 Gemini 4 Hydrogen，採 11/12 官方 GA 日期；產品分批推出與 API 可用範圍分開，不代表全量歷史重驗。 2026-11-14 補收 SOV-Transcribe-1，採 11/12 官方發布日；非串流語音轉寫與通用模型分開，不代表全量歷史重驗。 2026-11-15 補收 IBM LLMON 兩款實驗預覽及 Duo v1 的 1.0／1.2 版本；採官方模型發布日期，非全量歷史重驗。 2026-11-16 補收華為雲 openPangu-2.1-Pro（11/15 指定區域 MaaS 發布）及 Perplexity Decider v1.3／Flash v1.3（11/12 發布）；區分 API 與權重的存取證據，非全量歷史重驗。 2026-11-17 增補 Qwen4-Max 正式 API（11/16），補收 ERNIE 5.5 Flash Base／Preview 與 MiniMax H3-Image；區分託管存取、預訓練權重及後訓練權重預告，非全量歷史重驗。 2026-11-18 增補 GPT-6.2 Astra／Sol、Microsoft 的程式／影像／決策與 Liquid d1.2 支線；保留 MAI Image 2.7 的 10/27 編輯預覽及 11/17 Foundry 公開預覽，未重新查核全部歷史。 2026-11-19 新增 Gemini 4 Neon、Hy4 flash 與 DaisyRose-27B，並補既有 Genie 4 的 11/18 存取狀態；不代表全部歷史資料已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -311,9 +311,11 @@
       "date": "2026-10-27",
       "category": "世界模型／即時互動模擬／原生音訊",
       "tags": "WORLD/MM",
-      "note": "Google DeepMind 世界模型，生成可即時互動的場景與原生音訊。10/27 公告已向可信測試者推出研究預覽；Project Genie 的 Google AI Ultra 使用者及 Gemini API／AI Studio 早期合作夥伴存取仍寫即將推出，不是全面開放，也不是 Gemini 通用旗艦升代。",
+      "note": "Google DeepMind 世界模型，生成即時互動場景與原生音訊。10/27 公告向可信測試者推出研究預覽；11/18 起，Project Genie 向符合資格的 Google AI Ultra 訂戶分批開放，Google AI Pro 可加入等候名單。這是既有模型的存取擴大，不是 API 全面開放，也不是 Gemini 通用旗艦升代。",
       "sources": [
-        "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/"
+        "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+        "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
+        "https://deepmind.google/models/model-cards/genie-4/"
       ]
     },
     {
@@ -441,7 +443,7 @@
       "date": "2026-11-04",
       "category": "多模態／推理／程式與 Agent 能力",
       "tags": "R/A/MM",
-      "note": "騰訊 Hy4 正式版，與先前 Hy4 Preview 區分。11/4 官方發布並於 TokenHub 提供，具視覺理解、工具使用與長程任務能力。官方新聞稿表示權重及系統卡將於之後數日釋出，本次不據此宣稱權重已開放；Hy4 Flash 仍是預告，不另加已發布節點。",
+      "note": "騰訊 Hy4 正式版，與先前 Hy4 Preview 區分。11/4 官方發布並於 TokenHub 提供，具視覺理解、工具使用與長程任務能力。官方新聞稿表示權重及系統卡將於之後數日釋出，本次不據此宣稱權重已開放。後續 11/16 發布的 Hy4 flash 另立節點，不與 Hy4 權重狀態混用。",
       "sources": [
         "https://cloud.tencent.com/document/product/1823/130675",
         "https://www.prnewswire.com/apac/news-releases/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models-302929177.html"
@@ -940,6 +942,44 @@
       "sources": [
         "https://news.microsoft.com/source/2026/11/17/microsoft-ignite-2026-empowering-human-ambition-intelligence-and-trust/",
         "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/from-model-choice-to-your-durable-advantage-build-ai-that-keeps-improving/4573609"
+      ]
+    },
+    {
+      "vendor": "Google",
+      "model": "Gemini 4 Neon",
+      "date": "2026-11-18",
+      "category": "通用／推理／多模態／程式與 Agent 能力",
+      "tags": "R/A/MM",
+      "note": "11/18 官方發表，Gemini API 付費層級一般可用（GA；gemini-4-neon），具 100 萬 token 上下文。Google 同日起在 Gemini app 與 Antigravity 等產品向指定方案分批推出，不等於免費層級可用。Neon 定位介於 Carbon 的高難度長程任務和 Hydrogen 的日常快速處理之間。",
+      "sources": [
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+        "https://aistudio.google.com/docs/changelog",
+        "https://deepmind.google/models/model-cards/gemini-4-neon/"
+      ]
+    },
+    {
+      "vendor": "Tencent",
+      "model": "Hy4 flash",
+      "date": "2026-11-16",
+      "category": "通用／多模態／推理／程式與 Agent 能力",
+      "tags": "R/A/MM/OW",
+      "note": "11/16 騰訊發布並於 TokenHub 提供，亦接入 WorkBuddy。支援文字及影像輸入，最高 100 萬 token 上下文。官方倉庫其後列出指令版、FP8 量化與預訓練基底的開放權重，採 Tencent Hy License；權重釋出與託管首發分開看，FP8 不是另一個模型節點。",
+      "sources": [
+        "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/",
+        "https://cloud.tencent.com/document/product/1823/130675",
+        "https://github.com/Tencent-Hunyuan/Hy4-flash"
+      ]
+    },
+    {
+      "vendor": "RadixArk",
+      "model": "DaisyRose-27B",
+      "date": "2026-11-18",
+      "category": "多模態／推理／強化學習後訓練",
+      "tags": "R/A/MM/OW",
+      "note": "11/18 RadixArk 發布 Qwen3.8-27B 的後訓練衍生模型；使用強化學習，未用監督微調或蒸餾，保留圖片理解與 256K token 上下文。BF16、FP8、NVFP4 權重以 Apache 2.0 釋出；三種精度不另算模型。",
+      "sources": [
+        "https://huggingface.co/blog/RadixArk/daisyrose-27b-pushing-the-frontier-of-post-trainin",
+        "https://huggingface.co/RadixArk/DaisyRose-27B"
       ]
     }
   ]
