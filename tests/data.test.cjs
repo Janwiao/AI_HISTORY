@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-19');
-  assert.equal(updates.additions.length,81);
-  assert.equal(new Set(updates.additions.map(D.key)).size,81);
+  assert.equal(updates.checkedAt,'2026-11-20');
+  assert.equal(updates.additions.length,85);
+  assert.equal(new Set(updates.additions.map(D.key)).size,85);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,81);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,85);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -340,4 +340,20 @@ test('Nov 19 additions distinguish API rollout, hosted release and open weights'
  assert.equal(neon.date,'2026-11-18');assert.match(neon.note,/付費.*GA/);assert.equal(B.family(neon).id,'gemini');
  assert.equal(flash.date,'2026-11-16');assert.match(flash.note,/Tencent Hy License/);assert.ok(D.tags(flash).includes('OW'));assert.equal(B.family(flash).id,'tencent-hy');
  assert.equal(rose.date,'2026-11-18');assert.match(rose.note,/Qwen3\.8-27B/);assert.match(rose.note,/Apache 2\.0/);assert.equal(B.family(rose).id,'daisyrose');
+});
+
+test('Sage and Olala records distinguish capabilities and announcement, API and weight dates', () => {
+  const find=(vendor,model)=>updates.additions.find(r=>r.vendor===vendor&&r.model===model);
+  const sage=find('Shanghai AI Lab','Sage-S2.1-Flash');
+  const mini=find('OVHcloud','Olala-v1.0-mini-7A1B');
+  const mt=find('OVHcloud','Olala-v1.0-translate');
+  const sum=find('OVHcloud','Olala-v1.0-summarize');
+  assert.equal(sage.date,'2026-11-16');
+  assert.ok(D.types(sage).includes('science'));
+  assert.ok(!D.types(sage).includes('general'));
+  assert.deepEqual([mini.date,mt.date,sum.date],Array(3).fill('2026-11-18'));
+  assert.match(mini.note,/11\/17.*11\/18.*11\/19/);
+  assert.deepEqual(D.types(mt),['translation']);
+  assert.ok(D.types(sum).includes('reasoning'));
+  for (const row of [sage,mini,mt,sum]) assert.ok(row.sources.every(url=>new URL(url).protocol==='https:'));
 });

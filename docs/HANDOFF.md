@@ -221,3 +221,7 @@ GPT-6 Rosalind Research 以研究專用部署版本收錄（10/30），官方系
 ## 2026-11-19 自主維護交接
 
 新增 Gemini 4 Neon（11/18 付費 API GA）、Hy4 flash（11/16 託管首發，另記後續開放權重）與 DaisyRose-27B（11/18 開放權重）；Genie 4 保留 10/27 研究預覽首發日，補 11/18 起向符合資格的 Google AI Ultra 訂戶分批開放。共 289 個模型／版本節點、34 品牌、9 張 Agent／工具卡。 本批僅核實列出的增補與存取狀態；詳見 [本批查核](UPDATE_2026-11-19.zh-TW.md)。
+
+## 2026-11-20 自主維護交接
+
+補收 11/16 公告的 Sage-S2.1-Flash，以及 11/18 列入 OVHcloud 官方 API 目錄的 Olala mini、Translate 和 Summarize。共 293 個模型／版本節點、36 個品牌、9 張 Agent／工具卡。沿用既有版型與分類，詳見 [本批查核](UPDATE_2026-11-20.zh-TW.md)。

@@ -76,10 +76,10 @@ test('new brands and decision filter retain list, timeline, details and brand na
   }finally{c.dom.window.close()}
  }
 });
-test('desktop loads 289 unique records, all dates and 34 brands at readable scale; updates closed', async()=>{
+test('desktop loads 293 unique records, all dates and 36 brands at readable scale; updates closed', async()=>{
   const c=await boot();try{
-    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,289);assert.equal(c.d.querySelectorAll('.model-card').length,289);
-    assert.equal(c.d.querySelectorAll('#brandJump option').length,35);assert.equal(c.d.getElementById('pct').textContent,'100%');
+    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,293);assert.equal(c.d.querySelectorAll('.model-card').length,293);
+    assert.equal(c.d.querySelectorAll('#brandJump option').length,37);assert.equal(c.d.getElementById('pct').textContent,'100%');
     assert.equal(c.d.getElementById('updatesPanel').open,false);assert.equal(c.d.getElementById('listResults').hidden,true);
     assert.equal(c.d.querySelectorAll('.model-card time[datetime="2026-05"]').length,1);
   }finally{c.dom.window.close()}
@@ -99,7 +99,7 @@ test('filter intersections, empty/reset, capability search and URL restoration',
     assert.equal(c.d.querySelectorAll('.node').length,1);assert.match(c.w.location.search,/brand=Alibaba/);
     c.d.getElementById('search').value='nonexistent';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.equal(c.d.getElementById('emptyState').hidden,false);assert.equal(c.v.hidden,true);
-    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,289);assert.equal(c.d.getElementById('emptyState').hidden,true);
+    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,293);assert.equal(c.d.getElementById('emptyState').hidden,true);
     c.d.getElementById('search').value='推理';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.ok(c.d.querySelectorAll('.node').length>=75);
     c.w.history.pushState({},'', '?brand=Alibaba&year=2026&type=image&view=list');c.w.dispatchEvent(new c.w.PopStateEvent('popstate'));
@@ -218,7 +218,7 @@ test('Rerank filter is selectable and excludes Embed while cumulative scope is e
   c.set('typeFilter','rerank');
   const cards=[...c.d.querySelectorAll('.model-card')];
   assert.equal(cards.length,2);assert.ok(cards.every(card=>card.textContent.includes('Rerank 5')));
-  assert.match(c.d.getElementById('scope').textContent,/累計收錄 81 筆增量/);
+  assert.match(c.d.getElementById('scope').textContent,/累計收錄 85 筆增量/);
   assert.match(c.d.getElementById('scope').textContent,/不代表全部當日發布或重新查核/);
  }finally{c.dom.window.close()}
 });
@@ -249,10 +249,11 @@ test('Genie world-model filter, detail and Google family remain distinct',async(
  } finally {c.w.close();}
 });
 
-test('research filter exposes Rosalind and preserves scoped source detail',async()=>{
+test('research filter exposes Rosalind and Sage without mixing in general-purpose models',async()=>{
  const c=await boot({mobile:true});try{
- c.set('typeFilter','science');assert.equal(c.d.querySelectorAll('.model-card').length,1);
- assert.match(c.d.querySelector('.model-card').textContent,/Rosalind/);
+ c.set('typeFilter','science');assert.equal(c.d.querySelectorAll('.model-card').length,2);
+ const labels=[...c.d.querySelectorAll('.model-card')].map(x=>x.textContent).join(' ');
+ assert.match(labels,/Rosalind/);assert.match(labels,/Sage-S2\.1-Flash/);
  }finally{c.dom.window.close()}
 });
 
