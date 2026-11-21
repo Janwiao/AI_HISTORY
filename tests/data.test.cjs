@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-20');
-  assert.equal(updates.additions.length,85);
-  assert.equal(new Set(updates.additions.map(D.key)).size,85);
+  assert.equal(updates.checkedAt,'2026-11-21');
+  assert.equal(updates.additions.length,88);
+  assert.equal(new Set(updates.additions.map(D.key)).size,88);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -102,7 +102,7 @@ test('Rerank is a retrieval ranking capability, not embedding or general generat
 test('Genie 4 is a dated world model with a later rollout, not Gemini flagship',()=>{
  const row=updates.additions.find(r=>r.model==='Genie 4');
  assert.equal(row.date,'2026-10-27'); assert.equal(row.vendor,'Google');
- assert.match(row.note,/可信測試者/); assert.match(row.note,/11\/18.*Ultra/); assert.equal(updates.additions.filter(r=>r.model==='Genie 4').length,1);
+ assert.match(row.note,/可信測試者/); assert.match(row.note,/11\/18.*Ultra/);assert.match(row.note,/11\/19.*Interactions API/); assert.equal(updates.additions.filter(r=>r.model==='Genie 4').length,1);
  assert.equal(row.sources[0],'https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/');
  assert.ok(D.types(row).includes('world')); assert.ok(!D.types(row).includes('general'));
  assert.equal(require('../assets/brand-data.js').family(row).id,'genie');
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,85);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,88);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -192,7 +192,7 @@ test('November 6 model additions retain exact availability and specialized branc
  const hy=updates.additions.find(r=>r.model==='Hy4');
  assert.equal(hy.date,'2026-11-04');assert.equal(hy.vendor,'Tencent');
  assert.equal(B.family(hy).id,'tencent-hy');assert.ok(D.types(hy).includes('multimodal'));
- assert.match(hy.note,/不據此宣稱權重已開放/);assert.match(hy.note,/Hy4 Preview/);assert.match(hy.note,/Hy4 flash 另立節點/);assert.ok(!hy.tags.includes('OW'));
+ assert.match(hy.note,/11\/20.*Instruct 權重.*Tencent Hy License 1.0/);assert.match(hy.note,/Hy4 Preview/);assert.match(hy.note,/Hy4 flash 另立節點/);assert.ok(hy.tags.includes('OW'));
  for(const row of [cyber,omni,hy])assert.equal(updates.additions.filter(r=>D.key(r)===D.key(row)).length,1);
  assert.ok(!updates.additions.some(r=>/Mistral Studio|Meta Muse/.test(r.model)));
 });
@@ -356,4 +356,14 @@ test('Sage and Olala records distinguish capabilities and announcement, API and 
   assert.deepEqual(D.types(mt),['translation']);
   assert.ok(D.types(sum).includes('reasoning'));
   for (const row of [sage,mini,mt,sum]) assert.ok(row.sources.every(url=>new URL(url).protocol==='https:'));
+});
+
+test('November 21 separates primary releases from API milestones and packaging',()=>{
+ const pick=name=>updates.additions.find(r=>r.model===name);
+ const aion=pick('Aion-1.0-Instruct-2.3B'), ideo=pick('Ideogram 4.6'), loop=pick('SenseNova-Loop-9B'), live=pick('GPT-Live-1.1');
+ assert.equal(aion.date,'2026-11-19');assert.match(aion.note,/MIT.*origin trial.*開發者預覽/);
+ assert.equal(ideo.date,'2026-11-19');assert.ok(D.types(ideo).includes('image'));assert.match(ideo.note,/未確認 4.6 有公開權重/);
+ assert.equal(loop.date,'2026-11-17');assert.ok(D.types(loop).includes('multimodal'));assert.match(loop.note,/Apache 2.0.*同意分享帳號資訊/);
+ assert.equal(live.date,'2026-10-15');assert.match(live.note,/11\/19.*gpt-live-1\.1.*不代表 Quip/);
+ assert.equal(updates.additions.filter(r=>r.model.startsWith('GPT-Live-1.1')).length,2);
 });

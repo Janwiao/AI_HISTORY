@@ -64,22 +64,22 @@ test('EmbeddingGemma appears in embedding filter and its separate Google family 
  }finally{c.dom.window.close()}
 });
 test('new brands and decision filter retain list, timeline, details and brand navigation',async()=>{
- for(const [brand,model,type] of [['Kakao','Kanana-2-v-decide','decision'],['SenseTime','SenseNova 6.8 Flash',''],['Thinking Machines Lab','Inkling 2 Small','']]){
+ for(const [brand,model,type,count=1] of [['Kakao','Kanana-2-v-decide','decision'],['SenseTime','SenseNova 6.8 Flash','',2],['Ideogram','Ideogram 4.6','image'],['Thinking Machines Lab','Inkling 2 Small','']]){
   const c=await boot({mobile:true,url:`https://example.test/AI_HISTORY/?brand=${encodeURIComponent(brand)}&type=${type}&view=list`});try{
    assert.deepEqual(c.errors,[]);assert.equal(c.d.getElementById('brandJump').value,brand);
    assert.equal(c.d.getElementById('typeFilter').value,type);
-   assert.equal(c.d.querySelectorAll('.model-card').length,1);assert.equal(c.d.querySelectorAll('.node').length,1);
-   c.d.querySelector('[data-detail]').click();assert.equal(c.d.getElementById('detailTitle').textContent,model);
+   assert.equal(c.d.querySelectorAll('.model-card').length,count);assert.equal(c.d.querySelectorAll('.node').length,count);
+   [...c.d.querySelectorAll('.model-card')].find(card=>card.textContent.includes(model)).querySelector('[data-detail]').click();assert.equal(c.d.getElementById('detailTitle').textContent,model);
    assert.ok(c.d.querySelectorAll('#detailSources a').length>=1);c.click('closeDetail');
    c.d.querySelector('#listResults [data-brand]').click();assert.equal(c.d.getElementById('brandEvolution').open,true);
    assert.ok(c.d.getElementById('brandCanvas').textContent.includes(model));
   }finally{c.dom.window.close()}
  }
 });
-test('desktop loads 293 unique records, all dates and 36 brands at readable scale; updates closed', async()=>{
+test('desktop loads 296 unique records, all dates and 37 brands at readable scale; updates closed', async()=>{
   const c=await boot();try{
-    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,293);assert.equal(c.d.querySelectorAll('.model-card').length,293);
-    assert.equal(c.d.querySelectorAll('#brandJump option').length,37);assert.equal(c.d.getElementById('pct').textContent,'100%');
+    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,296);assert.equal(c.d.querySelectorAll('.model-card').length,296);
+    assert.equal(c.d.querySelectorAll('#brandJump option').length,38);assert.equal(c.d.getElementById('pct').textContent,'100%');
     assert.equal(c.d.getElementById('updatesPanel').open,false);assert.equal(c.d.getElementById('listResults').hidden,true);
     assert.equal(c.d.querySelectorAll('.model-card time[datetime="2026-05"]').length,1);
   }finally{c.dom.window.close()}
@@ -99,7 +99,7 @@ test('filter intersections, empty/reset, capability search and URL restoration',
     assert.equal(c.d.querySelectorAll('.node').length,1);assert.match(c.w.location.search,/brand=Alibaba/);
     c.d.getElementById('search').value='nonexistent';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.equal(c.d.getElementById('emptyState').hidden,false);assert.equal(c.v.hidden,true);
-    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,293);assert.equal(c.d.getElementById('emptyState').hidden,true);
+    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,296);assert.equal(c.d.getElementById('emptyState').hidden,true);
     c.d.getElementById('search').value='推理';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.ok(c.d.querySelectorAll('.node').length>=75);
     c.w.history.pushState({},'', '?brand=Alibaba&year=2026&type=image&view=list');c.w.dispatchEvent(new c.w.PopStateEvent('popstate'));
@@ -218,7 +218,7 @@ test('Rerank filter is selectable and excludes Embed while cumulative scope is e
   c.set('typeFilter','rerank');
   const cards=[...c.d.querySelectorAll('.model-card')];
   assert.equal(cards.length,2);assert.ok(cards.every(card=>card.textContent.includes('Rerank 5')));
-  assert.match(c.d.getElementById('scope').textContent,/累計收錄 85 筆增量/);
+  assert.match(c.d.getElementById('scope').textContent,/累計收錄 88 筆增量/);
   assert.match(c.d.getElementById('scope').textContent,/不代表全部當日發布或重新查核/);
  }finally{c.dom.window.close()}
 });

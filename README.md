@@ -161,3 +161,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-20 自主資料增補
 
 補收 11/16 公告的 Sage-S2.1-Flash，以及 11/18 列入 OVHcloud 官方 API 目錄的 Olala mini、Translate 和 Summarize。共 293 個模型／版本節點、36 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-20.zh-TW.md)。
+
+## 2026-11-21 自主資料增補
+
+補收 Aion-1.0-Instruct-2.3B、Ideogram 4.6（11/19）與 SenseNova-Loop-9B（11/17）；另補既有 GPT-Live-1.1／Genie 4 的 11/19 API 開放與 Hy4 權重狀態，不另計節點。共 296 個模型／版本節點、37 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-21.zh-TW.md)。

@@ -17,7 +17,8 @@
     ['humans&', [rule('ampersand', 'Ampersand 協作模型', /^Ampersand v\d+(?:\.\d+)*$/i)]],
     ['Ricursive Intelligence', [rule('ripple', 'Ripple', /^Ripple-\d+B Preview$/i)]],
     ['Kakao', [rule('kanana-decide', 'Kanana 決策支線', /^Kanana-\d+-v-decide$/i)]],
-    ['SenseTime', [rule('sensenova', 'SenseNova', /^SenseNova \d+(?:\.\d+)*(?: Flash)?$/i)]],
+    ['Ideogram', [rule('ideogram-image', 'Ideogram 影像', /^Ideogram \d+(?:\.\d+)*$/i)]],
+    ['SenseTime', [rule('sensenova-loop', 'SenseNova Loop', /^SenseNova-Loop-\d+B(?:-Preview)?$/i), rule('sensenova', 'SenseNova', /^SenseNova \d+(?:\.\d+)*(?: Flash)?$/i)]],
     ['Thinking Machines Lab', [rule('inkling', 'Inkling', /^Inkling(?: \d+)?(?:[- ]Small)?$/i)]],
     ['Tencent', [rule('tencent-hy', 'Hy', /^Hy\d+(?:\.\d+)*(?: Preview| Flash)?$/i)]],
     ['Meituan', [rule('longcat', 'LongCat', /^LongCat-\d+(?:\.\d+)*(?:-Preview)?$/i)]],
@@ -92,7 +93,7 @@
     ['Perplexity', [rule('pplx-decider', 'Decider 決策模型', /^Decider(?: Flash)? v\d+(?:\.\d+)*$/i), rule('sonar', 'Sonar', /^Sonar(?: (?:Pro|API|Deep|Research|Reasoning))*$/i)]],
     ['NVIDIA', [rule('nemotron', 'Nemotron', /^(?:Llama Nemotron Reasoning Family|Llama-\d+(?:\.\d+)*-Nemotron-[a-z\d-]+|Nemotron \d+(?:\.\d+)*(?: [a-z\d]+)*)$/i)]],
     ['Amazon', [rule('nova', 'Amazon Nova', /^Amazon Nova (?:Micro \/ Lite \/ Pro|Premier)$/i)]],
-    ['Microsoft', [rule('phi', 'Phi', /^Phi-\d+(?:\.\d+)*(?:-reasoning(?:-vision| \/ reasoning-plus)?)?$/i),
+    ['Microsoft', [rule('aion', 'Aion 端側模型', /^Aion-\d+(?:\.\d+)*-Instruct-\d+(?:\.\d+)*B$/i), rule('phi', 'Phi', /^Phi-\d+(?:\.\d+)*(?:-reasoning(?:-vision| \/ reasoning-plus)?)?$/i),
       rule('mai-code', 'MAI Code', /^MAI Code \d+(?:\.\d+)*(?: Flash)?$/i),
       rule('mai-image', 'MAI Image 影像支線', /^MAI Image \d+(?:\.\d+)*(?: Flash)?$/i),
       rule('microsoft-decision', 'Microsoft Decision', /^Microsoft-Decision-\d+(?:\.\d+)*$/i)
