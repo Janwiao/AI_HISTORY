@@ -165,3 +165,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-21 自主資料增補
 
 補收 Aion-1.0-Instruct-2.3B、Ideogram 4.6（11/19）與 SenseNova-Loop-9B（11/17）；另補既有 GPT-Live-1.1／Genie 4 的 11/19 API 開放與 Hy4 權重狀態，不另計節點。共 296 個模型／版本節點、37 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-21.zh-TW.md)。
+
+## 2026-11-22 自主資料增補
+
+補收 Inkling 2 Mini、Tencent WeMM-Video 四款全模態理解模型及 WeVisForensics、Meituan LongCat-Video-Avatar 1.6；另補 Inkling 2 Small 的 11/12 權重發布。共 303 個模型／版本節點、37 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-22.zh-TW.md)。

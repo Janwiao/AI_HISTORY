@@ -19,9 +19,9 @@
     ['Kakao', [rule('kanana-decide', 'Kanana 決策支線', /^Kanana-\d+-v-decide$/i)]],
     ['Ideogram', [rule('ideogram-image', 'Ideogram 影像', /^Ideogram \d+(?:\.\d+)*$/i)]],
     ['SenseTime', [rule('sensenova-loop', 'SenseNova Loop', /^SenseNova-Loop-\d+B(?:-Preview)?$/i), rule('sensenova', 'SenseNova', /^SenseNova \d+(?:\.\d+)*(?: Flash)?$/i)]],
-    ['Thinking Machines Lab', [rule('inkling', 'Inkling', /^Inkling(?: \d+)?(?:[- ]Small)?$/i)]],
-    ['Tencent', [rule('tencent-hy', 'Hy', /^Hy\d+(?:\.\d+)*(?: Preview| Flash)?$/i)]],
-    ['Meituan', [rule('longcat', 'LongCat', /^LongCat-\d+(?:\.\d+)*(?:-Preview)?$/i)]],
+    ['Thinking Machines Lab', [rule('inkling', 'Inkling', /^Inkling(?: \d+)?(?:[- ](?:Small|Mini))?$/i)]],
+    ['Tencent', [rule('wemm-video', 'WeMM 影片理解', /^WeMM-Video-(?:2B|4B|9B|35B-A3B)$/i), rule('wevis-forensics', 'WeVis 影片鑑識', /^WeVisForensics$/i), rule('tencent-hy', 'Hy', /^Hy\d+(?:\.\d+)*(?: Preview| Flash)?$/i)]],
+    ['Meituan', [rule('longcat-avatar', 'LongCat 數位人影片', /^LongCat-Video-Avatar \d+(?:\.\d+)*$/i), rule('longcat', 'LongCat', /^LongCat-\d+(?:\.\d+)*(?:-Preview)?$/i)]],
     ['OpenAI', [
       rule('gpt-cyber', 'GPT Cyber 資安支線', /^GPT-\d+(?:\.\d+)* Cyber$/i),
       rule('gpt-rosalind', 'GPT Rosalind 研究支線', /^GPT-\d+(?:\.\d+)* Rosalind Research$/i),

@@ -36,7 +36,7 @@ test('November 7 additions use verified announcement dates without duplicating p
 });
 test('Inkling and Kimi distinguish hosted availability from promised and observed weights',()=>{
  const ink=updates.additions.find(r=>r.model==='Inkling 2 Small');
- assert.ok(!D.tags(ink).includes('OW'));assert.match(ink.note,/封閉權重/);assert.match(ink.note,/計畫/);
+ assert.ok(D.tags(ink).includes('OW'));assert.match(ink.note,/11\/5.*封閉權重/);assert.match(ink.note,/11\/12.*Apache 2\.0/);
  const kimi=updates.additions.find(r=>r.model==='Kimi K3.1 Pro');
  assert.match(kimi.note,/首次公開日期未核實/);assert.match(kimi.note,/不推論不同權重/);
  assert.ok(kimi.sources.includes('https://www.moonshot.ai/'));
@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-21');
-  assert.equal(updates.additions.length,88);
-  assert.equal(new Set(updates.additions.map(D.key)).size,88);
+  assert.equal(updates.checkedAt,'2026-11-22');
+  assert.equal(updates.additions.length,95);
+  assert.equal(new Set(updates.additions.map(D.key)).size,95);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,88);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,95);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -366,4 +366,26 @@ test('November 21 separates primary releases from API milestones and packaging',
  assert.equal(loop.date,'2026-11-17');assert.ok(D.types(loop).includes('multimodal'));assert.match(loop.note,/Apache 2.0.*同意分享帳號資訊/);
  assert.equal(live.date,'2026-10-15');assert.match(live.note,/11\/19.*gpt-live-1\.1.*不代表 Quip/);
  assert.equal(updates.additions.filter(r=>r.model.startsWith('GPT-Live-1.1')).length,2);
+});
+
+test('November 22 distinguishes released weights, video understanding, forensics, and avatar generation', () => {
+ const pick=m=>updates.additions.find(r=>r.model===m);
+ const mini=pick('Inkling 2 Mini');
+ assert.equal(mini.date,'2026-11-20');
+ assert.deepEqual(D.tags(mini),['R','A','MM','OW']);
+ assert.match(mini.note,/26\.4B.*3\.4B.*5\.4B/);
+ const family=updates.additions.filter(r=>r.model.startsWith('WeMM-Video-'));
+ assert.deepEqual(family.map(r=>r.model),['WeMM-Video-2B','WeMM-Video-4B','WeMM-Video-9B','WeMM-Video-35B-A3B']);
+ for(const r of family){
+  assert.equal(r.date,'2026-11-20');
+  assert.match(r.note,/不生成影片/);
+  assert.equal(D.matches(r,{type:'multimodal'}),true);
+  assert.equal(D.matches(r,{type:'video'}),false);
+ }
+ const forensics=pick('WeVisForensics'), avatar=pick('LongCat-Video-Avatar 1.6');
+ assert.equal(forensics.date,'2026-11-19');
+ assert.match(forensics.note,/五個角色 LoRA.*不是完整獨立基座權重/);
+ assert.equal(avatar.date,'2026-11-13');
+ assert.match(avatar.note,/模型卡標 MIT/);
+ assert.equal(D.matches(avatar,{type:'video'}),true);
 });

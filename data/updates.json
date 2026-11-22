@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-21",
+  "checkedAt": "2026-11-22",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。 2026-11-12 增補 Qwen4-Max-Preview、Gemini Decision 1 及 Scribe v3／v3 Live；預覽、決策分類與語音轉寫支線分開標示，不代表全量歷史重驗。 2026-11-13 增補 Gemini 4 Hydrogen，採 11/12 官方 GA 日期；產品分批推出與 API 可用範圍分開，不代表全量歷史重驗。 2026-11-14 補收 SOV-Transcribe-1，採 11/12 官方發布日；非串流語音轉寫與通用模型分開，不代表全量歷史重驗。 2026-11-15 補收 IBM LLMON 兩款實驗預覽及 Duo v1 的 1.0／1.2 版本；採官方模型發布日期，非全量歷史重驗。 2026-11-16 補收華為雲 openPangu-2.1-Pro（11/15 指定區域 MaaS 發布）及 Perplexity Decider v1.3／Flash v1.3（11/12 發布）；區分 API 與權重的存取證據，非全量歷史重驗。 2026-11-17 增補 Qwen4-Max 正式 API（11/16），補收 ERNIE 5.5 Flash Base／Preview 與 MiniMax H3-Image；區分託管存取、預訓練權重及後訓練權重預告，非全量歷史重驗。 2026-11-18 增補 GPT-6.2 Astra／Sol、Microsoft 的程式／影像／決策與 Liquid d1.2 支線；保留 MAI Image 2.7 的 10/27 編輯預覽及 11/17 Foundry 公開預覽，未重新查核全部歷史。 2026-11-19 新增 Gemini 4 Neon、Hy4 flash 與 DaisyRose-27B，並補既有 Genie 4 的 11/18 存取狀態；不代表全部歷史資料已重驗。 2026-11-20 補收 Sage-S2.1-Flash 與 Olala 三款已列官方 API 的模型；未重新查驗全部歷史。 2026-11-21 補收 Aion Instruct、Ideogram 4.6 與 SenseNova-Loop-9B，另補 GPT-Live-1.1、Genie 4 的 API 事件與 Hy4 權重發布；未重新查驗全部歷史。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。 2026-11-12 增補 Qwen4-Max-Preview、Gemini Decision 1 及 Scribe v3／v3 Live；預覽、決策分類與語音轉寫支線分開標示，不代表全量歷史重驗。 2026-11-13 增補 Gemini 4 Hydrogen，採 11/12 官方 GA 日期；產品分批推出與 API 可用範圍分開，不代表全量歷史重驗。 2026-11-14 補收 SOV-Transcribe-1，採 11/12 官方發布日；非串流語音轉寫與通用模型分開，不代表全量歷史重驗。 2026-11-15 補收 IBM LLMON 兩款實驗預覽及 Duo v1 的 1.0／1.2 版本；採官方模型發布日期，非全量歷史重驗。 2026-11-16 補收華為雲 openPangu-2.1-Pro（11/15 指定區域 MaaS 發布）及 Perplexity Decider v1.3／Flash v1.3（11/12 發布）；區分 API 與權重的存取證據，非全量歷史重驗。 2026-11-17 增補 Qwen4-Max 正式 API（11/16），補收 ERNIE 5.5 Flash Base／Preview 與 MiniMax H3-Image；區分託管存取、預訓練權重及後訓練權重預告，非全量歷史重驗。 2026-11-18 增補 GPT-6.2 Astra／Sol、Microsoft 的程式／影像／決策與 Liquid d1.2 支線；保留 MAI Image 2.7 的 10/27 編輯預覽及 11/17 Foundry 公開預覽，未重新查核全部歷史。 2026-11-19 新增 Gemini 4 Neon、Hy4 flash 與 DaisyRose-27B，並補既有 Genie 4 的 11/18 存取狀態；不代表全部歷史資料已重驗。 2026-11-20 補收 Sage-S2.1-Flash 與 Olala 三款已列官方 API 的模型；未重新查驗全部歷史。 2026-11-21 補收 Aion Instruct、Ideogram 4.6 與 SenseNova-Loop-9B，另補 GPT-Live-1.1、Genie 4 的 API 事件與 Hy4 權重發布；未重新查驗全部歷史。 2026-11-22 增補 Inkling 2 Mini、WeMM-Video 四款、WeVisForensics 研究套件及 LongCat-Video-Avatar 1.6，補記 Inkling 2 Small 權重已開放；不代表全部歷史已重驗。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -482,11 +482,12 @@
       "model": "Inkling 2 Small",
       "date": "2026-11-05",
       "category": "通用／多模態／推理／程式／Agent",
-      "tags": "R/A/MM",
-      "note": "Thinking Machines Lab 第二代 Inkling 模型；594B total／17B active MoE，接受文字及圖片、輸出文字，支援可調推理 effort。11/5 在 Tinker Playground 與推理／微調 API 提供，首發仍為封閉權重；Apache 2.0 權重是完成外部安全測試後下週釋出的計畫，不標為已開放，也不是 Tinker 產品首發。",
+      "tags": "R/A/MM/OW",
+      "note": "Thinking Machines Lab 第二代 Inkling；594B 總參數、17B 啟用，接受文字與圖片、輸出文字。11/5 先於 Tinker Playground 及推理／微調 API 提供，首發仍是封閉權重；11/12 正式公開 Apache 2.0 可下載權重。兩個里程碑屬同一模型，不另計節點。",
       "sources": [
         "https://thinkingmachines.ai/news/inkling-2-small/",
-        "https://thinkingmachines.ai/model-card/inkling-2-small/"
+        "https://thinkingmachines.ai/model-card/inkling-2-small/",
+        "https://huggingface.co/thinkingmachines/Inkling-2-Small"
       ]
     },
     {
@@ -1070,6 +1071,90 @@
       "sources": [
         "https://www.sensetime.com/en/news/sensenova-loop-9b-release-20261118-1435",
         "https://huggingface.co/sensenova/SenseNova-Loop-9B"
+      ]
+    },
+    {
+      "vendor": "Thinking Machines Lab",
+      "model": "Inkling 2 Mini",
+      "date": "2026-11-20",
+      "category": "通用／多模態／推理／程式",
+      "tags": "R/A/MM/OW",
+      "note": "文字與圖像輸入、文字輸出。26.4B 總參數、3.4B 啟用；中段重複三次換算每 token 約 5.4B 權重啟用量。11/20 提供 Tinker 推理與微調及可下載 Apache 2.0 權重；研究用 variable-loop 不另計。",
+      "sources": [
+        "https://thinkingmachines.ai/news/inkling-2-mini/",
+        "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+      ]
+    },
+    {
+      "vendor": "Tencent",
+      "model": "WeMM-Video-2B",
+      "date": "2026-11-20",
+      "category": "全模態／影片理解／推理",
+      "tags": "R/MM/OW",
+      "note": "稠密模型，支援中英與文字、圖片、音訊及含原聲影片輸入，輸出文字，不生成影片。以 11/20 公開 BF16 權重為日期，模型卡標示 Apache 2.0；其他量化格式不另計，未驗證託管 API。",
+      "sources": [
+        "https://github.com/Tencent/WeMM-Video#model-zoo",
+        "https://huggingface.co/tencent/WeMM-Video-2B/tree/aaff85654e51d16aecf4f8197f7eb625333b74db"
+      ]
+    },
+    {
+      "vendor": "Tencent",
+      "model": "WeMM-Video-4B",
+      "date": "2026-11-20",
+      "category": "全模態／影片理解／推理",
+      "tags": "R/MM/OW",
+      "note": "稠密模型，支援中英與文字、圖片、音訊及含原聲影片輸入，輸出文字，不生成影片。以 11/20 公開 BF16 權重為日期，模型卡標示 Apache 2.0；其他量化格式不另計，未驗證託管 API。",
+      "sources": [
+        "https://github.com/Tencent/WeMM-Video#model-zoo",
+        "https://huggingface.co/tencent/WeMM-Video-4B/tree/2d79a1d04f174b7a593257221aa0bda655426383"
+      ]
+    },
+    {
+      "vendor": "Tencent",
+      "model": "WeMM-Video-9B",
+      "date": "2026-11-20",
+      "category": "全模態／影片理解／推理",
+      "tags": "R/MM/OW",
+      "note": "稠密模型，支援中英與文字、圖片、音訊及含原聲影片輸入，輸出文字，不生成影片。以 11/20 公開 BF16 權重為日期，模型卡標示 Apache 2.0；其他量化格式不另計，未驗證託管 API。",
+      "sources": [
+        "https://github.com/Tencent/WeMM-Video#model-zoo",
+        "https://huggingface.co/tencent/WeMM-Video-9B/tree/a97ef7143f6f605c1125a1db8850383979adee69"
+      ]
+    },
+    {
+      "vendor": "Tencent",
+      "model": "WeMM-Video-35B-A3B",
+      "date": "2026-11-20",
+      "category": "全模態／影片理解／推理",
+      "tags": "R/MM/OW",
+      "note": "混合專家模型，支援中英與文字、圖片、音訊及含原聲影片輸入，輸出文字，不生成影片。以 11/20 公開 BF16 權重為日期，模型卡標示 Apache 2.0；其他量化格式不另計，未驗證託管 API。",
+      "sources": [
+        "https://github.com/Tencent/WeMM-Video#model-zoo",
+        "https://huggingface.co/tencent/WeMM-Video-35BA3B/tree/8a93bb32e6b9e5ff02a18c406a049aa0b03ba8e2"
+      ]
+    },
+    {
+      "vendor": "Tencent",
+      "model": "WeVisForensics",
+      "date": "2026-11-19",
+      "category": "專用／生成影片鑑識",
+      "tags": "VIDEO/MM/OW",
+      "note": "Tencent 生成影片鑑識研究：主調查者協調專職檢查器，分析視聽偽跡。11/16 論文，11/19 公開基於 Qwen3.5-4B 的五個角色 LoRA 適配器，模型卡標 Apache 2.0。合計為一組專用研究套件，不是完整獨立基座權重、影片生成模型或商用 Agent 產品。",
+      "sources": [
+        "https://arxiv.org/abs/2611.21373",
+        "https://huggingface.co/tencent/WeVisForensics/commit/9fa025a02dde4f7f7de8883fe17b6f251f39098e"
+      ]
+    },
+    {
+      "vendor": "Meituan",
+      "model": "LongCat-Video-Avatar 1.6",
+      "date": "2026-11-13",
+      "category": "專用／影片生成／數位人",
+      "tags": "VIDEO/MM/OW",
+      "note": "音訊驅動的單人與多人數位人影片生成與續作；11/13 公開權重與技術報告 v1，11/17 為報告 v2。模型卡標 MIT；INT8 不是新模型，不據此宣稱託管 API 可用。",
+      "sources": [
+        "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+        "https://arxiv.org/abs/2611.18822"
       ]
     }
   ]

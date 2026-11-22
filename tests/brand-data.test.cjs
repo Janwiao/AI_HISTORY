@@ -32,7 +32,7 @@ test('Mistral dated revision keeps its family while EmbeddingGemma has a special
  assert.equal(classify('Mistral AI','Mistral Large 4 + product').id,'other');
 });
 test('new model brands have conservative named lanes and Kimi retains its existing family',()=>{
- for(const [vendor,model,id] of [['Kakao','Kanana-2-v-decide','kanana-decide'],['SenseTime','SenseNova 6.8 Flash','sensenova'],['Thinking Machines Lab','Inkling 2 Small','inkling'],['Moonshot AI','Kimi K3.1 Pro','kimi']]){
+ for(const [vendor,model,id] of [['Kakao','Kanana-2-v-decide','kanana-decide'],['SenseTime','SenseNova 6.8 Flash','sensenova'],['Thinking Machines Lab','Inkling 2 Small','inkling'],['Thinking Machines Lab','Inkling 2 Mini','inkling'],['Tencent','WeMM-Video-35B-A3B','wemm-video'],['Tencent','WeVisForensics','wevis-forensics'],['Meituan','LongCat-Video-Avatar 1.6','longcat-avatar'],['Moonshot AI','Kimi K3.1 Pro','kimi']]){
   assert.equal(classify(vendor,model).id,id);
  }
  assert.equal(classify('Kakao','Unknown').id,'other');
@@ -46,10 +46,10 @@ test('UMD exposes the same small API in a browser without dependencies', () => {
   assert.equal(context.window.BrandEvolutionData.family({ vendor: 'OpenAI', model: 'GPT-4' }).id, 'gpt');
 });
 
-test('all 296 merged nodes are retained exactly once with no product injection', () => {
+test('all 303 merged nodes are retained exactly once with no product injection', () => {
   assert.equal(baseline().length, 208);
-  assert.equal(records.length, 296);
-  assert.equal(new Set(records.map(D.key)).size, 296);
+  assert.equal(records.length, 303);
+  assert.equal(new Set(records.map(D.key)).size, 303);
   const all = [];
   for (const vendor of new Set(records.map(row => row.vendor))) {
     const lanes = B.group(records, vendor);
