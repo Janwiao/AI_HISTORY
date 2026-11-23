@@ -5,6 +5,9 @@
   const OTHER = { id: 'other', label: '其他／未分類' };
   const rule = (id, label, pattern) => ({ id, label, pattern });
   const catalogs = new Map([
+    ['Mind Lab', [rule('macaron', 'Macaron', /^Macaron-V\d+(?:\.\d+)*$/i)]],
+    ['Baseten', [rule('baseten-decision', 'Base Labs 決策模型', /^(?:bison|groundhog)-\d+$/i)]],
+    ['Reson8', [rule('rumble', 'Rumble 語音轉寫', /^Rumble-\d+(?:-Flash)?$/i)]],
     ['Shanghai AI Lab', [rule('sage-science', 'Sage 科學研究支線', /^Sage-S\d+(?:\.\d+)*-Flash$/i)]],
     ['OVHcloud', [rule('olala', 'Olala', /^Olala-v\d+\.\d+-(?:mini-\d+A\d+B|translate|summarize)$/i)]],
     ['Huawei', [rule('openpangu', 'openPangu', /^openPangu-\d+(?:\.\d+)*(?:-Pro|-Flash)?$/i)]],

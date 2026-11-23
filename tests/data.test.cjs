@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-22');
-  assert.equal(updates.additions.length,95);
-  assert.equal(new Set(updates.additions.map(D.key)).size,95);
+  assert.equal(updates.checkedAt,'2026-11-23');
+  assert.equal(updates.additions.length,100);
+  assert.equal(new Set(updates.additions.map(D.key)).size,100);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,95);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,100);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -388,4 +388,20 @@ test('November 22 distinguishes released weights, video understanding, forensics
  assert.equal(avatar.date,'2026-11-13');
  assert.match(avatar.note,/模型卡標 MIT/);
  assert.equal(D.matches(avatar,{type:'video'}),true);
+});
+
+test('November 23 keeps model releases distinct from hosting and weights milestones',()=>{
+ const row=(vendor,model)=>updates.additions.find(r=>r.vendor===vendor&&r.model===model);
+ const mac=row('Mind Lab','Macaron-V1.1');
+ assert.equal(mac.date,'2026-09-22'); assert.ok(D.tags(mac).includes('OW')); assert.ok(!D.types(mac).includes('multimodal'));
+ assert.match(mac.note,/11\/16.*11\/20.*未驗證 Pro 另有獨立權重/);
+ for(const model of ['bison-1','groundhog-1']){
+   const decision=row('Baseten',model);assert.equal(decision.date,'2026-11-20');
+   assert.deepEqual(D.types(decision),['decision','multimodal']);assert.ok(D.tags(decision).includes('OW'));
+ }
+ const flash=row('Reson8','Rumble-2-Flash'),full=row('Reson8','Rumble-2');
+ assert.equal(flash.date,'2026-11-03');assert.match(flash.note,/11\/18.*Apache 2\.0/);
+ assert.equal(full.date,'2026-11-10');assert.ok(!D.tags(full).includes('OW'));
+ assert.ok(D.types(flash).includes('voice')&&D.types(full).includes('voice'));
+ assert.equal(updates.additions.filter(r=>/Venti/.test(r.model)).length,0);
 });
