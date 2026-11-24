@@ -76,10 +76,10 @@ test('new brands and decision filter retain list, timeline, details and brand na
   }finally{c.dom.window.close()}
  }
 });
-test('desktop loads 308 unique records, all dates and 40 brands at readable scale; updates closed', async()=>{
+test('desktop loads 321 unique records, all dates and 41 brands at readable scale; updates closed', async()=>{
   const c=await boot();try{
-    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,308);assert.equal(c.d.querySelectorAll('.model-card').length,308);
-    assert.equal(c.d.querySelectorAll('#brandJump option').length,41);assert.equal(c.d.getElementById('pct').textContent,'100%');
+    assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.node').length,321);assert.equal(c.d.querySelectorAll('.model-card').length,321);
+    assert.equal(c.d.querySelectorAll('#brandJump option').length,42);assert.equal(c.d.getElementById('pct').textContent,'100%');
     assert.equal(c.d.getElementById('updatesPanel').open,false);assert.equal(c.d.getElementById('listResults').hidden,true);
     assert.equal(c.d.querySelectorAll('.model-card time[datetime="2026-05"]').length,1);
   }finally{c.dom.window.close()}
@@ -99,7 +99,7 @@ test('filter intersections, empty/reset, capability search and URL restoration',
     assert.equal(c.d.querySelectorAll('.node').length,1);assert.match(c.w.location.search,/brand=Alibaba/);
     c.d.getElementById('search').value='nonexistent';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.equal(c.d.getElementById('emptyState').hidden,false);assert.equal(c.v.hidden,true);
-    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,308);assert.equal(c.d.getElementById('emptyState').hidden,true);
+    c.click('emptyReset');assert.equal(c.d.querySelectorAll('.node').length,321);assert.equal(c.d.getElementById('emptyState').hidden,true);
     c.d.getElementById('search').value='推理';c.d.getElementById('search').dispatchEvent(new c.w.Event('input'));await wait(170);
     assert.ok(c.d.querySelectorAll('.node').length>=75);
     c.w.history.pushState({},'', '?brand=Alibaba&year=2026&type=image&view=list');c.w.dispatchEvent(new c.w.PopStateEvent('popstate'));
@@ -218,7 +218,7 @@ test('Rerank filter is selectable and excludes Embed while cumulative scope is e
   c.set('typeFilter','rerank');
   const cards=[...c.d.querySelectorAll('.model-card')];
   assert.equal(cards.length,2);assert.ok(cards.every(card=>card.textContent.includes('Rerank 5')));
-  assert.match(c.d.getElementById('scope').textContent,/累計收錄 100 筆增量/);
+  assert.match(c.d.getElementById('scope').textContent,/累計收錄 113 筆增量/);
   assert.match(c.d.getElementById('scope').textContent,/不代表全部當日發布或重新查核/);
  }finally{c.dom.window.close()}
 });
@@ -249,11 +249,11 @@ test('Genie world-model filter, detail and Google family remain distinct',async(
  } finally {c.w.close();}
 });
 
-test('research filter exposes Rosalind and Sage without mixing in general-purpose models',async()=>{
+test('research filter exposes Rosalind, Sage and LingSante without mixing in general-purpose models',async()=>{
  const c=await boot({mobile:true});try{
- c.set('typeFilter','science');assert.equal(c.d.querySelectorAll('.model-card').length,2);
+ c.set('typeFilter','science');assert.equal(c.d.querySelectorAll('.model-card').length,4);
  const labels=[...c.d.querySelectorAll('.model-card')].map(x=>x.textContent).join(' ');
- assert.match(labels,/Rosalind/);assert.match(labels,/Sage-S2\.1-Flash/);
+ assert.match(labels,/Rosalind/);assert.match(labels,/Sage-S2\.1-Flash/);assert.match(labels,/LingSante-3\.1-flash/);assert.match(labels,/LingSante-3\.1-air-VL/);
  }finally{c.dom.window.close()}
 });
 
@@ -300,10 +300,12 @@ test('new cyber and video filters retain detail and brand lanes',async()=>{
 test('Tencent new brand is present in filter, timeline, list and brand dialog',async()=>{
  const c=await boot({url:'https://example.test/AI_HISTORY/?brand=Tencent&view=list'});try{
   assert.deepEqual(c.errors,[]);assert.equal(c.d.getElementById('brandJump').value,'Tencent');
-  assert.equal(c.d.querySelectorAll('.model-card').length,7);assert.equal(c.d.querySelectorAll('.node').length,7);
+  assert.equal(c.d.querySelectorAll('.model-card').length,14);assert.equal(c.d.querySelectorAll('.node').length,14);
   assert.match(c.d.getElementById('listResults').textContent,/Hy4 flash/);
   assert.match(c.d.getElementById('listResults').textContent,/WeMM-Video-35B-A3B/);
   assert.match(c.d.getElementById('listResults').textContent,/WeVisForensics/);
+  assert.match(c.d.getElementById('listResults').textContent,/WeMM-Ecom-35B-A3B/);
+  assert.match(c.d.getElementById('listResults').textContent,/WePocketModel1\.0-4B/);
   c.d.querySelector('#listResults [data-brand="Tencent"]').click();assert.match(c.d.getElementById('brandCanvas').textContent,/Hy4/);
  }finally{c.dom.window.close()}
 });
@@ -391,7 +393,7 @@ test('Hydrogen appears once with correct date and official sources in mobile lis
 
 test('Salesforce new brand renders and filters in mobile list and timeline',async()=>{const c=await boot({mobile:true,url:'https://example.test/AI_HISTORY/?brand=Salesforce&type=voice&view=list'});try{assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.model-card').length,1);assert.equal(c.d.querySelectorAll('.node').length,1);c.d.querySelector('.model-card [data-detail]').click();assert.equal(c.d.getElementById('detailTitle').textContent,'SOV-Transcribe-1');assert.equal(c.d.querySelectorAll('#detailSources a').length,2);c.click('closeDetail');c.click('timelineView');assert.equal(c.v.hidden,false);c.set('typeFilter','general');assert.equal(c.d.querySelectorAll('.model-card').length,0);}finally{c.dom.window.close()}});
 
-test('IBM and InclusionAI new brands render mobile lists, sources and timeline',async()=>{for(const brand of ['IBM','InclusionAI']){const c=await boot({mobile:true,url:`https://example.test/AI_HISTORY/?brand=${brand}&view=list`});try{assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.model-card').length,2);assert.equal(c.d.querySelectorAll('.node').length,2);c.d.querySelector('.model-card [data-detail]').click();assert.ok(c.d.querySelectorAll('#detailSources a').length>=2);c.click('closeDetail');c.click('timelineView');assert.equal(c.v.hidden,false);}finally{c.dom.window.close()}}});
+test('IBM and InclusionAI new brands render mobile lists, sources and timeline',async()=>{for(const [brand,count] of [['IBM',2],['InclusionAI',6]]){const c=await boot({mobile:true,url:`https://example.test/AI_HISTORY/?brand=${brand}&view=list`});try{assert.deepEqual(c.errors,[]);assert.equal(c.d.querySelectorAll('.model-card').length,count);assert.equal(c.d.querySelectorAll('.node').length,count);c.d.querySelector('.model-card [data-detail]').click();assert.ok(c.d.querySelectorAll('#detailSources a').length>=2);c.click('closeDetail');c.click('timelineView');assert.equal(c.v.hidden,false);}finally{c.dom.window.close()}}});
 
 test('Huawei and Perplexity are reachable by brand links and show official sources',async()=>{
  for(const [brand,count] of [['Huawei',1],['Perplexity',2]]){

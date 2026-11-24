@@ -173,3 +173,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-23 自主資料增補
 
 補收 Mind Lab Macaron-V1.1、Baseten bison-1／groundhog-1 與 Reson8 Rumble-2／Rumble-2-Flash。模型首發、權重發布及區域 API 上架分開記錄，不把上架或開放權重另計為新模型。共 308 個模型／版本節點、40 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-23.zh-TW.md)。
+
+## 2026-11-24 自主資料增補
+
+收錄 GLM-5.4、LingSante 兩款、Tencent WePocketModel 兩款與 WeMM-Ecom 五款，並補入 Ling-3.2-flash、Ming 語音合成與 Sarvam-105B-1711。既有 GPT-6.2 Sol 補記 11/23 Chat 分頁推出，不另計版本。共 321 個模型／版本節點、41 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-24.zh-TW.md)。

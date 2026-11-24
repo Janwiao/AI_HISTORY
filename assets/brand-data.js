@@ -12,7 +12,8 @@
     ['OVHcloud', [rule('olala', 'Olala', /^Olala-v\d+\.\d+-(?:mini-\d+A\d+B|translate|summarize)$/i)]],
     ['Huawei', [rule('openpangu', 'openPangu', /^openPangu-\d+(?:\.\d+)*(?:-Pro|-Flash)?$/i)]],
     ['IBM', [rule('granite-llmon', 'Granite LLMON 實驗支線', /^Granite-4\.1-\d+B-LLMON-preview$/i)]],
-    ['InclusionAI', [rule('duo', 'Duo 視聽互動', /^Duo-\d+\.\d+$/i)]],
+    ['InclusionAI', [rule('duo', 'Duo 視聽互動', /^Duo-\d+\.\d+$/i), rule('lingsante', 'LingSante 醫療健康', /^LingSante-/i), rule('ant-ling', 'Ling 多模態', /^Ling-/i), rule('ming-tts', 'Ming 語音合成', /^Ming-.*-tts-/i)]],
+    ['Sarvam AI', [rule('sarvam', 'Sarvam', /^Sarvam-/i)]],
     ['Salesforce', [rule('sov-transcribe', 'SOV 語音轉寫', /^SOV-Transcribe-\d+$/i)]],
     ['ElevenLabs', [rule('scribe', 'Scribe 語音轉寫', /^Scribe v\d+(?:\.\d+)*(?: Live)?$/i)]],
     ['RadixArk', [rule('daisyrose', 'DaisyRose 後訓練支線', /^DaisyRose-\d+B$/i)]],
@@ -23,7 +24,7 @@
     ['Ideogram', [rule('ideogram-image', 'Ideogram 影像', /^Ideogram \d+(?:\.\d+)*$/i)]],
     ['SenseTime', [rule('sensenova-loop', 'SenseNova Loop', /^SenseNova-Loop-\d+B(?:-Preview)?$/i), rule('sensenova', 'SenseNova', /^SenseNova \d+(?:\.\d+)*(?: Flash)?$/i)]],
     ['Thinking Machines Lab', [rule('inkling', 'Inkling', /^Inkling(?: \d+)?(?:[- ](?:Small|Mini))?$/i)]],
-    ['Tencent', [rule('wemm-video', 'WeMM 影片理解', /^WeMM-Video-(?:2B|4B|9B|35B-A3B)$/i), rule('wevis-forensics', 'WeVis 影片鑑識', /^WeVisForensics$/i), rule('tencent-hy', 'Hy', /^Hy\d+(?:\.\d+)*(?: Preview| Flash)?$/i)]],
+    ['Tencent', [rule('wepocket', 'WePocket 端側多模態', /^WePocketModel\d+\.\d+-[24]B$/i), rule('wemm-ecom', 'WeMM 電商理解', /^WeMM-Ecom-(?:0\.8B|2B|4B|9B|35B-A3B)$/i), rule('wemm-video', 'WeMM 影片理解', /^WeMM-Video-(?:2B|4B|9B|35B-A3B)$/i), rule('wevis-forensics', 'WeVis 影片鑑識', /^WeVisForensics$/i), rule('tencent-hy', 'Hy', /^Hy\d+(?:\.\d+)*(?: Preview| Flash)?$/i)]],
     ['Meituan', [rule('longcat-avatar', 'LongCat 數位人影片', /^LongCat-Video-Avatar \d+(?:\.\d+)*$/i), rule('longcat', 'LongCat', /^LongCat-\d+(?:\.\d+)*(?:-Preview)?$/i)]],
     ['OpenAI', [
       rule('gpt-cyber', 'GPT Cyber 資安支線', /^GPT-\d+(?:\.\d+)* Cyber$/i),

@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-23');
-  assert.equal(updates.additions.length,100);
-  assert.equal(new Set(updates.additions.map(D.key)).size,100);
+  assert.equal(updates.checkedAt,'2026-11-24');
+  assert.equal(updates.additions.length,113);
+  assert.equal(new Set(updates.additions.map(D.key)).size,113);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,100);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,113);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -404,4 +404,24 @@ test('November 23 keeps model releases distinct from hosting and weights milesto
  assert.equal(full.date,'2026-11-10');assert.ok(!D.tags(full).includes('OW'));
  assert.ok(D.types(flash).includes('voice')&&D.types(full).includes('voice'));
  assert.equal(updates.additions.filter(r=>/Venti/.test(r.model)).length,0);
+});
+
+test('Nov 24 distinguishes public access, regional/product rollout and native modalities',()=>{
+ const B=require('../assets/brand-data.js');
+ const up=updates.additions;
+ const by=m=>up.find(r=>r.model===m);
+ const glm=by('GLM-5.4'), sol=by('GPT-6.2 Sol');
+ assert.equal(glm.date,'2026-11-23');assert.match(glm.note,/公共 API 尚未推出/);assert.ok(!D.tags(glm).includes('OW'));
+ assert.equal(sol.date,'2026-11-17');assert.match(sol.note,/11\/23.*Chat 分頁.*不改 Work／Codex 模型/);
+ for(const m of ['LingSante-3.1-flash','LingSante-3.1-air-VL']){
+   const r=by(m);assert.equal(r.date,'2026-11-23');assert.ok(D.types(r).includes('science'));assert.ok(D.tags(r).includes('OW'));assert.equal(B.family(r).id,'lingsante');
+ }
+ assert.ok(!D.types(by('LingSante-3.1-flash')).includes('multimodal'));
+ assert.ok(D.types(by('LingSante-3.1-air-VL')).includes('multimodal'));
+ assert.equal(B.family(by('Ming-3.0-tts-0.5B')).id,'ming-tts-voice');
+ for(const r of up.filter(x=>/^WePocketModel|^WeMM-Ecom/.test(x.model))){
+   assert.equal(r.date,'2026-11-23');assert.ok(D.tags(r).includes('OW'));assert.ok(!D.types(r).includes('video'));
+   assert.equal(B.family(r).id,r.model.startsWith('WePocket')?'wepocket':'wemm-ecom');
+ }
+ assert.equal(up.filter(x=>/^WePocketModel|^WeMM-Ecom/.test(x.model)).length,7);
 });
