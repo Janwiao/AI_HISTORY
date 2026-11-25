@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-24');
-  assert.equal(updates.additions.length,113);
-  assert.equal(new Set(updates.additions.map(D.key)).size,113);
+  assert.equal(updates.checkedAt,'2026-11-25');
+  assert.equal(updates.additions.length,117);
+  assert.equal(new Set(updates.additions.map(D.key)).size,117);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,113);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,117);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -293,9 +293,9 @@ test('November 17 update preserves four separate model records and weights/acces
  }
  const get=name=>updates.additions.find(r=>r.model===name);
  const base=get('ERNIE 5.5 Flash Base'), preview=get('ERNIE 5.5 Flash Preview');
- assert.ok(D.tags(base).includes('OW'));assert.ok(!D.tags(preview).includes('OW'));
+ assert.ok(D.tags(base).includes('OW'));assert.ok(D.tags(preview).includes('OW'));
  assert.match(base.note,/非|不是 Apache 2.0/);assert.match(preview.note,/千帆 API 已開放/);
- assert.match(preview.note,/未確認後訓練權重已釋出/);assert.ok(!D.types(preview).includes('multimodal'));
+ assert.match(preview.note,/後訓練權重已依 Apache 2.0 提供/);assert.ok(!D.types(preview).includes('multimodal'));
  const img=get('MiniMax H3-Image');assert.deepEqual(D.types(img),['image']);
  assert.match(img.note,/11\/10.*Community License/);assert.ok(D.tags(img).includes('OW'));
  const qwen=get('Qwen4-Max');assert.match(qwen.note,/新加坡區域／國際部署/);
@@ -424,4 +424,19 @@ test('Nov 24 distinguishes public access, regional/product rollout and native mo
    assert.equal(B.family(r).id,r.model.startsWith('WePocket')?'wepocket':'wemm-ecom');
  }
  assert.equal(up.filter(x=>/^WePocketModel|^WeMM-Ecom/.test(x.model)).length,7);
+});
+
+test('Nov 25 adds distinct Hy-MT3 sizes and U1.6 image model without counting formats',()=>{
+ const B=require('../assets/brand-data.js');
+ const group=updates.additions.filter(r=>r.model.startsWith('Hy-MT3-'));
+ assert.deepEqual(group.map(r=>r.model),['Hy-MT3-1.8B','Hy-MT3-7B','Hy-MT3-30B-A3B']);
+ for(const r of group){
+  assert.equal(r.vendor,'Tencent');assert.equal(r.date,'2026-11-24');
+  assert.deepEqual(D.types(r),['translation']);assert.equal(B.family(r).id,'hy-mt-translation');
+  assert.ok(D.tags(r).includes('OW'));assert.match(r.note,/Apache 2.0/);
+ }
+ const images=updates.additions.filter(r=>r.model.startsWith('SenseNova-U1.6'));
+ assert.equal(images.length,1);
+ assert.equal(images[0].date,'2026-11-24');
+ assert.ok(D.types(images[0]).includes('image'));assert.equal(B.family(images[0]).id,'sensenova-u-image');
 });

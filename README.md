@@ -177,3 +177,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-24 自主資料增補
 
 收錄 GLM-5.4、LingSante 兩款、Tencent WePocketModel 兩款與 WeMM-Ecom 五款，並補入 Ling-3.2-flash、Ming 語音合成與 Sarvam-105B-1711。既有 GPT-6.2 Sol 補記 11/23 Chat 分頁推出，不另計版本。共 321 個模型／版本節點、41 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-24.zh-TW.md)。
+
+## 2026-11-25 自主資料增補
+
+新增騰訊 Hy-MT3 三款翻譯模型與商湯 SenseNova-U1.6 影像模型；既有 ERNIE 5.5 Flash Preview 補記 Apache 2.0 權重已開放，不另計節點。共 325 個模型／版本節點、41 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-25.zh-TW.md)。
