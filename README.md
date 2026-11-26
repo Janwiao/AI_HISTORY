@@ -181,3 +181,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-25 自主資料增補
 
 新增騰訊 Hy-MT3 三款翻譯模型與商湯 SenseNova-U1.6 影像模型；既有 ERNIE 5.5 Flash Preview 補記 Apache 2.0 權重已開放，不另計節點。共 325 個模型／版本節點、41 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-25.zh-TW.md)。
+
+## 2026-11-26 自主資料增補
+
+收錄 MAGI-2 旗艦、8 月研究預覽與 Ternary Bonsai 2.5 27B，區分託管與權重開放。共 328 個模型／版本節點、43 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-26.zh-TW.md)。

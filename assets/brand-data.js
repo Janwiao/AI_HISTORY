@@ -102,6 +102,8 @@
       rule('mai-image', 'MAI Image 影像支線', /^MAI Image \d+(?:\.\d+)*(?: Flash)?$/i),
       rule('microsoft-decision', 'Microsoft Decision', /^Microsoft-Decision-\d+(?:\.\d+)*$/i)
     ]],
+    ['Sand.ai', [rule('magi', 'MAGI 影片', /^MAGI-\d+(?: Preview)?$/i)]],
+    ['PrismML', [rule('ternary-bonsai', 'Ternary Bonsai 本機模型', /^Ternary Bonsai \d+(?:\.\d+)* \d+B$/i)]],
     ['Liquid AI', [rule('liquid-decision', 'Liquid d 決策模型', /^d\d+(?:\.\d+)*(?:-ultra)?$/i)]],
     ['Baidu', [rule('ernie-flash', 'ERNIE Flash', /^ERNIE \d+(?:\.\d+)* Flash (?:Base|Preview)$/i), rule('ernie', 'ERNIE', /^ERNIE (?:\d+(?:\.\d+)*(?: Open-source Family)?|X\d+)$/i)]],
     ['ByteDance', [rule('seedream', 'Seedream 影像支線', /^Seedream \d+(?:\.\d+)*(?: Pro)?$/i), rule('seed', 'Seed', /^Seed\d+(?:\.\d+)*(?:-VL)?$/i)]]

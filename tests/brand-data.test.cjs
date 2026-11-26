@@ -46,10 +46,10 @@ test('UMD exposes the same small API in a browser without dependencies', () => {
   assert.equal(context.window.BrandEvolutionData.family({ vendor: 'OpenAI', model: 'GPT-4' }).id, 'gpt');
 });
 
-test('all 325 merged nodes are retained exactly once with no product injection', () => {
+test('all 328 merged nodes are retained exactly once with no product injection', () => {
   assert.equal(baseline().length, 208);
-  assert.equal(records.length, 325);
-  assert.equal(new Set(records.map(D.key)).size, 325);
+  assert.equal(records.length, 328);
+  assert.equal(new Set(records.map(D.key)).size, 328);
   const all = [];
   for (const vendor of new Set(records.map(row => row.vendor))) {
     const lanes = B.group(records, vendor);
@@ -176,7 +176,7 @@ test('Qwen preview retains Qwen family while Decision and Scribe have distinct s
  for(const [name,id] of [['Qwen4-Max-Preview','qwen'],['Gemini Decision 1','gemini-decision'],['Scribe v3','scribe'],['Scribe v3 Live','scribe']]){
   const row=updates.additions.find(r=>r.model===name);assert.equal(B.family(row).id,id);
  }
- assert.equal(new Set(records.map(r=>r.vendor)).size,41);
+ assert.equal(new Set(records.map(r=>r.vendor)).size,43);
  assert.equal(B.group(records,'ElevenLabs').length,1);
  assert.equal(B.group(records,'ElevenLabs')[0].rows.length,2);
 });
@@ -186,4 +186,17 @@ test('Huawei and Perplexity new models have scoped name lanes and original event
   const row=updates.additions.find(r=>r.vendor===vendor&&r.model===model);
   assert.equal(row.date,date);assert.equal(B.family(row).id,id);assert.ok(row.sources.length>=2);
  }
+});
+
+test('MAGI versions share a video lane while hosted and open weights remain distinct',()=>{
+ const magi=B.group(records,'Sand.ai');
+ assert.equal(magi.length,1);assert.equal(magi[0].rows.length,2);
+ for(const [model,date,open] of [['MAGI-2 Preview','2026-08-05',true],['MAGI-2','2026-11-24',false]]){
+  const row=records.find(r=>r.model===model);
+  assert.equal(row.date,date);assert.equal(B.family(row).id,'magi');
+  assert.ok(D.types(row).includes('video'));assert.equal(row.tags.split('/').includes('OW'),open);
+ }
+ const bonsai=records.find(r=>r.model==='Ternary Bonsai 2.5 27B');
+ assert.equal(bonsai.date,'2026-11-24');assert.equal(B.family(bonsai).id,'ternary-bonsai');
+ assert.ok(D.types(bonsai).includes('coding'));assert.match(bonsai.note,/Apache 2\.0/);
 });
