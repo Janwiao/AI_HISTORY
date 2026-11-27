@@ -5,7 +5,7 @@ const path=require('node:path');
 const read=f=>fs.readFileSync(path.join(__dirname,'..',f),'utf8');
 test('Agent product stays separate, carries preview scope and safe source link',()=>{
  const page=read('agents.html');
- assert.equal((page.match(/<article class="card"/g)||[]).length,9);
+ assert.equal((page.match(/<article class="card"/g)||[]).length,11);
  for(const name of ['dots','Hermes Agent','OpenClaw','Jev','Codex','Claude Code','Claude Duet']) assert.ok(page.includes(name));
  assert.match(page,/id="claude-duet" data-checked-at="2026-10-26"/);
  assert.match(page,/美國 Pro／Max 使用者候補申請/);
@@ -13,8 +13,8 @@ test('Agent product stays separate, carries preview scope and safe source link',
 });
 test('changed runtime and manifest URLs use fresh cache revisions',()=>{
  const page=read('index.html');
- for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261126-content1`));
- assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261126-content1'));
+ for(const asset of ['data.js','brand-data.js','explorer.js']) assert.ok(page.includes(`assets/${asset}?v=20261127-content1`));
+ assert.ok(read('assets/explorer.js').includes('data/updates.json?v=20261127-content1'));
 });
 
 
@@ -23,7 +23,7 @@ test('dots texting stays a US Pro beta product event, preserving original cards'
  assert.match(page,/data-product="openai-dots" data-checked-at="2026-10-30"/);
  assert.match(page,/2026-10-28 · Texting beta/);assert.match(page,/美國 Pro/);assert.match(page,/iMessage 或 RCS/);
  assert.match(page,/不是新模型或全球全面開放/);
- assert.equal((page.match(/<article class="card"/g)||[]).length,9);
+ assert.equal((page.match(/<article class="card"/g)||[]).length,11);
 });
 
 
@@ -31,7 +31,7 @@ test('dots texting stays a US Pro beta product event, preserving original cards'
 test('new Agent cards are dated product events with scoped previews and safe sources',()=>{
  const {JSDOM}=require('jsdom');const dom=new JSDOM(read('agents.html'),{runScripts:'dangerously'});const d=dom.window.document;
  try{
-  assert.equal(d.querySelectorAll('article.card').length,9);
+  assert.equal(d.querySelectorAll('article.card').length,11);
   const studio=d.getElementById('mistral-studio'),muse=d.getElementById('meta-muse');
   for(const card of [studio,muse]){
    assert.equal(card.dataset.k,'agent');assert.equal(card.dataset.checkedAt,card.id==='meta-muse'?'2026-11-09':'2026-11-06');
@@ -51,7 +51,7 @@ test('Hermes security and Meta specialization are dated events in existing Agent
  const {JSDOM}=require('jsdom');const dom=new JSDOM(read('agents.html'),{runScripts:'dangerously'});const d=dom.window.document;
  try{
   const hermes=d.getElementById('hermes-agent'),muse=d.getElementById('meta-muse');
-  assert.equal(d.querySelectorAll('article.card').length,9);
+  assert.equal(d.querySelectorAll('article.card').length,11);
   for(const card of [hermes,muse]){
    assert.equal(card.dataset.k,'agent');assert.equal(card.dataset.checkedAt,'2026-11-09');
    assert.ok([...card.querySelectorAll('a')].every(a=>a.protocol==='https:'&&a.rel.includes('noopener')&&a.rel.includes('noreferrer')));
@@ -63,6 +63,22 @@ test('Hermes security and Meta specialization are dated events in existing Agent
   for(const filter of ['coding','decision','agent','all']){
    d.querySelector(`[data-f="${filter}"]`).click();
    for(const card of [hermes,muse])assert.equal(card.hidden,!['agent','all'].includes(filter));
+  }
+ }finally{dom.window.close()}
+});
+
+test('Google Jules and Antigravity preserve separate milestones and Coding filter',()=>{
+ const {JSDOM}=require('jsdom');const dom=new JSDOM(read('agents.html'),{runScripts:'dangerously',url:'https://janwiao.github.io/AI_HISTORY/agents.html#google-jules'});
+ try{
+  const d=dom.window.document;
+  const cards=['google-jules','google-antigravity'].map(id=>d.getElementById(id));
+  const dates=card=>[...card.querySelectorAll('time')].map(el=>el.dateTime);
+  assert.deepEqual(dates(cards[0]),['2024-12-11','2025-05-20','2025-08-06','2026-10-29']);
+  assert.deepEqual(dates(cards[1]),['2025-11-18','2026-05-19','2026-06-18']);
+  for(const card of cards) assert.ok([...card.querySelectorAll('a')].every(a=>a.protocol==='https:'&&a.rel.includes('noopener')&&a.rel.includes('noreferrer')));
+  for(const filter of ['coding','agent','decision','all']){
+   d.querySelector(`[data-f="${filter}"]`).click();
+   for(const card of cards) assert.equal(card.hidden,!['coding','all'].includes(filter));
   }
  }finally{dom.window.close()}
 });

@@ -185,3 +185,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-26 自主資料增補
 
 收錄 MAGI-2 旗艦、8 月研究預覽與 Ternary Bonsai 2.5 27B，區分託管與權重開放。共 328 個模型／版本節點、43 個品牌、9 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-26.zh-TW.md)。
+
+## 2026-11-27 自主資料增補
+
+收錄阿里雲 decision-model，修正 Qwen4-Max-Preview 的退場時間及舊 ID 轉送。Agents & Tools 新增 Google Jules 歷程，並補記 Antigravity CLI 的個人版遷移。共 329 個模型／版本節點、43 個品牌、11 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-27.zh-TW.md)。

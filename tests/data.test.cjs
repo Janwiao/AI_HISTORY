@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-26');
-  assert.equal(updates.additions.length,120);
-  assert.equal(new Set(updates.additions.map(D.key)).size,120);
+  assert.equal(updates.checkedAt,'2026-11-27');
+  assert.equal(updates.additions.length,121);
+  assert.equal(new Set(updates.additions.map(D.key)).size,121);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,120);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,121);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -259,7 +259,7 @@ test('November 12 additions preserve primary dates, distinct modalities and prev
  const qwen=updates.additions.find(r=>r.model==='Qwen4-Max-Preview');
  assert.ok(D.types(qwen).includes('general'));assert.ok(D.types(qwen).includes('multimodal'));
  assert.ok(!D.types(qwen).includes('video'));assert.match(qwen.note,/僅限 Token Plan/);assert.match(qwen.note,/不支援按量付費/);
- assert.match(qwen.note,/11\/25 24:00（UTC\+8）/);assert.match(qwen.note,/期滿退役/);
+ assert.match(qwen.note,/11\/25 10:00（UTC\+8）/);assert.match(qwen.note,/退場/);
  const decision=updates.additions.find(r=>r.model==='Gemini Decision 1');
  assert.deepEqual(D.types(decision),['decision','multimodal']);assert.match(decision.note,/Google Cloud.*後續計畫/);
  for(const name of ['Scribe v3','Scribe v3 Live']){
@@ -439,4 +439,20 @@ test('Nov 25 adds distinct Hy-MT3 sizes and U1.6 image model without counting fo
  assert.equal(images.length,1);
  assert.equal(images[0].date,'2026-11-24');
  assert.ok(D.types(images[0]).includes('image'));assert.equal(B.family(images[0]).id,'sensenova-u-image');
+});
+
+test('Alibaba stable decision model is a specialist; retired Qwen preview preserves the original date',()=>{
+ const manifest=JSON.parse(require('node:fs').readFileSync(require('node:path').join(__dirname,'../data/updates.json'),'utf8'));
+ const stable=manifest.additions.filter(row=>row.vendor==='Alibaba'&&row.model==='decision-model');
+ assert.equal(stable.length,1);
+ assert.equal(stable[0].date,'2026-11-25');
+ assert.match(stable[0].tags,/DECISION/);
+ assert.match(stable[0].note,/新加坡/);
+ assert.match(stable[0].note,/不等於通用結構化輸出/);
+ const preview=manifest.additions.find(row=>row.model==='Qwen4-Max-Preview');
+ assert.equal(preview.date,'2026-11-11');
+ assert.match(preview.note,/11\/25 10:00（UTC\+8）退場/);
+ assert.match(preview.note,/轉送 qwen4-max/);
+ assert.equal(manifest.additions.find(row=>row.model==='Qwen4-Max').date,'2026-11-16');
+ assert.ok(!manifest.additions.some(row=>/Jules|Antigravity/i.test(row.model)));
 });

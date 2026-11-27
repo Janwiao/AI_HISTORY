@@ -69,6 +69,7 @@
     ]],
     ['Moonshot AI', [rule('kimi', 'Kimi', /^Kimi(?:[- ]K\d+(?:\.\d+)*(?: [a-z\d]+)*|-thinking-preview)$/i)]],
     ['Alibaba', [
+      rule('alibaba-decision', 'Alibaba 決策模型', /^decision-model(?:-preview)?$/i),
       rule('qwen-image', 'Qwen Image', /^Qwen-Image(?:[- ][a-z\d.]+)*$/i),
       rule('qwen-translation', 'Qwen 翻譯', /^Qwen\d+(?:\.\d+)*-LiveTranslate(?:[- ][a-z\d]+)*$/i),
       rule('qwen-voice', 'Qwen 語音', /^Qwen\d+(?:\.\d+)*-(?:TTS|ASR)(?:[- ][a-z\d.]+)*$/i),
