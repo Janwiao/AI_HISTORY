@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-27",
+  "checkedAt": "2026-11-28",
   "baselinePath": "archive/2026-10-01-base.html",
-  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。 2026-11-12 增補 Qwen4-Max-Preview、Gemini Decision 1 及 Scribe v3／v3 Live；預覽、決策分類與語音轉寫支線分開標示，不代表全量歷史重驗。 2026-11-13 增補 Gemini 4 Hydrogen，採 11/12 官方 GA 日期；產品分批推出與 API 可用範圍分開，不代表全量歷史重驗。 2026-11-14 補收 SOV-Transcribe-1，採 11/12 官方發布日；非串流語音轉寫與通用模型分開，不代表全量歷史重驗。 2026-11-15 補收 IBM LLMON 兩款實驗預覽及 Duo v1 的 1.0／1.2 版本；採官方模型發布日期，非全量歷史重驗。 2026-11-16 補收華為雲 openPangu-2.1-Pro（11/15 指定區域 MaaS 發布）及 Perplexity Decider v1.3／Flash v1.3（11/12 發布）；區分 API 與權重的存取證據，非全量歷史重驗。 2026-11-17 增補 Qwen4-Max 正式 API（11/16），補收 ERNIE 5.5 Flash Base／Preview 與 MiniMax H3-Image；區分託管存取、預訓練權重及後訓練權重預告，非全量歷史重驗。 2026-11-18 增補 GPT-6.2 Astra／Sol、Microsoft 的程式／影像／決策與 Liquid d1.2 支線；保留 MAI Image 2.7 的 10/27 編輯預覽及 11/17 Foundry 公開預覽，未重新查核全部歷史。 2026-11-19 新增 Gemini 4 Neon、Hy4 flash 與 DaisyRose-27B，並補既有 Genie 4 的 11/18 存取狀態；不代表全部歷史資料已重驗。 2026-11-20 補收 Sage-S2.1-Flash 與 Olala 三款已列官方 API 的模型；未重新查驗全部歷史。 2026-11-21 補收 Aion Instruct、Ideogram 4.6 與 SenseNova-Loop-9B，另補 GPT-Live-1.1、Genie 4 的 API 事件與 Hy4 權重發布；未重新查驗全部歷史。 2026-11-22 增補 Inkling 2 Mini、WeMM-Video 四款、WeVisForensics 研究套件及 LongCat-Video-Avatar 1.6，補記 Inkling 2 Small 權重已開放；不代表全部歷史已重驗。 2026-11-23 補收 Macaron-V1.1、Baseten 兩款決策模型與 Reson8 兩款語音轉寫模型；區分模型首發、權重發布及地區 API 上架，不代表全部歷史已重驗。 2026-11-24 增補 GLM-5.4、LingSante 兩款醫療模型、Ling-3.2-flash、Ming 語音合成、Sarvam 新 checkpoint 、WePocketModel 兩款與 WeMM-Ecom 五款；既有 GPT-6.2 Sol 補 Chat 分頁推出事件，並未重驗全部歷史。 2026-11-25 增補 Hy-MT3 三款翻譯模型與 SenseNova-U1.6 影像模型，並補既有 ERNIE 5.5 Flash Preview 的權重開放；不代表全部歷史已重驗。 2026-11-26 增補 MAGI-2 旗艦、8 月研究預覽及 Ternary Bonsai 2.5 27B；區分權重、託管 API 與不同模型版本，未重驗全部歷史。 2026-11-27 新增阿里雲 decision-model 的區域上架，補正 Qwen4-Max-Preview 的退場與轉送；Agent 頁另補 Jules 與 Antigravity CLI 遷移，不代表全史已重驗。",
+  "note": "以 2026-10-01 更新前的網站作為歷史底稿，新增節點採官方／原廠來源確認。語音、翻譯、Embedding、影像等支線會標示類別，避免與通用旗艦升代混淆。 2026-10-26 為本批增補查核日期，不代表全部歷史節點已重新查核。 2026-10-28 僅增補 Genie 4；查核日期不代表所有歷史資料均已重驗。 2026-10-29 增補 Gemini 4 Carbon 與兩款 GPT-Live-1.1 語音模型；不代表全部歷史資料已重驗。 2026-10-30 僅增補 GPT-6 Luna 的 10/29 ChatGPT 修訂，並於 Agent 頁更新 dots 簡訊 beta 事件。 2026-10-31 僅補 GLM 法律支線的後續 AutoClaw 可用公告，不增加模型數或推論名稱等同。 2026-11-03 增補 Rosalind Research 專用部署支線及 Argon 10/13 開放狀態，不代表全部歷史均已重驗。 2026-11-04 僅增補 LongCat-2.5 正式版及美團品牌；採 11/2 官方發布與 API 可用日，另註技術文章 11/1 日期，不代表全部歷史已重驗。 2026-11-05 增補 GPT-Image-2.6 Sunburst／Flare 兩款影像模型，並補 Cohere 四款模型的 11/4 OpenRouter 上架狀態；不代表全部歷史已重驗。 2026-11-06 增補 GPT-6 Cyber、Gemini Omni 1.2 Flash 與 Tencent Hy4；資安及影片模型獨立標示，有限存取與權重釋出計畫不等於全面開放；不代表全部歷史已重驗。 2026-11-07 增補 Kanana-2-v-decide、Inkling 2 Small，並補收 Kimi K3.1 Pro 與 SenseNova 6.8 Flash；公告、託管存取與權重釋出分開記錄，不代表全部歷史已重驗。 2026-11-08 補收 Mistral Large 4 的 10/6 公開預覽與 10/29 改良權重版本，以及 EmbeddingGemma 2；本批為歷史補漏，不是 11/8 新發布，也不代表全部歷史已重驗。 2026-11-09 補收 Arete-27B、Ampersand v0.1 與 Ripple-65B Preview；另於 Agent 頁記錄 Hermes Security plugin 及 Meta 專用模型推出事件，不把產品事件另計為模型，也不代表全部歷史已重驗。 2026-11-10 增補 11/9 發布的 Claude Fable 5.2／Mythos 5.2；相同底層模型以不同防護與存取版本分列，不代表兩組不同權重或全部歷史已重驗。 2026-11-11 增補 11/9 公告的 Seedream 5.5 與 Muse Ember 1.0，另補 Carbon 的 11/10 API GA 狀態；不代表全量歷史重驗。 2026-11-12 增補 Qwen4-Max-Preview、Gemini Decision 1 及 Scribe v3／v3 Live；預覽、決策分類與語音轉寫支線分開標示，不代表全量歷史重驗。 2026-11-13 增補 Gemini 4 Hydrogen，採 11/12 官方 GA 日期；產品分批推出與 API 可用範圍分開，不代表全量歷史重驗。 2026-11-14 補收 SOV-Transcribe-1，採 11/12 官方發布日；非串流語音轉寫與通用模型分開，不代表全量歷史重驗。 2026-11-15 補收 IBM LLMON 兩款實驗預覽及 Duo v1 的 1.0／1.2 版本；採官方模型發布日期，非全量歷史重驗。 2026-11-16 補收華為雲 openPangu-2.1-Pro（11/15 指定區域 MaaS 發布）及 Perplexity Decider v1.3／Flash v1.3（11/12 發布）；區分 API 與權重的存取證據，非全量歷史重驗。 2026-11-17 增補 Qwen4-Max 正式 API（11/16），補收 ERNIE 5.5 Flash Base／Preview 與 MiniMax H3-Image；區分託管存取、預訓練權重及後訓練權重預告，非全量歷史重驗。 2026-11-18 增補 GPT-6.2 Astra／Sol、Microsoft 的程式／影像／決策與 Liquid d1.2 支線；保留 MAI Image 2.7 的 10/27 編輯預覽及 11/17 Foundry 公開預覽，未重新查核全部歷史。 2026-11-19 新增 Gemini 4 Neon、Hy4 flash 與 DaisyRose-27B，並補既有 Genie 4 的 11/18 存取狀態；不代表全部歷史資料已重驗。 2026-11-20 補收 Sage-S2.1-Flash 與 Olala 三款已列官方 API 的模型；未重新查驗全部歷史。 2026-11-21 補收 Aion Instruct、Ideogram 4.6 與 SenseNova-Loop-9B，另補 GPT-Live-1.1、Genie 4 的 API 事件與 Hy4 權重發布；未重新查驗全部歷史。 2026-11-22 增補 Inkling 2 Mini、WeMM-Video 四款、WeVisForensics 研究套件及 LongCat-Video-Avatar 1.6，補記 Inkling 2 Small 權重已開放；不代表全部歷史已重驗。 2026-11-23 補收 Macaron-V1.1、Baseten 兩款決策模型與 Reson8 兩款語音轉寫模型；區分模型首發、權重發布及地區 API 上架，不代表全部歷史已重驗。 2026-11-24 增補 GLM-5.4、LingSante 兩款醫療模型、Ling-3.2-flash、Ming 語音合成、Sarvam 新 checkpoint 、WePocketModel 兩款與 WeMM-Ecom 五款；既有 GPT-6.2 Sol 補 Chat 分頁推出事件，並未重驗全部歷史。 2026-11-25 增補 Hy-MT3 三款翻譯模型與 SenseNova-U1.6 影像模型，並補既有 ERNIE 5.5 Flash Preview 的權重開放；不代表全部歷史已重驗。 2026-11-26 增補 MAGI-2 旗艦、8 月研究預覽及 Ternary Bonsai 2.5 27B；區分權重、託管 API 與不同模型版本，未重驗全部歷史。 2026-11-27 新增阿里雲 decision-model 的區域上架，補正 Qwen4-Max-Preview 的退場與轉送；Agent 頁另補 Jules 與 Antigravity CLI 遷移，不代表全史已重驗。 2026-11-28 補收 Niji 8 與 Ming-Image-0.2-Design；區分網頁／Discord 與開放權重，未重驗全部歷史。",
   "additions": [
     {
       "vendor": "DeepSeek",
@@ -1479,6 +1479,31 @@
       "sources": [
         "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
         "https://www.alibabacloud.com/help/en/model-studio/decision-model-stable"
+      ]
+    },
+    {
+      "vendor": "Midjourney",
+      "model": "Niji 8",
+      "date": "2026-11-24",
+      "category": "動漫風格影像生成／參考圖編輯",
+      "tags": "IMAGE",
+      "note": "Midjourney 與 Spellbrush 合作的動漫影像支線，11/24 原廠公告可於網頁選單或 Discord 使用。Edit 可參照角色與場景圖片調整構圖與姿勢，並非遊戲圖層或逐格動畫輸出。未確認開放權重。",
+      "sources": [
+        "https://nijijourney.com/blog/niji-8",
+        "https://docs.midjourney.com/hc/en-us/articles/32199405667853-Version"
+      ]
+    },
+    {
+      "vendor": "InclusionAI",
+      "model": "Ming-Image-0.2-Design",
+      "date": "2026-11-26",
+      "category": "視覺設計／影像生成",
+      "tags": "IMAGE/OW",
+      "note": "採 11/26 原廠公告日，不把模型倉庫建立日當成正式發布日。原廠標示 6B DiT，主打含文字版面、海報、UI 概念及透明背景圖，模型權重採 MIT。0.2 Design-Layer 是另行預告的拆層模型，本筆不計入該預告。",
+      "sources": [
+        "https://huggingface.co/inclusionAI/Ming-Image-0.2-Design",
+        "https://github.com/inclusionAI/Ming-Image",
+        "https://x.com/AntLingAGI/status/2125916926048358827"
       ]
     }
   ]

@@ -189,3 +189,7 @@ GitHub Pages：https://janwiao.github.io/AI_HISTORY/
 ## 2026-11-27 自主資料增補
 
 收錄阿里雲 decision-model，修正 Qwen4-Max-Preview 的退場時間及舊 ID 轉送。Agents & Tools 新增 Google Jules 歷程，並補記 Antigravity CLI 的個人版遷移。共 329 個模型／版本節點、43 個品牌、11 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-27.zh-TW.md)。
+
+## 2026-11-28 自主資料增補
+
+補收 Niji 8（11/24，網頁與 Discord）與 Ming-Image-0.2-Design（11/26 原廠公告，MIT 權重）。另行預告的 0.2 Design-Layer 不計入。共 331 個模型／版本節點、44 個品牌、11 張 Agent／工具卡。詳見 [本批查核](docs/UPDATE_2026-11-28.zh-TW.md)。

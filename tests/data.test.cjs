@@ -77,9 +77,9 @@ test('Qwen sources use canonical announcements and disclose Image license', () =
 });
 
 test('October update dates and sources are explicit; revision and product identities stay separate', () => {
-  assert.equal(updates.checkedAt,'2026-11-27');
-  assert.equal(updates.additions.length,121);
-  assert.equal(new Set(updates.additions.map(D.key)).size,121);
+  assert.equal(updates.checkedAt,'2026-11-28');
+  assert.equal(updates.additions.length,123);
+  assert.equal(new Set(updates.additions.map(D.key)).size,123);
   const dates = {'GPT-6.1 Terra':'2026-10-26','Claude Haiku 5.5':'2026-10-07','DeepSeek-V4.1-Flash-1017':'2026-10-17','Grok Voice 3.0':'2026-10-14','Rerank 5 Pro':'2026-10-21','Rerank 5 Fast':'2026-10-21','GLM-Legal':'2026-10-13','North Small Translate 1.0':'2026-09-09','GLM-5.3-Flash':'2026-08-27'};
   for (const [model,date] of Object.entries(dates)) {
     const row=updates.additions.find(r=>r.model===model);
@@ -130,7 +130,7 @@ test('dated Luna revision stays in named Luna lane',()=>{assert.equal(require('.
 
 test('Legal availability follow-up preserves beta date and does not infer identity or API rollout',()=>{
  const row=updates.additions.find(r=>r.model==='GLM-Legal');
- assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,121);
+ assert.equal(row.date,'2026-10-13');assert.equal(updates.additions.length,123);
  assert.match(row.note,/10\/29/);assert.match(row.note,/GLM-5.3-flashX-Legal/);
  assert.match(row.note,/未明說/);assert.match(row.note,/不推論 API 已全面開放/);
  assert.ok(row.sources.includes('https://autoclaw.z.ai/blog/model/GLM-5.3-flashX-Legal/'));
@@ -455,4 +455,15 @@ test('Alibaba stable decision model is a specialist; retired Qwen preview preser
  assert.match(preview.note,/轉送 qwen4-max/);
  assert.equal(manifest.additions.find(row=>row.model==='Qwen4-Max').date,'2026-11-16');
  assert.ok(!manifest.additions.some(row=>/Jules|Antigravity/i.test(row.model)));
+});
+
+test('November 28 adds two image models and leaves the separate Layer preview out of the model count',()=>{
+ const manifest=require('../data/updates.json');
+ const niji=manifest.additions.filter(row=>row.model==='Niji 8');
+ const ming=manifest.additions.filter(row=>row.model==='Ming-Image-0.2-Design');
+ assert.equal(niji.length,1);assert.equal(ming.length,1);
+ assert.deepEqual([niji[0].date,ming[0].date],['2026-11-24','2026-11-26']);
+ assert.equal(niji[0].tags,'IMAGE');assert.equal(ming[0].tags,'IMAGE/OW');
+ assert.match(niji[0].note,/Discord/);assert.match(ming[0].note,/MIT/);
+ assert.ok(!manifest.additions.some(row=>row.model==='Ming-Image-0.2-Design-Layer'));
 });
